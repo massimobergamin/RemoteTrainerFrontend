@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "react-native-webrtc": "^1.89.1"
+  }
+}
