@@ -31,28 +31,28 @@ const signup = () => {
                 <input type="text" 
                     placeholder="First Name"
                     value={formState.firstName} 
-                    onChange={(e)=>setFormState({...formState, firstName:e.target.value})></input>
+                    onChange={(e)=>setFormState({...formState, firstName:e.target.value})}/>
                 <input type="text" 
                     placeholder="Last Name"
                     value={formState.lastName} 
-                    onChange={(e)=>setFormState({...formState, lastName:e.target.value})></input>
+                    onChange={(e)=>setFormState({...formState, lastName:e.target.value})}/>
                 <input type="text" 
                     placeholder="Username"
                     value={formState.username} 
-                    onChange={(e)=>setFormState({...formState, username:e.target.value})></input>
+                    onChange={(e)=>setFormState({...formState, username:e.target.value})}/>
                 <input type="email"
                     placeholder="Email"
                     value={formState.email} 
-                    onChange={(e)=>setFormState({...formState, email:e.target.value})></input>
+                    onChange={(e)=>setFormState({...formState, email:e.target.value})}/>
                 <input type="password"
                     placeholder="Password"
                     value={formState.password} 
-                    onChange={(e)=>setFormState({...formState, password:e.target.value})></input>
+                    onChange={(e)=>setFormState({...formState, password:e.target.value})}/>
                 <button type="button" 
                     disabled={formState.password===""||formState.email===""||formState.firstName===""||formState.lastName===""||formState.username===""}
                     onClick={createHandler}>SIGN UP</button>
             </form>
-            <p>Already have an account? <Link href="/login"><span>Login.</span></Link></p>
+            <p>Already have an account? <Link href="/"><span>Login.</span></Link></p>
         </div>
     )
 }
