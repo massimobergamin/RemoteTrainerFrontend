@@ -7,7 +7,7 @@ function UploadVideoForm() {
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
     const [urlFile, setUrlFile] = useState(null);
-    const {url} = useStorage(file);
+    const {url, progress} = useStorage(file);
     const types = ['video/mp4'];
 
      const handleChange = (e) => {
@@ -21,26 +21,18 @@ function UploadVideoForm() {
             setError('Please select a video file(mp4)');
         }
     }
-
-    // useEffect(() => {
-    //     if (url) {
-    //         setUrl({...state, url: url});
-    //     }
-    // }, [url])
-
-    // useEffect(() => {
-    //     if (file) {
-    //         const {url} = useStorage(file);
-    //         setUrlFile(url);
-    //     }
-    // },[file])
-
+    
     return (
         <div>
             <form>
                 <input type="file" onChange={handleChange}/>
                 <div >
-                {urlFile && <div>{urlFile}</div>}
+                {url && 
+                <video id="Exercise_Video" width="176" height="176" autoplay="true" loop="true">
+                    <source src={url} type="video/mp4"/>
+                    Your browser does not support HTML5 video.
+                </video> }
+                {error && <div>{error}</div>}
                 </div>
             </form>
         </div>

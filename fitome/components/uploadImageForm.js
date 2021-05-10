@@ -2,12 +2,12 @@
 import React, {useState, useEffect} from 'react'
 import useStorage from '../firebase/useStorage'
 
-function UploadVideoForm() {
+function UploadImageForm() {
     
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
     const [urlFile, setUrlFile] = useState(null);
-    const {url} = useStorage(file);
+    const {url, progress} = useStorage(file);
     const types = ['image/png', 'image/jpeg'];
 
      const handleChange = (e) => {
@@ -27,11 +27,12 @@ function UploadVideoForm() {
             <form>
                 <input type="file" onChange={handleChange}/>
                 <div >
-                {url && <div>{url}</div>}
+                {url && <img src={url}/>}
+                {error && <div>{error}</div>}
                 </div>
             </form>
         </div>
     )
 }
 
-export default UploadVideoForm
+export default UploadImageForm
