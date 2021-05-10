@@ -18,6 +18,9 @@
 //   reducers: {
 //     /* TODO: define trainer reducers */
 //   },
+//   extraReducers: {
+//     [fetchTrainerById.fulfilled] : (state, action) => {}
+//   }
 // });
 
 // export const { /* TODO: generate action creators for trainer reducers above*/} = trainerSlice.actions;
