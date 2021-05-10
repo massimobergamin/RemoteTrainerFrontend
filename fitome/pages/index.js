@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import styles from '../styles/Home.module.css'
 import { useAuth } from '../firebase/contextAuth'
 import Link from 'next/link';
+import UploadForm from '../components/uploadForm'
 
 export default function Home() {
 
@@ -17,6 +18,7 @@ export default function Home() {
   const loginHandler = async () => {
     try {
         await login(formState.email, formState.password);
+        console.log("LOGGING IN")
     } catch (err) {
         console.error(err)
     }
@@ -34,6 +36,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <UploadForm/>
         <form>
           <input type="email"
             placeholder="Email" 
@@ -45,7 +48,7 @@ export default function Home() {
           placeholder="Password" 
           value={formState.password}
           required
-          onChange={(e) => setFormState({...formState, password: e.target.password})}
+          onChange={(e) => setFormState({...formState, password: e.target.value})}
           />
           <button type="button" onClick={loginHandler}>LOGIN</button>
         </form>

@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import Link from 'next/link';
 import {useAuth} from '../firebase/contextAuth'
 
-const signup = () => {
+const SignUp = () => {
     
-    const {signup, currentUser} = useAuth();
+    const {signUp, currentUser} = useAuth();
 
     const initialState = {
         firstName: "",
@@ -18,7 +18,8 @@ const signup = () => {
     const createHandler = async () => {
         //check database for if username already exists
         try {
-            await signup(formState.email, formState.password);
+            await signUp(formState.email, formState.password);
+            console.log("Signing UP")
         } catch (err) {
             console.error(err)
         }
@@ -57,4 +58,4 @@ const signup = () => {
     )
 }
 
-export default signup
+export default SignUp

@@ -1,7 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { auth } from './config'
+import React, { useContext, useState, useEffect, createContext } from 'react'
+import {auth} from './config'
 
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -19,6 +19,22 @@ export function AuthProvider({ children }) {
     return auth.signInWithEmailAndPassword(email,password)
   };
 
+  function logout() {
+    return auth.signOut()
+  }
+
+  function resetPassword(email) {
+    return auth.sendPasswordResetEmail(email)
+  }
+
+  function updateEmail(email) {
+    return currentUser.updateEmail(email)
+  }
+
+  function updatePassword(password) {
+    return currentUser.updatePassword(password)
+  }
+
   useEffect(() => {
    const unsubscribe = auth.onAuthStateChanged(user => {
         setCurrentUser(user);
@@ -30,7 +46,11 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser, 
     signUp,
-    login
+    login,
+    logout,
+    resetPassword,
+    updateEmail,
+    updatePassword
   }
 
   return (

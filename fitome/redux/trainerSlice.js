@@ -1,4 +1,14 @@
 // import { createSlice } from '@reduxjs/toolkit'
+// import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+// import axios from 'axios'
+
+// export const fetchTrainerById = createAsyncThunk({
+//   'trainerSlice/fetByIdStatus',
+//   async (trainerId, thinkAPI) => {
+//     const response = await axios.get('')
+//     return response.data
+//   }
+// })
 
 // export const trainerSlice = createSlice({
 //   name: 'trainer',
