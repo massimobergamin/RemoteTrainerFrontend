@@ -14,7 +14,7 @@ export default function Home() {
     email: '', 
     password: '',
   }
-
+  
   const [formState, setFormState] = useState(initialState);
 
   const loginHandler = async () => {
@@ -38,6 +38,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <UploadImageForm/>
         <UploadVideoForm/>
         <form>
           <input type="email"

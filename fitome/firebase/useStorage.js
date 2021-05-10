@@ -12,7 +12,7 @@ const useStorage = (file) => {
         if (file) {
             const storageRef = projectStorage.ref();
             const imageRef = storageRef.child(`${Date.now()}.${file.name}`);
-        imageRef.put(file).on('state_changed', (snap) => {
+            imageRef.put(file).on('state_changed', (snap) => {
             let percentage = (snap.bytesTransferred/snap.totalBytes)*100;
             setProgress(percentage);
         }, (err) => {
