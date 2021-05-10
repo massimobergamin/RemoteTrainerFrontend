@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 import { useAuth } from '../firebase/contextAuth'
 import Link from 'next/link';
 import UploadVideoForm from '../components/uploadForm'
+import UploadImageForm from '../components/uploadImageForm';
 
 export default function Home() {
 
@@ -36,6 +37,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <UploadImageForm/>
         <UploadVideoForm/>
         <form>
           <input type="email"
