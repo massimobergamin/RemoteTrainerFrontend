@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styles from '../styles/Home.module.css'
 import { useAuth } from '../firebase/contextAuth'
 import Link from 'next/link';
-import UploadVideoForm from '../components/uploadForm'
+import UploadVideoForm from '../components/uploadVideoForm'
 import UploadImageForm from '../components/uploadImageForm';
 
 export default function Home() {
