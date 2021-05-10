@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styles from '../styles/Home.module.css'
 import { useAuth } from '../firebase/contextAuth'
 import Link from 'next/link';
-import UploadForm from '../components/uploadForm'
+import UploadVideoForm from '../components/uploadForm'
 
 export default function Home() {
 
@@ -36,7 +36,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <UploadForm/>
+        <UploadVideoForm/>
         <form>
           <input type="email"
             placeholder="Email" 
