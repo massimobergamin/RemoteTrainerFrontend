@@ -2,7 +2,7 @@
 // import axios from 'axios'
 
 // export const fetchClientById = createAsyncThunk({
-//   'client/fetByIdStatus',
+//   'clientSlice/fetByIdStatus',
 //   async (clientId, thinkAPI) => {
 //     const response = await axios.get('')
 //     return response.data
@@ -18,8 +18,8 @@
 //   reducers: {
 //     /* TODO: define client reducers */
 //   },
-//   extraTrducers: {
-//     [fetchClientBtId.fulsilled] : (state, action) => {}
+//   extraReducers: {
+//     [fetchClientById.fulfilled] : (state, action) => {}
 //   }
 // });
 

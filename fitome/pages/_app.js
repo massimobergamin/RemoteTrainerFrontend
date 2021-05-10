@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import '../styles/globals.css';
 import { AuthProvider } from '../firebase/contextAuth';
-require('dotenv').config();
 // import store from '../redux/store'
 // import { Provider } from 'react-redux'
 
