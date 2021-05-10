@@ -7,11 +7,11 @@ function UploadForm() {
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
     const [urlFile, setUrlFile] = useState(null);
-
+    const {url} = useStorage(file);
     const types = ['video/mp4'];
 
      const handleChange = (e) => {
-         let selected = e.target.files[0];
+        let selected = e.target.files[0];
         if (selected && types.includes(selected.type)) {
             console.log(selected.type)
             setFile(selected);
@@ -28,12 +28,12 @@ function UploadForm() {
     //     }
     // }, [url])
 
-    useEffect(() => {
-        if (file) {
-            const {url} = useStorage(file);
-            setUrlFile(url);
-        }
-    },[file])
+    // useEffect(() => {
+    //     if (file) {
+    //         const {url} = useStorage(file);
+    //         setUrlFile(url);
+    //     }
+    // },[file])
 
     return (
         <div>

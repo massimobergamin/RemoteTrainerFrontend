@@ -8,9 +8,10 @@ const useStorage = (file) => {
 
     useEffect(()=>{
         //references
-        const storageRef = projectStorage.ref();
-        const imageRef = storageRef.child(`${user.uid}.${Date.now()}.${file.name}`);
         
+        if (file) {
+            const storageRef = projectStorage.ref();
+            const imageRef = storageRef.child(`${Date.now()}.${file.name}`);
         imageRef.put(file).on('state_changed', (snap) => {
             let percentage = (snap.bytesTransferred/snap.totalBytes)*100;
             setProgress(percentage);
@@ -20,6 +21,7 @@ const useStorage = (file) => {
             const url = await imageRef.getDownloadURL();
             setUrl(url);
         })
+    }
     },[file]);
 
     return {progress, url, error};
