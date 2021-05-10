@@ -1,20 +1,9 @@
-const withPWA = require('next-pwa');
-const runtimeCaching = require('next-pwa/cache')
+const withOffline = require('next-offline')
 
-module.exports = withPWA({
-  pwa: {
-    dest: 'public',
-    runtimeCaching,
-  },
-  webpack: (config, { isServer }) => {
-    // Fixes npm packages that depend on `fs` module
-    if (!isServer) {
-      config.node = {
-        fs: 'empty',
-        net: 'empty',
-      }
-    }
+const nextConfig = {
+  
+}
 
-    return config
-  },
-})
+
+module.exports = withOffline(nextConfig)
+
