@@ -8,6 +8,7 @@ const io = require('socket.io')(server, {
     origin: "http://localhost:3000"
   }
 })
+
 const { v4: uuidV4 } = require('uuid')
 const mocks = require('./mocks')
 
@@ -48,8 +49,12 @@ io.on('connection', socket => {
   //listens for join an existing room given by roomId from "JOIN CALL" button on page session/:id
   socket.on('joinRoom', ({userId, firstName, sessionId}) => {
     socket.join(sessionId)  //join existing room
-    console.log("JOINING ROOM", sessionId)
-    io.to(roomId).emit(`${firstName} has joined the session.`) //to tell person in room you are there
+    let numClients = io.sockets.adapter.rooms.get(sessionId).size
+    console.log ("JOINING:", numClients)
+    //let numClients = clientsInRoom ? Object.keys(clientsInRoom.sockets).length : 0;
+    //console.log("JOINING ROOM", sessionId, " with ", numClients, " ppl")
+    
+    socket.broadcase.emit("user-connected", userId) //to tell person in room you are there
   })
 
   //listens for a disconnect
