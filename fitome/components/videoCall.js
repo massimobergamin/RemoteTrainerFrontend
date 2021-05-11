@@ -27,7 +27,7 @@ const VideoCall = () => {
   useEffect(() => {
     socket.on('connect', () => {
       // listen here, not emit
-      socket.on('roomCreated', ({roomId, userId}) => {
+      socket.on("roomCreated", ({roomId, userId}) => {
         console.log("roomCreated ID:", roomId, ' ', userId);
         setRoomId(roomId)
       });

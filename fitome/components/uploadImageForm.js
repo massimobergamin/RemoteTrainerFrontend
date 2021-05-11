@@ -25,7 +25,7 @@ function UploadImageForm() {
     return (
         <div>
             <form>
-                <input type="file" onChange={handleChange}/>
+                <input type="file" accept="image/*" capture="camera" onChange={handleChange}/>
                 <div >
                 {url && <img src={url}/>}
                 {error && <div>{error}</div>}

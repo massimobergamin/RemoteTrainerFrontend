@@ -8,40 +8,15 @@ const io = require('socket.io')(server, {
     origin: "http://localhost:3000"
   }
 })
-
 const { v4: uuidV4 } = require('uuid')
 
 
-io.on('connection', socket => {
-  
-  console.log('Connected to Client')
-  // socket.on('join-room', (roomId, userId) => {
-  //   console.log(roomId, userId);
-  // });
 
-  socket.on('createNewRoom', ({userId, firstName}) => {
-    const roomId = uuidV4();
-    socket.join(roomId);
-    console.log("JOINING ROOM", userId, firstName)
-    socket.emit('roomCreated', {roomId, userId});
-  });
+// app.use(cors());
 
-  // socket.on('joinRoom', ({userId, roomId}) => {
-  //   socket.join(roomId)
-  // })
-
-});
-
-
-
-
-server.listen(PORT, () => {
-  console.log(`Server listening on port: ${PORT}`);
-});
-
-
-
-
+// app.get('/', (req, res) => {
+//   res.send('Video Testing Babyyyyy!');
+// })
 
 
 // app.get('/video/newCall', (req, res) => {
@@ -52,3 +27,24 @@ server.listen(PORT, () => {
 // app.get('/video/:room', (req, res) => {
 //   res.send(req.params.room);
 // });
+
+
+io.on('connection', socket => {
+  console.log('Connected to Client')
+  // socket.on('join-room', (roomId, userId) => {
+  //   console.log(roomId, userId);
+  // });
+
+  socket.on('createNewRoom', ({userId, firstName}) => {
+    const roomId = uuidV4();
+    socket.join(roomId);
+    console.log("JOINING ROOM", roomId, " ", userId, firstName)
+    socket.emit("roomCreated", {roomId, userId});
+  });
+});
+
+
+server.listen(PORT, () => {
+  console.log(`Server listening on port: ${PORT}`);
+});
+
