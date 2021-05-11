@@ -30,27 +30,31 @@ const mocks = require('./mocks')
 
 io.on('connection', socket => {
   console.log('Connected to Client')
-  // socket.on('join-room', (roomId, userId) => {
-  //   console.log(roomId, userId);
-  // });
 
-  socket.on('createNewRoom', ({userId, firstName}) => {
-    const roomId = uuidV4();
-    socket.join(roomId);
-    console.log("CREATED ROOM", roomId, " ", userId, firstName)
-    socket.emit("roomCreated", {roomId, userId});
+  //listens for create new room given by sessionId from "START CALL" button on page session/:id
+  socket.on('createNewRoom', ({userId, sessionId, firstName}) => {
+    // const roomId = uuidV4();
+    socket.join(sessionId); // joins room using sessionId as roomId
+    console.log("CREATED ROOM", userId, firstName)
+    // TODO: call db to add in_use flag with sessionId
   });
 
+  //listens for a useEffect to check get sessionId row and send it back to page session/:id
   socket.on('isRoomActive', ({userId, sessionId}, callback) => {
-    console.log("USER", userId)
-    console.log("Session", sessionId)
-    callback(mocks.withRoom)    
+    //TOOD: call controller to get appointment row and send the whole row back
+    callback(mocks.withRoom)
   });
 
-  socket.on('joinRoom', ({userId, firstName, roomId}) => {
-    socket.join(roomId)
-    console.log("JOINING ROOM", roomId)
-    socket.to(roomId).emit(`${firstName} has joined the session.`)
+  //listens for join an existing room given by roomId from "JOIN CALL" button on page session/:id
+  socket.on('joinRoom', ({userId, firstName, sessionId}) => {
+    socket.join(sessionId)  //join existing room
+    console.log("JOINING ROOM", sessionId)
+    io.to(roomId).emit(`${firstName} has joined the session.`) //to tell person in room you are there
+  })
+
+  //listens for a disconnect
+  socket.on('disconnect', () => {
+    socket.broadcast.emit("Call Ended")
   })
 });
 
