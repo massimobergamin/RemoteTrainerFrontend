@@ -1,8 +1,7 @@
-
 import React, {useState, useEffect} from 'react'
 import useStorage from '../firebase/useStorage'
 
-function UploadImageForm() {
+const UploadImageForm = () => {
     
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
@@ -35,4 +34,4 @@ function UploadImageForm() {
     )
 }
 
-export default UploadImageForm
+export default UploadImageForm;
