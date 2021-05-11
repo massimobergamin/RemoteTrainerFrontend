@@ -13,7 +13,18 @@
 // export const trainerSlice = createSlice({
 //   name: 'trainer',
 //   initialState: {
-//     value: '' /* TODO: define initialState */,
+//     uid: "",
+//     username: "",
+//     profile_picture: "",
+//     email: "",
+//     last_login: Date.now,
+//     firstName: "",
+//     lastName: "",
+//     username: "",
+//     sex: "",
+//     weight: 0,
+//     height: 0,
+//     birthday: Date.now,
 //   },
 //   reducers: {
 //     /* TODO: define trainer reducers */

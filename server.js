@@ -9,8 +9,7 @@ const io = require('socket.io')(server, {
   }
 })
 const { v4: uuidV4 } = require('uuid')
-
-
+const mocks = require('./mocks')
 
 // app.use(cors());
 
@@ -38,9 +37,21 @@ io.on('connection', socket => {
   socket.on('createNewRoom', ({userId, firstName}) => {
     const roomId = uuidV4();
     socket.join(roomId);
-    console.log("JOINING ROOM", roomId, " ", userId, firstName)
+    console.log("CREATED ROOM", roomId, " ", userId, firstName)
     socket.emit("roomCreated", {roomId, userId});
   });
+
+  socket.on('isRoomActive', ({userId, sessionId}, callback) => {
+    console.log("USER", userId)
+    console.log("Session", sessionId)
+    callback(mocks.withRoom)    
+  });
+
+  socket.on('joinRoom', ({userId, firstName, roomId}) => {
+    socket.join(roomId)
+    console.log("JOINING ROOM", roomId)
+    socket.to(roomId).emit(`${firstName} has joined the session.`)
+  })
 });
 
 
