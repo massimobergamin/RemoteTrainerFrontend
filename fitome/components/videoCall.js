@@ -56,7 +56,6 @@ export default VideoCall
 
 
 // BEN'S LIST:
-/////
 
 // pages
 //   - appointmentList (would list all appointment for the current user)
