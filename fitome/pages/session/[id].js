@@ -6,10 +6,12 @@ function SessionDetailPage () {
 
     const router = useRouter();
     const { id } = router.query;
-    const [roomCreated, setRoomCreated] = useState(false)
+    const [roomActive, setRoomActive] = useState(false)
 
     useEffect(() => {
-    
+        socket.emit ('isRoomActive', {sessionId}, (res) => {
+            
+        })
     }, [])
 
     return (

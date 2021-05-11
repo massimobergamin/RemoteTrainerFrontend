@@ -17,7 +17,6 @@ const VideoCall = () => {
   // On click, new room is created and user is joined into room
   const newRoom = () => {
     socket.emit('createNewRoom', {userId: currentUser?.uid, firstName: currentUser?.email});
-    console.log(socket)
   };
 
   //on click, join a room that already exists
@@ -28,9 +27,9 @@ const VideoCall = () => {
   useEffect(() => {
     socket.on('connect', () => {
       // listen here, not emit
-      socket.on('roomCreated', ({roomId, userId}) => {
+      socket.on("roomCreated", ({roomId, userId}) => {
         console.log("roomCreated ID:", roomId, ' ', userId);
-        //setRoomId(roomId)
+        setRoomId(roomId)
       });
       // socket.on('joinRoom', ({roomId, userId}) => {
       //   console.log("joined RoomID:", roomId, ' ', userId);
