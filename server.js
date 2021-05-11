@@ -38,8 +38,8 @@ io.on('connection', socket => {
   socket.on('createNewRoom', ({userId, firstName}) => {
     const roomId = uuidV4();
     socket.join(roomId);
-    console.log("JOINING ROOM", userId, firstName)
-    socket.emit('roomCreated', {roomId, userId});
+    console.log("JOINING ROOM", roomId, " ", userId, firstName)
+    socket.emit("roomCreated", {roomId, userId});
   });
 });
 
