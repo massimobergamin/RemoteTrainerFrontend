@@ -3,8 +3,10 @@ import React, { useState } from 'react'
 import styles from '../styles/Home.module.css'
 import { useAuth } from '../firebase/contextAuth'
 import Link from 'next/link';
+import UploadImageForm from '../components/uploadImageForm'
 import UploadVideoForm from '../components/uploadVideoForm'
-import UploadImageForm from '../components/uploadImageForm';
+import VideoCall from '../components/videoCall'
+
 
 export default function Home() {
 
@@ -13,7 +15,7 @@ export default function Home() {
     email: '', 
     password: '',
   }
-
+  
   const [formState, setFormState] = useState(initialState);
 
   const loginHandler = async () => {
@@ -55,6 +57,7 @@ export default function Home() {
           <button type="button" onClick={loginHandler}>LOGIN</button>
         </form>
         <p>Don't have an account? <Link href="/signup"><span>Sign up.</span></Link></p>
+        <VideoCall></VideoCall>
       </main>
     </div>
   )
