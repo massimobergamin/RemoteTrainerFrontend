@@ -1,4 +1,5 @@
-export const withRoom = {
+// export const withRoom = {
+const withRoom = {
     meeting_id: 2,
     client_uid: "eZRIzsBdiuZUWvsKCGwtO2QU1OC2",
     trainer_uid: "s02BMBXurUUZHvUml2jc9bwPAn43",
@@ -7,7 +8,8 @@ export const withRoom = {
     endDate: new Date(Date.now() + 60000),
     in_use: true
 }
-export const withoutRoom = {
+// export const withoutRoom = {
+const withoutRoom = {
     meeting_id: 3,
     client_uid: "eZRIzsBdiuZUWvsKCGwtO2QU1OC2",
     trainer_uid: "s02BMBXurUUZHvUml2jc9bwPAn43",
@@ -19,6 +21,7 @@ export const withoutRoom = {
 
 const mocks = {withRoom, withoutRoom};
 
-export default mocks;
+// export default mocks;
+module.exports = mocks;
 
 
