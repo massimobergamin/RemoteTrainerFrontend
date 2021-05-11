@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import styles from '../styles/Home.module.css'
 import { useAuth } from '../firebase/contextAuth'
 import Link from 'next/link';
-import UploadVideoForm from '../components/uploadForm'
+import UploadImageForm from '../components/uploadImageForm'
+import UploadVideoForm from '../components/uploadVideoForm'
 import VideoCall from '../components/videoCall'
 
 
