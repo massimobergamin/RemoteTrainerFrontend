@@ -12,11 +12,11 @@ const { v4: uuidV4 } = require('uuid')
 
 
 
-app.use(cors());
+// app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('Video Testing Babyyyyy!');
-})
+// app.get('/', (req, res) => {
+//   res.send('Video Testing Babyyyyy!');
+// })
 
 
 // app.get('/video/newCall', (req, res) => {
@@ -31,8 +31,15 @@ app.get('/', (req, res) => {
 
 io.on('connection', socket => {
   console.log('Connected to Client')
-  socket.on('join-room', (roomId, userId) => {
-    console.log(roomId, userId);
+  // socket.on('join-room', (roomId, userId) => {
+  //   console.log(roomId, userId);
+  // });
+
+  socket.on('createNewRoom', ({userId, firstName}) => {
+    const roomId = uuidV4();
+    socket.join(roomId);
+    console.log("JOINING ROOM", userId, firstName)
+    socket.emit('roomCreated', {roomId, userId});
   });
 });
 
