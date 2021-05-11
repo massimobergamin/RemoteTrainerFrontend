@@ -1,6 +1,6 @@
 // import { configureStore } from '@reduxjs/toolkit'
-// import trainerReducer from './trainerSlice'
-// import clientReducer from './clientSlice'
+// import trainerReducer from './trainer'
+// import clientReducer from './client'
 
 // export default configureStore({
 //   reducer: {
