@@ -4,6 +4,7 @@ import axios from 'axios'
 export const postUser = createAsyncThunk(
   'users/postTrainerStatus',
   async (userData, thunkAPI) => {
+    console.log("trainerjs", userData)
     const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users`, userData);
     return response.data;
   }

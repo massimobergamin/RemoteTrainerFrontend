@@ -22,8 +22,10 @@ const SignUp = () => {
     const createHandler = async () => {
         //check database for if username already exists
         try {
+            console.log("hello")
             await signUp(formState.email, formState.password);
-            postUser(dispatch,formState);
+            const res = await postUser(dispatch, formState);
+            console.log(res);
             console.log("Signing UP")
         } catch (err) {
             console.error(err)
@@ -62,7 +64,7 @@ const SignUp = () => {
                     disabled={formState.password===""||formState.email===""||formState.firstName===""||formState.lastName===""||formState.username===""}
                     onClick={createHandler}>SIGN UP</button>
             </form>
-            <p>Already have an account? <Link href="/"><span>Login.</span></Link></p>
+            <p>Already have an account? <Link href="/"><a><span>Login.</span></a></Link></p>
         </div>
     )
 }
