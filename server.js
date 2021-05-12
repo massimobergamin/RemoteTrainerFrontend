@@ -29,6 +29,7 @@ io.on('connection', socket => {
     socket.join(sessionId); // joins room using sessionId as roomId
     console.log("CREATED ROOM", userId, firstName)
     // TODO: call db to add in_use flag with sessionId
+    socket.broadcast.emit("user-connected", userId) //to tell person in room you are there
   });
 
   //listens for a useEffect to check get sessionId row and send it back to page session/:id
@@ -52,7 +53,7 @@ io.on('connection', socket => {
 
   //listens for a disconnect
   socket.on('hang-up', () => {
-    socket.broadcast.emit("Call Ended")
+    socket.broadcast.emit("call-ended")
   })
 });
 

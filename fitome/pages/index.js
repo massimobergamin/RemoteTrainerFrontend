@@ -5,7 +5,7 @@ import { useAuth } from '../firebase/contextAuth'
 import Link from 'next/link';
 import UploadImageForm from '../components/uploadImageForm'
 import UploadVideoForm from '../components/uploadVideoForm'
-import VideoCall from '../components/videoCall'
+
 
 
 export default function Home() {
@@ -57,7 +57,7 @@ export default function Home() {
           <button type="button" onClick={loginHandler}>LOGIN</button>
         </form>
         <p>Don't have an account? <Link href="/signup"><a><span>Sign up.</span></a></Link></p>
-        <VideoCall></VideoCall>
+        
       </main>
     </div>
   )
