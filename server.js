@@ -64,7 +64,7 @@ io.on('connection', socket => {
     //let numClients = clientsInRoom ? Object.keys(clientsInRoom.sockets).length : 0;
     //console.log("JOINING ROOM", sessionId, " with ", numClients, " ppl")
     
-    socket.to(sessionId).emit("user-connected", userId)
+    socket.broadcast.emit("user-connected", userId)
     // socket.broadcast.emit("user-connected", userId) //to tell person in room you are there
 
     socket.on('disconnect', () => {
