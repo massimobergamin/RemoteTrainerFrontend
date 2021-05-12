@@ -25,6 +25,9 @@
 //     weight: 0,
 //     height: 0,
 //     birthday: Date.now,
+//     exercises: [],
+//     workouts: [],
+//     clients: []
 //   },
 //   reducers: {
 //     /* TODO: define trainer reducers */
@@ -34,7 +37,7 @@
 //   }
 // });
 
+
 // export const { /* TODO: generate action creators for trainer reducers above*/} = trainerSlice.actions;
 
 // export default trainerSlice.reducer;
-
