@@ -9,28 +9,27 @@ const SignUp = () => {
     const dispatch = useDispatch();
 
     const initialState = {
-        user_uid: "",
+        user_uid: '',
         first_name: "",
         last_name: "",
         email: "",
         password: "",
         username: "",
-        type: ""
+        type: "",
+        last_login: Date.now()
     }
     const [formState, setFormState] = useState(initialState);
 
     const createHandler = async () => {
         //check database for if username already exists
         try {
-            console.log("hello")
             await signUp(formState.email, formState.password);
-            const res = await postUser(dispatch, formState);
+            formState.user_uid = currentUser.uid
+            const res = await dispatch(postUser(formState));
             console.log(res);
-            console.log("Signing UP")
         } catch (err) {
             console.error(err)
         }
-        //redux to create user to post to db
     }
 
     return (

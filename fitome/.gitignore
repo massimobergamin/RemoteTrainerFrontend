@@ -36,3 +36,7 @@ service-worker.js.map
 
 # vercel
 .vercel
+
+# service worker
+service-worker.js
+service-worker.js.map
