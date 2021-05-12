@@ -4830,16 +4830,22 @@ precacheAndRoute([{
   "revision": "b579ea82dc4f58e1c3c63f2bb7108893"
 }, {
   "url": "_next/static/chunks/webpack.js",
-  "revision": "4ebd00f82315ee7352b39c8a196cc32c"
+  "revision": "b277406074cc35039a3ec315d4b7e1f0"
 }, {
   "url": "_next/static/development/_buildManifest.js",
-  "revision": "5375642c734078229da6718c2dbd730e"
+  "revision": "78d5c24a47f479ed21d2040ad6deb376"
 }, {
   "url": "_next/static/development/_ssgManifest.js",
   "revision": "abee47769bf307639ace4945f9cfd4ff"
 }, {
-  "url": "_next/static/webpack/f7b92a7a88d2fd535a24.hot-update.json",
-  "revision": "234ce12bb6dc6dfaa28f420241fb6ed6"
+  "url": "_next/static/webpack/59144e1e467ca3314b61.hot-update.json",
+  "revision": "f532cb129847205e3d6c62890568328d"
+}, {
+  "url": "_next/static/webpack/pages/_app.59144e1e467ca3314b61.hot-update.js",
+  "revision": "43fbc9a5e2f6557fffd53738bb4e6058"
+}, {
+  "url": "_next/static/webpack/pages/signup.59144e1e467ca3314b61.hot-update.js",
+  "revision": "edd76d2bc1b8f193c7b06ff57a4eaca1"
 }], {});
 registerRoute(/\.(json|js|css)$/, new StaleWhileRevalidate({
   "cacheName": "weather-cache",

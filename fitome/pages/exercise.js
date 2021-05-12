@@ -1,10 +1,5 @@
-//get phone access to upload file with service worker
-//exercise form
-//upload file
-
-//sw.js in public folder
-//next offline
 import UploadImageForm from '../components/uploadImageForm.js';
+import { postExercise } from '../redux/trainer'
 
 const Exercise = () => {
 
