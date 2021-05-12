@@ -191,6 +191,9 @@ export const trainerSlice = createSlice({
     [getWorkout.fulfilled] : (state, action) => {
       state.workouts = action.payload
     },
+    [postWorkout.fulfilled] : (state, action) => {
+      state.workouts = {...action.payload}
+    },
     [getExercise.fulfilled] : (state, action) => {
       state.exercises = action.payload
     },
@@ -202,7 +205,7 @@ export const trainerSlice = createSlice({
 
 
 
-// export const { /* TODO: generate action creators for trainer reducers above*/} = trainerSlice.actions;
+export const { postUser, updateUser, getUserById, postClient, postSession, updateSession, getSessions, postPlan, updatePlan, getPlan, updatePlanNotes, getWorkout, postWorkout, getExercise, postExercise} = trainerSlice.actions;
 
 // export default trainerSlice.reducer;
 
