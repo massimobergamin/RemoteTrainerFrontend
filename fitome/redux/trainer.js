@@ -4,8 +4,10 @@ import axios from 'axios'
 export const postUser = createAsyncThunk(
   'users/postTrainerStatus',
   async (userData, thunkAPI) => {
-    console.log("trainerjs", userData)
+    //console.log("trainerjs", userData)
     const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users`, userData);
+    //dispatchEvent(postUser)
+    //console.log(response);
     return response.data;
   }
 );
@@ -132,13 +134,13 @@ export const trainerSlice = createSlice({
     username: "",
     profile_picture: "",
     email: "",
-    last_login: Date.now,
+    last_login: Date.now(),
     firstName: "",
     lastName: "",
     sex: "",
     weight: 0,
     height: 0,
-    birthday: Date.now,
+    birthday: Date.now(),
     exercises: [],
     workouts: [],
     clients: [],
@@ -151,7 +153,7 @@ export const trainerSlice = createSlice({
     }
   },
   extraReducers: {
-    [postUser.fulfilled] : (state, action) => {
+    postUser: (state, action) => {
       state.user = action.payload
     },
     [updateUser.fulfilled] : (state, action) => {
