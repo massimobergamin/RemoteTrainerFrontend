@@ -9,33 +9,16 @@ const io = require('socket.io')(server, {
   }
 })
 const { ExpressPeerServer } = require('peer');
-const { v4: uuidV4 } = require('uuid')
 const mocks = require('./mocks')
 const peerServer = ExpressPeerServer(server, {
   path: '/'
 });
 
-const rooms = {};
 
 app.use('/peerjs', peerServer);
-// app.use(cors());
 
-// app.get('/', (req, res) => {
-//   res.send('Video Testing Babyyyyy!');
-// })
-
-
-// app.get('/video/newCall', (req, res) => {
-//   res.redirect(`/${uuidV4()}`)
-// });
-
-
-// app.get('/video/:room', (req, res) => {
-//   res.send(req.params.room);
-// });
 peerServer.on('connection', peer => {
   console.log("Peer connected", peer.id)
-  // peerServer.socket
 })
 
 io.on('connection', socket => {
@@ -43,7 +26,6 @@ io.on('connection', socket => {
 
   //listens for create new room given by sessionId from "START CALL" button on page session/:id
   socket.on('createNewRoom', ({userId, sessionId, firstName}) => {
-    // const roomId = uuidV4();
     socket.join(sessionId); // joins room using sessionId as roomId
     console.log("CREATED ROOM", userId, firstName)
     // TODO: call db to add in_use flag with sessionId
@@ -58,15 +40,11 @@ io.on('connection', socket => {
   //listens for join an existing room given by roomId from "JOIN CALL" button on page session/:id
   socket.on('joinRoom', ({userId, firstName, sessionId}) => {
     socket.join(sessionId)  //join existing room
-    rooms[sessionId] = { guest: userId };
-    let numClients = io.sockets.adapter.rooms.get(sessionId).size
-    console.log ("JOINING:", numClients)
-    //let numClients = clientsInRoom ? Object.keys(clientsInRoom.sockets).length : 0;
-    //console.log("JOINING ROOM", sessionId, " with ", numClients, " ppl")
+  let numClients = io.sockets.adapter.rooms.get(sessionId).size
+  //if (numClients <= 1) {
+      socket.broadcast.emit("user-connected", userId) //to tell person in room you are there
+    //}
     
-    socket.broadcast.emit("user-connected", userId)
-    // socket.broadcast.emit("user-connected", userId) //to tell person in room you are there
-
     socket.on('disconnect', () => {
       socket.broadcast.emit('user-disconnected', userId)
   })
