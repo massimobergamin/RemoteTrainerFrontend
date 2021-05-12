@@ -1,9 +1,19 @@
 const nextOffline = require('next-offline')
 const nextConfig = {
-  generateInDevMode: true,
+  generateInDevMode: false,
   workboxOpts: {
     swDest: '../public/service-worker.js',
     runtimeCaching: [
+      {
+        urlPattern: /^https?.*/,
+        handler: 'NetworkFirst',
+        options: {
+          cacheName: 'offlineCache',
+          expiration: {
+            maxEntries: 200,
+          },
+        },
+      },
       {
         urlPattern: /\.(json|js|css)$/,
         handler: 'StaleWhileRevalidate',
