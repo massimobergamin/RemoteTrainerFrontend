@@ -8,8 +8,4 @@ logs
 # The file containing environment variables 
 .env
 
-package-lock.json
-
-service-worker.js
-
-service-worker.js.map
+.DS_Store
