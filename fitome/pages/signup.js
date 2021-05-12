@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import {useAuth} from '../firebase/contextAuth'
-import { useDispatch } from 'react-redux';
-import { postUser, getUserById } from '../redux/trainer'
+import { useDispatch, useSelector } from 'react-redux';
+import { postUser } from '../redux/trainer'
+import { nanoid } from '@reduxjs/toolkit';
 
 const SignUp = () => {
     const {signUp, currentUser} = useAuth();
@@ -16,17 +17,25 @@ const SignUp = () => {
         password: "",
         username: "",
         type: "",
-        last_login: Date.now()
+        last_login: 0,
+        invitecode: nanoid()
     }
-    const [formState, setFormState] = useState(initialState);
 
+    // anotherSTate
+    // user uid
+    // nanoid
+    // send back nanoid
+
+    const [formState, setFormState] = useState(initialState);
+    const { user } = useSelector(state => state.trainer);
+   
     const createHandler = async () => {
         //check database for if username already exists
         try {
-            await signUp(formState.email, formState.password);
-            formState.user_uid = currentUser.uid
-            const res = await dispatch(postUser(formState));
-            console.log(res);
+            const fireBaseData = await signUp(formState.email, formState.password);
+            setFormState({...formState, user_uid:fireBaseData.user.uid, last_login: Date.now()})
+            dispatch(postUser(formState))
+          
         } catch (err) {
             console.error(err)
         }
@@ -38,11 +47,11 @@ const SignUp = () => {
                 <input type="text" 
                     placeholder="First Name"
                     value={formState.firstName} 
-                    onChange={(e)=>setFormState({...formState, firstName:e.target.value})}/>
+                    onChange={(e)=>setFormState({...formState, first_name:e.target.value})}/>
                 <input type="text" 
                     placeholder="Last Name"
                     value={formState.lastName} 
-                    onChange={(e)=>setFormState({...formState, lastName:e.target.value})}/>
+                    onChange={(e)=>setFormState({...formState, last_name:e.target.value})}/>
                 <input type="text" 
                     placeholder="Username"
                     value={formState.username} 

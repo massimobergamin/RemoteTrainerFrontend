@@ -1,20 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios'
+
 //user routes
 export const postUser = createAsyncThunk(
-  'users/postTrainerStatus',
-  async (userData, thunkAPI) => {
-    //console.log("trainerjs", userData)
-    const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users`, userData);
-    //dispatchEvent(postUser)
-    //console.log(response);
-    return response.data;
+    'trainer/postUserStatus',
+ async (userData) => {
+    try {
+      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users`, userData);
+      console.log("response, ", response)
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const updateUser = createAsyncThunk(
   'users/postTrainerStatus',
-  async (uid, userData, thunkAPI) => {
+  async (uid, userData) => {
     const response = await axios.put(`https://remotetrainerserver.herokuapp.com/users/${uid}`, userData);
     return response.data;
   }
@@ -22,7 +26,7 @@ export const updateUser = createAsyncThunk(
 
 export const getUserById = createAsyncThunk(
   'users/fetchUserStatus',
-  async (uid, thunkAPI) => {
+  async (uid) => {
     const response = await axios.get(`https://remotetrainerserver.herokuapp.com/${uid}-trainer`);
     return response.data;
   }
@@ -30,7 +34,7 @@ export const getUserById = createAsyncThunk(
 
 export const postClient = createAsyncThunk(
   'users/postClientStatus',
-  async (trainer_uid, client_uid, thunkAPI) => {
+  async (trainer_uid, client_uid) => {
     const response = await axios.post(`https://remotetrainerserver.herokuapp.com/${trainer_uid}-${client_uid}`);
     return response.data;
   }
@@ -39,7 +43,7 @@ export const postClient = createAsyncThunk(
 //session routes
 export const postSession = createAsyncThunk(
   'users/postSessionStatus',
-  async (trainer_uid, client_uid, sessionData, thunkAPI) => {
+  async (trainer_uid, client_uid, sessionData) => {
     const response = await axios.post(`https://remotetrainerserver.herokuapp.com/${trainer_uid}-${client_uid}`, sessionData);
     return response.data;
   }
@@ -47,7 +51,7 @@ export const postSession = createAsyncThunk(
 
 export const updateSession = createAsyncThunk(
   'users/updateSessionsStatus',
-  async (meeting_id, thunkAPI) => {
+  async (meeting_id) => {
     const response = await axios.put(`https://remotetrainerserver.herokuapp.com/${meeting_id}`);
     return response.data;
   }
@@ -55,7 +59,7 @@ export const updateSession = createAsyncThunk(
 //not sure what to do with this one, there are 2 get session routes
 export const getSessions = createAsyncThunk(
   'users/getSessionsStatus',
-  async (meeting_id, sessionData, thunkAPI) => {
+  async (meeting_id, sessionData) => {
     const response = await axios.get(`https://remotetrainerserver.herokuapp.com/${meeting_id}`, sessionData);
     return response.data;
   }
@@ -64,7 +68,7 @@ export const getSessions = createAsyncThunk(
 //plans routes
 export const postPlan = createAsyncThunk(
   'plans/postPlanStatus',
-  async (trainer_uid, client_uid, planData, thunkAPI) => {
+  async (trainer_uid, client_uid, planData) => {
     const response = await axios.post(`https://remotetrainerserver.herokuapp.com/${trainer_uid}-${client_uid}`, planData);
     return response.data;
   }
@@ -72,7 +76,7 @@ export const postPlan = createAsyncThunk(
 
 export const updatePlan = createAsyncThunk(
   'plans/updatePlanStatus',
-  async (plan_id, planData, thunkAPI) => {
+  async (plan_id, planData) => {
     const response = await axios.put(`https://remotetrainerserver.herokuapp.com/${plan_id}`, planData);
     return response.data;
   }
@@ -80,7 +84,7 @@ export const updatePlan = createAsyncThunk(
 
 export const getPlan = createAsyncThunk(
   'plans/getPlanStatus',
-  async (client_uid, start_date, thunkAPI) => {
+  async (client_uid, start_date) => {
     const response = await axios.get(`https://remotetrainerserver.herokuapp.com/${client_uid}-${start_date}`);
     return response.data;
   }
@@ -88,7 +92,7 @@ export const getPlan = createAsyncThunk(
 
 export const updatePlanNotes = createAsyncThunk(
   'plans/updatePlanNotesStatus',
-  async (plan_id, planData, thunkAPI) => {
+  async (plan_id, planData) => {
     const response = await axios.put(`https://remotetrainerserver.herokuapp.com/${plan_id}`, planData);
     return response.data;
   }
@@ -97,7 +101,7 @@ export const updatePlanNotes = createAsyncThunk(
 //Workouts & Exercises
 export const getWorkout = createAsyncThunk(
   'workouts/getWorkoutStatus',
-  async (trainer_uid, thunkAPI) => {
+  async (trainer_uid) => {
     const response = await axios.get(`https://remotetrainerserver.herokuapp.com/${trainer_uid}`);
     return response.data;
   }
@@ -105,7 +109,7 @@ export const getWorkout = createAsyncThunk(
 
 export const postWorkout = createAsyncThunk(
   'workouts/postWorkoutStatus',
-  async (trainer_uid, workoutData, thunkAPI) => {
+  async (trainer_uid, workoutData) => {
     const response = await axios.post(`https://remotetrainerserver.herokuapp.com/${trainer_uid}`, workoutData);
     return response.data;
   }
@@ -113,7 +117,7 @@ export const postWorkout = createAsyncThunk(
 
 export const getExercise = createAsyncThunk(
   'exercises/getExerciseStatus',
-  async (trainer_uid, thunkAPI) => {
+  async (trainer_uid) => {
     const response = await axios.get(`https://remotetrainerserver.herokuapp.com/${trainer_uid}`);
     return response.data;
   }
@@ -121,7 +125,7 @@ export const getExercise = createAsyncThunk(
 
 export const postExercise = createAsyncThunk(
   'exercises/postExerciseStatus',
-  async (trainer_uid, exerciseData, thunkAPI) => {
+  async (trainer_uid, exerciseData) => {
     const response = await axios.post(`https://remotetrainerserver.herokuapp.com/${trainer_uid}`, exerciseData);
     return response.data;
   }
@@ -130,17 +134,19 @@ export const postExercise = createAsyncThunk(
 export const trainerSlice = createSlice({
   name: 'trainer',
   initialState: {
-    uid: "",
-    username: "",
-    profile_picture: "",
-    email: "",
-    last_login: Date.now(),
-    firstName: "",
-    lastName: "",
-    sex: "",
-    weight: 0,
-    height: 0,
-    birthday: Date.now(),
+    user: {
+      user_uid: "",
+      username: "",
+      email: "",
+      last_login: Date.now(),
+      first_name: "",
+      last_name: "",
+      profile_picture: "",
+      sex: "",
+      weight: 0,
+      height: 0,
+      birthday: Date.now(),
+    },
     exercises: [],
     workouts: [],
     clients: [],
@@ -153,8 +159,12 @@ export const trainerSlice = createSlice({
     }
   },
   extraReducers: {
-    postUser: (state, action) => {
+    [postUser.fulfilled] : (state, action) => {
       state.user = action.payload
+      console.log(state.user)
+      // console.log("inside reducer ", state.user)
+      // console.log("action ", action.payload)
+      //return action.payload
     },
     [updateUser.fulfilled] : (state, action) => {
       state.user = action.payload
