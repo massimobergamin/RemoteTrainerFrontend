@@ -205,7 +205,7 @@ export const trainerSlice = createSlice({
 
 
 
-export const { postUser, updateUser, getUserById, postClient, postSession, updateSession, getSessions, postPlan, updatePlan, getPlan, updatePlanNotes, getWorkout, getExercise, postExercise} = trainerSlice.actions;
+export const { postUser, updateUser, getUserById, postClient, postSession, updateSession, getSessions, postPlan, updatePlan, getPlan, updatePlanNotes, getWorkout, postWorkout, getExercise, postExercise} = trainerSlice.actions;
 
 // export default trainerSlice.reducer;
 
