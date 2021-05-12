@@ -1,17 +1,21 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import {useAuth} from '../firebase/contextAuth'
+import { useDispatch } from 'react-redux';
+import { postUser, getUserById } from '../redux/trainer'
 
 const SignUp = () => {
-    
     const {signUp, currentUser} = useAuth();
+    const dispatch = useDispatch();
 
     const initialState = {
-        firstName: "",
-        lastName: "",
-        email:"",
-        password:"",
-        username:"",
+        user_uid: "",
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
+        username: "",
+        type: ""
     }
     const [formState, setFormState] = useState(initialState);
 
@@ -19,6 +23,7 @@ const SignUp = () => {
         //check database for if username already exists
         try {
             await signUp(formState.email, formState.password);
+            postUser(dispatch,formState);
             console.log("Signing UP")
         } catch (err) {
             console.error(err)
@@ -49,6 +54,10 @@ const SignUp = () => {
                     placeholder="Password"
                     value={formState.password} 
                     onChange={(e)=>setFormState({...formState, password:e.target.value})}/>
+                <input type="type"
+                    placeholder="Type"
+                    value={formState.type} 
+                    onChange={(e)=>setFormState({...formState, type:e.target.value})}/>
                 <button type="button" 
                     disabled={formState.password===""||formState.email===""||formState.firstName===""||formState.lastName===""||formState.username===""}
                     onClick={createHandler}>SIGN UP</button>

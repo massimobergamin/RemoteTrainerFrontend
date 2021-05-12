@@ -1,4 +1,3 @@
-import { createSlice } from '@reduxjs/toolkit'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 //user routes
@@ -205,9 +204,9 @@ export const trainerSlice = createSlice({
 
 
 
-export const { postUser, updateUser, getUserById, postClient, postSession, updateSession, getSessions, postPlan, updatePlan, getPlan, updatePlanNotes, getWorkout, postWorkout, getExercise, postExercise} = trainerSlice.actions;
+//export const { postUser, updateUser, getUserById, postClient, postSession, updateSession, getSessions, postPlan, updatePlan, getPlan, updatePlanNotes, getWorkout, postWorkout, getExercise, postExercise} = trainerSlice.actions;
 
-// export default trainerSlice.reducer;
+export default trainerSlice.reducer;
 
 //ACTIONS
 /*

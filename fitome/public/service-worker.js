@@ -4830,16 +4830,16 @@ precacheAndRoute([{
   "revision": "b579ea82dc4f58e1c3c63f2bb7108893"
 }, {
   "url": "_next/static/chunks/webpack.js",
-  "revision": "4ebd00f82315ee7352b39c8a196cc32c"
+  "revision": "d8225845faf3a1551ee27b4f64a3075c"
 }, {
   "url": "_next/static/development/_buildManifest.js",
-  "revision": "5375642c734078229da6718c2dbd730e"
+  "revision": "78d5c24a47f479ed21d2040ad6deb376"
 }, {
   "url": "_next/static/development/_ssgManifest.js",
   "revision": "abee47769bf307639ace4945f9cfd4ff"
 }, {
-  "url": "_next/static/webpack/f7b92a7a88d2fd535a24.hot-update.json",
-  "revision": "234ce12bb6dc6dfaa28f420241fb6ed6"
+  "url": "_next/static/webpack/fbd49e5d52e925f10787.hot-update.json",
+  "revision": "ad2f5e7ff917cd6ad5c3aa134c7c0322"
 }], {});
 registerRoute(/\.(json|js|css)$/, new StaleWhileRevalidate({
   "cacheName": "weather-cache",
