@@ -56,7 +56,7 @@ export default function Home() {
           />
           <button type="button" onClick={loginHandler}>LOGIN</button>
         </form>
-        <p>Don't have an account? <Link href="/signup"><span>Sign up.</span></Link></p>
+        <p>Don't have an account? <Link href="/signup"><a><span>Sign up.</span></a></Link></p>
         <VideoCall></VideoCall>
       </main>
     </div>
