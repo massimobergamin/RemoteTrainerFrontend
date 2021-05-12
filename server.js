@@ -8,49 +8,51 @@ const io = require('socket.io')(server, {
     origin: "http://localhost:3000"
   }
 })
-const { v4: uuidV4 } = require('uuid')
+const { ExpressPeerServer } = require('peer');
 const mocks = require('./mocks')
-
-// app.use(cors());
-
-// app.get('/', (req, res) => {
-//   res.send('Video Testing Babyyyyy!');
-// })
+const peerServer = ExpressPeerServer(server, {
+  path: '/'
+});
 
 
-// app.get('/video/newCall', (req, res) => {
-//   res.redirect(`/${uuidV4()}`)
-// });
+app.use('/peerjs', peerServer);
 
-
-// app.get('/video/:room', (req, res) => {
-//   res.send(req.params.room);
-// });
-
+peerServer.on('connection', peer => {
+  console.log("Peer connected", peer.id)
+})
 
 io.on('connection', socket => {
   console.log('Connected to Client')
-  // socket.on('join-room', (roomId, userId) => {
-  //   console.log(roomId, userId);
-  // });
 
-  socket.on('createNewRoom', ({userId, firstName}) => {
-    const roomId = uuidV4();
-    socket.join(roomId);
-    console.log("CREATED ROOM", roomId, " ", userId, firstName)
-    socket.emit("roomCreated", {roomId, userId});
+  //listens for create new room given by sessionId from "START CALL" button on page session/:id
+  socket.on('createNewRoom', ({userId, sessionId, firstName}) => {
+    socket.join(sessionId); // joins room using sessionId as roomId
+    console.log("CREATED ROOM", userId, firstName)
+    // TODO: call db to add in_use flag with sessionId
   });
 
+  //listens for a useEffect to check get sessionId row and send it back to page session/:id
   socket.on('isRoomActive', ({userId, sessionId}, callback) => {
-    console.log("USER", userId)
-    console.log("Session", sessionId)
-    callback(mocks.withRoom)    
+    //TODO: call controller to get appointment row and send the whole row back
+    callback(mocks.withRoom)
   });
 
-  socket.on('joinRoom', ({userId, firstName, roomId}) => {
-    socket.join(roomId)
-    console.log("JOINING ROOM", roomId)
-    socket.to(roomId).emit(`${firstName} has joined the session.`)
+  //listens for join an existing room given by roomId from "JOIN CALL" button on page session/:id
+  socket.on('joinRoom', ({userId, firstName, sessionId}) => {
+    socket.join(sessionId)  //join existing room
+  let numClients = io.sockets.adapter.rooms.get(sessionId).size
+  //if (numClients <= 1) {
+      socket.broadcast.emit("user-connected", userId) //to tell person in room you are there
+    //}
+    
+    socket.on('disconnect', () => {
+      socket.broadcast.emit('user-disconnected', userId)
+  })
+  })
+
+  //listens for a disconnect
+  socket.on('hang-up', () => {
+    socket.broadcast.emit("Call Ended")
   })
 });
 
