@@ -1,4 +1,5 @@
-.videoRoom_myVideo {
+
+/* .videoRoom_myVideo {
   height: 30vh;
   width: 30vh;
   border-radius: 50%;
@@ -6,28 +7,37 @@
   bottom: 0;
   left: 0;
   object-fit: cover;
-  -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
-}
+} */
 
 .video_me {
   border-radius: 50%;
   position:fixed;
-  bottom: 0;
-  right: 0;
-  height: 30vh;
-  width: 30vh;
+  bottom: 2vh;
+  right: 1vh;
+  height: 20vh;
+  width: 20vh;
   object-fit: cover;
 }
 
-.videoRoom_theirVideo {
+/* .videoRoom_theirVideo {
   height: 100vh;
   width: 100vw;
   object-fit: cover;
-  
+} */
+
+.video_them {
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--primary);
+  object-fit: cover;
 }
 
-/* video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
+.endCall {
+  position: fixed;
+  bottom: 2vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}

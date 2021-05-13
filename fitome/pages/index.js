@@ -1,30 +1,38 @@
-import Head from 'next/head'
-import React, { useState } from 'react'
-import styles from '../styles/Home.module.css'
-import { useAuth } from '../firebase/contextAuth'
+import Head from 'next/head';
+import React, { useState } from 'react';
+import styles from '../styles/Home.module.css';
+import { useAuth } from '../firebase/contextAuth';
 import Link from 'next/link';
-import UploadImageForm from '../components/uploadImageForm'
-import UploadVideoForm from '../components/uploadVideoForm'
-import VideoCall from '../components/videoCall'
-
+import UploadImageForm from '../components/uploadImageForm';
+import UploadVideoForm from '../components/uploadVideoForm';
+import { useDispatch } from 'react-redux';
+import { getUserById } from '../redux/trainer';
+import { getUser } from '../redux/client';
+import { useRouter } from 'next/router';
 
 
 export default function Home() {
-
-  const {login, currentUser} = useAuth(); 
+  const { login } = useAuth();
+  const router = useRouter();
+  const dispatch = useDispatch();
   const initialState = {
-    email: '', 
+    email: '',
     password: '',
-  }
-  
+  };
   const [formState, setFormState] = useState(initialState);
 
   const loginHandler = async () => {
     try {
-        await login(formState.email, formState.password);
-        console.log("LOGGING IN")
+      let userInfo = await login(formState.email, formState.password);
+      if (userInfo.displayName === 'trainer') {
+        dispatch(getUserById(userInfo.user.uid));
+        router.push('/trainer');
+      } else {
+        dispatch(getUser(userInfo.user.uid));
+        router.push('/client');
+      }
     } catch (err) {
-        console.error(err)
+      console.error(err)
     }
   };
 
@@ -38,19 +46,18 @@ export default function Home() {
         <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"></link>
       </Head>
-
       <main className={styles.main}>
         <UploadImageForm/>
         <UploadVideoForm/>
         <form>
           <input type="email"
-            placeholder="Email" 
+            placeholder="Email"
             value={formState.email}
-            required 
+            required
             onChange={(e) => setFormState({...formState, email: e.target.value})}
           />
-          <input type="password" 
-          placeholder="Password" 
+          <input type="password"
+          placeholder="Password"
           value={formState.password}
           required
           onChange={(e) => setFormState({...formState, password: e.target.value})}
@@ -58,7 +65,7 @@ export default function Home() {
           <button type="button" onClick={loginHandler}>LOGIN</button>
         </form>
         <p>Don't have an account? <Link href="/signup"><a><span>Sign up.</span></a></Link></p>
-        <VideoCall></VideoCall>
+        
       </main>
     </div>
   )

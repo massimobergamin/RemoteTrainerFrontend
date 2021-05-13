@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react'
-import useStorage from '../firebase/useStorage'
+import React, { useState, useEffect } from 'react';
+import useStorage from '../firebase/useStorage';
 
-const UploadImageForm = () => {
-    
+const UploadImageForm = ({ setMedia }) => {
+
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
     const [urlFile, setUrlFile] = useState(null);
-    const {url, progress} = useStorage(file);
+    const { url, progress } = useStorage(file);
     const types = ['image/png', 'image/jpeg'];
 
      const handleChange = (e) => {
@@ -15,12 +15,13 @@ const UploadImageForm = () => {
             console.log(selected.type)
             setFile(selected);
             setError(null);
+            setMedia(url);
         } else {
             setFile(null);
             setError('Please select an image file(png or jpeg)');
         }
     }
-    
+
     return (
         <div>
             <form>

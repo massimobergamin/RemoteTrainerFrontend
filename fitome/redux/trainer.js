@@ -1,225 +1,329 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
 //user routes
 export const postUser = createAsyncThunk(
-  'users/postTrainerStatus',
-  async (userData, thunkAPI) => {
-    //console.log("trainerjs", userData)
-    const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users`, userData);
-    //dispatchEvent(postUser)
-    //console.log(response);
-    return response.data;
+  'trainer/postUserStatus',
+  async (userData) => {
+    try {
+      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users`, userData);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
-);
+  );
 
 export const updateUser = createAsyncThunk(
-  'users/postTrainerStatus',
-  async (uid, userData, thunkAPI) => {
-    const response = await axios.put(`https://remotetrainerserver.herokuapp.com/users/${uid}`, userData);
-    return response.data;
-  }
-);
+    'trainer/updateUserStatus',
+    async (uid, userData) => {
+      try {
+        const response = await axios.put(`https://remotetrainerserver.herokuapp.com/users/${uid}`, userData);
+        return response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  );
 
 export const getUserById = createAsyncThunk(
-  'users/fetchUserStatus',
-  async (uid, thunkAPI) => {
-    const response = await axios.get(`https://remotetrainerserver.herokuapp.com/${uid}-trainer`);
-    return response.data;
+    'trainer/getUserByIdStatus',
+    async (uid) => {
+      try {
+        const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/${uid}-trainer`);
+        return response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  );
+
+export const postClient = createAsyncThunk(
+  'trainer/postClientStatus',
+  async (trainer_uid, client_uid) => {
+    try {
+      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/clients/${trainer_uid}-${client_uid}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
-export const postClient = createAsyncThunk(
-  'users/postClientStatus',
-  async (trainer_uid, client_uid, thunkAPI) => {
-    const response = await axios.post(`https://remotetrainerserver.herokuapp.com/${trainer_uid}-${client_uid}`);
-    return response.data;
+export const getClients= createAsyncThunk(
+  'trainer/getClientsStatus',
+  async (uid) => {
+    try {
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/clients/${uid}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const postInviteCode = createAsyncThunk(
+  'trainer/postInviteCodeStatus',
+  async (inviteState) => {
+    try {
+      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users/invite/${inviteState.user_uid}`, inviteState);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const getInviteCode = createAsyncThunk(
+  'trainer/getInviteCodeStatus',
+  async () => {
+    try {
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/invite/${inviteState.user_uid}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 //session routes
 export const postSession = createAsyncThunk(
-  'users/postSessionStatus',
-  async (trainer_uid, client_uid, sessionData, thunkAPI) => {
-    const response = await axios.post(`https://remotetrainerserver.herokuapp.com/${trainer_uid}-${client_uid}`, sessionData);
-    return response.data;
+  'trainer/postSessionStatus',
+  async (trainer_uid, client_uid, sessionData) => {
+    try {
+      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users/sessions/${trainer_uid}-${client_uid}`, sessionData);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const updateSession = createAsyncThunk(
-  'users/updateSessionsStatus',
-  async (meeting_id, thunkAPI) => {
-    const response = await axios.put(`https://remotetrainerserver.herokuapp.com/${meeting_id}`);
-    return response.data;
+  'trainer/updateSessionsStatus',
+  async (meeting_id) => {
+    try {
+      const response = await axios.put(`https://remotetrainerserver.herokuapp.com/users/sessions/${meeting_id}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
-//not sure what to do with this one, there are 2 get session routes
+
 export const getSessions = createAsyncThunk(
-  'users/getSessionsStatus',
-  async (meeting_id, sessionData, thunkAPI) => {
-    const response = await axios.get(`https://remotetrainerserver.herokuapp.com/${meeting_id}`, sessionData);
-    return response.data;
+  'trainer/getSessionsStatus',
+  async (type, uid) => {
+    try {
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/sessions/${type}-${uid}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const getSession = createAsyncThunk(
+  'trainer/getSessionStatus',
+  async (meeting_id) => {
+    try {
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/sessions/${meeting_id}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 //plans routes
 export const postPlan = createAsyncThunk(
-  'plans/postPlanStatus',
-  async (trainer_uid, client_uid, planData, thunkAPI) => {
-    const response = await axios.post(`https://remotetrainerserver.herokuapp.com/${trainer_uid}-${client_uid}`, planData);
-    return response.data;
+  'trainer/postPlanStatus',
+  async (trainer_uid, client_uid, planData) => {
+    try {
+      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/plans/${trainer_uid}-${client_uid}`, planData);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const updatePlan = createAsyncThunk(
-  'plans/updatePlanStatus',
-  async (plan_id, planData, thunkAPI) => {
-    const response = await axios.put(`https://remotetrainerserver.herokuapp.com/${plan_id}`, planData);
-    return response.data;
+  'trainer/updatePlanStatus',
+  async (plan_id, planData) => {
+    try {
+      const response = await axios.put(`https://remotetrainerserver.herokuapp.com/plans/${plan_id}`, planData);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const getPlan = createAsyncThunk(
-  'plans/getPlanStatus',
-  async (client_uid, start_date, thunkAPI) => {
-    const response = await axios.get(`https://remotetrainerserver.herokuapp.com/${client_uid}-${start_date}`);
-    return response.data;
+  'trainer/getPlanStatus',
+  async (client_uid, start_date) => {
+    try {
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/plans/${client_uid}-${start_date}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const updatePlanNotes = createAsyncThunk(
-  'plans/updatePlanNotesStatus',
-  async (plan_id, planData, thunkAPI) => {
-    const response = await axios.put(`https://remotetrainerserver.herokuapp.com/${plan_id}`, planData);
-    return response.data;
+  'trainer/updatePlanNotesStatus',
+  async (plan_id, planData) => {
+    try {
+      const response = await axios.put(`https://remotetrainerserver.herokuapp.com/plans/notes/${plan_id}`, planData);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 //Workouts & Exercises
 export const getWorkout = createAsyncThunk(
-  'workouts/getWorkoutStatus',
-  async (trainer_uid, thunkAPI) => {
-    const response = await axios.get(`https://remotetrainerserver.herokuapp.com/${trainer_uid}`);
-    return response.data;
-  }
-);
-
-export const postWorkout = createAsyncThunk(
-  'workouts/postWorkoutStatus',
-  async (trainer_uid, workoutData, thunkAPI) => {
-    const response = await axios.post(`https://remotetrainerserver.herokuapp.com/${trainer_uid}`, workoutData);
-    return response.data;
+  'trainer/getWorkoutStatus',
+  async (trainer_uid) => {
+    try {
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/${trainer_uid}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const getExercise = createAsyncThunk(
-  'exercises/getExerciseStatus',
-  async (trainer_uid, thunkAPI) => {
-    const response = await axios.get(`https://remotetrainerserver.herokuapp.com/${trainer_uid}`);
-    return response.data;
+  'trainer/getExerciseStatus',
+  async (trainer_uid) => {
+    try {
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/workouts/${trainer_uid}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const postWorkout = createAsyncThunk(
+  'trainer/postWorkoutStatus',
+  async (trainer_uid, workoutData) => {
+    try {
+      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/workouts/${trainer_uid}`, workoutData);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const postExercise = createAsyncThunk(
-  'exercises/postExerciseStatus',
-  async (trainer_uid, exerciseData, thunkAPI) => {
-    const response = await axios.post(`https://remotetrainerserver.herokuapp.com/${trainer_uid}`, exerciseData);
-    return response.data;
+  'trainer/postExerciseStatus',
+  async (trainer_uid, exerciseData) => {
+    try {
+      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/workouts/custom/${trainer_uid}`, exerciseData);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const trainerSlice = createSlice({
   name: 'trainer',
   initialState: {
-    uid: "",
-    username: "",
-    profile_picture: "",
-    email: "",
-    last_login: Date.now(),
-    firstName: "",
-    lastName: "",
-    sex: "",
-    weight: 0,
-    height: 0,
-    birthday: Date.now(),
+    user: {
+      user_uid: "",
+      username: "",
+      email: "",
+      last_login: 0,
+      first_name: "",
+      last_name: "",
+      profile_picture: "",
+      sex: "",
+      weight: 0,
+      height: 0,
+      birthday: 0,
+    },
+    invite_code: "",
     exercises: [],
     workouts: [],
     clients: [],
     sessions: [],
+    singleSession: {},
     plans: []
   },
   reducers: {
-    createUser: (state, action) => {
-      state = action.payload
-    }
+
   },
   extraReducers: {
-    postUser: (state, action) => {
-      state.user = action.payload
+    [postUser.fulfilled] : (state, action) => {
+      state.user = action.payload;
     },
     [updateUser.fulfilled] : (state, action) => {
-      state.user = action.payload
+      state.user = action.payload; // backend route needs to be fixed to return user
     },
     [getUserById.fulfilled] : (state, action) => {
-      state.user = action.payload
+      state.sessions = action.payload.sessions;
+      delete action.payload.sessions;
+      state.user = action.payload;
     },
     [postClient.fulfilled] : (state, action) => {
-      state.clients = {...action.payload}
+      state.clients.push(action.payload);
+    },
+    [getClients.fulfilled] : (state, action) => {
+      state.clients = action.payload;
+    },
+    [postInviteCode.fulfilled] : (state, action) => {
+      state.invite_code = action.payload;
+    },
+    [getInviteCode.fulfilled] : (state, action) => {
+      state.invite_code = action.payload;
     },
     [postSession.fulfilled] : (state, action) => {
-      state.sessons = {...action.payload}
+      state.sessions.push(action.payload);
     },
-    //how are we updating the state of a particular session in 
-    //the array if there are multiple sessions?
     [updateSession.fulfilled] : (state, action) => {
-      state.sessons = {...action.payload}
+      let sessionIndex = state.sessions.findIndex(session => session.id === action.payload.id); // backend route needs to be fixed to return session
+      state.sessions[sessionIndex] = action.payload;
     },
     [getSessions.fulfilled] : (state, action) => {
-      state.sessons = action.payload
+      state.sessions = action.payload;
+    },
+    [getSession.fulfilled] : (state, action) => {
+      state.singleSession = action.payload;
     },
     [postPlan.fulfilled] : (state, action) => {
-      state.plans = {...action.payload}
+      state.plans.push(action.payload);
     },
-    //how will this update particular plan?
     [updatePlan.fulfilled] : (state, action) => {
-      state.plans = {...action.payload}
+      let planIndex = state.plans.findIndex(plan => plan.id === action.payload.id); // backend route needs to be fixed to return plan
+      state.plans[planIndex] = action.payload;
     },
     [getPlan.fulfilled] : (state, action) => {
-      state.plans = action.payload
+      state.plans = action.payload;
     },
-    //how will this update particular plan?
     [updatePlanNotes.fulfilled] : (state, action) => {
-      state.plans = {...action.payload}
+      let planIndex = state.plans.findIndex(plan => plan.id === action.payload.id); // backend route needs to be fixed to return plan
+      state.plans[planIndex] = action.payload;
     },
     [getWorkout.fulfilled] : (state, action) => {
-      state.workouts = action.payload
-    },
-    [postWorkout.fulfilled] : (state, action) => {
-      state.workouts = {...action.payload}
+      state.workouts = action.payload;
     },
     [getExercise.fulfilled] : (state, action) => {
-      state.exercises = action.payload
+      state.exercises = action.payload;
+    },
+    [postWorkout.fulfilled] : (state, action) => {
+      state.workouts.push(action.payload);
     },
     [postExercise.fulfilled] : (state, action) => {
-      state.exercises = {...action.payload}
+      state.exercises.push(action.payload);
     },
   }
 });
 
-
-
-//export const { postUser, updateUser, getUserById, postClient, postSession, updateSession, getSessions, postPlan, updatePlan, getPlan, updatePlanNotes, getWorkout, postWorkout, getExercise, postExercise} = trainerSlice.actions;
-
 export default trainerSlice.reducer;
-
-//ACTIONS
-/*
-Register Trainer
-Modify User (profile info)
-Create Exercise
-Create Workout
-Create Plan
-Modify Plan
-Create Session
-Modify Session
-*/
-

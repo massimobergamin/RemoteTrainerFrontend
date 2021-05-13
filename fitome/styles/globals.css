@@ -31,11 +31,3 @@ a {
 * {
   box-sizing: border-box;
 }
-
-.video_them {
-  background-color: #ca6702;
-}
-
-.video_me {
-  background-color: var(--primary);
-}
