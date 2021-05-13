@@ -8,10 +8,11 @@ import UploadVideoForm from '../components/uploadVideoForm';
 import { useDispatch } from 'react-redux';
 import { getUserById } from '../redux/trainer';
 import { getUser } from '../redux/client';
-import { router } from 'next/router';
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const { login } = useAuth();
+  const router = useRouter();
   const dispatch = useDispatch();
   const initialState = {
     email: '',
@@ -63,7 +64,7 @@ export default function Home() {
           <button type="button" onClick={loginHandler}>LOGIN</button>
         </form>
         <p>Don't have an account? <Link href="/signup"><a><span>Sign up.</span></a></Link></p>
-
+        
       </main>
     </div>
   )
