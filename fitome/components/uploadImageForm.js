@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useStorage from '../firebase/useStorage';
 
-const UploadImageForm = () => {
+const UploadImageForm = ({ setMedia }) => {
 
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
@@ -15,6 +15,7 @@ const UploadImageForm = () => {
             console.log(selected.type)
             setFile(selected);
             setError(null);
+            setMedia(url);
         } else {
             setFile(null);
             setError('Please select an image file(png or jpeg)');

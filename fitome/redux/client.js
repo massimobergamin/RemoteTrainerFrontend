@@ -105,7 +105,6 @@ export const clientSlice = createSlice({
       height: 0,
       birthday: 0,
     },
-    trainerInfo: {},
     sessions: [],
     singleSession: {},
     plans: []
@@ -123,8 +122,6 @@ export const clientSlice = createSlice({
     [getUser.fulfilled] : (state, action) => {
       state.plans = action.payload.plans;
       delete action.payload.plans;
-      state.trainerInfo = action.payload.trainerInfo;
-      delete action.payload.trainerInfo;
       state.user = action.payload;
     },
     [getSessions.fulfilled] : (state, action) => {
