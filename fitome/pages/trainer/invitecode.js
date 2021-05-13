@@ -1,6 +1,5 @@
 import Link from 'next/link'
 const Trainer = () => {
-
   
   return (
     <div>
