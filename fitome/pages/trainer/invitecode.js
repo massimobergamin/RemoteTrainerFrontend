@@ -9,9 +9,12 @@ const Trainer = () => {
       <Link href="./exercise">
       <h1>Exercises</h1>
       </Link>
+<<<<<<< HEAD
+=======
       <Link href="./plans">
       <h1>Plans</h1>
       </Link>
+>>>>>>> 3adeeb7a0567b0c66e20f6bdb4d2af6a257b7afa
       <Link href="./appointments">
       <h1>Appointments</h1>
       </Link>
