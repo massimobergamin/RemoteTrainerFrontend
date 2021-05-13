@@ -11,8 +11,11 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function signUp(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+  function signUp(email, password, type) {
+    return auth.createUserWithEmailAndPassword(email, password)
+      .then((result) => result.user.updateProfile({
+        displayName: type
+      })).catch((error) => console.log(error));
   };
 
   function login(email, password) {
@@ -44,7 +47,7 @@ export function AuthProvider({ children }) {
   }, [])
 
   const value = {
-    currentUser, 
+    currentUser,
     signUp,
     login,
     logout,
@@ -59,4 +62,3 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   )
 }
-
