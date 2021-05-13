@@ -54,6 +54,8 @@ io.on('connection', socket => {
   //listens for a disconnect
   socket.on('hang-up', () => {
     socket.broadcast.emit("call-ended")
+    socket.disconnect();
+    console.log("I AM DISCONNECTED")
   })
 });
 
