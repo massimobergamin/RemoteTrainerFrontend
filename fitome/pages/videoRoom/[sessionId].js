@@ -42,7 +42,7 @@ function VideoRoom() {
 
                     myPeer.on('call', call => { // When we join someone's room we will receive a call from them
                         console.log("ANSWERING CALL", call, "   ", stream)
-                        call?.answer(stream) // Stream them our video/audio
+                        call.answer(stream) // Stream them our video/audio
                         const video = document.createElement('video');
                         //video.muted = true;
                         video.classList.add("video_them")
