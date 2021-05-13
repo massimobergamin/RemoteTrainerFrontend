@@ -29,7 +29,13 @@ export default function Home() {
         router.push('/trainer');
       } else {
         dispatch(getUser(userInfo.user.uid));
-        // router.push('/client/sessions');
+        // .then
+          // check user for trainer info
+            // if none exists
+              // route to client landing
+            // if trainer info exists
+              // route to client sessions
+        router.push('/client');
       }
     } catch (err) {
       console.error(err)

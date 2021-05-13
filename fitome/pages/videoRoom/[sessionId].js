@@ -9,7 +9,7 @@ import TimerOverlay from '../../components/timerOverlay';
 function VideoRoom() {
     const router = useRouter();
     const { currentUser } = useAuth();
-    const [stream, setStream] = useState(null);
+    const [streamTest, setStreamTest] = useState(null);
     const { sessionId } = router.query;
     const [them, setThem] = useState({})
 
@@ -28,7 +28,7 @@ function VideoRoom() {
                 const themVideoScreen = document.getElementById('video_them');
 
                 myPeer.on('open', peerId => { // When we first open the app, have us join a room
-                    socket.emit('joinroom', {userId: peerId, firstName:"MARK", sessionId:sessionId})
+                    socket.emit('joinRoom', {userId: peerId, firstName:"MARK", sessionId:sessionId})
                     console.log("PEERID", peerId, " ROOMID ", sessionId)
                 })
 
@@ -39,16 +39,16 @@ function VideoRoom() {
                     const myVideo = document.createElement('video');
                     myVideo.muted = true;
                     myVideo.classList.add("video_me")
-                    setStream(stream)
+                    // setStreamTest(stream)
                     addVideoStream(myVideo, stream, myVideoScreen)
 
                     myPeer.on('call', call => { // When we join someone's room we will receive a call from them
                         console.log("ANSWERING CALL", call, "   ", stream)
-                        call?.answer(stream) // Stream them our video/audio
+                        call.answer(stream) // Stream them our video/audio
                         const video = document.createElement('video');
-                        //video.muted = true;
+                        video.muted = true;
                         video.classList.add("video_them")
-                        call?.on('stream', userVideoStream => { // When we recieve their stream
+                        call.on('stream', userVideoStream => { // When we recieve their stream
                             addVideoStream(video, userVideoStream, themVideoScreen) // Display their video to ourselves
                         })
                     })
@@ -56,7 +56,7 @@ function VideoRoom() {
 
                     socket.on('user-connected', userId => { // If a new user connect, connect to them
                         console.log("Socket user connected", userId);
-                        connectToNewUser(userId, stream) 
+                        connectToNewUser(userId, stream)
                     })
 
                     socket.on('call-ended', res => {
@@ -80,13 +80,13 @@ function VideoRoom() {
                     //Add their video
                     console.log("CALLING", call)
                     const video = document.createElement('video')
-                    //video.muted = true;
+                    video.muted = true;
                     video.classList.add("video_them")
-                    call?.on('stream', userVideoStream => {
+                    call.on('stream', userVideoStream => {
                         addVideoStream(video, userVideoStream, themVideoScreen)
                     })
                     //If they leave, remove their video
-                    call?.on('close', () => {
+                    call.on('close', () => {
                         video.remove()
                     })
                 }
@@ -114,7 +114,7 @@ function VideoRoom() {
     return (
         <div>
           <div className="call_background"><h1>Waiting for Participant...</h1></div>
-          <div id="video_them" className="videoRoom_theirVideo" >
+          <div id="video_them" className="videoRoom_theirVideo">
 
           </div>
           <div id="video_me" className="videoRoom_myVideo" >

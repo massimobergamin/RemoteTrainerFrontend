@@ -22,7 +22,7 @@ function SessionDetailPage () {
     function joinCallHandler () {
         console.log("joining")
         //emit
-        socket.emit('joinRoom', {userId: currentUser.uid, firstName: "MARK", roomId: session.id}); //get firstName from redux
+        // socket.emit('joinRoom', {userId: currentUser.uid, firstName: "MARK", roomId: session.id}); //get firstName from redux
         router.push(`/videoRoom/${id}`)
     }
 
