@@ -1,56 +1,43 @@
 import UploadImageForm from '../components/uploadImageForm.js';
-import { postExercise } from '../redux/trainer'
+import { postExercise } from '../redux/trainer';
+import { useAuth } from '../firebase/contextAuth';
+import { useDispatch } from 'react-redux';
+import { router } from 'next/router';
 
 const Exercise = () => {
+  const [media, setMedia] = useState('');
+  const initialState = {
+    title: '',
+    description: '',
+    muscle_group: '',
+    benefits: '',
+    media: media
+  };
+  const [formState, setFormState] = useState(initialState);
+  const { currentUser } = useAuth();
+  const dispatch = useDispatch();
 
-  const handleChange = () => {
-    
-  }
-  
   const handleSubmit = () => {
-    
+    try {
+      dispatch(postExercise(currentUser.uid, {...formState, type: 'custom'}));
+      router.push('/trainer');
+    } catch (err) {
+      console.log(err);
+    }
   }
-  
+
   return (
     <div>
       <form>
-          <input placeHolder="Exercise name" type="text" name="title" onChange={handleChange}/>
-          <input placeHolder="Description" type="text" name="description" onChange={handleChange}/>
-          <input placeHolder="Muscle Group" type="text" name="muscle_group" onChange={handleChange}/>
-          <input placeHolder="Benefits" type="text" name="benefits" onChange={handleChange}/>
+          <input placeHolder="Exercise name" type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
+          <input placeHolder="Description" type="text" onChange={(e) => setFormState({...formState, description: e.target.value})}/>
+          <input placeHolder="Muscle Group" type="text" onChange={(e) => setFormState({...formState, muscle_group: e.target.value})}/>
+          <input placeHolder="Benefits" type="text" onChange={(e) => setFormState({...formState, benefits: e.target.value})}/>
           <input type="submit" value="Create" onClick={handleSubmit}/>
-          <UploadImageForm></UploadImageForm>
+          <UploadImageForm setMedia={setMedia}></UploadImageForm>
       </form>
     </div>
   )
 }
 
-export default Exercise
-/*
-const Exercise = sequelize.define('exercise', {
-  trainer_uid: {
-    type: DataTypes.STRING,
-  },
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  type: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  description: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  media: {
-    type: DataTypes.STRING,
-  },
-  muscle_group: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  benefits: {
-    type: DataTypes.STRING,
-  },
-}); */
+export default Exercise;
