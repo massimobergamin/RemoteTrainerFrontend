@@ -22,6 +22,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Poppins', sans-serif;
+  color: var(--fontColor)
 }
 
 a {
@@ -31,4 +32,18 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.pageContainer {
+  padding: 4vh 4vw 0px 4vw;
+  height: 94vh;
+  width: 100vw;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+  line-height: 1em;
+  font-size: 2em;
+  text-align: center;
 }
