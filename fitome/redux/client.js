@@ -114,26 +114,28 @@ export const clientSlice = createSlice({
   },
   extraReducers: {
     [postUser.fulfilled] : (state, action) => {
-      state.user = {...state.user, ...action.payload}
+      state.user = action.payload;
     },
     [updateUser.fulfilled] : (state, action) => {
-      state.user = {...state.user, ...action.payload}
+      state.user = action.payload;
     },
     [getUser.fulfilled] : (state, action) => {
-      state.user = {...state.user, ...action.payload}
+      state.plans = action.payload.plans;
+      delete action.payload.plans;
+      state.user = action.payload;
     },
     [getSessions.fulfilled] : (state, action) => {
-      state.sessions = [...state.sessions, ...action.payload];
+      state.sessions = action.payload;
     },
     [getSession.fulfilled] : (state, action) => {
-      state.singleSession = {...state.singleSession, ...action.payload};
+      state.singleSession = action.payload;
     },
     [getClientPlans.fulfilled] : (state, action) => {
-      state.plans = [...state.plans, ...action.payload];
+      state.plans = action.payload;
     },
     [addPlanNotes.fulfilled] : (state, action) => {
       let planIndex = state.plans.findIndex(plan => plan.id === action.payload.id);
-      state.plans[planIndex] = [...state.plans[planIndex], ...action.payload];
+      state.plans[planIndex] = action.payload;
     },
   }
 });

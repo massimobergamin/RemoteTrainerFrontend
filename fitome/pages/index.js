@@ -5,14 +5,14 @@ import { useAuth } from '../firebase/contextAuth';
 import Link from 'next/link';
 import UploadImageForm from '../components/uploadImageForm';
 import UploadVideoForm from '../components/uploadVideoForm';
-import VideoCall from '../components/videoCall';
 import { useDispatch } from 'react-redux';
 import { getUserById } from '../redux/trainer';
 import { getUser } from '../redux/client';
-import { router } from 'next/router';
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const { login } = useAuth();
+  const router = useRouter();
   const dispatch = useDispatch();
   const initialState = {
     email: '',
