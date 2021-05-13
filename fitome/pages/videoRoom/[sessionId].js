@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, {useEffect, useState} from 'react'
 // import Peer from 'peerjs';
 import { useRouter } from 'next/router'
 import {useAuth} from '../../firebase/contextAuth'
@@ -63,9 +63,11 @@ function VideoRoom() {
                         myPeer.disconnect();
                         const themVideo = document.getElementById('video_them');
                         themVideo.remove();
-                        console.log("MYBIGSTREAM", stream.getTracks())
-                        stream.getTracks()[0].stop()
-                        stream.getTracks()[1].stop()
+                        if (stream) {
+                            stream.getTracks()[0].stop()
+                            stream.getTracks()[1].stop()
+                            setStream(null)
+                        }
                         router.push('/')
                     })
                     
@@ -102,7 +104,6 @@ function VideoRoom() {
     },[currentUser])
     
    function hangUp () {
-       console.log("HANGING UP", stream.getTracks())
        stream.getTracks()[0].stop()
        stream.getTracks()[1].stop()
        setStream(null)
@@ -112,6 +113,7 @@ function VideoRoom() {
 
     return (
         <div>
+          <div className="call_background"><h1>Waiting for Participant...</h1></div>
           <div id="video_them" className="videoRoom_theirVideo" >
 
           </div>
