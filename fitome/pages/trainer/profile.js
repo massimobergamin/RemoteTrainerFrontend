@@ -1,15 +1,13 @@
 import { useState } from 'react';
-import { useAuth } from '../firebase/contextAuth'
+import { useAuth } from '../../firebase/contextAuth'
 import { useSelector } from 'react-redux';
-import UpdateProfileForm from '../components/updateProfileForm';
-import { updateUser } from '../redux/trainer';
+import UpdateProfileForm from '../../components/updateProfileForm';
+import { updateUser } from '../../redux/trainer';
 import { useDispatch } from 'react-redux';
 
 const Profile = () => {
   
   const { user } = useSelector(state => state.trainer);
-
-
 
   return (
     <div>

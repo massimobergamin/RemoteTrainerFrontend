@@ -29,7 +29,6 @@ const UpdateProfileForm = () => {
 
   return (
     <div>
-      <p>{user.first_name + " " + user.last_name}</p>
       <form>
           <input
           type="text" 

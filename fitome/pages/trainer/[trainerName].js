@@ -10,7 +10,10 @@ const Trainer = () => {
       <Link href="./exercise">
       <h1>Exercises</h1>
       </Link>
-      <Link href="./appointmnets">
+      <Link href="./plans">
+      <h1>Plans</h1>
+      </Link>
+      <Link href="./appointments">
       <h1>Appointments</h1>
       </Link>
       <Link href="/profile">
@@ -23,13 +26,7 @@ const Trainer = () => {
 
 export default Trainer;
 
-// login
-
-// trainer landing page
-// creating appointment
-// creating workout
 // creating  plan
-// viewing his getWorkouts
 // view his appointments
 // profile
 
