@@ -44,11 +44,11 @@ function VideoRoom() {
 
                     myPeer.on('call', call => { // When we join someone's room we will receive a call from them
                         console.log("ANSWERING CALL", call, "   ", stream)
-                        call.answer(stream) // Stream them our video/audio
+                        call?.answer(stream) // Stream them our video/audio
                         const video = document.createElement('video');
                         //video.muted = true;
                         video.classList.add("video_them")
-                        call.on('stream', userVideoStream => { // When we recieve their stream
+                        call?.on('stream', userVideoStream => { // When we recieve their stream
                             addVideoStream(video, userVideoStream, themVideoScreen) // Display their video to ourselves
                         })
                     })
@@ -74,16 +74,17 @@ function VideoRoom() {
                 function connectToNewUser(userId, stream) { // This runs when someone joins our room
                     console.log("CONNECTING TO NEW USER", userId, " ", stream, myPeer)
                     const call = myPeer.call(userId, stream) // Call the user who just joined
+                    
                     //Add their video
                     console.log("CALLING", call)
                     const video = document.createElement('video')
                     //video.muted = true;
                     video.classList.add("video_them")
-                    call.on('stream', userVideoStream => {
+                    call?.on('stream', userVideoStream => {
                         addVideoStream(video, userVideoStream, themVideoScreen)
                     })
                     //If they leave, remove their video
-                    call.on('close', () => {
+                    call?.on('close', () => {
                         video.remove()
                     })
                 }
@@ -118,10 +119,10 @@ function VideoRoom() {
 
           </div>
           <div className="endCall">
-          <button type="button" onClick={() => hangUp()} className="button_circle"><img src="/icons/call_end.png"/></button>
+          <button type="button" onClick={() => hangUp()} className="button_circle"><img src="/icons/call_end_white_24dp.svg"/></button>
+          </div> 
           <div className="timer_container">
             <TimerOverlay />
-          </div>
           </div>
         </div>
     )

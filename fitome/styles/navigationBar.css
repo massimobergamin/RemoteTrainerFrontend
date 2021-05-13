@@ -1,0 +1,30 @@
+.navigationBar_container {
+    position: fixed;
+    bottom: 0;
+    height: 6vh;
+    width: 100vw;
+    background-color: var(--accent);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+.navigationBar_icon {
+    list-style-type: none;
+    height: 4vh;
+    width: 4vh;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.navigationBar_icon:hover{
+    background-color: var(--secondary)
+}
+
+.navigationBar_icon:active{
+    background-color: var(--secondary)
+}

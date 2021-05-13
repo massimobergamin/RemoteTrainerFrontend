@@ -4,6 +4,7 @@
 @import './buttons.css';
 @import './timerOverlay.css';
 
+@import './navigationBar.css';
 
 :root {
   /* Colors: */
