@@ -39,6 +39,7 @@ const TimerOverlay = () => {
   const handleReset = () => {
     if (!isEditing) {
       setReset(prevState => prevState + 1);
+      setIsPlaying(prev => false);
     } else {
       const { hours, minutes, seconds } = timerInput;
       const newHours = parseInt(hours)
@@ -48,6 +49,7 @@ const TimerOverlay = () => {
       const newDuration = (newHours * 3600) + (newMinutes * 60) + newSeconds;
       setNewTimer(newDuration);
       setReset(prevState => prevState + 1);
+      setIsEditing(prevState => !prevState);
     }
   };
 
@@ -62,7 +64,6 @@ const TimerOverlay = () => {
   const isEmpty = () => {
     return !newTimer;
   }
-
 
   return (
     <div>

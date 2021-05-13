@@ -119,9 +119,12 @@ function VideoRoom() {
           </div>
           <div className="endCall">
           <button type="button" onClick={() => hangUp()} className="button_circle"><img src="/icons/call_end.png"/></button>
-          </div> 
+          <div className="timer_container">
+            <TimerOverlay />
+          </div>
+          </div>
         </div>
     )
 }
-
+ 
 export default VideoRoom
