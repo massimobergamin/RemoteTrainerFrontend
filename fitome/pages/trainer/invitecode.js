@@ -1,6 +1,6 @@
 import Link from 'next/link'
 const Trainer = () => {
-  
+
   return (
     <div>
       <Link href="./workouts">
@@ -31,7 +31,7 @@ export default Trainer;
 
 // client landing page
 // view appointment
-// view owkrout 
+// view owkrout
 // view plan
 // view exercises
-// profile 
+// profile

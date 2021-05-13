@@ -189,7 +189,7 @@ export const getWorkout = createAsyncThunk(
   'trainer/getWorkoutStatus',
   async (trainer_uid) => {
     try {
-      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/${trainer_uid}`);
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/workouts/${trainer_uid}`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -201,7 +201,7 @@ export const getExercise = createAsyncThunk(
   'trainer/getExerciseStatus',
   async (trainer_uid) => {
     try {
-      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/workouts/${trainer_uid}`);
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/exercises/${trainer_uid}`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -225,7 +225,7 @@ export const postExercise = createAsyncThunk(
   'trainer/postExerciseStatus',
   async (trainer_uid, exerciseData) => {
     try {
-      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/workouts/custom/${trainer_uid}`, exerciseData);
+      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/exercises/custom/${trainer_uid}`, exerciseData);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -265,7 +265,7 @@ export const trainerSlice = createSlice({
       state.user = action.payload;
     },
     [updateUser.fulfilled] : (state, action) => {
-      state.user = action.payload; // backend route needs to be fixed to return user
+      state.user = action.payload;
     },
     [getUserById.fulfilled] : (state, action) => {
       state.sessions = action.payload.sessions;
@@ -288,7 +288,7 @@ export const trainerSlice = createSlice({
       state.sessions.push(action.payload);
     },
     [updateSession.fulfilled] : (state, action) => {
-      let sessionIndex = state.sessions.findIndex(session => session.id === action.payload.id); // backend route needs to be fixed to return session
+      let sessionIndex = state.sessions.findIndex(session => session.id === action.payload.id);
       state.sessions[sessionIndex] = action.payload;
     },
     [getSessions.fulfilled] : (state, action) => {
@@ -301,14 +301,14 @@ export const trainerSlice = createSlice({
       state.plans.push(action.payload);
     },
     [updatePlan.fulfilled] : (state, action) => {
-      let planIndex = state.plans.findIndex(plan => plan.id === action.payload.id); // backend route needs to be fixed to return plan
+      let planIndex = state.plans.findIndex(plan => plan.id === action.payload.id);
       state.plans[planIndex] = action.payload;
     },
     [getPlan.fulfilled] : (state, action) => {
       state.plans = action.payload;
     },
     [updatePlanNotes.fulfilled] : (state, action) => {
-      let planIndex = state.plans.findIndex(plan => plan.id === action.payload.id); // backend route needs to be fixed to return plan
+      let planIndex = state.plans.findIndex(plan => plan.id === action.payload.id);
       state.plans[planIndex] = action.payload;
     },
     [getWorkout.fulfilled] : (state, action) => {
