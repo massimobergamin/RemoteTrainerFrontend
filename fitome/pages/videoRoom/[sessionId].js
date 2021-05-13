@@ -9,6 +9,7 @@ function VideoRoom() {
     const { currentUser } = useAuth();
     const [stream, setStream] = useState(null)
     const { sessionId } = router.query;
+    const [them, setThem] = useState({})
 
     
     useEffect(() => {
@@ -36,13 +37,15 @@ function VideoRoom() {
                     const myVideo = document.createElement('video');
                     myVideo.muted = true;
                     myVideo.classList.add("video_me")
+                    setStream(stream)
                     addVideoStream(myVideo, stream, myVideoScreen)
 
                     myPeer.on('call', call => { // When we join someone's room we will receive a call from them
                         console.log("ANSWERING CALL", call, "   ", stream)
                         call.answer(stream) // Stream them our video/audio
                         const video = document.createElement('video');
-                        video.muted = true;
+                        //video.muted = true;
+                        video.classList.add("video_them")
                         call.on('stream', userVideoStream => { // When we recieve their stream
                             addVideoStream(video, userVideoStream, themVideoScreen) // Display their video to ourselves
                         })
@@ -53,6 +56,16 @@ function VideoRoom() {
                         console.log("Socket user connected", userId);
                         connectToNewUser(userId, stream) 
                     })
+
+                    socket.on('call-ended', res => {
+                        myPeer.disconnect();
+                        const themVideo = document.getElementById('video_them');
+                        themVideo.remove();
+                        console.log("MYBIGSTREAM", stream.getTracks())
+                        stream.getTracks()[0].stop()
+                        stream.getTracks()[1].stop()
+                        router.push('/')
+                    })
                     
                 })
             
@@ -62,7 +75,8 @@ function VideoRoom() {
                     //Add their video
                     console.log("CALLING", call)
                     const video = document.createElement('video')
-                    video.muted = true;
+                    //video.muted = true;
+                    video.classList.add("video_them")
                     call.on('stream', userVideoStream => {
                         addVideoStream(video, userVideoStream, themVideoScreen)
                     })
@@ -84,19 +98,28 @@ function VideoRoom() {
         }
     },[currentUser])
     
-   
+   function hangUp () {
+       console.log("HANGING UP", stream.getTracks())
+       stream.getTracks()[0].stop()
+       stream.getTracks()[1].stop()
+       setStream(null)
+       socket.emit('hang-up', currentUser.uid)
+       router.push("/")
+   }
 
     return (
         <div>
-          <div id="video_them" className="VideoRoom_theirVideo" >
+          <div id="video_them" className="videoRoom_theirVideo" >
 
           </div>
-          <div id="video_me" className="VideoRoom_myVideo" >
+          <div id="video_me" className="videoRoom_myVideo" >
 
           </div>
+          <div className="endCall">
+          <button type="button" onClick={() => hangUp()} className="button_circle"><img src="/icons/call_end.png"/></button>
+          </div> 
         </div>
     )
 }
 
 export default VideoRoom
-

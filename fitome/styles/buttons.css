@@ -9,3 +9,15 @@
 .button:hover {
     cursor: pointer;
 }
+
+.button_circle {
+    background-color: var(--accent);
+    color: white;
+    border: 0;
+    padding: 8px 12px;
+    border-radius: 50%;
+}
+
+.button_circle:hover {
+    cursor: pointer;
+}

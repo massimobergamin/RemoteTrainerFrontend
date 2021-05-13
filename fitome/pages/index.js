@@ -3,6 +3,12 @@ import React, { useState } from 'react';
 import styles from '../styles/Home.module.css';
 import { useAuth } from '../firebase/contextAuth';
 import Link from 'next/link';
+<<<<<<< HEAD
+import UploadImageForm from '../components/uploadImageForm'
+import UploadVideoForm from '../components/uploadVideoForm'
+
+
+=======
 import UploadImageForm from '../components/uploadImageForm';
 import UploadVideoForm from '../components/uploadVideoForm';
 import VideoCall from '../components/videoCall';
@@ -10,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import { getUserById } from '../redux/trainer';
 import { getUser } from '../redux/client';
 import { router } from 'next/router';
+>>>>>>> 77278c4ed848470f906c115400929c402badbc20
 
 export default function Home() {
   const { login } = useAuth();
@@ -64,7 +71,7 @@ export default function Home() {
           <button type="button" onClick={loginHandler}>LOGIN</button>
         </form>
         <p>Don't have an account? <Link href="/signup"><a><span>Sign up.</span></a></Link></p>
-        <VideoCall></VideoCall>
+        
       </main>
     </div>
   )
