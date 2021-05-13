@@ -1,6 +1,6 @@
 import UploadVideoForm from '../../../components/uploadVideoForm';
-import { postExercise } from '../../redux/trainer';
-import { useAuth } from '../../firebase/contextAuth';
+import { postExercise } from '../../../redux/trainer';
+import { useAuth } from '../../../firebase/contextAuth';
 import { useDispatch } from 'react-redux';
 import { router } from 'next/router';
 import { useState } from 'react';

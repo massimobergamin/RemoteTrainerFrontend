@@ -1,5 +1,5 @@
-import { getExercise, postWorkout } from '../../redux/trainer';
-import { useAuth } from '../../firebase/contextAuth';
+import { getExercise, postWorkout } from '../../../redux/trainer';
+import { useAuth } from '../../../firebase/contextAuth';
 import { useDispatch, useSelector } from 'react-redux';
 import { router } from 'next/router';
 import { useEffect } from 'react';
