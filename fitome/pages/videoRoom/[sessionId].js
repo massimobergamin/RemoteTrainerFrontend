@@ -3,13 +3,17 @@ import React, {useEffect, useState, useRef} from 'react'
 import { useRouter } from 'next/router'
 import {useAuth} from '../../firebase/contextAuth'
 import {socket} from '../../lib/socket'
+import TimerOverlay from '../../components/timerOverlay';
+
+
+
 
 function VideoRoom() {
     const router = useRouter();
     const { currentUser } = useAuth();
-    const [stream, setStream] = useState(null)
+    const [stream, setStream] = useState(null);
     const { sessionId } = router.query;
-
+    
     
     useEffect(() => {
         if (currentUser) {
@@ -94,6 +98,7 @@ function VideoRoom() {
           <div id="video_me" className="VideoRoom_myVideo" >
 
           </div>
+          <TimerOverlay></TimerOverlay>
         </div>
     )
 }
