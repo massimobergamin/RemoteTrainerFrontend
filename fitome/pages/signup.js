@@ -43,7 +43,7 @@ const SignUp = () => {
     
               dispatch(postUser(formState));
               dispatch(postInviteCode(inviteState));
-              router.push(`/trainer/${formState.first_name}`);
+              router.push(`/trainer/invitecode`);
             } else {
               //add code for client here
             }
