@@ -8,10 +8,10 @@ export const postUser = createAsyncThunk(
  async (userData) => {
     try {
       const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users`, userData);
-      console.log("response, ", response)
+      console.log("post res ", response)
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 );
@@ -34,10 +34,12 @@ export const updateUser = createAsyncThunk(
   'trainer/postTrainerStatus',
   async (uid, userData) => {
     try {
+      
       const response = await axios.put(`https://remotetrainerserver.herokuapp.com/users/${uid}`, userData);
+      
       return response.data;
     } catch (error) {
-      console.log(error)
+      //console.log(error)
     }
   }
 );
