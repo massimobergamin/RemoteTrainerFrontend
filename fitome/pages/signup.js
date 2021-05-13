@@ -34,7 +34,7 @@ const SignUp = () => {
     const createHandler = async () => {
        
         try {
-          const fireBaseData = await signUp(formState.email, formState.password, formState.displayName);
+          const fireBaseData = await signUp(formState.email, formState.password, formState.type);
           
           setFormState({...formState, user_uid:fireBaseData.user.uid, last_login: Date.now()})
           setInviteState({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5)})
