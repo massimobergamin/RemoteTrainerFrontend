@@ -13,9 +13,9 @@ const Trainer = () => {
   const { currentUser } = useAuth();
   const { user, invite_code } = useSelector(state => state.trainer);
   // useEffect(() => {
-  //   inviteCode = dispatch(getInviteCode(currentUser.uid))
+  //   dispatch(getInviteCode(currentUser.uid))
   // })
-  
+
   return (
     <div>
       <h1>{invite_code.invite_code}</h1>
@@ -50,7 +50,7 @@ export default Trainer;
 
 // client landing page
 // view appointment
-// view owkrout 
+// view owkrout
 // view plan
 // view exercises
-// profile 
+// profile
