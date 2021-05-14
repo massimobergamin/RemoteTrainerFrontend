@@ -1,6 +1,6 @@
 
-import React, {useState, useEffect} from 'react'
-import useStorage from '../firebase/useStorage'
+import React, { useState, useEffect } from 'react';
+import useStorage from '../firebase/useStorage';
 
 function UploadVideoForm({ setMedia }) {
 
@@ -13,13 +13,12 @@ function UploadVideoForm({ setMedia }) {
      const handleChange = (e) => {
         let selected = e.target.files[0];
         if (selected && types.includes(selected.type)) {
-            console.log(selected.type)
             setFile(selected);
             setError(null);
             setMedia(url);
         } else {
             setFile(null);
-            setError('Please select a video file(mp4)');
+            setError('Please select a video file (mp4)');
         }
     }
 
@@ -29,7 +28,7 @@ function UploadVideoForm({ setMedia }) {
                 <input type="file" onChange={handleChange} capture="camera"/>
                 <div >
                 {url &&
-                <video id="Exercise_Video" width="176" height="176" autoplay="true" loop="true">
+                <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
                     <source src={url} type="video/mp4"/>
                     Your browser does not support HTML5 video.
                 </video> }
@@ -40,4 +39,4 @@ function UploadVideoForm({ setMedia }) {
     )
 }
 
-export default UploadVideoForm
+export default UploadVideoForm;

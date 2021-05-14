@@ -20,15 +20,15 @@ function Workouts() {
       {workouts && workouts.map(workout =>
         <div key={workout.id}>
           <div>{workout.title}</div>
-          {workouts.exercises && workouts.exercises.map(exercise =>
-            <div>
-              <div>{exercise.title}</div>
-                {exercise.media &&
-                <video id="Exercise_Video" width="176" height="176" autoplay="true" loop="true">
-                  <source src={exercise.media} type="video/mp4"/>
-                  Your browser does not support HTML5 video.
+          {workout.exercises && workout.exercises.map(exercise =>
+            <div key={exercise.id}>
+            <div>{exercise.title}</div>
+              {exercise.media &&
+                <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
+                    <source src={exercise.media} type="video/mp4"/>
+                    Your browser does not support HTML5 video.
                 </video>}
-            </div>)}
+          </div>)}
         </div>)}
     </div>
   )

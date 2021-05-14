@@ -13,7 +13,7 @@ const CreateExercise = () => {
     description: '',
     muscle_group: '',
     benefits: '',
-    media: media
+    media: ''
   };
   const [formState, setFormState] = useState(initialState);
   const { currentUser } = useAuth();
@@ -23,8 +23,8 @@ const CreateExercise = () => {
   const handleSubmit = (e) => {
     try {
       e.preventDefault();
-      dispatch(postExercise({trainer_uid: currentUser.uid, exerciseData: {...formState, type: 'custom'}})).then(() => console.log(exercises));
-      // router.push('/exercises');
+      dispatch(postExercise({trainer_uid: currentUser.uid, exerciseData: {...formState, media: media, type: 'custom'}}));
+      router.push('/trainer/exercises');
     } catch (err) {
       console.log(err);
     }
