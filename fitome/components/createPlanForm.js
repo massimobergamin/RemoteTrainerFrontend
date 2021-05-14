@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '../firebase/contextAuth'
+import { useAuth } from '../firebase/contextAuth';
 import { useSelector } from 'react-redux';
 import { updateUser, getClients, getWorkout } from '../redux/trainer';
 import { useDispatch } from 'react-redux';
-import moment from 'moment'
+import moment from 'moment';
 
 
 //get list of workouts
