@@ -2,7 +2,6 @@
 @import './videoCall.css';
 @import './buttons.css';
 @import './navigationBar.css';
-@import './planForm.css';
 
 :root {
   /* Colors: */
@@ -38,7 +37,8 @@ a {
   width: 100vw;
 }
 
-h1 {
+h1, 
+p {
   margin: 0;
   padding: 0;
   line-height: 1em;
