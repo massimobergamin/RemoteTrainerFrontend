@@ -11,15 +11,15 @@ const Trainer = () => {
 
   let inviteCode = '';
   const { currentUser } = useAuth();
-
+  const { user, invite_code } = useSelector(state => state.trainer);
   useEffect(() => {
     inviteCode = dispatch(getInviteCode(currentUser.uid))
   })
   
   return (
     <div>
-      Hi
-      {user.user_uid}
+      <h1>{invite_code.invite_code}</h1>
+      <h1>{user.user_uid}</h1>
       <h3>Start inviting your clients with this code</h3>
       <h1>{inviteCode}</h1>
       <Link href="./workouts">
