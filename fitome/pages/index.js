@@ -55,22 +55,20 @@ export default function Home() {
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"></link>
       </Head>
       <main className={styles.main}>
-        <UploadImageForm/>
-        <UploadVideoForm/>
         <form>
           <input type="email"
             placeholder="Email"
             value={formState.email}
-            required
             onChange={(e) => setFormState({...formState, email: e.target.value})}
           />
           <input type="password"
           placeholder="Password"
           value={formState.password}
-          required
           onChange={(e) => setFormState({...formState, password: e.target.value})}
           />
-          <button type="button" onClick={loginHandler}>LOGIN</button>
+          <button type="button" 
+          disabled={formState.password===""||formState.email===""}
+          onClick={loginHandler}>LOGIN</button>
         </form>
         <p>Don't have an account? <Link href="/signup"><a><span>Sign up.</span></a></Link></p>
         

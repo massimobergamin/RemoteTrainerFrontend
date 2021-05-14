@@ -26,7 +26,7 @@ function UploadVideoForm({ setMedia }) {
     return (
         <div>
             <form>
-                <input type="file" onChange={handleChange} capture="camera"/>
+                <input type="file" onChange={handleChange}/>
                 <div >
                 {url &&
                 <video id="Exercise_Video" width="176" height="176" autoplay="true" loop="true">
