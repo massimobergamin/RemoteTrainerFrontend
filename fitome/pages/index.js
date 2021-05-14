@@ -28,7 +28,8 @@ export default function Home() {
         router.push('/trainer');
       } else {
         dispatch(getUser(userInfo.user.uid));
-        router.push('/client');
+        // router.push('/client');
+        router.push('/session/2')
       }
     } catch (err) {
       console.error(err)
