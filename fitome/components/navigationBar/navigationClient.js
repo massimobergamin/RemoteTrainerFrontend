@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link';
 
-function navigationClient() {
+const navigationClient = () => {
     return (
         <ul className="navigationBar_container">
             <Link href="/client/workout">

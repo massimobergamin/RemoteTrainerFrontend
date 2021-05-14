@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link';
 
-function navigationTrainer() {
+const NavigationTrainer = () => {
     return (
         <ul className="navigationBar_container">
             <Link href="/trainer/workout">
@@ -28,4 +28,4 @@ function navigationTrainer() {
     )
 }
 
-export default navigationTrainer
+export default NavigationTrainer

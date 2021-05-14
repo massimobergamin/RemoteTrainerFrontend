@@ -1,12 +1,14 @@
 import Link from 'next/link'
-const Trainer = () => {
+import NavigationTrainer from '../../components/navigationBar/navigationTrainer'
 
+const Trainer = () => {
+  
   return (
     <div>
       <Link href="./workouts">
       <h1>Workouts</h1>
       </Link>
-      <Link href="./exercises">
+      <Link href="./exercise">
       <h1>Exercises</h1>
       </Link>
       <Link href="./plans">
@@ -18,7 +20,7 @@ const Trainer = () => {
       <Link href="/profile">
       <h1>Profile</h1>
       </Link>
-      <h1></h1>
+      <NavigationTrainer></NavigationTrainer>
     </div>
   )
 }
@@ -31,7 +33,7 @@ export default Trainer;
 
 // client landing page
 // view appointment
-// view owkrout
+// view owkrout 
 // view plan
 // view exercises
-// profile
+// profile 
