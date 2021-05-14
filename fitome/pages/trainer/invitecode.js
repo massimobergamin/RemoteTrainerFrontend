@@ -6,7 +6,7 @@ const Trainer = () => {
       <Link href="./workouts">
       <h1>Workouts</h1>
       </Link>
-      <Link href="./exercise">
+      <Link href="./exercises">
       <h1>Exercises</h1>
       </Link>
       <Link href="./plans">
