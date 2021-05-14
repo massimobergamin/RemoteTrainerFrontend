@@ -1,49 +1,34 @@
-import React, {useEffect, useState} from 'react'; 
-import Peer from 'peerjs';
+import React, {useEffect, useState} from 'react'
+// import Peer from 'peerjs';
 import { useRouter } from 'next/router'
 import {useAuth} from '../../firebase/contextAuth'
 import {socket} from '../../lib/socket'
 
-
 function VideoRoom() {
     const router = useRouter();
     const { currentUser } = useAuth();
-    const [streamTest, setStreamTest] = useState(null);
+    const [stream, setStream] = useState(null)
     const { sessionId } = router.query;
     const [them, setThem] = useState({})
-    const myVideoScreen = document.getElementById('video_me');
-    const themVideoScreen = document.getElementById('video_them');
-    const myPeer = new Peer(currentUser.uid, {
-        //, {
-         host: "localhost",
-         path: "/peerjs",
-         port: 3001
-    });
+
     
     useEffect(() => {
         if (currentUser) {
-            //import('peerjs').then(({ default: Peer }) => {
-                // const myPeer = new Peer(currentUser.uid, {
-                //     //, {
-                //      host: "localhost",
-                //      path: "/peerjs",
-                //      port: 3001
-                // }
-                // );
+            import('peerjs').then(({ default: Peer }) => {
+                const myPeer = new Peer(currentUser.uid
+                    //, {
+                    // host: "localhost",
+                    // path: "/peerjs",
+                    // port: 3001
+                //}
+                );
                 const myVideoScreen = document.getElementById('video_me');
                 const themVideoScreen = document.getElementById('video_them');
 
                 myPeer.on('open', peerId => { // When we first open the app, have us join a room
-                    console.log('USERID:', currentUser.uid, "peerID:", peerId)
-                    socket.emit('join-room', {userId: peerId, firstName:"MARK", sessionId:sessionId})
+                    socket.emit('joinroom', {userId: peerId, firstName:"MARK", sessionId:sessionId})
                     console.log("PEERID", peerId, " ROOMID ", sessionId)
                 })
-
-                // myPeer.on('connection', peerId => { // When we first open the app, have us join a room
-                //     console.log('USERID:', currentUser.uid, "peerID:", peerId)
-                //     socket.emit('join-room', {userId: peerId, firstName:"MARK", sessionId:sessionId})
-                //     console.log("PEERID2", peerId, " ROOMID ", sessionId)
-                // })
 
                 navigator.mediaDevices.getUserMedia({
                     video: true,
@@ -52,25 +37,24 @@ function VideoRoom() {
                     const myVideo = document.createElement('video');
                     myVideo.muted = true;
                     myVideo.classList.add("video_me")
-                    setStreamTest(stream)
+                    setStream(stream)
                     addVideoStream(myVideo, stream, myVideoScreen)
 
                     myPeer.on('call', call => { // When we join someone's room we will receive a call from them
                         console.log("ANSWERING CALL", call, "   ", stream)
-                        call.answer(stream) // Stream them our video/audio
+                        call?.answer(stream) // Stream them our video/audio
                         const video = document.createElement('video');
                         //video.muted = true;
                         video.classList.add("video_them")
-                        call.on('stream', remoteStream=> { // When we recieve their stream
-                            addVideoStream(video, remoteStream, themVideoScreen) // Display their video to ourselves
+                        call?.on('stream', userVideoStream => { // When we recieve their stream
+                            addVideoStream(video, userVideoStream, themVideoScreen) // Display their video to ourselves
                         })
                     })
                     
-                    myPeer.on('error', err => console.log("ERROR", err))
 
                     socket.on('user-connected', userId => { // If a new user connect, connect to them
                         console.log("Socket user connected", userId);
-                        connectToNewUser(userId, stream)
+                        connectToNewUser(userId, stream) 
                     })
 
                     socket.on('call-ended', res => {
@@ -80,7 +64,7 @@ function VideoRoom() {
                         if (stream) {
                             stream.getTracks()[0].stop()
                             stream.getTracks()[1].stop()
-                            setStreamTest(null)
+                            setStream(null)
                         }
                         router.push('/')
                     })
@@ -90,14 +74,13 @@ function VideoRoom() {
                 function connectToNewUser(userId, stream) { // This runs when someone joins our room
                     console.log("CONNECTING TO NEW USER", userId, " ", stream, myPeer)
                     const call = myPeer.call(userId, stream) // Call the user who just joined
-                    
                     //Add their video
                     console.log("CALLING", call)
                     const video = document.createElement('video')
-                    video.muted = true;
+                    //video.muted = true;
                     video.classList.add("video_them")
-                    call.on('stream', remoteStream => {
-                        addVideoStream(video, remoteStream, themVideoScreen)
+                    call?.on('stream', userVideoStream => {
+                        addVideoStream(video, userVideoStream, themVideoScreen)
                     })
                     //If they leave, remove their video
                     call?.on('close', () => {
@@ -113,14 +96,14 @@ function VideoRoom() {
                     container.append(video);
                   }
                 
-            //});
+            });
         }
     },[currentUser])
     
    function hangUp () {
-       streamTest.getTracks()[0].stop()
-       streamTest.getTracks()[1].stop()
-       setStreamTest(null)
+       stream.getTracks()[0].stop()
+       stream.getTracks()[1].stop()
+       setStream(null)
        socket.emit('hang-up', currentUser.uid)
        router.push("/")
    }
@@ -128,7 +111,7 @@ function VideoRoom() {
     return (
         <div>
           <div className="call_background"><h1>Waiting for Participant...</h1></div>
-          <div id="video_them" className="videoRoom_theirVideo">
+          <div id="video_them" className="videoRoom_theirVideo" >
 
           </div>
           <div id="video_me" className="videoRoom_myVideo" >
@@ -137,117 +120,8 @@ function VideoRoom() {
           <div className="endCall">
           <button type="button" onClick={() => hangUp()} className="button_circle"><img src="/icons/call_end_white_24dp.svg"/></button>
           </div> 
-          <div className="timer_container">
-
-          </div>
         </div>
     )
 }
- 
+
 export default VideoRoom
-
-
-
-// import React, {useEffect, useState, useRef} from 'react'
-// import Peer from 'peerjs';
-// import { useRouter } from 'next/router'
-// import {useAuth} from '../../firebase/contextAuth'
-// import {socket} from '../../lib/socket'
-// function VideoRoom() {
-// 	const router = useRouter();
-// 	const { currentUser } = useAuth();
-// 	const { sessionId } = router.query;
-//     const forceUpdate = React.useCallback(() => updateState({}), []);
-// 	const streamRef = useRef(null);
-// 	const videoRef = useRef(null);
-// 	const [state, setState] = useState({
-// 		peers: {},
-// 		stream: null,
-// 	})
-// 	useEffect(() => {
-// 		if (streamRef?.current) {
-// 			if (state.stream && videoRef && !videoRef.current.srcObject) {
-// 				videoRef.current.srcObject = this.stream
-// 			}
-// 			attachPeerVideos();
-// 		}
-// 	},[]);
-//   const attachPeerVideos = () => {
-//     Object.entries(state.peers).forEach(entry => {
-//       const [peerId, peer] = entry;
-//       if (peer.video && !peer.video.srcObject && peer.stream) {
-//         peer.video.setAttribute('data-peer-id', peerId);
-//         peer.video.srcObject = peer.stream;
-//       }
-//     })
-//   }
-//   const getMedia = (callback, err) => {
-//     const options = { 
-// 			video: true,
-// 			audio: true,
-// 		};
-// 		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-//       return navigator.mediaDevices.getUserMedia(options)
-//         .then(stream => callback(stream))
-//         .catch(e => err(e));
-//     }
-//     return navigator.getUserMedia(options, callback,  err);
-//   }
-//   const destroyPeer = (peerId) => {
-//     const peers = {...state.peers}
-//     delete peers[peerId];
-//     setState((prev) => ({
-// 			...prev,
-//       peers
-//     }));
-//   }
-//   const signalPeer = (peer, data) => {
-//     try {
-//       peer.signal(data)
-//     } catch(e) {
-//       console.debug('signal error', e)
-//     }
-//   }
-//   const renderPeers = () => (
-//     Object.entries(state.peers).map(entry => {
-//       const [peerId, peer] = entry;
-//       return (
-// 				<div key={peerId}>
-// 					<video ref={video => peer.video = video}></video>
-// 				</div>
-// 			)
-//     })
-// 	);
-//   const onMedia = (stream) => {
-//     streamRef = stream;
-//     forceUpdate();
-//     socket = io(ioUrl)
-//     socket.on('peer', msg => {
-//       const peerId = msg.peerId;
-// 			if (peerId === this.socket.id) {
-//         return debug('Peer is me :D', peerId)
-//       }
-//       createPeer(peerId, true, stream);
-//     })
-//     socket.on('signal', data => {
-//       const peerId = data.from;
-//       const peer = state.peers[peerId];
-//       if (!peer) {
-//         createPeer(peerId, false, stream);
-//       }
-//       signalPeer(state.peers[peerId], data.signal);
-//     })
-//     socket.on('unpeer', msg => {
-//       destroyPeer(msg.peerId);
-//     })
-//   }
-// 	return (
-// 		<>
-// 			<div id="me">
-// 				<video id="myVideo" ref={video => this.video = video} controls></video>
-// 			</div>
-// 			<div id="peers">{renderPeers()}</div>
-// 		</>
-// 	);
-// }
-// export default VideoRoom

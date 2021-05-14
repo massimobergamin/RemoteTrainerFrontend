@@ -25,12 +25,12 @@ io.on('connection', socket => {
   console.log('Connected to Client')
 
   //listens for create new room given by sessionId from "START CALL" button on page session/:id
-  // socket.on('createNewRoom', ({userId, sessionId, firstName}) => {
-  //   socket.join(sessionId); // joins room using sessionId as roomId
-  //   console.log("CREATED ROOM", userId, firstName)
-  //   // TODO: call db to add in_use flag with sessionId
-  //   socket.broadcast.emit("user-connected", userId) //to tell person in room you are there
-  // });
+  socket.on('createNewRoom', ({userId, sessionId, firstName}) => {
+    socket.join(sessionId); // joins room using sessionId as roomId
+    console.log("CREATED ROOM", userId, firstName)
+    // TODO: call db to add in_use flag with sessionId
+    socket.broadcast.emit("user-connected", userId) //to tell person in room you are there
+  });
 
   //listens for a useEffect to check get sessionId row and send it back to page session/:id
   socket.on('isRoomActive', ({userId, sessionId}, callback) => {
@@ -39,7 +39,7 @@ io.on('connection', socket => {
   });
 
   //listens for join an existing room given by roomId from "JOIN CALL" button on page session/:id
-  socket.on('join-room', ({userId, sessionId}) => {
+  socket.on('joinRoom', ({userId, firstName, sessionId}) => {
     socket.join(sessionId)  //join existing room
   let numClients = io.sockets.adapter.rooms.get(sessionId).size
   //if (numClients <= 1) {
@@ -54,7 +54,6 @@ io.on('connection', socket => {
   //listens for a disconnect
   socket.on('hang-up', () => {
     socket.broadcast.emit("call-ended")
-    socket.broadcast.emit('user-disconnected')
     socket.disconnect();
     console.log("I AM DISCONNECTED")
   })
