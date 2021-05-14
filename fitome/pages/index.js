@@ -23,10 +23,11 @@ export default function Home() {
   const loginHandler = async () => {
     try {
       let userInfo = await login(formState.email, formState.password);
-      if (userInfo.displayName === 'trainer') {
+      
+      if (userInfo.user.displayName === 'trainer') {
         dispatch(getUserById(userInfo.user.uid));
         router.push('/trainer');
-      } else {
+      } else if (userInfo.user.displayName === 'client') {
         dispatch(getUser(userInfo.user.uid));
         // .then
           // check user for trainer info
