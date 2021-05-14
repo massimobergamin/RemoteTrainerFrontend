@@ -1,10 +1,11 @@
 import { getExercise, postWorkout } from '../../../redux/trainer';
 import { useAuth } from '../../../firebase/contextAuth';
 import { useDispatch, useSelector } from 'react-redux';
-import { router } from 'next/router';
-import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 const CreateWorkout = () => {
+  const router = useRouter();
   const initialState = {
     title: '',
     exerciseIds: []
@@ -34,7 +35,7 @@ const CreateWorkout = () => {
 
   const handleSubmit = () => {
     try {
-      dispatch(postWorkout(currentUser.uid, formState));
+      dispatch(postWorkout({trainer_uid: currentUser.uid, workoutData: formState}));
       router.push('/workouts');
     } catch (err) {
       console.log(err);
@@ -45,7 +46,8 @@ const CreateWorkout = () => {
     <div>
       <h1>Create New Workout</h1>
       <form>
-          <input placeHolder="Title" type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
+          <input placeholder="Title" type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
+          <input type="submit" value="Create" onClick={handleSubmit}/>
           <h3>Select Exercises</h3>
           {exercises.map(exercise => {
             <div key={exercise.id}>
@@ -59,7 +61,6 @@ const CreateWorkout = () => {
               <button onClick={() => handleClick(e, exercise.id)}>{buttonText}</button>
             </div>
           })}
-          <input type="submit" value="Create" onClick={handleSubmit}/>
       </form>
     </div>
   )
