@@ -24,7 +24,7 @@ const UploadImageForm = () => {
     return (
         <div>
             <form>
-                <input type="file" accept="image/*" capture="camera" onChange={handleChange}/>
+                <input type="file" onChange={handleChange}/>
                 <div >
                 {url && <img src={url}/>}
                 {error && <div>{error}</div>}
