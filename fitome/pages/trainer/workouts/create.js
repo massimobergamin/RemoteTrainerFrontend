@@ -17,8 +17,6 @@ const CreateWorkout = () => {
   const { exercises } = useSelector(state => state.trainer);
 
   useEffect(() => {
-    console.log('currentUser', currentUser);
-    console.log('exercises', exercises)
     dispatch(getExercise(currentUser.uid));
   }, [])
 
