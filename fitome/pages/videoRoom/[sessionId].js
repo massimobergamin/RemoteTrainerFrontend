@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-// import Peer from 'peerjs';
+import React, {useEffect, useState} from 'react'; 
+import Peer from 'peerjs';
 import { useRouter } from 'next/router'
 import {useAuth} from '../../firebase/contextAuth'
 import {socket} from '../../lib/socket'
@@ -11,18 +11,25 @@ function VideoRoom() {
     const [streamTest, setStreamTest] = useState(null);
     const { sessionId } = router.query;
     const [them, setThem] = useState({})
-
+    const myVideoScreen = document.getElementById('video_me');
+    const themVideoScreen = document.getElementById('video_them');
+    const myPeer = new Peer(currentUser.uid, {
+        //, {
+         host: "localhost",
+         path: "/peerjs",
+         port: 3001
+    });
     
     useEffect(() => {
         if (currentUser) {
-            import('peerjs').then(({ default: Peer }) => {
-                const myPeer = new Peer(currentUser.uid, {
-                    //, {
-                     host: "localhost",
-                     path: "/peerjs",
-                     port: 3001
-                }
-                );
+            //import('peerjs').then(({ default: Peer }) => {
+                // const myPeer = new Peer(currentUser.uid, {
+                //     //, {
+                //      host: "localhost",
+                //      path: "/peerjs",
+                //      port: 3001
+                // }
+                // );
                 const myVideoScreen = document.getElementById('video_me');
                 const themVideoScreen = document.getElementById('video_them');
 
@@ -106,7 +113,7 @@ function VideoRoom() {
                     container.append(video);
                   }
                 
-            });
+            //});
         }
     },[currentUser])
     
@@ -138,6 +145,9 @@ function VideoRoom() {
 }
  
 export default VideoRoom
+
+
+
 // import React, {useEffect, useState, useRef} from 'react'
 // import Peer from 'peerjs';
 // import { useRouter } from 'next/router'
