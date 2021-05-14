@@ -16,7 +16,7 @@ export const postUser = createAsyncThunk(
 
 export const updateUser = createAsyncThunk(
     'trainer/updateUserStatus',
-    async (uid, userData) => {
+    async ({uid, userData}) => {
       try {
         const response = await axios.put(`https://remotetrainerserver.herokuapp.com/users/${uid}`, userData);
         return response.data;
@@ -40,7 +40,7 @@ export const getUserById = createAsyncThunk(
 
 export const postClient = createAsyncThunk(
   'trainer/postClientStatus',
-  async (trainer_uid, client_uid) => {
+  async ({trainer_uid, client_uid}) => {
     try {
       const response = await axios.post(`https://remotetrainerserver.herokuapp.com/clients/${trainer_uid}-${client_uid}`);
       return response.data;
@@ -89,7 +89,7 @@ export const getInviteCode = createAsyncThunk(
 //session routes
 export const postSession = createAsyncThunk(
   'trainer/postSessionStatus',
-  async (trainer_uid, client_uid, sessionData) => {
+  async ({trainer_uid, client_uid, sessionData}) => {
     try {
       const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users/sessions/${trainer_uid}-${client_uid}`, sessionData);
       return response.data;
@@ -113,7 +113,7 @@ export const updateSession = createAsyncThunk(
 
 export const getSessions = createAsyncThunk(
   'trainer/getSessionsStatus',
-  async (type, uid) => {
+  async ({type, uid}) => {
     try {
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/sessions/${type}-${uid}`);
       return response.data;
@@ -138,7 +138,7 @@ export const getSession = createAsyncThunk(
 //plans routes
 export const postPlan = createAsyncThunk(
   'trainer/postPlanStatus',
-  async (trainer_uid, client_uid, planData) => {
+  async ({trainer_uid, client_uid, planData}) => {
     try {
       const response = await axios.post(`https://remotetrainerserver.herokuapp.com/plans/${trainer_uid}-${client_uid}`, planData);
       return response.data;
@@ -150,7 +150,7 @@ export const postPlan = createAsyncThunk(
 
 export const updatePlan = createAsyncThunk(
   'trainer/updatePlanStatus',
-  async (plan_id, planData) => {
+  async ({plan_id, planData}) => {
     try {
       const response = await axios.put(`https://remotetrainerserver.herokuapp.com/plans/${plan_id}`, planData);
       return response.data;
@@ -162,7 +162,7 @@ export const updatePlan = createAsyncThunk(
 
 export const getPlan = createAsyncThunk(
   'trainer/getPlanStatus',
-  async (client_uid, start_date) => {
+  async ({client_uid, start_date}) => {
     try {
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/plans/${client_uid}-${start_date}`);
       return response.data;
@@ -174,7 +174,7 @@ export const getPlan = createAsyncThunk(
 
 export const updatePlanNotes = createAsyncThunk(
   'trainer/updatePlanNotesStatus',
-  async (plan_id, planData) => {
+  async ({plan_id, planData}) => {
     try {
       const response = await axios.put(`https://remotetrainerserver.herokuapp.com/plans/notes/${plan_id}`, planData);
       return response.data;
@@ -189,7 +189,7 @@ export const getWorkout = createAsyncThunk(
   'trainer/getWorkoutStatus',
   async (trainer_uid) => {
     try {
-      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/${trainer_uid}`);
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/workouts/${trainer_uid}`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -201,7 +201,7 @@ export const getExercise = createAsyncThunk(
   'trainer/getExerciseStatus',
   async (trainer_uid) => {
     try {
-      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/workouts/${trainer_uid}`);
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/exercises/${trainer_uid}`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -211,7 +211,7 @@ export const getExercise = createAsyncThunk(
 
 export const postWorkout = createAsyncThunk(
   'trainer/postWorkoutStatus',
-  async (trainer_uid, workoutData) => {
+  async ({trainer_uid, workoutData}) => {
     try {
       const response = await axios.post(`https://remotetrainerserver.herokuapp.com/workouts/${trainer_uid}`, workoutData);
       return response.data;
@@ -223,9 +223,9 @@ export const postWorkout = createAsyncThunk(
 
 export const postExercise = createAsyncThunk(
   'trainer/postExerciseStatus',
-  async (trainer_uid, exerciseData) => {
+  async ({trainer_uid, exerciseData}) => {
     try {
-      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/workouts/custom/${trainer_uid}`, exerciseData);
+      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/exercises/custom/${trainer_uid}`, exerciseData);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -265,7 +265,7 @@ export const trainerSlice = createSlice({
       state.user = action.payload;
     },
     [updateUser.fulfilled] : (state, action) => {
-      state.user = action.payload; // backend route needs to be fixed to return user
+      state.user = action.payload;
     },
     [getUserById.fulfilled] : (state, action) => {
       state.sessions = action.payload.sessions;
@@ -288,7 +288,7 @@ export const trainerSlice = createSlice({
       state.sessions.push(action.payload);
     },
     [updateSession.fulfilled] : (state, action) => {
-      let sessionIndex = state.sessions.findIndex(session => session.id === action.payload.id); // backend route needs to be fixed to return session
+      let sessionIndex = state.sessions.findIndex(session => session.id === action.payload.id);
       state.sessions[sessionIndex] = action.payload;
     },
     [getSessions.fulfilled] : (state, action) => {
@@ -301,14 +301,14 @@ export const trainerSlice = createSlice({
       state.plans.push(action.payload);
     },
     [updatePlan.fulfilled] : (state, action) => {
-      let planIndex = state.plans.findIndex(plan => plan.id === action.payload.id); // backend route needs to be fixed to return plan
+      let planIndex = state.plans.findIndex(plan => plan.id === action.payload.id);
       state.plans[planIndex] = action.payload;
     },
     [getPlan.fulfilled] : (state, action) => {
       state.plans = action.payload;
     },
     [updatePlanNotes.fulfilled] : (state, action) => {
-      let planIndex = state.plans.findIndex(plan => plan.id === action.payload.id); // backend route needs to be fixed to return plan
+      let planIndex = state.plans.findIndex(plan => plan.id === action.payload.id);
       state.plans[planIndex] = action.payload;
     },
     [getWorkout.fulfilled] : (state, action) => {

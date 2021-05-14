@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, {useEffect, useState} from 'react'
 // import Peer from 'peerjs';
 import { useRouter } from 'next/router'
 import {useAuth} from '../../firebase/contextAuth'
@@ -42,11 +42,11 @@ function VideoRoom() {
 
                     myPeer.on('call', call => { // When we join someone's room we will receive a call from them
                         console.log("ANSWERING CALL", call, "   ", stream)
-                        call.answer(stream) // Stream them our video/audio
+                        call?.answer(stream) // Stream them our video/audio
                         const video = document.createElement('video');
                         //video.muted = true;
                         video.classList.add("video_them")
-                        call.on('stream', userVideoStream => { // When we recieve their stream
+                        call?.on('stream', userVideoStream => { // When we recieve their stream
                             addVideoStream(video, userVideoStream, themVideoScreen) // Display their video to ourselves
                         })
                     })
@@ -61,9 +61,11 @@ function VideoRoom() {
                         myPeer.disconnect();
                         const themVideo = document.getElementById('video_them');
                         themVideo.remove();
-                        console.log("MYBIGSTREAM", stream.getTracks())
-                        stream.getTracks()[0].stop()
-                        stream.getTracks()[1].stop()
+                        if (stream) {
+                            stream.getTracks()[0].stop()
+                            stream.getTracks()[1].stop()
+                            setStream(null)
+                        }
                         router.push('/')
                     })
                     
@@ -77,11 +79,11 @@ function VideoRoom() {
                     const video = document.createElement('video')
                     //video.muted = true;
                     video.classList.add("video_them")
-                    call.on('stream', userVideoStream => {
+                    call?.on('stream', userVideoStream => {
                         addVideoStream(video, userVideoStream, themVideoScreen)
                     })
                     //If they leave, remove their video
-                    call.on('close', () => {
+                    call?.on('close', () => {
                         video.remove()
                     })
                 }
@@ -99,7 +101,6 @@ function VideoRoom() {
     },[currentUser])
     
    function hangUp () {
-       console.log("HANGING UP", stream.getTracks())
        stream.getTracks()[0].stop()
        stream.getTracks()[1].stop()
        setStream(null)
@@ -109,6 +110,7 @@ function VideoRoom() {
 
     return (
         <div>
+          <div className="call_background"><h1>Waiting for Participant...</h1></div>
           <div id="video_them" className="videoRoom_theirVideo" >
 
           </div>
@@ -116,7 +118,7 @@ function VideoRoom() {
 
           </div>
           <div className="endCall">
-          <button type="button" onClick={() => hangUp()} className="button_circle"><img src="/icons/call_end.png"/></button>
+          <button type="button" onClick={() => hangUp()} className="button_circle"><img src="/icons/call_end_white_24dp.svg"/></button>
           </div> 
         </div>
     )
