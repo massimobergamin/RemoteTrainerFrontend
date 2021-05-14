@@ -29,20 +29,21 @@ const SignUp = () => {
     const [inviteState, setInviteState] = useState(inviteInitialState)
 
     const [formState, setFormState] = useState(initialState);
-    const { user } = useSelector(state => state.trainer);
-
+    const { user, invite_code } = useSelector(state => state.trainer);
+    console.log("outside function", user)
+    console.log("invitecode", invite_code)
     const createHandler = async () => {
        
         try {
           const fireBaseData = await signUp(formState.email, formState.password, formState.type);
-          
-          setFormState({...formState, user_uid:fireBaseData.user.uid, last_login: Date.now()})
-          setInviteState({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5)})
+            //console.log(fireBaseData.user.uid)
+        //   setFormState({...formState, user_uid:fireBaseData.user.uid, last_login: Date.now()})
+        //   setInviteState({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5)})
         
           if (formState.type === 'trainer') {
     
-              dispatch(postUser(formState));
-              dispatch(postInviteCode(inviteState));
+              await dispatch(postUser({...formState, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
+              await dispatch(postInviteCode({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5)}));
               router.push(`/trainer/invitecode`);
             } else {
               //add code for client here

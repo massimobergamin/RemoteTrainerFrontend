@@ -3,20 +3,22 @@ import NavigationTrainer from '../../components/navigationBar/navigationTrainer'
 import { getInviteCode } from '../../redux/trainer';
 import { useAuth } from '../../firebase/contextAuth';
 import  { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Trainer = () => {
   const dispatch = useDispatch();
 
   let inviteCode = '';
   const { currentUser } = useAuth();
-
+  const { user, invite_code } = useSelector(state => state.trainer);
   useEffect(() => {
     inviteCode = dispatch(getInviteCode(currentUser.uid))
   })
   
   return (
     <div>
+      <h1>{invite_code.invite_code}</h1>
+      <h1>{user.user_uid}</h1>
       <h3>Start inviting your clients with this code</h3>
       <h1>{inviteCode}</h1>
       <Link href="./workouts">
