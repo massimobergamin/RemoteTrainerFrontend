@@ -86,6 +86,17 @@ export const addPlanNotes = createAsyncThunk(
   }
 )
 
+export const checkTrainerCode = createAsyncThunk(
+  'client/checkTrainerCodeStatus',
+  async ({trainer_code}, thunkAPI) => {
+    try {
+      // TODO: checks if trainer code exists in db
+    } catch (err) {
+      console.log(err);
+    }
+  }
+)
+
 export const clientSlice = createSlice({
   name: 'client',
   initialState: {

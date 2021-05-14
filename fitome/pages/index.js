@@ -28,14 +28,14 @@ export default function Home() {
         dispatch(getUserById(userInfo.user.uid));
         router.push('/trainer');
       } else if (userInfo.user.displayName === 'client') {
-        dispatch(getUser(userInfo.user.uid));
-        // .then
-          // check user for trainer info
-            // if none exists
-              // route to client landing
-            // if trainer info exists
-              // route to client sessions
-        router.push('/client');
+        dispatch(getUser(userInfo.user.uid))
+        .then((user) => {
+          if (!user.trainerInfo.trainer_uid) {
+            router.push('/client/trainercode');
+          } else {
+            router.push('/client/sessions');
+          }
+        });
       }
     } catch (err) {
       console.error(err)
