@@ -6,8 +6,9 @@ export const postUser = createAsyncThunk(
   'trainer/postUserStatus',
   async (userData) => {
     try {
-      console.log(userData)
+      console.log("POSTING", userData)
       const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users`, userData);
+      console.log("RESPONSE DATA:", response.data)
       return response.data;
     } catch (error) {
       console.log(error);
@@ -32,6 +33,9 @@ export const getUserById = createAsyncThunk(
     async (uid) => {
       try {
         const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/${uid}-trainer`);
+        //const response = await axios.get(`http://localhost:3050/users/${uid}-trainer`);
+        console.log("REDUX, recive from comp", uid)
+        console.log("REDUX, get user info:", response.data)
         return response.data;
       } catch (error) {
         console.log(error);
