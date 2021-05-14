@@ -17,7 +17,7 @@ const TrainerCode = () => {
 
   const handleSubmit = (tCode) => {
     dispatch(checkTrainerCode(tCode))
-      .then();
+      .then(/* TODO */);
     // check against db to see if trainer code exists
       // if true
         // add both uid's to trainer_client rel table in db

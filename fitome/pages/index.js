@@ -33,7 +33,7 @@ export default function Home() {
           if (!user.trainerInfo.trainer_uid) {
             router.push('/client/trainercode');
           } else {
-            router.push('/client/sessions');
+            router.push('/client/plan');
           }
         });
       }
