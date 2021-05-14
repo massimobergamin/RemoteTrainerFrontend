@@ -174,14 +174,13 @@ const CreatePlanForm = () => {
       <p>Details</p>
       {planState.details.length ? (
         <ul>
-          {planState.details.map((details, index) => {
+          {planState.details.map((detail, index) => {
             <li key={index}>
-            {details}
+            {detail}
             </li>
           })}
         </ul>
       ) : null }
-      <p>{planState.details}</p>
           <input className="button" type="submit" value="Finalize Plan" onClick={e => handlePlanSubmit(e)}/>
       </form>
     </div>
