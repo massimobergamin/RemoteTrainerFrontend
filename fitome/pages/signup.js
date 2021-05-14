@@ -30,8 +30,8 @@ const SignUp = () => {
 
     const [formState, setFormState] = useState(initialState);
     const { user, invite_code } = useSelector(state => state.trainer);
-    console.log("outside function", user)
-    console.log("invitecode", invite_code)
+    // console.log("outside function", user)
+    // console.log("invitecode", invite_code)
     const createHandler = async () => {
        
         try {
