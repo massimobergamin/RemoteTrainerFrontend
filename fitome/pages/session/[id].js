@@ -22,14 +22,14 @@ function SessionDetailPage () {
     function joinCallHandler () {
         console.log("joining")
         //emit
-        //socket.emit('join-room', {userId: currentUser.uid, firstName: "MARK", roomId: session.id}); //get firstName from redux
+        socket.emit('joinRoom', {userId: currentUser.uid, firstName: "MARK", roomId: session.id}); //get firstName from redux
         router.push(`/videoRoom/${id}`)
     }
 
     function startCallHandler () {
         console.log("starting")
         //emit
-        //socket.emit('createNewRoom', {userId: currentUser.uid, firstName: "MARK"}); //get firstName from redux
+        socket.emit('createNewRoom', {userId: currentUser.uid, firstName: "MARK"}); //get firstName from redux
         router.push(`/videoRoom/${id}`);
     }
 
