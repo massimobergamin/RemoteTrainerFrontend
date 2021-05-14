@@ -32,11 +32,11 @@ function VideoRoom() {
                     console.log("PEERID", peerId, " ROOMID ", sessionId)
                 })
 
-                myPeer.on('connection', peerId => { // When we first open the app, have us join a room
-                    console.log('USERID:', currentUser.uid, "peerID:", peerId)
-                    socket.emit('join-room', {userId: peerId, firstName:"MARK", sessionId:sessionId})
-                    console.log("PEERID2", peerId, " ROOMID ", sessionId)
-                })
+                // myPeer.on('connection', peerId => { // When we first open the app, have us join a room
+                //     console.log('USERID:', currentUser.uid, "peerID:", peerId)
+                //     socket.emit('join-room', {userId: peerId, firstName:"MARK", sessionId:sessionId})
+                //     console.log("PEERID2", peerId, " ROOMID ", sessionId)
+                // })
 
                 navigator.mediaDevices.getUserMedia({
                     video: true,
@@ -73,7 +73,7 @@ function VideoRoom() {
                         if (stream) {
                             stream.getTracks()[0].stop()
                             stream.getTracks()[1].stop()
-                            setStream(null)
+                            setStreamTest(null)
                         }
                         router.push('/')
                     })
