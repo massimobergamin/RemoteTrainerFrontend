@@ -2,6 +2,7 @@
 @import './videoCall.css';
 @import './buttons.css';
 @import './navigationBar.css';
+@import './planForm.css';
 
 :root {
   /* Colors: */
