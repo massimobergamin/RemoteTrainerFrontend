@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import {socket} from '../../lib/socket';
 import Peer from "simple-peer";
+import TimerOverlay from '../../components/timerOverlay';
+
 
 const Video = ({ peer }) => {
   const ref = useRef();
@@ -103,10 +105,14 @@ const VideoRoom = () => {
   function hangUp () {
     console.log("HANGING UP")
   }
+
   return (
     <div>
       <video muted className="video_me" ref={userVideo} autoPlay playsInline />
       {peers.map((peer, index) => <Video key={index} peer={peer} />)}
+      <div className="timer_container">
+        <TimerOverlay />
+      </div>
     </div>
   );
 }

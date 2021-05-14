@@ -2,6 +2,8 @@
 @import './videoCall.css';
 @import './buttons.css';
 @import './navigationBar.css';
+@import './timerOverlay.css';
+
 
 :root {
   /* Colors: */

@@ -1,0 +1,17 @@
+.timer_input {
+  display: flex;
+  flex-flow: column;
+  width: 6vw;
+  margin: 8px;
+}
+
+.timer_container {
+  display: flex;
+  position:fixed;
+  bottom: 30vh;
+  right: 4vh;
+}
+
+.timer_label {
+  color: white;
+}
