@@ -5,7 +5,7 @@ import { useAuth } from '../firebase/contextAuth';
 import Link from 'next/link';
 import UploadImageForm from '../components/uploadImageForm';
 import UploadVideoForm from '../components/uploadVideoForm';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUserById } from '../redux/trainer';
 import { getUser } from '../redux/client';
 import { useRouter } from 'next/router';
@@ -19,16 +19,18 @@ export default function Home() {
     password: '',
   };
   const [formState, setFormState] = useState(initialState);
+  const { user } = useSelector(state => state.trainer);
 
   const loginHandler = async () => {
     try {
       let userInfo = await login(formState.email, formState.password);
       
       if (userInfo.user.displayName === 'trainer') {
-        dispatch(getUserById(userInfo.user.uid));
-        router.push('/trainer');
+        await dispatch(getUserById(userInfo.user.uid));
+        console.log(user)
+        //router.push('/trainer');
       } else if (userInfo.user.displayName === 'client') {
-        dispatch(getUser(userInfo.user.uid));
+        await dispatch(getUser(userInfo.user.uid));
         // .then
           // check user for trainer info
             // if none exists

@@ -8,12 +8,13 @@ import { useDispatch, useSelector } from 'react-redux';
 const Trainer = () => {
   const dispatch = useDispatch();
 
-  let inviteCode = '';
+
+  //let inviteCode = '';
   const { currentUser } = useAuth();
   const { user, invite_code } = useSelector(state => state.trainer);
-  useEffect(() => {
-    dispatch(getInviteCode(currentUser.uid))
-  })
+  // useEffect(() => {
+  //   inviteCode = dispatch(getInviteCode(currentUser.uid))
+  // })
   
   return (
     <div>
