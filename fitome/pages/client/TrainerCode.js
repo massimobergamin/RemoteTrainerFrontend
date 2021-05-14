@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import {useAuth} from '../firebase/contextAuth'
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const TrainerCode = () => {
   const [input, setInput] = useState('');
