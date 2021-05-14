@@ -100,10 +100,18 @@ const VideoRoom = () => {
     return peer;
   }
 
+
+  function hangUp () {
+    console.log("HANGING UP")
+  }
+  
   return (
     <div>
       <video className="video_me" muted ref={userVideo} autoPlay playsInline />
       {peers.map((peer, index) => <Video key={index} peer={peer} />)}
+      <div className="endCall">
+           <button type="button" onClick={() => hangUp()} className="button_circle"><img src="/icons/call_end_white_24dp.svg"/></button>
+      </div> 
     </div>
   );
 }

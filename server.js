@@ -10,9 +10,9 @@ const io = require('socket.io')(server, {
 })
 const { ExpressPeerServer } = require('peer');
 const mocks = require('./mocks')
-const peerServer = ExpressPeerServer(server, {
-  path: '/'
-});
+// const peerServer = ExpressPeerServer(server, {
+//   path: '/'
+// });
 const users = {};
 const socketToRoom = {};
 
