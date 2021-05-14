@@ -16,7 +16,7 @@ export const postUser = createAsyncThunk(
 
 export const updateUser = createAsyncThunk(
     'trainer/updateUserStatus',
-    async (uid, userData) => {
+    async ({uid, userData}) => {
       try {
         const response = await axios.put(`https://remotetrainerserver.herokuapp.com/users/${uid}`, userData);
         return response.data;
@@ -40,7 +40,7 @@ export const getUserById = createAsyncThunk(
 
 export const postClient = createAsyncThunk(
   'trainer/postClientStatus',
-  async (trainer_uid, client_uid) => {
+  async ({trainer_uid, client_uid}) => {
     try {
       const response = await axios.post(`https://remotetrainerserver.herokuapp.com/clients/${trainer_uid}-${client_uid}`);
       return response.data;
@@ -89,7 +89,7 @@ export const getInviteCode = createAsyncThunk(
 //session routes
 export const postSession = createAsyncThunk(
   'trainer/postSessionStatus',
-  async (trainer_uid, client_uid, sessionData) => {
+  async ({trainer_uid, client_uid, sessionData}) => {
     try {
       const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users/sessions/${trainer_uid}-${client_uid}`, sessionData);
       return response.data;
@@ -113,7 +113,7 @@ export const updateSession = createAsyncThunk(
 
 export const getSessions = createAsyncThunk(
   'trainer/getSessionsStatus',
-  async (type, uid) => {
+  async ({type, uid}) => {
     try {
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/sessions/${type}-${uid}`);
       return response.data;
@@ -138,7 +138,7 @@ export const getSession = createAsyncThunk(
 //plans routes
 export const postPlan = createAsyncThunk(
   'trainer/postPlanStatus',
-  async (trainer_uid, client_uid, planData) => {
+  async ({trainer_uid, client_uid, planData}) => {
     try {
       const response = await axios.post(`https://remotetrainerserver.herokuapp.com/plans/${trainer_uid}-${client_uid}`, planData);
       return response.data;
@@ -150,7 +150,7 @@ export const postPlan = createAsyncThunk(
 
 export const updatePlan = createAsyncThunk(
   'trainer/updatePlanStatus',
-  async (plan_id, planData) => {
+  async ({plan_id, planData}) => {
     try {
       const response = await axios.put(`https://remotetrainerserver.herokuapp.com/plans/${plan_id}`, planData);
       return response.data;
@@ -162,7 +162,7 @@ export const updatePlan = createAsyncThunk(
 
 export const getPlan = createAsyncThunk(
   'trainer/getPlanStatus',
-  async (client_uid, start_date) => {
+  async ({client_uid, start_date}) => {
     try {
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/plans/${client_uid}-${start_date}`);
       return response.data;
@@ -174,7 +174,7 @@ export const getPlan = createAsyncThunk(
 
 export const updatePlanNotes = createAsyncThunk(
   'trainer/updatePlanNotesStatus',
-  async (plan_id, planData) => {
+  async ({plan_id, planData}) => {
     try {
       const response = await axios.put(`https://remotetrainerserver.herokuapp.com/plans/notes/${plan_id}`, planData);
       return response.data;
@@ -211,7 +211,7 @@ export const getExercise = createAsyncThunk(
 
 export const postWorkout = createAsyncThunk(
   'trainer/postWorkoutStatus',
-  async (trainer_uid, workoutData) => {
+  async ({trainer_uid, workoutData}) => {
     try {
       const response = await axios.post(`https://remotetrainerserver.herokuapp.com/workouts/${trainer_uid}`, workoutData);
       return response.data;
@@ -223,7 +223,7 @@ export const postWorkout = createAsyncThunk(
 
 export const postExercise = createAsyncThunk(
   'trainer/postExerciseStatus',
-  async (trainer_uid, exerciseData) => {
+  async ({trainer_uid, exerciseData}) => {
     try {
       const response = await axios.post(`https://remotetrainerserver.herokuapp.com/exercises/custom/${trainer_uid}`, exerciseData);
       return response.data;
