@@ -46,7 +46,8 @@ const SignUp = () => {
               await dispatch(postInviteCode({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5)}));
               //router.push(`/trainer/invitecode`);
             } else {
-              //add code for client here
+              await dispatch(postUser({...formState, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
+              //router.push(``)
             }
 
           
@@ -83,7 +84,7 @@ const SignUp = () => {
                     value={formState.type} 
                     onChange={(e)=>setFormState({...formState, type:e.target.value})}/>
                 <button type="button" 
-                    disabled={formState.password===""||formState.email===""||formState.firstName===""||formState.lastName===""||formState.username===""}
+                    disabled={formState.password===""||formState.email===""||formState.first_name===""||formState.last_name===""||formState.username===""}
                     onClick={createHandler}>SIGN UP</button>
             </form>
             <p>Already have an account? <Link href="/"><a><span>Login.</span></a></Link></p>
