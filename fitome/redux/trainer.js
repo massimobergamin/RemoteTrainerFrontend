@@ -56,7 +56,7 @@ export const postClient = createAsyncThunk(
 
 export const getClients= createAsyncThunk(
   'trainer/getClientsStatus',
-  async (uid) => {
+  async (uid, thunkAPI) => {
     try {
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/clients/${uid}`);
       return response.data;

@@ -15,6 +15,8 @@
   /* Font Sizes: */
   --bold: 500;
   --regular: 300;
+  /*button: */
+  --disabled: #585858;
 }
 
 html,
