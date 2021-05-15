@@ -5,10 +5,11 @@ export const postUser = createAsyncThunk(
   'client/postUserStatus',
   async (userData, thunkAPI) => {
     try {
+      console.log('POSTING', userData);
       const response = await axios.post('https://remotetrainerserver.herokuapp.com/users', userData);
+      console.log("RESPONSE DATA:", response.data)
       return response.data;
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err)
     }
   }
@@ -30,7 +31,9 @@ export const getUser = createAsyncThunk(
   'client/getUserStatus',
   async (uid, thunkAPI) => {
     try {
+      console.log('getUser input: ', uid);
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/${uid}-client`);
+      console.log('getUser response: ', response.data);
       return response.data;
     } catch (err) {
       console.log(err)
@@ -86,11 +89,18 @@ export const addPlanNotes = createAsyncThunk(
   }
 )
 
-export const checkTrainerCode = createAsyncThunk(
-  'client/checkTrainerCodeStatus',
+export const getTrainerByCode = createAsyncThunk(
+  'client/getTrainerByCodeStatus',
   async ({trainer_code}, thunkAPI) => {
     try {
-      // TODO: checks if trainer code exists in db
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/invite/${trainer_code}`);
+      console.log('Redux/getTrainerByCode: ', response.data);
+      
+      if (response.data) {
+        const trainer = await axios.get()
+      }
+      // TODO: checks if trainer code exists in db,
+      // sends back trainer info if so
     } catch (err) {
       console.log(err);
     }
@@ -101,16 +111,13 @@ export const clientSlice = createSlice({
   name: 'client',
   initialState: {
     user: {
-      id: '',
       user_uid: '',
       username: '',
-      type: '',
-      profile_picture: '',
       email: '',
       last_login: 0,
       first_name: '',
       last_name: '',
-      username: '',
+      profile_picture: '',
       sex: '',
       weight: 0,
       height: 0,
@@ -132,11 +139,20 @@ export const clientSlice = createSlice({
       state.user = action.payload;
     },
     [getUser.fulfilled] : (state, action) => {
+      state.sessions = action.payload.sessions;
+      state.user.user_uid = action.payload.user_uid;
+      state.user.username  = action.payload.username;
+      state.user.email = action.payload.email;
+      state.user.last_login = action.payload.last_login;
+      state.user.first_name = action.payload.first_name;
+      state.user.last_name = action.payload.last_name;
+      state.user.profile_picture = action.payload.profile_picture;
+      state.user.sex = action.payload.sex;
+      state.user.weight = action.payload.weight;
+      state.user.height = action.payload.height;
+      state.user.birthday = action.payload.birthday;
       state.plans = action.payload.plans;
-      delete action.payload.plans;
       state.trainerInfo = action.payload.trainerInfo;
-      delete action.payload.trainerInfo;
-      state.user = action.payload;
     },
     [getSessions.fulfilled] : (state, action) => {
       state.sessions = action.payload;
@@ -150,6 +166,9 @@ export const clientSlice = createSlice({
     [addPlanNotes.fulfilled] : (state, action) => {
       let planIndex = state.plans.findIndex(plan => plan.id === action.payload.id);
       state.plans[planIndex] = action.payload;
+    },
+    [getTrainerByCode.fulfilled] : (state, action) => {
+
     },
   }
 });

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {useAuth} from '../../firebase/contextAuth'
 import { useDispatch, useSelector } from 'react-redux';
-import { checkTrainerCode } from '../../redux/client';
+import { getTrainerByCode } from '../../redux/client';
 
 
 const TrainerCode = () => {
