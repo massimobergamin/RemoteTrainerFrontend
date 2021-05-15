@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
-import {useAuth} from '../../firebase/contextAuth'
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import {useAuth} from '../../firebase/contextAuth';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTrainerByCode } from '../../redux/client';
+import { postClient } from '../../redux/trainer';
 
 
 const TrainerCode = () => {
   const [input, setInput] = useState('');
 
+  const router = useRouter();
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
   
@@ -15,21 +18,30 @@ const TrainerCode = () => {
     setInput(e.target.value);
   };
 
-  const handleSubmit = (tCode) => {
-    dispatch(checkTrainerCode(tCode))
-      .then(/* TODO */);
-    // check against db to see if trainer code exists
-      // if true
-        // add both uid's to trainer_client rel table in db
-        // route to sessions page
-      // if false 
-        // show alert that trainer id does not exist
+  const handleSubmit = async () => {
+    const code = input;
+    await dispatch(getTrainerByCode(code))
+      .then(response => {
+        const client = currentUser.uid;
+        const trainer = response.payload.data.user_uid;
+        if (trainer && client) {
+          dispatch(postClient({trainer_uid: trainer , client_uid: client}));
+          router.push('/client/plan');
+        } else { 
+          alert('Trainer does not exist...');
+        }
+      }).catch(error => { 
+        console.error(error);
+        alert('Trainer does not exist...'); 
+      });
   };
 
 
   return (
     <div className="pageContainer">
-      <input type="text" value={input} onChange={handleChange} placeholder="Enter your trainer's code..."></input>
+      <h2>Welcome!</h2>
+      <h4>Please enter your Trainer's invite code below:</h4>
+      <input type="text" value={input} onChange={handleChange} placeholder="Trainer code..."></input>
       <button type="button" onClick={handleSubmit}>Submit</button>
     </div>
   )

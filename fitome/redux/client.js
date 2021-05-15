@@ -91,16 +91,17 @@ export const addPlanNotes = createAsyncThunk(
 
 export const getTrainerByCode = createAsyncThunk(
   'client/getTrainerByCodeStatus',
-  async ({trainer_code}, thunkAPI) => {
+  async (code, thunkAPI) => {
     try {
-      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/invite/${trainer_code}`);
+      console.log('redux code: ', code);
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/client/invite/${code}`);
       console.log('Redux/getTrainerByCode: ', response.data);
       
       if (response.data) {
-        const trainer = await axios.get()
+        const trainer = await axios.get(`https://remotetrainerserver.herokuapp.com/users/${response.data.trainer_uid}-trainer`);
+        console.log('Redux/getTrainerByCode trainer: ', trainer);
+        return trainer;
       }
-      // TODO: checks if trainer code exists in db,
-      // sends back trainer info if so
     } catch (err) {
       console.log(err);
     }
@@ -168,7 +169,7 @@ export const clientSlice = createSlice({
       state.plans[planIndex] = action.payload;
     },
     [getTrainerByCode.fulfilled] : (state, action) => {
-
+      state.trainerInfo = action.payload.trainerInfo;
     },
   }
 });
