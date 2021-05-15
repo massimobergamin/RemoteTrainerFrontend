@@ -12,18 +12,26 @@ function create() {
     const dispatch = useDispatch();
 
     useEffect(()=> {
-        //console.log("userId", user.user_uid);
-        dispatch(getSessions("trainer", currentUser.uid));
-        console.log(trainer)
-        //user.user_uid));
-        dispatch(getClients(trainer.user.user_uid))
-    },[router]);
+        console.log(currentUser)
+        if (currentUser) {
+            dispatch(getSessions("trainer", currentUser.uid));
+            //user.user_uid));
+            dispatch(getClients(currentUser.uid))
+        }
+    },[currentUser, router]);
     
     const listClients = () => {
-        console.log("CLIENTS", clients)
-        console.log("USER", user)
-        //return clients.map((client)=> console.log(client))
-        //return <option value={`${client.first_name} ${client.last_name}`}></option>
+        // console.log("CLIENTS", clients)
+        // console.log("USER", user)'
+        if (trainer.clients) {
+        return trainer.clients.map((client)=> {
+            console.log("CLIENT" , client)
+            return <option key={client.id} value={`${client.first_name}`}></option>
+        })
+        }
+        else {
+            return <option value="Please invite your clients."></option>
+        } 
     }
 
 
@@ -40,7 +48,7 @@ function create() {
             <label htmlFor="listOfClients">Choose a Client:</label>
             <input list="clientList" id="listOfClients" name="listOfClients" />
             <datalist id="clientList">
-                {/* {listClients()} */}
+                {listClients()}
             </datalist>
             <label htmlFor="startTime">Session Start Time:</label>
             <input type="datetime-local" id="startTime" name="startTime"/>
