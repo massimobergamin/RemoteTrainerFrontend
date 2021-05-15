@@ -5,7 +5,7 @@ import { setSelectedWorkout } from '../../../redux/trainer';
 import { useRouter } from 'next/router';
 
 function Details() {
-  const { selectedWorkout } = useSelector(() => state.trainer);
+  const { selectedWorkout } = useSelector(state => state.trainer);
   const dispatch = useDispatch();
   const router = useRouter();
 
