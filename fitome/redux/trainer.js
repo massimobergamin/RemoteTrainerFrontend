@@ -34,7 +34,6 @@ export const getUserById = createAsyncThunk(
       try {
         const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/${uid}-trainer`);
         //const response = await axios.get(`http://localhost:3050/users/${uid}-trainer`);
-        console.log("REDUX, recive from comp", uid)
         console.log("REDUX, get user info:", response.data)
         return response.data;
       } catch (error) {
@@ -85,7 +84,7 @@ export const getInviteCode = createAsyncThunk(
   'trainer/getInviteCodeStatus',
   async (inviteState) => {
     try {
-      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/invite/${inviteState.user_uid}`);
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/invite/${inviteState}`);
       return response.data;
     } catch (error) {
       console.log(error);
