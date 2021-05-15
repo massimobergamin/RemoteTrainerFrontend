@@ -22,13 +22,12 @@ export default function Home() {
   const { user } = useSelector(state => state.trainer);
 
   const loginHandler = async () => {
-    try {
       let userInfo = await login(formState.email, formState.password);
-      
+      console.log(userInfo)
       if (userInfo.user.displayName === 'trainer') {
-        await dispatch(getUserById(userInfo.user.uid));
-        console.log(user)
-        //router.push('/trainer');
+        await dispatch(getUserById(userInfo.user.uid))
+        
+        router.push('/trainer/session/create');
       } else if (userInfo.user.displayName === 'client') {
         dispatch(getUser(userInfo.user.uid))
         .then((user) => {
@@ -39,9 +38,6 @@ export default function Home() {
           }
         });
       }
-    } catch (err) {
-      console.error(err)
-    }
   };
 
   return (
@@ -55,6 +51,7 @@ export default function Home() {
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"></link>
       </Head>
       <main className={styles.main}>
+        {user.email}
         <form>
           <input type="email"
             placeholder="Email"

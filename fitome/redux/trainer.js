@@ -59,7 +59,9 @@ export const getClients= createAsyncThunk(
   'trainer/getClientsStatus',
   async (uid) => {
     try {
+      console.log("REDUx uid,", uid)
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/clients/${uid}`);
+      console.log(response.data)
       return response.data;
     } catch (error) {
       console.log(error);
@@ -261,10 +263,17 @@ export const trainerSlice = createSlice({
     clients: [],
     sessions: [],
     singleSession: {},
-    plans: []
+    plans: [],
+    selectedWorkout: {},
+    selectedExercise: {}
   },
   reducers: {
-
+    setSelectedWorkout (state, action) {
+      state.selectedWorkout = action.payload;
+    },
+    setSelectedExercise (state, action) {
+      state.selectedExercise = action.payload;
+    }
   },
   extraReducers: {
     [postUser.fulfilled] : (state, action) => {
@@ -274,9 +283,19 @@ export const trainerSlice = createSlice({
       state.user = action.payload;
     },
     [getUserById.fulfilled] : (state, action) => {
+      console.log("ACTION PAY", action.payload)
       state.sessions = action.payload.sessions;
-      delete action.payload.sessions;
-      state.user = action.payload;
+      state.user.user_uid = action.payload.user_uid;
+      state.user.username  = action.payload.username;
+      state.user.email = action.payload.email;
+      state.user.last_login = action.payload.last_login;
+      state.user.first_name = action.payload.first_name;
+      state.user.last_name = action.payload.last_name;
+      state.user.profile_picture = action.payload.profile_picture;
+      state.user.sex = action.payload.sex;
+      state.user.weight = action.payload.weight;
+      state.user.height = action.payload.height;
+      state.user.birthday = action.payload.birthday;
     },
     [postClient.fulfilled] : (state, action) => {
       state.clients.push(action.payload);
@@ -332,4 +351,5 @@ export const trainerSlice = createSlice({
   }
 });
 
+export const { setSelectedWorkout, setSelectedExercise } = trainerSlice.actions;
 export default trainerSlice.reducer;
