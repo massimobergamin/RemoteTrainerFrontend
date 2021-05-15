@@ -58,9 +58,7 @@ export const getClients= createAsyncThunk(
   'trainer/getClientsStatus',
   async (uid) => {
     try {
-      console.log("REDUx uid,", uid)
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/clients/${uid}`);
-      console.log(response.data)
       return response.data;
     } catch (error) {
       console.log(error);
