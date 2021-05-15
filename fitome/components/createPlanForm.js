@@ -11,26 +11,19 @@ import moment from 'moment';
 const CreatePlanForm = () => {
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
+  const { user, clients } = useSelector(state => state.trainer);
   const [openClients, setOpenClients] = useState(false);
   const [openWorkouts, setOpenWorkouts] = useState(false);
 
   //retrieves list of Trainer's clients
   useEffect(() => {
-    const getClientList = async () => {
       dispatch(getClients(currentUser.uid))
-    }
-    clientList.push(getClientList);
-
-    const getWorkoutList = async () => {
       dispatch(getWorkout(currentUser.uid))
-    }
-    workoutList.push(getWorkoutList)
-  })
+  }, [])
+
 
   //client list will be a drop down option
   //trainer can click the client and it will register that client to the plan
-  const clientList = [];
-  const workoutList = [];
 
   const toggleClient = () => setOpenClients(!openClients);
 
@@ -56,16 +49,13 @@ const CreatePlanForm = () => {
     client_notes: ""
   }
 
-
   const [detailState, setDetailState] = useState(detailInitialState)
   const [planState, setPlanState] = useState(initialState);
-  const { user } = useSelector(state => state.trainer);
+
 
   const handleDetailSubmit = (e) => {
     e.preventDefault();
     planState.details.push(detailState);
-    console.log(planState.details)
-    console.log(detailState)
   }
 
   const onChange = (e) => {
@@ -92,7 +82,7 @@ const CreatePlanForm = () => {
         >
           <div className="clientListButton">
             <a href="#">
-            <p className="button" value={planState.client_uid} type="text" name="client" onChange={onChange} required autoComplete="off">
+            <p className="button" value={planState.first_name} type="text" name="client" onChange={onChange} required autoComplete="off">
             { !planState.client ? (
             openClients ? 'Close' : 'Choose Client'
             ) : planState.client
@@ -103,9 +93,9 @@ const CreatePlanForm = () => {
           <div className="clientDropdownList">
             { openClients ? (
             <ul>
-            {clientList.map((client, index) => (
+            {clients.map((client, index) => (
             <li key={index}>
-            <button type="button" onClick={() => onChange({ target: {name: "client", value: client.user_uid} })}>
+            <button type="button" onClick={() => onChange({ target: {name: "client", value: client.first_name} })}>
               {client.first_name}
             </button>
             </li>
@@ -129,10 +119,10 @@ const CreatePlanForm = () => {
           <div role="button" onKeyPress={() => toggleWorkout(!openWorkouts)} onClick={() => toggleWorkout(!openWorkouts)}>
             <div>
               <a href="#">
-              <p className="button" value={planState.client_uid} type="text" name="client" onChange={onChange} required autoComplete="off">
-              { !planState.client ? (
-              openClients ? 'Close' : 'Select Workout'
-              ) : planState.client
+              <p className="button" value={planState.start_date} type="text" name="client" onChange={onChange} required autoComplete="off">
+              { !planState.workout ? (
+              openWorkouts ? 'Close' : 'Select Workout'
+              ) : planState.workout
               }
               </p>
               </a>
