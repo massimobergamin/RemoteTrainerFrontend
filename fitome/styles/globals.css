@@ -55,9 +55,14 @@ p {
   margin-bottom: 15px;
 }
 
-form input {
+form input { /*added*/
   margin: 1vh 0;
   border: 0;
   padding: 3px 5px 3px 5px;
   box-shadow:0 0 5px 3px rgba(0, 0, 0, 0.11);
+}
+
+#Exercise_Video { /*added*/
+  border-radius: 4px;
+  background-color: black;
 }
