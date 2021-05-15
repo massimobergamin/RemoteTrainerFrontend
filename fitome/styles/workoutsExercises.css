@@ -1,0 +1,36 @@
+.card {
+  border: 1px solid darkgray;
+  border-radius: 4px;
+  margin: 2vh 2vh;
+  padding: 2vh 2vh;
+  min-width: 200px;
+}
+
+.scroll {
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  overflow-y: scroll;
+}
+
+.scrollItems {
+  margin: 0 2vh;
+}
+
+.scrollItems div {
+  margin: 1vh 0;
+}
+
+video {
+  border-radius: 4px;
+  background-color: black;
+}
+
+.card p {
+  margin-bottom: 1.5vh;
+}
+
+.crExInput {
+  margin-right: 4vw;
+  margin-top: 3vh;
+}

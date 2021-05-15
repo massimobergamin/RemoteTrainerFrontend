@@ -3,7 +3,8 @@
 @import './buttons.css';
 @import './navigationBar.css';
 @import './timerOverlay.css';
-
+@import './workoutsExercisesBar.css';
+@import './workoutsExercises.css';
 
 :root {
   /* Colors: */
@@ -14,6 +15,8 @@
   /* Font Sizes: */
   --bold: 500;
   --regular: 300;
+  /*button: */
+  --disabled: #585858;
 }
 
 html,
@@ -31,6 +34,7 @@ a {
 
 * {
   box-sizing: border-box;
+  text-align: center; /*added this*/
 }
 
 .pageContainer {
@@ -39,11 +43,15 @@ a {
   width: 100vw;
 }
 
-h1, 
+h1,
 p {
   margin: 0;
   padding: 0;
   line-height: 1em;
   font-size: 2em;
   text-align: center;
+}
+
+form input {
+  margin: 1vh 0;
 }
