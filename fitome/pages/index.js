@@ -29,14 +29,13 @@ export default function Home() {
         
         router.push('/trainer/session/create');
       } else if (userInfo.user.displayName === 'client') {
-        dispatch(getUser(userInfo.user.uid))
-        .then((user) => {
+          await dispatch(getUser(userInfo.user.uid));
           if (!user.trainerInfo.trainer_uid) {
             router.push('/client/trainercode');
           } else {
             router.push('/client/plan');
           }
-        });
+        };
       }
   };
 
@@ -72,4 +71,3 @@ export default function Home() {
       </main>
     </div>
   )
-}
