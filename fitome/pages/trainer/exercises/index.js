@@ -21,20 +21,20 @@ function Exercises() {
   }, [])
 
   const categorizeExercises = () => {
-    setArmExs(exercises.filter(exercise => (exercise.muscle_group === ('arms' || 'Arms')) && exercise.type === 'custom'));
-    setLegExs(exercises.filter(exercise => (exercise.muscle_group === ('legs' || 'Legs')) && exercise.type === 'custom'));
-    setBackExs(exercises.filter(exercise => (exercise.muscle_group === ('back' || 'Back')) && exercise.type === 'custom'));
-    setChestExs(exercises.filter(exercise => (exercise.muscle_group === ('chest' || 'Chest')) && exercise.type === 'custom'));
-    setMiscExs(exercises.filter(exercise => (exercise.muscle_group !== ('arms' || 'Arms'
-      || 'legs' || 'Legs' || 'back' || 'Back' || 'chest' || 'Chest')) && exercise.type === 'custom'));
+    setArmExs(exercises.filter(exercise => exercise.muscle_group === 'arms' && exercise.type === 'custom'));
+    setLegExs(exercises.filter(exercise => exercise.muscle_group === 'legs' && exercise.type === 'custom'));
+    setBackExs(exercises.filter(exercise => exercise.muscle_group === 'back' && exercise.type === 'custom'));
+    setChestExs(exercises.filter(exercise => exercise.muscle_group === 'chest' && exercise.type === 'custom'));
+    setMiscExs(exercises.filter(exercise => exercise.muscle_group !== 'arms' && exercise.muscle_group !== 'legs'
+      && exercise.muscle_group !== 'back' && exercise.muscle_group !== 'chest' && exercise.type === 'custom'));
   }
 
   return (
     <div>
       <button onClick={() => router.push('/trainer/exercises/create')}>New Exercise</button>
+      <h3>Arms</h3>
       {armExs && armExs.map(exercise =>
         <div key={exercise.id}>
-          <h3>Arms</h3>
           <button onClick={() => {
             dispatch(setSelectedExercise(exercise));
             router.push('/trainer/exercises/details');
@@ -46,9 +46,9 @@ function Exercises() {
                   Your browser does not support HTML5 video.
               </video>}
         </div>)}
+        <h3>Legs</h3>
       {legExs && legExs.map(exercise =>
         <div key={exercise.id}>
-          <h3>Legs</h3>
           <button onClick={() => {
             dispatch(setSelectedExercise(exercise));
             router.push('/trainer/exercises/details');
@@ -60,9 +60,9 @@ function Exercises() {
                   Your browser does not support HTML5 video.
               </video>}
         </div>)}
+        <h3>Back</h3>
       {backExs && backExs.map(exercise =>
         <div key={exercise.id}>
-          <h3>Back</h3>
           <button onClick={() => {
             dispatch(setSelectedExercise(exercise));
             router.push('/trainer/exercises/details');
@@ -74,9 +74,9 @@ function Exercises() {
                   Your browser does not support HTML5 video.
               </video>}
         </div>)}
+        <h3>Chest</h3>
       {chestExs && chestExs.map(exercise =>
         <div key={exercise.id}>
-          <h3>Chest</h3>
           <button onClick={() => {
             dispatch(setSelectedExercise(exercise));
             router.push('/trainer/exercises/details');
@@ -88,9 +88,9 @@ function Exercises() {
                   Your browser does not support HTML5 video.
               </video>}
           </div>)}
+          <h3>Miscellaneous</h3>
       {miscExs && miscExs.map(exercise =>
         <div key={exercise.id}>
-          <h3>Miscellaneous</h3>
           <button onClick={() => {
             dispatch(setSelectedExercise(exercise));
             router.push('/trainer/exercises/details');
