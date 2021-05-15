@@ -52,6 +52,11 @@ p {
   text-align: center;
 }
 
-form input {
+form input { /*added*/
   margin: 1vh 0;
+}
+
+#Exercise_Video { /*added*/
+  border-radius: 4px;
+  background-color: black;
 }

@@ -56,20 +56,21 @@ const CreateWorkout = () => {
       <div className="pageContainer">
         <h1>Create New Workout</h1>
         <form>
-            <input className="crExInput" placeholder="Title" type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
-            <button className="button" onClick={handleSubmit}>Create</button>
+            <input className="workoutsExercises_crWrkInput" placeholder="Title" type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
+            <button className="button" onClick={handleSubmit} disabled={formState.title===""||formState.exerciseIds.length===0}>Create</button>
         </form>
           <h3>Select Exercises</h3>
-          <div className="scroll">
+          <div className="workoutsExercises_scroll">
             {exercises && exercises.map((exercise, i) =>
-              <div key={exercise.id} className="card">
+              <div key={exercise.id} className="workoutsExercises_card">
                 <button className="button" onClick={() => handleClick(exercise.id, i)}>{buttonTextArr[i] || 'Add'}</button>
                 <div>{exercise.title}</div>
-                {exercise.media &&
-                  <video id="Exercise_Video" width="176" height="176" autoplay="true" loop="true">
+                {exercise.media ?
+                  <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
                       <source src={exercise.media} type="video/mp4"/>
                       Your browser does not support HTML5 video.
-                  </video>}
+                  </video> :
+                  <img src="/noVid.png" width="176" height="176"></img>}
               </div>)}
             </div>
           </div>
