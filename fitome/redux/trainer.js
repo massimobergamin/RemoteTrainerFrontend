@@ -263,11 +263,18 @@ export const trainerSlice = createSlice({
     clients: [],
     sessions: [],
     singleSession: {},
-    plans: []
+    plans: [],
+    selectedWorkout: {},
+    selectedExercise: {}
   },
-  // reducers: {
-
-  // },
+  reducers: {
+    setSelectedWorkout (state, action) {
+      state.selectedWorkout = action.payload;
+    },
+    setSelectedExercise (state, action) {
+      state.selectedExercise = action.payload;
+    }
+  },
   extraReducers: {
     [postUser.fulfilled] : (state, action) => {
       state.user = action.payload;
@@ -344,4 +351,5 @@ export const trainerSlice = createSlice({
   }
 });
 
+export const { setSelectedWorkout, setSelectedExercise } = trainerSlice.actions;
 export default trainerSlice.reducer;
