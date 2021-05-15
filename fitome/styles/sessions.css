@@ -1,0 +1,24 @@
+.sessionForm_announcement {
+    color: rgb(163, 162, 162);
+    font-size: 0.8em;
+}
+
+.sessionCreate_form {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.sessionCreate_field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around; 
+    margin-bottom: 3vh;
+    font-size: 1.2em;
+}
+
+.createSessionButton {
+    padding: 1em 1em;
+}
