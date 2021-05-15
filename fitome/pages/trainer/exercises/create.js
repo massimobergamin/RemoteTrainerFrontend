@@ -4,6 +4,8 @@ import { useAuth } from '../../../firebase/contextAuth';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
+import WorkoutsExercisesBar from '../../../components/workoutsExercisesBar';
 
 const CreateExercise = () => {
   const router = useRouter();
@@ -32,15 +34,19 @@ const CreateExercise = () => {
 
   return (
     <div>
-      <h1>Create New Exercise</h1>
-      <form>
-          <input placeholder="Title" type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
-          <input placeholder="Description" type="text" onChange={(e) => setFormState({...formState, description: e.target.value})}/>
-          <input placeholder="Muscle Group" type="text" onChange={(e) => setFormState({...formState, muscle_group: e.target.value})}/>
-          <input placeholder="Benefits" type="text" onChange={(e) => setFormState({...formState, benefits: e.target.value})}/>
-          <input type="submit" value="Create" onClick={handleSubmit}/>
-          <UploadVideoForm setMedia={setMedia}></UploadVideoForm>
-      </form>
+      <WorkoutsExercisesBar></WorkoutsExercisesBar>
+      <div className="pageContainer">
+        <h1>Create New Exercise</h1>
+        <form>
+            <input placeholder="Title" type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
+            <input placeholder="Description" type="text" onChange={(e) => setFormState({...formState, description: e.target.value})}/>
+            <input placeholder="Muscle Group" type="text" onChange={(e) => setFormState({...formState, muscle_group: e.target.value})}/>
+            <input placeholder="Benefits" type="text" onChange={(e) => setFormState({...formState, benefits: e.target.value})}/>
+            <UploadVideoForm setMedia={setMedia}></UploadVideoForm>
+            <input className="button" type="submit" value="Create" onClick={handleSubmit}/>
+        </form>
+      </div>
+      <NavigationTrainer></NavigationTrainer>
     </div>
   )
 }

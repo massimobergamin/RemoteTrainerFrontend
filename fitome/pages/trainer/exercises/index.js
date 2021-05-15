@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getExercise, setSelectedExercise } from '../../../redux/trainer';
 import { useAuth } from '../../../firebase/contextAuth';
+import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
+import WorkoutsExercisesBar from '../../../components/workoutsExercisesBar';
 
 function Exercises() {
   const router = useRouter();
@@ -31,77 +33,83 @@ function Exercises() {
 
   return (
     <div>
-      <button onClick={() => router.push('/trainer/exercises/create')}>New Exercise</button>
-      <h3>Arms</h3>
-      {armExs && armExs.map(exercise =>
-        <div key={exercise.id}>
-          <button onClick={() => {
-            dispatch(setSelectedExercise(exercise));
-            router.push('/trainer/exercises/details');
-          }}>View Details</button>
-          <div>{exercise.title}</div>
-            {exercise.media &&
-              <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
-                  <source src={exercise.media} type="video/mp4"/>
-                  Your browser does not support HTML5 video.
-              </video>}
-        </div>)}
-        <h3>Legs</h3>
-      {legExs && legExs.map(exercise =>
-        <div key={exercise.id}>
-          <button onClick={() => {
-            dispatch(setSelectedExercise(exercise));
-            router.push('/trainer/exercises/details');
-          }}>View Details</button>
-          <div>{exercise.title}</div>
-            {exercise.media &&
-              <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
-                  <source src={exercise.media} type="video/mp4"/>
-                  Your browser does not support HTML5 video.
-              </video>}
-        </div>)}
-        <h3>Back</h3>
-      {backExs && backExs.map(exercise =>
-        <div key={exercise.id}>
-          <button onClick={() => {
-            dispatch(setSelectedExercise(exercise));
-            router.push('/trainer/exercises/details');
-          }}>View Details</button>
-          <div>{exercise.title}</div>
-            {exercise.media &&
-              <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
-                  <source src={exercise.media} type="video/mp4"/>
-                  Your browser does not support HTML5 video.
-              </video>}
-        </div>)}
-        <h3>Chest</h3>
-      {chestExs && chestExs.map(exercise =>
-        <div key={exercise.id}>
-          <button onClick={() => {
-            dispatch(setSelectedExercise(exercise));
-            router.push('/trainer/exercises/details');
-          }}>View Details</button>
-          <div>{exercise.title}</div>
-            {exercise.media &&
-              <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
-                  <source src={exercise.media} type="video/mp4"/>
-                  Your browser does not support HTML5 video.
-              </video>}
+      <WorkoutsExercisesBar></WorkoutsExercisesBar>
+      <div className="pageContainer">
+        <button className="button" onClick={() => router.push('/trainer/exercises/create')}>New Exercise</button>
+        <h3>Arms</h3>
+        <div className="scroll">
+          {armExs && armExs.map(exercise =>
+            <div className="card" key={exercise.id}>
+              <button className="button" onClick={() => {
+                dispatch(setSelectedExercise(exercise));
+                router.push('/trainer/exercises/details');
+              }}>View Details</button>
+              <div>{exercise.title}</div>
+                {exercise.media &&
+                  <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
+                      <source src={exercise.media} type="video/mp4"/>
+                      Your browser does not support HTML5 video.
+                  </video>}
+            </div>)}
+          </div>
+          <h3>Legs</h3>
+        {legExs && legExs.map(exercise =>
+          <div key={exercise.id}>
+            <button className="button" onClick={() => {
+              dispatch(setSelectedExercise(exercise));
+              router.push('/trainer/exercises/details');
+            }}>View Details</button>
+            <div>{exercise.title}</div>
+              {exercise.media &&
+                <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
+                    <source src={exercise.media} type="video/mp4"/>
+                    Your browser does not support HTML5 video.
+                </video>}
           </div>)}
-          <h3>Miscellaneous</h3>
-      {miscExs && miscExs.map(exercise =>
-        <div key={exercise.id}>
-          <button onClick={() => {
-            dispatch(setSelectedExercise(exercise));
-            router.push('/trainer/exercises/details');
-          }}>View Details</button>
-          <div>{exercise.title}</div>
-            {exercise.media &&
-              <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
-                  <source src={exercise.media} type="video/mp4"/>
-                  Your browser does not support HTML5 video.
-              </video>}
-        </div>)}
+          <h3>Back</h3>
+        {backExs && backExs.map(exercise =>
+          <div key={exercise.id}>
+            <button className="button" onClick={() => {
+              dispatch(setSelectedExercise(exercise));
+              router.push('/trainer/exercises/details');
+            }}>View Details</button>
+            <div>{exercise.title}</div>
+              {exercise.media &&
+                <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
+                    <source src={exercise.media} type="video/mp4"/>
+                    Your browser does not support HTML5 video.
+                </video>}
+          </div>)}
+          <h3>Chest</h3>
+        {chestExs && chestExs.map(exercise =>
+          <div key={exercise.id}>
+            <button className="button" onClick={() => {
+              dispatch(setSelectedExercise(exercise));
+              router.push('/trainer/exercises/details');
+            }}>View Details</button>
+            <div>{exercise.title}</div>
+              {exercise.media &&
+                <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
+                    <source src={exercise.media} type="video/mp4"/>
+                    Your browser does not support HTML5 video.
+                </video>}
+            </div>)}
+            <h3>Miscellaneous</h3>
+        {miscExs && miscExs.map(exercise =>
+          <div key={exercise.id}>
+            <button className="button" onClick={() => {
+              dispatch(setSelectedExercise(exercise));
+              router.push('/trainer/exercises/details');
+            }}>View Details</button>
+            <div>{exercise.title}</div>
+              {exercise.media &&
+                <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
+                    <source src={exercise.media} type="video/mp4"/>
+                    Your browser does not support HTML5 video.
+                </video>}
+          </div>)}
+        </div>
+      <NavigationTrainer></NavigationTrainer>
     </div>
   )
 }
