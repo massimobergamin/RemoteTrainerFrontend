@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getWorkout } from '../../../redux/trainer';
+import { getWorkout, setSelectedWorkout } from '../../../redux/trainer';
 import { useAuth } from '../../../firebase/contextAuth';
 
 function Workouts() {
@@ -19,6 +19,10 @@ function Workouts() {
       <button onClick={() => router.push('/trainer/workouts/create')}>New Workout</button>
       {workouts && workouts.map(workout =>
         <div key={workout.id}>
+          <button onClick={() => {
+            dispatch(setSelectedWorkout(workout));
+            router.push('/trainer/workouts/details');
+          }}>View Details</button>
           <div>{workout.title}</div>
           {workout.exercises && workout.exercises.map(exercise =>
             <div key={exercise.id}>
