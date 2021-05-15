@@ -110,9 +110,9 @@ export const clientSlice = createSlice({
     singleSession: {},
     plans: []
   },
-  reducers: {
+  // reducers: {
 
-  },
+  // },
   extraReducers: {
     [postUser.fulfilled] : (state, action) => {
       state.user = action.payload;
@@ -143,6 +143,6 @@ export const clientSlice = createSlice({
   }
 });
 
-export const { /* TODO: generate action creators for client reducers above*/} = clientSlice.actions;
+// export const { /* TODO: generate action creators for client reducers above*/} = clientSlice.actions;
 
 export default clientSlice.reducer;
