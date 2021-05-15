@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getWorkout, setSelectedWorkout } from '../../../redux/trainer';
 import { useAuth } from '../../../firebase/contextAuth';
+import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
+import WorkoutsExercisesBar from '../../../components/workoutsExercisesBar';
 
 function Workouts() {
   const router = useRouter();
@@ -16,24 +18,30 @@ function Workouts() {
 
   return (
     <div>
-      <button onClick={() => router.push('/trainer/workouts/create')}>New Workout</button>
-      {workouts && workouts.map(workout =>
-        <div key={workout.id}>
-          <button onClick={() => {
-            dispatch(setSelectedWorkout(workout));
-            router.push('/trainer/workouts/details');
-          }}>View Details</button>
-          <div>{workout.title}</div>
-          {workout.exercises && workout.exercises.map(exercise =>
-            <div key={exercise.id}>
-            <div>{exercise.title}</div>
-              {exercise.media &&
-                <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
-                    <source src={exercise.media} type="video/mp4"/>
-                    Your browser does not support HTML5 video.
-                </video>}
+      <WorkoutsExercisesBar></WorkoutsExercisesBar>
+      <div className="pageContainer">
+        <button className="button" onClick={() => router.push('/trainer/workouts/create')}>New Workout</button>
+        {workouts && workouts.map(workout =>
+          <div key={workout.id} className="card">
+            <button className="button" onClick={() => {
+              dispatch(setSelectedWorkout(workout));
+              router.push('/trainer/workouts/details');
+            }}>View Details</button>
+            <div>{workout.title}</div>
+            <div className="scroll">
+              {workout.exercises && workout.exercises.map(exercise =>
+                <div key={exercise.id} className="scrollItems">
+                  <div>{exercise.title}</div>
+                    {exercise.media &&
+                      <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
+                          <source src={exercise.media} type="video/mp4"/>
+                          Your browser does not support HTML5 video.
+                      </video>}
+                </div>)}
+              </div>
           </div>)}
-        </div>)}
+        </div>
+        <NavigationTrainer></NavigationTrainer>
     </div>
   )
 }

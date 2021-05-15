@@ -1,0 +1,32 @@
+.workoutsExercisesBar_container {
+  position: sticky;
+  top: 0;
+  height: 6vh;
+  width: 100vw;
+  background-color: var(--accent);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-decoration: none;
+  color: white;
+}
+
+.workoutsExercisesBar_icon {
+  list-style-type: none;
+  height: 5vh;
+  width: 25vh;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 1.5vh;
+}
+
+.workoutsExercisesBar_icon:hover{
+  background-color: var(--secondary)
+}
+
+.workoutsExercisesBar_icon:active{
+  background-color: var(--secondary)
+}
