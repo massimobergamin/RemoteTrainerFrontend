@@ -1,4 +1,3 @@
-import { current } from 'immer';
 import React, { useEffect } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { getUser } from '../../redux/client'
@@ -6,7 +5,7 @@ import { useAuth } from '../../firebase/contextAuth';
 import NavigationClient from '../../components/navigationBar/navigationClient';
 
 
-// displays client's workout plan 
+// displays client's workout plan + exercises
 const Plan = () => {
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
