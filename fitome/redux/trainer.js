@@ -262,7 +262,12 @@ export const trainerSlice = createSlice({
     singleSession: {},
     plans: [],
     selectedWorkout: {},
-    selectedExercise: {}
+    selectedExercise: {},
+    armExs: [],
+    legExs: [],
+    backExs: [],
+    chestExs: [],
+    miscExs: []
   },
   reducers: {
     setSelectedWorkout (state, action) {
@@ -338,6 +343,12 @@ export const trainerSlice = createSlice({
     },
     [getExercise.fulfilled] : (state, action) => {
       state.exercises = action.payload;
+      state.armExs = state.exercises.filter(exercise => exercise.muscle_group === 'arms' && exercise.type === 'custom');
+      state.legExs = state.exercises.filter(exercise => exercise.muscle_group === 'legs' && exercise.type === 'custom');
+      state.backExs = state.exercises.filter(exercise => exercise.muscle_group === 'back' && exercise.type === 'custom');
+      state.chestExs = state.exercises.filter(exercise => exercise.muscle_group === 'chest' && exercise.type === 'custom');
+      state.miscExs = state.exercises.filter(exercise => exercise.muscle_group !== 'arms' && exercise.muscle_group !== 'legs'
+        && exercise.muscle_group !== 'back' && exercise.muscle_group !== 'chest' && exercise.type === 'custom');
     },
     [postWorkout.fulfilled] : (state, action) => {
       state.workouts.push(action.payload);

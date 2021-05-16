@@ -3,7 +3,7 @@
   top: 0;
   height: 6vh;
   width: 100vw;
-  background-color: var(--accent);
+  background-color: var(--secondary);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -12,21 +12,45 @@
   list-style-type: none;
   text-decoration: none;
   color: white;
+  border-radius: 4px;
 }
 
 .workoutsExercisesBar_icon {
   list-style-type: none;
-  height: 5vh;
-  width: 25vh;
+  height: 6vh;
+  width: 50vw;
   padding: 5px;
   border-radius: 4px;
   font-size: 1.5vh;
+  border: 3px solid var(--secondary);
 }
 
-.workoutsExercisesBar_icon:hover{
-  background-color: var(--secondary)
+.workoutsExercisesBar_blue {
+  background-color: var(--primary-accent);
+  border: 3px solid var(--primary-accent);
+  border-bottom: 3px solid var(--secondary);
 }
 
-.workoutsExercisesBar_icon:active{
-  background-color: var(--secondary)
+.workoutsExercisesBar_icon:hover {
+  background-color: var(--accent);
+  border: 3px solid var(--accent);
+  border-bottom: 3px solid var(--accent);
+}
+
+.workoutsExercisesBar_icon:active { /*active not working*/
+  background-color: var(--accent);
+  border: 3px solid var(--accent);
+  border-bottom: 3px solid var(--accent);
+}
+
+.workoutsExercisesBar_blue:hover {
+  background-color: var(--primary);
+  border: 3px solid var(--primary);
+  border-bottom: 3px solid var(--secondary);
+}
+
+.workoutsExercisesBar_blue:active { /*active not working*/
+  background-color: var(--primary);
+  border: 3px solid var(--primary);
+  border-bottom: 3px solid var(--secondary);
 }

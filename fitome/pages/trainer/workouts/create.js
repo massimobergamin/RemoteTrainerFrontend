@@ -43,8 +43,8 @@ const CreateWorkout = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      dispatch(postWorkout({trainer_uid: currentUser.uid, workoutData: formState}));
-      router.push('/trainer/workouts');
+      dispatch(postWorkout({trainer_uid: currentUser.uid, workoutData: formState}))
+        .then(() => router.push('/trainer/workouts'));
     } catch (err) {
       console.log(err);
     }

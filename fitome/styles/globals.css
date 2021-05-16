@@ -10,6 +10,7 @@
 :root {
   /* Colors: */
   --primary: rgb(148, 210, 201);
+  --primary-accent: rgb(88, 226, 206); /*added this to use for workoutsExercisesBar, feel free to change*/
   --secondary: #ee9b00;
   --accent: #ca6702;
   --fontColor: #303030;
