@@ -15,23 +15,28 @@ function UploadVideoForm({ setMedia }) {
         if (selected && types.includes(selected.type)) {
             setFile(selected);
             setError(null);
-            setMedia(url);
         } else {
             setFile(null);
             setError('Please select a video file (mp4)');
         }
     }
 
+    useEffect(() => {
+      file && setMedia('uploading');
+      url && setMedia(url);
+    }, [file, url])
+
     return (
         <div>
             <form>
                 <input type="file" onChange={handleChange}/>
                 <div >
+                {(file && !url) && <h5>Uploading {file.name}...</h5>}
                 {url &&
                 <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
                     <source src={url} type="video/mp4"/>
                     Your browser does not support HTML5 video.
-                </video> }
+                </video>}
                 {error && <div>{error}</div>}
                 </div>
             </form>

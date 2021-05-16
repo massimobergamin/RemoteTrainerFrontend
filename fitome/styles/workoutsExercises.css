@@ -1,36 +1,34 @@
-.card {
+.workoutsExercises_card {
   border: 1px solid darkgray;
   border-radius: 4px;
   margin: 2vh 2vh;
   padding: 2vh 2vh;
   min-width: 200px;
+  min-height: 267px;
 }
 
-.scroll {
+.workoutsExercises_scroll {
   display: flex;
   flex-direction: row;
   align-items: top;
+  justify-content: space-between;
   overflow-y: scroll;
 }
 
-.scrollItems {
+.workoutsExercises_scrollItems {
   margin: 0 2vh;
+  min-height: 221px;
 }
 
-.scrollItems div {
+.workoutsExercises_scrollItems div {
   margin: 1vh 0;
 }
 
-video {
-  border-radius: 4px;
-  background-color: black;
-}
-
-.card p {
+.workoutsExercises_card p {
   margin-bottom: 1.5vh;
 }
 
-.crExInput {
+.workoutsExercises_crWrkInput {
   margin-right: 4vw;
   margin-top: 3vh;
 }

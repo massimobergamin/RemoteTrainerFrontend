@@ -4,19 +4,19 @@ import Link from 'next/link';
 const NavigationTrainer = () => {
     return (
         <ul className="navigationBar_container">
-            <Link href="/trainer/workout">
-                <li className="navigationBar_icon"> 
+            <Link href="/trainer/workouts">
+                <li className="navigationBar_icon">
                     <img src="/icons/fitness_center_white_24dp.svg"/>
                 </li>
             </Link>
             <Link href="/trainer/sessionList">
-                <li className="navigationBar_icon"> 
+                <li className="navigationBar_icon">
                     <img src="/icons/call_white_24dp.svg"/>
                 </li>
             </Link>
             <Link href="/trainer/clientAssignment">
                 <li className="navigationBar_icon">
-                    <img src="/icons/inventory_white_24dp.svg"/>    
+                    <img src="/icons/inventory_white_24dp.svg"/>
                 </li>
             </Link>
             <Link href="/trainer/profile">

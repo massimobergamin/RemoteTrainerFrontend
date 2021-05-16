@@ -40,10 +40,17 @@ const CreateExercise = () => {
         <form>
             <input placeholder="Title" type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
             <input placeholder="Description" type="text" onChange={(e) => setFormState({...formState, description: e.target.value})}/>
-            <input placeholder="Muscle Group" type="text" onChange={(e) => setFormState({...formState, muscle_group: e.target.value})}/>
+            {/* <input placeholder="Muscle Group" type="text" onChange={(e) => setFormState({...formState, muscle_group: e.target.value})}/> */}
+            <input placeholder="Muscle Group" type="text" list="muscleGroups" onChange={(e) => setFormState({...formState, muscle_group: e.target.value.toLowerCase()})}/>
+            <datalist id="muscleGroups">
+              <option>Arms</option>
+              <option>Legs</option>
+              <option>Back</option>
+              <option>Chest</option>
+            </datalist>
             <input placeholder="Benefits" type="text" onChange={(e) => setFormState({...formState, benefits: e.target.value})}/>
             <UploadVideoForm setMedia={setMedia}></UploadVideoForm>
-            <input className="button" type="submit" value="Create" onClick={handleSubmit}/>
+            <input className="button" type="submit" value="Create" onClick={handleSubmit} disabled={formState.title===""||formState.description===""||formState.muscle_group===""||formState.benefits===""||media==='uploading'}/>
         </form>
       </div>
       <NavigationTrainer></NavigationTrainer>
