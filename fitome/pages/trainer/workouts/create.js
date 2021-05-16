@@ -43,8 +43,8 @@ const CreateWorkout = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      dispatch(postWorkout({trainer_uid: currentUser.uid, workoutData: formState}));
-      router.push('/trainer/workouts');
+      dispatch(postWorkout({trainer_uid: currentUser.uid, workoutData: formState}))
+        .then(() => router.push('/trainer/workouts'));
     } catch (err) {
       console.log(err);
     }
@@ -71,6 +71,7 @@ const CreateWorkout = () => {
                       Your browser does not support HTML5 video.
                   </video> :
                   <img src="/noVid.png" width="176" height="176"></img>}
+                <div>Muscle: {exercise.muscle_group}</div>
               </div>)}
             </div>
           </div>

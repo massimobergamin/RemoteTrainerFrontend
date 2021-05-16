@@ -27,7 +27,7 @@ export default function Home() {
       if (userInfo.user.displayName === 'trainer') {
         await dispatch(getUserById(userInfo.user.uid))
         
-        router.push('/trainer/session/create');
+        router.push('/session');
       } else if (userInfo.user.displayName === 'client') {
           console.log('loginHandler: ', userInfo.user.uid);
           await dispatch(getUser(userInfo.user.uid));

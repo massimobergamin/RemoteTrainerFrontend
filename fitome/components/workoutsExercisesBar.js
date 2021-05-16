@@ -10,7 +10,7 @@ const WorkoutsExercisesBar = () => {
                 </li>
             </Link>
             <Link href="/trainer/exercises">
-                <li className="workoutsExercisesBar_icon">
+                <li className="workoutsExercisesBar_icon workoutsExercisesBar_blue">
                     <p>Exercises</p>
                 </li>
             </Link>

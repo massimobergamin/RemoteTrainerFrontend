@@ -25,8 +25,8 @@ const CreateExercise = () => {
   const handleSubmit = (e) => {
     try {
       e.preventDefault();
-      dispatch(postExercise({trainer_uid: currentUser.uid, exerciseData: {...formState, media: media, type: 'custom'}}));
-      router.push('/trainer/exercises');
+      dispatch(postExercise({trainer_uid: currentUser.uid, exerciseData: {...formState, media: media, type: 'custom'}}))
+        .then(() => router.push('/trainer/exercises'));
     } catch (err) {
       console.log(err);
     }
@@ -50,7 +50,7 @@ const CreateExercise = () => {
             </datalist>
             <input placeholder="Benefits" type="text" onChange={(e) => setFormState({...formState, benefits: e.target.value})}/>
             <UploadVideoForm setMedia={setMedia}></UploadVideoForm>
-            <input className="button" type="submit" value="Create" onClick={handleSubmit} disabled={formState.title===""||formState.description===""||formState.muscle_group===""||formState.benefits===""||media==='uploading'}/>
+            <input className="button" type="submit" value="Create" onClick={handleSubmit} disabled={formState.title===""||formState.description===""||formState.muscle_group===""||media==='uploading'}/>
         </form>
       </div>
       <NavigationTrainer></NavigationTrainer>
