@@ -6,6 +6,7 @@
 @import './workoutsExercisesBar.css';
 @import './workoutsExercises.css';
 @import './sessions.css';
+@import './profile.css';
 
 :root {
   /* Colors: */
