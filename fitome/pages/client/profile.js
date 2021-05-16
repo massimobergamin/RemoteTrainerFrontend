@@ -1,5 +1,6 @@
 import React from 'react'
 
+// TODO: Render page based off trainer profile template
 const Profile = () => {
   return (
     <div>
