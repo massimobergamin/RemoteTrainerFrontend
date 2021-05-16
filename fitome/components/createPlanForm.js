@@ -5,7 +5,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../firebase/contextAuth';
 import { useSelector } from 'react-redux';
-import { updateUser, getClients, getWorkout } from '../redux/trainer';
+import { updateUser, getClients, getWorkout, postPlan } from '../redux/trainer';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 
@@ -112,7 +112,7 @@ const CreatePlanForm = () => {
     console.log(detailState.sets)
   }
 
-  const { user, clients} = useSelector(state => state.trainer);
+  const { user, clients, workouts } = useSelector(state => state.trainer);
 
 //*********************** */
   const showSeletedWorkout = () => {
@@ -137,14 +137,8 @@ const CreatePlanForm = () => {
   const toggleWorkout = () => setOpenWorkouts(!openWorkouts)
   
   
-  const handleDetailSubmit = (e) => {
-    e.preventDefault();
-    planState.details.push(detailState);
-    setDetailState(detailInitialState)
-    console.log("PLANSTATE", planState)
-  }
   console.log("detail state", detailState)
-
+  
   const onChange = (e) => {
     const { name, value } = e.target;
     setPlanState((previousState) => ({
@@ -152,50 +146,50 @@ const CreatePlanForm = () => {
       [name]: value,
     }))
   }
-
+  
   const onChangeWorkout = (e) => {
     const { name, value } = e.target;
     value.exercises.map(ex => {
+      console.log(ex)
       detailState.exercises.push(ex)
     })
   }
-
+  
   const listClients = () => {
     // console.log("CLIENTS", clients)
     // console.log("USER", user)'
     if (clients) {
-        return clients.map((client)=> {
-            console.log("CLIENT" , client)
-            return <option key={client.id} value={`${client.first_name} ${client.last_name}`}></option>
-        })
+      return clients.map((client)=> {
+        
+        return <option key={client.id} value={`${client.first_name} ${client.last_name}`}></option>
+      })
     }
     else {
-        alert('You have no clients. Please invite your clients using your invite code.')
+      alert('You have no clients. Please invite your clients using your invite code.')
     } 
-}
-
+  }
+  
   const findValue = (value) => {
-    console.log("VALUE", value)
     for (let i=0; i<clients.length; i++) {
-        console.log("CHECK HERE", clients)
-        let name = clients[i].first_name+' '+clients[i].last_name;
-        console.log("NAME", name)
-        console.log("VAL", value)
-        if (name===value){
-            
-            console.log("HERHERE", clients[i].user_uid)
-            setPlanState({...planState, client_uid:clients[i].user_uid})
-        }
-    break;
+      console.log("CHECK HERE", clients)
+      let name = clients[i].first_name+' '+clients[i].last_name;
+      if (name===value){
+        setPlanState({...planState, client_uid:clients[i].user_uid})
+      }
+      break;
     }
-}
-
+  }
+  
+  const handleDetailSubmit = (e) => {
+    e.preventDefault();
+    planState.details.push(detailState);
+    setDetailState(detailInitialState)
+  }
   const handlePlanSubmit = (e) => {
     e.preventDefault();
-    console.log(planState)
-    dispatch(updateUser(currentUser.uid, planState.client_uid, planState));
+    dispatch(postPlan(planState));
   };
-
+  
   return (
     <div>
       <form className="fullFormContainer">
@@ -231,7 +225,7 @@ const CreatePlanForm = () => {
               <div>
               { openWorkouts ? (
               <ul>
-              {mock.map((workout, index) => (
+              {workouts.map((workout, index) => (
               <li key={index}>
               <button type="button" onClick={() => onChangeWorkout({ target: {name: "exercises", value: workout} })}>
                 {workout.title}
