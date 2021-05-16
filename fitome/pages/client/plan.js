@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { getUser } from '../../redux/client'
 import { useAuth } from '../../firebase/contextAuth';
+import NavigationClient from '../../components/navigationBar/navigationClient';
 
 
 // displays client's workout plan 
@@ -15,12 +16,12 @@ const Plan = () => {
   }, []);
 
   const client = useSelector(state => state.client);
-  console.log(client);
+  console.log('client: ', client);
   
   return (
     <div>
-      <h1>Client Plan</h1>
-      {client.user.username}
+      <h1>{client.user.username}'s Training Plan</h1>
+      <NavigationClient />
     </div>
   )
 }

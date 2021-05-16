@@ -4,7 +4,7 @@ import Link from 'next/link';
 const navigationClient = () => {
     return (
         <ul className="navigationBar_container">
-            <Link href="/client/workout">
+            <Link href="/client/plan">
                 <li className="navigationBar_icon"> 
                     <img src="/icons/fitness_center_white_24dp.svg"/>
                 </li>
