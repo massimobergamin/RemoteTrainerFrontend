@@ -115,11 +115,12 @@ export const updateSession = createAsyncThunk(
   }
 );
 
-export const getSessions = createAsyncThunk(
+export const getSessionsTrainer = createAsyncThunk(
   'trainer/getSessionsStatus',
-  async ({type, uid}) => {
+  async (uid) => {
     try {
-      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/sessions/${type}-${uid}`);
+      console.log("UID", uid)
+      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/sessions/trainer-${uid}`);
       console.log(response.data)
       return response.data;
     } catch (error) {
@@ -313,7 +314,7 @@ export const trainerSlice = createSlice({
       let sessionIndex = state.sessions.findIndex(session => session.id === action.payload.id);
       state.sessions[sessionIndex] = action.payload;
     },
-    [getSessions.fulfilled] : (state, action) => {
+    [getSessionsTrainer.fulfilled] : (state, action) => {
       state.sessions = action.payload;
     },
     [getSession.fulfilled] : (state, action) => {

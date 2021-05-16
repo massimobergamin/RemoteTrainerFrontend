@@ -38,7 +38,7 @@ export const getUser = createAsyncThunk(
   }
 )
 
-export const getSessions = createAsyncThunk(
+export const getSessionsClient = createAsyncThunk(
   'client/getSessionsStatus',
   async (uid, thunkAPI) => {
     try {
@@ -127,7 +127,7 @@ export const clientSlice = createSlice({
       delete action.payload.trainerInfo;
       state.user = action.payload;
     },
-    [getSessions.fulfilled] : (state, action) => {
+    [getSessionsClient.fulfilled] : (state, action) => {
       state.sessions = action.payload;
     },
     [getSession.fulfilled] : (state, action) => {
