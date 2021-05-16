@@ -1,0 +1,34 @@
+.profileContainer {
+  display: flex;
+
+  align-content: center;
+  padding: 4vh 4vw 0px 4vw;
+  height: 94vh;
+  width: 100vw;
+}
+
+.profileCreate_form {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  
+  padding-top: 10px;
+  max-width: 300px;
+}
+
+.profileCreate_field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around; 
+  margin-bottom: 3vh;
+  font-size: 1.2em;
+}
+
+.createProfileButton {
+  padding: 1em 1em;
+}
+
+.profileLabelInput {
+  font-size:medium;
+}

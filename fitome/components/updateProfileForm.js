@@ -29,31 +29,43 @@ const UpdateProfileForm = () => {
 
   return (
     <div>
-      <form>
-          <input
-          type="text" 
-          name="weight"
-          value={profileState.weight}
-          onChange={(e) => setProfileState({...profileState, weight:e.target.value})}/>
-          <input placeholder="Height" 
-          type="text" 
-          name="height" 
-          placeholder="Height"
-          value={profileState.height}
-          onChange={(e) => setProfileState({...profileState, height:e.target.value})}/>
-          <input placeholder="Birthday" 
-          type="text" 
-          name="birthday" 
-          value={profileState.birthday}
-          onChange={(e) => setProfileState({...profileState, birthday:e.target.value})}/>
-           <input placeholder="Gender"
-          type="text" 
-          name="gender"
-          value={profileState.sex}
-          onChange={(e) => setProfileState({...profileState, sex:e.target.value})}/>
-          <input type="submit" value="update" onClick={e => handleSubmit(e)}/>
-          <UploadImageForm>setPhoto={setPhoto}</UploadImageForm>
-      </form>
+      <div className="profileContainer">
+        <form className="profileCreate_form">
+            <p className="profileLabelInput">weight</p>
+            <input
+            className="profileCreate_field"
+            type="text" 
+            name="weight"
+            value={profileState.weight}
+            onChange={(e) => setProfileState({...profileState, weight:e.target.value})}/>
+            <p className="profileLabelInput">height</p>
+            <input 
+            className="profileCreate_field"
+            placeholder="Height" 
+            type="text" 
+            name="height" 
+            placeholder="Height"
+            value={profileState.height}
+            onChange={(e) => setProfileState({...profileState, height:e.target.value})}/>
+            <p className="profileLabelInput">birthday</p>
+            <input 
+            className="profileCreate_field"
+            placeholder="Birthday" 
+            type="date" 
+            name="birthday" 
+            value={profileState.birthday}
+            onChange={(e) => setProfileState({...profileState, birthday:e.target.value})}/>
+            <input 
+            className="profileCreate_field"
+            placeholder="Gender"
+            type="text" 
+            name="gender"
+            value={profileState.sex}
+            onChange={(e) => setProfileState({...profileState, sex:e.target.value})}/>
+            <UploadImageForm>setPhoto={setPhoto}</UploadImageForm>
+            <input className="button" type="submit" value="update" onClick={e => handleSubmit(e)}/>
+        </form>
+      </div>
     </div>
   )
 }

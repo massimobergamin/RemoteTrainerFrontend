@@ -144,9 +144,9 @@ export const getSession = createAsyncThunk(
 //plans routes
 export const postPlan = createAsyncThunk(
   'trainer/postPlanStatus',
-  async ({trainer_uid, client_uid, planData}) => {
+  async (planData) => {
     try {
-      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/plans/${trainer_uid}-${client_uid}`, planData);
+      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/plans/${planData.trainer_uid}-${planData.client_uid}`, planData);
       return response.data;
     } catch (error) {
       console.log(error);
