@@ -12,9 +12,9 @@ function sessionCard({class_name, usertype, session}) {
     return (
         <div className={class_name}>
             <div className="sessionCard_left">
-                <img className="sessionCard_profilepicture" 
+                {console.log(session)/* <img className="sessionCard_profilepicture" 
                 src={usertype==="trainer" ? session.users[0].profile_picture : session.users[1].profile_picture} 
-                />
+                /> */}
             </div>
             <div className="sessionCard_right">
                 {usertype==="trainer" ? 

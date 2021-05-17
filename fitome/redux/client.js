@@ -186,7 +186,7 @@ export const clientSlice = createSlice({
       state.trainerInfo = action.payload.trainerInfo;
     },
     [getSessionsFiltered.fulfilled] : (state,action) => {
-      state.filteredSessions = action.payload
+      state.filteredSessions = action.payload;
     }
   }
 });

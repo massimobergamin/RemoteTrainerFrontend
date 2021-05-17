@@ -52,7 +52,6 @@ export default function Home() {
             <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"></link>
           </Head>
           <main className={styles.main}>
-            {user.email}
             <form>
               <input type="email"
                 placeholder="Email"
