@@ -3,31 +3,73 @@
   border-radius: 4px;
   margin: 2vh 2vh;
   padding: 2vh 2vh;
-  min-width: 200px;
-  min-height: 267px;
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.workoutsExercises_largeCard {
+  border: 1px solid darkgray;
+  border-radius: 4px;
+  margin: 2vh 2vh;
+  padding: 2vh 2vh;
+  min-width: 250px;
+  min-height: 300px;
+  max-width: 1200px;
 }
 
 .workoutsExercises_scroll {
   display: flex;
   flex-direction: row;
   align-items: top;
-  overflow-y: scroll;
+  overflow-x: visible;
+  overflow-y: hidden;
 }
 
 .workoutsExercises_scrollItems {
   margin: 0 2vh;
-  min-height: 221px;
+  min-height: 220px;
 }
 
-.workoutsExercises_scrollItems div {
-  margin: 1vh 0;
+.workoutsExercises_card div, button {
+  margin: 1vh;
 }
 
-.workoutsExercises_card p {
-  margin-bottom: 1.5vh;
+.workoutsExercises_scroll div {
+  margin: 1vh;
 }
 
-.workoutsExercises_crWrkInput {
-  margin-right: 4vw;
-  margin-top: 3vh;
+.workoutsExercises_largeCard div {
+  margin: 1vh;
+}
+
+.workoutsExercises_flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.workoutsExercises_flexCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.workoutsExercises_form {
+  max-height: 65vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.workoutsExercises_field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 3vh;
+  font-size: 1.2em;
 }
