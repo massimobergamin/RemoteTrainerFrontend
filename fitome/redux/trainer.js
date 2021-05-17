@@ -171,6 +171,7 @@ export const getPlan = createAsyncThunk(
   async ({client_uid, start_date}) => {
     try {
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/plans/${client_uid}-${start_date}`);
+      console.log(response.data)
       return response.data;
     } catch (error) {
       console.log(error);
@@ -286,7 +287,6 @@ export const trainerSlice = createSlice({
       state.user = action.payload;
     },
     [getUserById.fulfilled] : (state, action) => {
-      console.log("ACTION PAY", action.payload)
       state.sessions = action.payload.sessions;
       state.user.user_uid = action.payload.user_uid;
       state.user.username  = action.payload.username;
@@ -326,6 +326,7 @@ export const trainerSlice = createSlice({
       state.singleSession = action.payload;
     },
     [postPlan.fulfilled] : (state, action) => {
+      console.log("PAYLOAD", action.payload)
       state.plans.push(action.payload);
     },
     [updatePlan.fulfilled] : (state, action) => {
