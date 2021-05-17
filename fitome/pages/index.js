@@ -21,12 +21,12 @@ export default function Home() {
   const [formState, setFormState] = useState(initialState);
   const { user } = useSelector(state => state.trainer);
 
-  const loginHandler = async () => {
+
+    const loginHandler = async () => {
       let userInfo = await login(formState.email, formState.password);
       console.log(userInfo)
       if (userInfo.user.displayName === 'trainer') {
         await dispatch(getUserById(userInfo.user.uid))
-        
         router.push('/session');
       } else if (userInfo.user.displayName === 'client') {
           console.log('loginHandler: ', userInfo.user.uid);
@@ -52,7 +52,6 @@ export default function Home() {
             <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"></link>
           </Head>
           <main className={styles.main}>
-            {user.email}
             <form>
               <input type="email"
                 placeholder="Email"
@@ -73,5 +72,4 @@ export default function Home() {
           </main>
         </div>
       )
-  };
-
+  }

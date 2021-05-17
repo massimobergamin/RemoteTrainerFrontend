@@ -16,13 +16,12 @@ const Trainer = () => {
     dispatch(getInviteCode(currentUser.uid))
     dispatch(getUserById(currentUser.uid))
   }, [])
-
+  console.log("INVITE", invite_code)
   return (
     <div>
       <h1></h1>
-      {console.log(user)}
       <h3>Start inviting your clients with this code</h3>
-      <p>{invite_code}</p>
+      <p>{invite_code.invite_code}</p>
       <NavigationTrainer></NavigationTrainer>
     </div>
   )

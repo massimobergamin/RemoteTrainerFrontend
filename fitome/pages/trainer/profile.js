@@ -26,7 +26,7 @@ const Profile = () => {
         <a href="./editprofile">
           <button className="button">Edit Profile</button>
         </a>
-        <p>{invite_code}</p>
+        <p>Invite a client: {invite_code.invite_code}</p>
       <NavigationTrainer></NavigationTrainer>
     </div>
   )
