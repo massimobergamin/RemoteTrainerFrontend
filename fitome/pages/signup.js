@@ -46,11 +46,11 @@ const SignUp = () => {
                 console.log('Hits Trainer');
                 await dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
                 await dispatch(postInviteCode({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5).toUpperCase()}));
-                // router.push(`/trainer/invitecode`);
+                router.push(`/trainer/invitecode`);
             } else {
                 console.log('Hits Client');
               await dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
-            //   router.push(`/client/trainercode`);
+            router.push(`/client/trainercode`);
             }
         } catch (err) {
             console.error(err)

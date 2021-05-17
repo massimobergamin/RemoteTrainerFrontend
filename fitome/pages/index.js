@@ -68,7 +68,6 @@ export default function Home() {
               onClick={loginHandler}>LOGIN</button>
             </form>
             <p>Don't have an account? <Link href="/signup"><a><span>Sign up.</span></a></Link></p>
-            
           </main>
         </div>
       )
