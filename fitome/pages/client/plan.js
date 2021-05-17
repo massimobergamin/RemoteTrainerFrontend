@@ -17,22 +17,30 @@ const Plan = () => {
   }, []);
 
   const client = useSelector(state => state.client);
-  const curPlan = client.plans[0];
-  const sched = client.plans[0].details;
-  
+  console.log(client.plans);
+
+  let curPlan;
+  let sched;
+
+  if (client.plans) {
+    curPlan = client.plans[7];
+    sched = client.plans[7].details;
+  }
+
+
   return (
     <div>
       <h1>{client.user.username}'s Training Plan</h1>
       <div>
-        <div>Beginning: {moment(curPlan.start_date).format('LL')}</div>
-        <div>Ending: {moment(curPlan.end_date).format('LL')}</div>
+        <div>Beginning: {client.plans ? moment(curPlan.start_date).format('LL') : null}</div>
+        <div>Ending: {client.plans ? moment(curPlan.end_date).format('LL') : null}</div>
         <div className={''/* TODO: plan_details_container css */}>
-          {sched.map((day) => (
+          {client.plans ? sched.map((day) => (
             <div>
-              <h3>{day.day}</h3>
+              <h2 key={day.id}>{day.day !== '' ? moment(day.day).format("dddd, MMMM Do YYYY") : null}</h2>
               <WorkoutDetails key={day.day} workout={day}></WorkoutDetails>
             </div>
-          ))}
+          )) : null}
         </div>
       </div>
       <NavigationClient />

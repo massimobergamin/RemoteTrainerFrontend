@@ -32,6 +32,7 @@ export default function Home() {
           console.log('loginHandler: ', userInfo.user.uid);
           await dispatch(getUser(userInfo.user.uid));
           router.push('/client/plan');
+          // TODO: route to landing if data not present
           // if (!user.trainerInfo.trainer_uid) {
           //   router.push('/client/trainercode');
           // } else {
