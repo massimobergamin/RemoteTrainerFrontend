@@ -17,7 +17,7 @@ function SessionList() {
         if (currentUser.displayName==="trainer") {
             dispatch(getSessionsFiltered({uid:currentUser.uid, type:"trainer"}))
         } else {
-            dispatch(getSessionsFiltered({uid:currentUser.uid, type:"trainer"}))
+            dispatch(getSessionsFiltered({uid:currentUser.uid, type:"client"}))
         }
     },[router]);
 
