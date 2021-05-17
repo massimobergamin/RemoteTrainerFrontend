@@ -103,7 +103,8 @@ const VideoRoom = () => {
   }
 
   function hangUp () {
-    console.log("HANGING UP")
+    console.log("HANGING UP");
+    socketRef.current.emit('disconnect')
   }
 
   return (
@@ -113,6 +114,9 @@ const VideoRoom = () => {
       <div className="timer_container">
         <TimerOverlay />
       </div>
+      <div className="endCall">
+        <button type="button" onClick={hangUp} className="button_circle"><img src="/icons/call_end_white_24dp.svg"/></button>
+    </div> 
     </div>
   );
 }
