@@ -19,7 +19,7 @@ const TrainerCode = () => {
   };
 
   const handleSubmit = async () => {
-    const code = input;
+    const code = input.toUpperCase();
     await dispatch(getTrainerByCode(code))
       .then(response => {
         const client = currentUser.uid;
@@ -39,7 +39,7 @@ const TrainerCode = () => {
 
   return (
     <div className="pageContainer">
-      <h2>Welcome!</h2>
+      <h2>Welcome to Fitome!</h2>
       <h4>Please enter your Trainer's invite code below:</h4>
       <input type="text" value={input} onChange={handleChange} placeholder="Trainer code..."></input>
       <button type="button" onClick={handleSubmit}>Submit</button>

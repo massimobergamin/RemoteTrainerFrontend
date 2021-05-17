@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useAuth} from '../../firebase/contextAuth'
 import {getSessionsFiltered} from '../../redux/client'
 import SessionCard from '../../components/sessionCard';
+import NavigationTrainer from '../../components/navigationBar/navigationTrainer';
 
 
 function SessionList() {
@@ -31,10 +32,16 @@ function SessionList() {
     }
 
     function showRest () {
+        if (sessions.length <= 1) {
+            return <div>No Upcoming Sessions Available.</div>
+        } else {
+            return <SessionCard class_name="rest" usertype={`${currentUser.displayName}`} session={sessions[1]} />
+        }
 
     }
 
     return (
+        <div>
         <div className="page_container">
             <div className="sessionList1"> 
                 Next Session:
@@ -44,6 +51,8 @@ function SessionList() {
                 Upcoming Sessions:
                 {showRest()}
             </div>
+        </div>
+        <NavigationTrainer/>
         </div>
     )
 }
