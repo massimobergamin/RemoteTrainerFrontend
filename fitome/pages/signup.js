@@ -40,12 +40,8 @@ const SignUp = () => {
             let lowerType = formState.type.toLowerCase();
             let firstName = titleCase(formState.first_name);
             let lastName = titleCase(formState.last_name);
-<<<<<<< HEAD
             const fireBaseData = await signUp(formState.email, formState.password, lowerType);
             if (formState.type === 'trainer') {
-=======
-            if (formState.type === 'Trainer') {
->>>>>>> 5ee125341c33fc7b686b67c885fef8b798f4aa34
                 await dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
                 await dispatch(postInviteCode({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5).toUpperCase()}));
                 router.push(`/trainer/invitecode`);
