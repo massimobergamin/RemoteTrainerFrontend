@@ -23,8 +23,8 @@ function SessionList() {
     },[router]);
 
     function showFirst () {
-        console.log(sessions);
-        if (sessions?.length===0) {
+        console.log('sessions:', sessions);
+        if (sessions?.length == 0) {
             return <div><div>No session Available.</div><div>Please make a session with your trainer.</div></div>
         } else {
             return <SessionCard class_name="first" usertype={`${currentUser.displayName}`} session={sessions[0]} />

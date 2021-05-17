@@ -23,8 +23,10 @@ const Plan = () => {
   let sched;
 
   if (client.plans) {
-    curPlan = client.plans[7];
-    sched = client.plans[7].details;
+    curPlan = client.plans;
+    sched = client.plans.details;
+    console.log(sched);
+    console.log(curPlan);
   }
 
 
