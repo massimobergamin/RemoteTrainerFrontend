@@ -10,8 +10,8 @@
 
 :root {
   /* Colors: */
-  --primary: rgb(148, 210, 201);
-  --primary-accent: rgb(88, 226, 206); /*added this to use for workoutsExercisesBar, feel free to change*/
+  --primary: #94d2c9;
+  --primary-accent: rgb(108, 175, 166); /*added this to use for workoutsExercisesBar, feel free to change*/
   --secondary: #ee9b00;
   --accent: #ca6702;
   --fontColor: #303030;
@@ -65,6 +65,6 @@ form input { /*added*/
 }
 
 #Exercise_Video { /*added*/
-  border-radius: 4px;
-  background-color: black;
+  border-radius: 5px;
+  background-color: rgb(27, 27, 27);
 }
