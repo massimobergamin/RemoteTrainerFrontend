@@ -47,7 +47,7 @@ const SignUp = () => {
                 router.push(`/trainer/invitecode`);
             } else {
               await dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
-              router.push(`/client/trainercode`);
+              router.push(`/client/invitecode`);
             }
         } catch (err) {
             console.error(err)

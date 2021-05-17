@@ -37,10 +37,14 @@ const CreateExercise = () => {
       <WorkoutsExercisesBar></WorkoutsExercisesBar>
       <div className="pageContainer">
         <h1>Create New Exercise</h1>
-        <form>
+        <form className="workoutsExercises_form">
+          <label className="workoutsExercises_field" htmlFor="title">Title:
             <input placeholder="Title" type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
+          </label>
+          <label className="workoutsExercises_field" htmlFor="sescription">Description:
             <input placeholder="Description" type="text" onChange={(e) => setFormState({...formState, description: e.target.value})}/>
-            {/* <input placeholder="Muscle Group" type="text" onChange={(e) => setFormState({...formState, muscle_group: e.target.value})}/> */}
+          </label>
+          <label className="workoutsExercises_field" htmlFor="muscleGroup">Muscle Group:
             <input placeholder="Muscle Group" type="text" list="muscleGroups" onChange={(e) => setFormState({...formState, muscle_group: e.target.value.toLowerCase()})}/>
             <datalist id="muscleGroups">
               <option>Arms</option>
@@ -48,10 +52,15 @@ const CreateExercise = () => {
               <option>Back</option>
               <option>Chest</option>
             </datalist>
+          </label>
+          <label className="workoutsExercises_field" htmlFor="benefits">Benefits:
             <input placeholder="Benefits" type="text" onChange={(e) => setFormState({...formState, benefits: e.target.value})}/>
+          </label>
+          <label className="workoutsExercises_field" htmlFor="video">Video:
             <UploadVideoForm setMedia={setMedia}></UploadVideoForm>
-            <input className="button" type="submit" value="Create" onClick={handleSubmit} disabled={formState.title===""||formState.description===""||formState.muscle_group===""||media==='uploading'}/>
+          </label>
         </form>
+          <button className="button" onClick={handleSubmit} disabled={formState.title===""||formState.description===""||formState.muscle_group===""||media==='uploading'}>Create</button>
       </div>
       <NavigationTrainer></NavigationTrainer>
     </div>

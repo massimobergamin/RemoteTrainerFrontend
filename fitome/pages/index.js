@@ -34,7 +34,7 @@ export default function Home() {
           router.push('/client/plan');
           // TODO: route to landing if data not present
           // if (!user.trainerInfo.trainer_uid) {
-          //   router.push('/client/trainercode');
+          //   router.push('/client/invitecode');
           // } else {
           //   router.push('/client/plan');
           // }
