@@ -61,7 +61,7 @@ function create() {
                 title: title,
             }
         }));
-        router.push("/sessions")
+        router.push("/session")
     }
 
     const findValue = (value) => {
