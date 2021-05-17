@@ -99,16 +99,22 @@ function create() {
         <div>
         <div className="pageContainer">
             <h1>Create Training Session</h1>
-        
+
             <form className="sessionCreate_form" onSubmit={submitHandler}>
             <label className="sessionCreate_field" htmlFor="sessionTitle">Session Purpose:
                 <input type="text" id="sessionTitle" name="sessionTitle" placeholder="Workout" onChange={(e)=>setFormState({...formState, title: e.target.value})}/>
                 <div className="sessionForm_announcement">* Defaults to "Workout" if session purpose is blank.</div>
             </label>
             <label className="sessionCreate_field" htmlFor="listOfClients">Select a Client:
-                <input list="clientList" onChange={(e)=>findValue(e.target.value)} id="listOfClients" name="listOfClients" />
+                <input list="clientList"
+                    type="text"
+                    autocomplete="off" 
+                    onChange={(e)=>findValue(e.target.value)} 
+                    id="listOfClients" 
+                    name="listOfClients" />
                 <datalist id="clientList" >
                     {listClients()}
+                    
                 </datalist>
                 </label>
             <label className="sessionCreate_field" htmlFor="startTime">Session Start Date:

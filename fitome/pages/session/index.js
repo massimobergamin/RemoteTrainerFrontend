@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useAuth} from '../../firebase/contextAuth'
 import {getSessionsFiltered} from '../../redux/client'
 import SessionCard from '../../components/sessionCard';
+import uuid from 'react-uuid'
 import NavigationTrainer from '../../components/navigationBar/navigationTrainer';
 
 
@@ -35,14 +36,30 @@ function SessionList() {
         if (sessions.length <= 1) {
             return <div>No Upcoming Sessions Available.</div>
         } else {
-            return <SessionCard class_name="rest" usertype={`${currentUser.displayName}`} session={sessions[1]} />
+            return sessions.slice(1).map((session) => {
+                return <SessionCard key={uuid()} class_name="rest" usertype={`${currentUser.displayName}`} session={session} />
+            })
         }
 
+    }
+
+    function showButton () {
+        if (currentUser.displayName === "trainer") {
+            return (
+                <button className="button" 
+                type="button"
+                onClick={()=>router.push('/trainer/session/create')}
+                >New Session
+                </button>
+            )
+        }
+        return null;
     }
 
     return (
         <div>
         <div className="page_container">
+            {showButton()}
             <div className="sessionList1"> 
                 Next Session:
                 {showFirst()}
