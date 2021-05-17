@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import NavigationTrainer from '../../../components/navigationBar/navigationTrainer'
 import {useDispatch, useSelector} from 'react-redux'
-import { getSessions, getClients } from '../../../redux/trainer';
+import { getClients } from '../../../redux/trainer';
 import {useAuth} from '../../../firebase/contextAuth'
 import {useRouter} from 'next/router';
 import uuid from 'react-uuid';
@@ -26,7 +26,7 @@ function create() {
     useEffect(()=> {
         console.log(currentUser)
         if (currentUser) {
-            dispatch(getSessions("trainer", currentUser.uid));
+            //dispatch(getSessions("trainer", currentUser.uid));
             dispatch(getClients(currentUser.uid))
         }
     },[currentUser, router]);
@@ -61,7 +61,7 @@ function create() {
                 title: title,
             }
         }));
-        router.push("/sessions")
+        router.push("/session")
     }
 
     const findValue = (value) => {

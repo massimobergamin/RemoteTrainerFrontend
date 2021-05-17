@@ -21,22 +21,7 @@ const Trainer = () => {
     <div>
       <h1></h1>
       <h3>Start inviting your clients with this code</h3>
-    <p>{invite_code.invite_code}</p>
-      <Link href="./workouts">
-      <h1>Workouts</h1>
-      </Link>
-      <Link href="./exercise">
-      <h1>Exercises</h1>
-      </Link>
-      <Link href="./plans">
-      <h1>Plans</h1>
-      </Link>
-      <Link href="./appointments">
-      <h1>Appointments</h1>
-      </Link>
-      <Link href="/profile">
-      <h1>Profile</h1>
-      </Link>
+      <p>{invite_code.invite_code}</p>
       <NavigationTrainer></NavigationTrainer>
     </div>
   )

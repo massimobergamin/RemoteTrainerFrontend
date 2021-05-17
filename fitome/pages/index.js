@@ -27,49 +27,51 @@ export default function Home() {
       if (userInfo.user.displayName === 'trainer') {
         await dispatch(getUserById(userInfo.user.uid))
         
-        router.push('/trainer/session/create');
+        router.push('/session');
       } else if (userInfo.user.displayName === 'client') {
-        await dispatch(getUser(userInfo.user.uid));
-        // .then
-          // check user for trainer info
-            // if none exists
-              // route to client landing
-            // if trainer info exists
-              // route to client sessions
-        router.push('/client');
+          console.log('loginHandler: ', userInfo.user.uid);
+          await dispatch(getUser(userInfo.user.uid));
+          router.push('/client/plan');
+          // TODO: route to landing if data not present
+          // if (!user.trainerInfo.trainer_uid) {
+          //   router.push('/client/trainercode');
+          // } else {
+          //   router.push('/client/plan');
+          // }
+        };
       }
+
+      return (
+        <div className={styles.container}>
+          <Head>
+            <title>Fitome</title>
+            <link rel="icon" href="/favicon.ico" />
+            <link rel="manifest" href="/manifest.json" />
+            <meta name="theme-color" content="#317EFB"/>
+            <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
+            <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"></link>
+          </Head>
+          <main className={styles.main}>
+            {user.email}
+            <form>
+              <input type="email"
+                placeholder="Email"
+                value={formState.email}
+                onChange={(e) => setFormState({...formState, email: e.target.value})}
+              />
+              <input type="password"
+              placeholder="Password"
+              value={formState.password}
+              onChange={(e) => setFormState({...formState, password: e.target.value})}
+              />
+              <button type="button" 
+              disabled={formState.password===""||formState.email===""}
+              onClick={loginHandler}>LOGIN</button>
+            </form>
+            <p>Don't have an account? <Link href="/signup"><a><span>Sign up.</span></a></Link></p>
+            
+          </main>
+        </div>
+      )
   };
 
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Fitome</title>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#317EFB"/>
-        <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
-        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"></link>
-      </Head>
-      <main className={styles.main}>
-        {user.email}
-        <form>
-          <input type="email"
-            placeholder="Email"
-            value={formState.email}
-            onChange={(e) => setFormState({...formState, email: e.target.value})}
-          />
-          <input type="password"
-          placeholder="Password"
-          value={formState.password}
-          onChange={(e) => setFormState({...formState, password: e.target.value})}
-          />
-          <button type="button" 
-          disabled={formState.password===""||formState.email===""}
-          onClick={loginHandler}>LOGIN</button>
-        </form>
-        <p>Don't have an account? <Link href="/signup"><a><span>Sign up.</span></a></Link></p>
-        
-      </main>
-    </div>
-  )
-}
