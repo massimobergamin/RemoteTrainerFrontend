@@ -30,7 +30,7 @@ function sessionCard({class_name, usertype, session}) {
     return (
         <div className={`${class_name} sessionCard_contrainer`}>
             <div className="sessionCard_left">
-                {showProfilePicture()}
+                {{showProfilePicture()}}
             </div>
             <div className="sessionCard_right">
                 {usertype==="trainer" ? 
