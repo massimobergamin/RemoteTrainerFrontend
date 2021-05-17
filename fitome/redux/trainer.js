@@ -59,7 +59,7 @@ export const getClients= createAsyncThunk(
   async (uid, thunkAPI) => {
     try {
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/clients/${uid}`);
-      return response.data;
+      return response.data.sort((a,b)=> (a.first_name+" "+a.last_name).localeCompare(b.first_name+" "+b.last_name));
     } catch (error) {
       console.log(error);
     }

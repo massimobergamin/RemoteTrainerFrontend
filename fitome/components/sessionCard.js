@@ -1,5 +1,6 @@
-import React from 'react'
+import React from 'react';
 import {useRouter} from 'next/router';
+import Moment from 'moment';
 
 function sessionCard({class_name, usertype, session}) {
 
@@ -23,8 +24,12 @@ function sessionCard({class_name, usertype, session}) {
         }
     }
 
-    function showTime() {
-        console.log(session, new Date(session.endDate).getTime())
+    function showButton() {
+        let currentDate = Date.now();
+        if (new Date(currentDate) >= new Date(session.startDate) && new Date(currentDate) <= new Date(session.endDate)) {
+            return (<button type="button" className="button" onClick={joinCallHandler}>JOIN CALL</button>)
+        } 
+        return null;
     }
 
     return (
@@ -33,13 +38,15 @@ function sessionCard({class_name, usertype, session}) {
                 {showProfilePicture()}
             </div>
             <div className="sessionCard_right">
+                <div>{session.title}</div>
+                <div>{`Session Time: ${Moment(session.startDate).format('LLL')}-${Moment(session.endDate).format('LT')}`}</div>
                 {usertype==="trainer" ? 
                 <div>Client: <span>{`${session.users[1].first_name} ${session.users[1].last_name}`}</span></div> 
                 :
                 <div>Trainer: <span>{`${session.users[0].first_name} ${session.users[0].last_name}`}</span></div>}
-                {showTime()}
+                {showButton()}
             </div>
-            <button onClick={joinCallHandler}>JOIN CALL</button>
+            
         </div>
     )
 }

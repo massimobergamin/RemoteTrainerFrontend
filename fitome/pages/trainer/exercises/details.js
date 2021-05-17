@@ -14,7 +14,7 @@ function Details() {
   return (
     <div>
       <WorkoutsExercisesBar></WorkoutsExercisesBar>
-      <div className="pageContainer">
+      <div className="pageContainer workoutsExercises_flexCol">
         <button className="button" onClick={() => {
           dispatch(setSelectedExercise({}));
           router.push('/trainer/exercises');

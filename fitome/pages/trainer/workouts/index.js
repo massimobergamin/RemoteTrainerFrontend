@@ -22,17 +22,17 @@ function Workouts() {
       <div className="pageContainer">
         <button className="button" onClick={() => router.push('/trainer/workouts/create')}>New Workout</button>
         {workouts[0] ? workouts.map(workout =>
-          <div key={workout.id} className="workoutsExercises_card">
+          <div key={workout.id} className="workoutsExercises_largeCard">
             <button className="button" onClick={() => {
               dispatch(setSelectedWorkout(workout));
               router.push('/trainer/workouts/details');
             }}>View Details</button>
-            <div>{workout.title}</div>
+            <h3>{workout.title}</h3>
             <div className="workoutsExercises_scroll">
               {workout.exercises && workout.exercises.map(exercise =>
                 <div key={exercise.id} className="workoutsExercises_scrollItems">
                     {exercise.media ?
-                      <video id="Exercise_Video" width="176" height="176" autoPlay={true} loop={true}>
+                      <video id="Exercise_Video" width="176" height="176" controls muted>
                           <source src={exercise.media} type="video/mp4"/>
                           Your browser does not support HTML5 video.
                       </video> :

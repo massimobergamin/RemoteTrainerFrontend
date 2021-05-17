@@ -44,7 +44,8 @@ a {
 .pageContainer {
   padding: 4vh 4vw 0px 4vw;
   height: 94vh;
-  width: 100vw;
+  width: 100vh;
+  overflow-y:scroll;
 }
 
 h1,

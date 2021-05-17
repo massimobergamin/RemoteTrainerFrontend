@@ -31,7 +31,6 @@ const UpdateProfileForm = () => {
   return (
     <div>
       <div className="profileContainer">
-        {console.log(user)}
         <form className="profileCreate_form">
             <p className="profileLabelInput">weight</p>
             <input
