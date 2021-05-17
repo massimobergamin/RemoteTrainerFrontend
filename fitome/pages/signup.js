@@ -30,7 +30,7 @@ const SignUp = () => {
     const [inviteState, setInviteState] = useState(inviteInitialState)
     const [formState, setFormState] = useState(initialState);
     const { user, invite_code } = useSelector(state => state.trainer);
-
+    console.log("INVITE", invite_code)
     function titleCase(name){
         return name[0].toUpperCase() + name.slice(1).toLowerCase();
     }
@@ -44,10 +44,10 @@ const SignUp = () => {
             if (formState.type === 'trainer') {
                 await dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
                 await dispatch(postInviteCode({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5).toUpperCase()}));
-                router.push(`/trainer/invitecode`);
+                //router.push(`/trainer/invitecode`);
             } else {
               await dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
-              router.push(`/client/trainercode`);
+              //router.push(`/client/trainercode`);
             }
         } catch (err) {
             console.error(err)
