@@ -24,7 +24,7 @@
     "redux-thunk": "^2.3.0",
     "simple-peer": "^9.11.0",
     "socket.io-client": "^4.0.2",
-    "webpack": "^5.37.0",
+    "webpack": "4.46.0",
     "webpack-manifest-plugin": "^3.1.1"
   }
 }
