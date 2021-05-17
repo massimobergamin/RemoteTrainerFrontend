@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { updateUser, getClients, getWorkout, postPlan } from '../redux/trainer';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import PlansBar from '../components/plansBar';
 
 
 //get list of workouts
@@ -103,6 +104,7 @@ const CreatePlanForm = () => {
   }
 
   const setReps = (e, index) => {
+    console.log(planState)
     const updatedArrray = insertAt(detailState.reps, index, e.currentTarget.value);
     console.log(detailState.reps)
   }
@@ -192,6 +194,7 @@ const CreatePlanForm = () => {
   
   return (
     <div>
+      <PlansBar></PlansBar>
       <form className="fullFormContainer">
         <div
           role="button"
