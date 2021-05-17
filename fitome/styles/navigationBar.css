@@ -30,3 +30,8 @@
 .navigationBar_icon:active{
     background-color: var(--secondary)
 }
+
+.navigationBar_image {
+    height: 3.5vh;
+    width: 3.5vh;
+}

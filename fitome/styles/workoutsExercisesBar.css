@@ -26,8 +26,8 @@
 }
 
 .workoutsExercisesBar_blue {
-  background-color: var(--primary-accent);
-  border: 3px solid var(--primary-accent);
+  background-color: var(--primary);
+  border: 3px solid var(--primary);
   border-bottom: 3px solid var(--secondary);
 }
 
@@ -44,13 +44,13 @@
 }
 
 .workoutsExercisesBar_blue:hover {
-  background-color: var(--primary);
-  border: 3px solid var(--primary);
+  background-color: var(--primary-accent);
+  border: 3px solid var(--primary-accent);
   border-bottom: 3px solid var(--secondary);
 }
 
 .workoutsExercisesBar_blue:active { /*active not working*/
-  background-color: var(--primary);
-  border: 3px solid var(--primary);
+  background-color: var(--primary-accent);
+  border: 3px solid var(--primary-accent);
   border-bottom: 3px solid var(--secondary);
 }
