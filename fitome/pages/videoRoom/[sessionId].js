@@ -65,14 +65,18 @@ const VideoRoom = () => {
 
       socketRef.current.on('callEnded', res => {
         console.log(peersRef.current)
-        peersRef.current.length >= 1 && peersRef.current.forEach((peer) => peer.disconnect());
         const themVideo = document.getElementById('video_them');
-        themVideo && themVideo.remove();
+        console.log(themVideo, "THEM");
+        peersRef.current.length >= 1 && peersRef.current.forEach(peer=>{
+          peer.peer.destroy();
+          console.log(peer.peer)
+        });
+         themVideo && themVideo.remove();
         if (userVideo.current) {
           userVideo.current.srcObject.getTracks()[0].stop()
           userVideo.current.srcObject.getTracks()[1].stop()
         }
-        router.push('/session')
+         router.push('/session')
       });
 
     })
@@ -119,7 +123,7 @@ const VideoRoom = () => {
     userVideo.current.srcObject.getTracks()[0].stop()
     userVideo.current.srcObject.getTracks()[1].stop()
     socketRef.current.emit('endCall')
-    router.push('session')
+    router.push('/session')
   }
 
   return (
