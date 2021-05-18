@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import NavigationTrainer from '../components/navigationBar/navigationTrainer'
 import moment from 'moment';
 import PlansBar from '../components/plansBar';
+import { route } from 'next/dist/next-server/server/router';
 
 
 //get list of workouts
@@ -137,6 +138,7 @@ const CreatePlanForm = () => {
   const handlePlanSubmit = (e) => {
     e.preventDefault();
     dispatch(postPlan(planState));
+    route.push('./clients')
   };
 
   const addDayButton = () => {
@@ -167,12 +169,8 @@ const CreatePlanForm = () => {
     <div>
       <PlansBar></PlansBar>
       <form className="fullFormContainer">
-        {/* <div
-          role="button"
-          onKeyPress={() => toggleClient(!openClients)}
-          onClick={() => toggleClient(!openClients)}
-        > */}
         <label htmlFor="listOfClients">Select a Client:</label>
+        
         <input list="clientList" onChange={(e)=>findValue(e.target.value)} id="listOfClients" name="listOfClients" />
         <datalist id="clientList" >
         {listClients()}
@@ -180,41 +178,47 @@ const CreatePlanForm = () => {
         {/* </div> */}
         <div>
         </div>
-        <p className="label">Start Date</p>
+        <p className="profileLabelInput">Start Date</p>
            <input type="date" name="start date" min={getDate(Date.now())} value={planState.start_date} onChange={(e) => {
             setPlanState({...planState, start_date:e.target.value})
            
           }} required/>
-        <p className="label">End Date</p>
+        <p className="profileLabelInput">End Date</p>
            <input placeholder="End Date" type="date"  min={getDate(moment(planState.start_date).add(1, 'days'))} disabled={planState.start_date === ''} name="end date" value={planState.end_date} 
            onChange={(e) => { if(e.target.value > planState.start_date) setPlanState({...planState, end_date:e.target.value})
            else alert("End date must be at least 1 day after start date")
           }}/>
-        <p className="label">Day</p>
+        
+        <p className="profileLabelInput">Day</p>
           <input type="date" placeholder="Day" onChange={(e) => {
             if(e.target.value >= planState.start_date && e.target.value <= planState.end_date)
             setDetailState({...detailState, day:e.target.value})
             else alert("This day is not within the selected plan dates")
           }
             }/>
+            
               <label htmlFor="listOfWorkoutss">Select a Workout:</label>
+              
         <input list="workoutList" onChange={(e)=>findWorkoutValue(e.target.value)} id="listOfWorkouts" name="listOfWorkouts" />
         <datalist id="workoutList" >
         {listWorkouts()}
         </datalist>
-
-          <div className="detailsContainer">
-          {showSeletedWorkout()}
-            <div>
-            </div>
-            <textarea placeholder="notes" onChange={(e) => setDetailState({...detailState, trainer_notes:e.target.value})}/>
-          </div>
-              {addDayButton()}
-              {finalizeDayButton()}
+        {showSeletedWorkout()}
+        
+        <textarea placeholder="notes" value={detailState.trainer_notes} onChange={(e) => setDetailState({...detailState, trainer_notes:e.target.value})}/>
+        
+        {addDayButton()}
+        
+        {finalizeDayButton()}
       </form>
       {planState.details ? planState.details.map(day => (
         <div>
           <p>{day.day}</p>
+          {day.exercises.map(exercise => (
+            <div>
+              <p>{exercise.title}</p>
+            </div>
+          ))}
         </div>
       )) : null
       }

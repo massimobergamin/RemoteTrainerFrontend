@@ -4,6 +4,7 @@ import { getUserById, getClients } from '../../redux/trainer'
 import { getUser } from '../../redux/client'
 import { useAuth } from '../../firebase/contextAuth';
 import NavigationClient from '../../components/navigationBar/navigationClient';
+import PlansBar from '../../components/plansBar';
 import moment from 'moment';
 import WorkoutDetails from '../../components/workoutDetails';
 import NavigationTrainer from '../../components/navigationBar/navigationTrainer';
@@ -47,48 +48,12 @@ const Clients = () => {
     } 
   }
 
-  // const listClients = () => {
-  //   if (clients) {
-  //     return clients.map((client)=> {
-  //       return <option key={client.id} value={`${client.first_name} ${client.last_name}`}></option>
-  //     })
-  //   }
-  //   else {
-  //     alert('You have no clients. Please invite your clients using your invite code.')
-  //   } 
-  // }
-
-  // const findValue = (value) => {
-  //   console.log("VAL", value)
-  //   for (let i=0; i<clients.length; i++) {
-  //     let name = clients[i].first_name+' '+clients[i].last_name;
-  //     if (name===value){
-  //       setSelectedClient(clients[i].user_uid)
-  //       clientDetails(clients[i].user_uid)
-  //     }
-  //     break;
-  //   }
-  // }
-
-  const renderClientDetails = () => {
-    if (selectedClient) {
-      return (
-        <div>
-          <h1>Hello</h1>
-          <button onClick={wipeClientState}>X</button>
-        </div>
-      )
-    }
-    else
-    return null
-  }
-  console.log("CLIENT" , user)
-
+ 
   return (
     <div>
       <h1>Client List</h1>
       {clientList()}
-          {renderClientDetails()}
+         
       <NavigationTrainer/>
     </div>
   )

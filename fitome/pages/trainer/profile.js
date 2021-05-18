@@ -3,7 +3,7 @@ import { useAuth } from '../../firebase/contextAuth'
 import { useSelector } from 'react-redux';
 import UpdateProfileForm from '../../components/updateProfileForm';
 import NavigationTrainer from '../../components/navigationBar/navigationTrainer';
-import { updateUser, getUserById } from '../../redux/trainer';
+import { updateUser, getUserById, getInviteCode } from '../../redux/trainer';
 import { useDispatch } from 'react-redux';
 
 const Profile = () => {
@@ -12,6 +12,7 @@ const Profile = () => {
   const { user, invite_code } = useSelector(state => state.trainer);
 
   useEffect(() => {
+    dispatch(getInviteCode(currentUser.uid))
     dispatch(getUserById(currentUser.uid))
   }, [])
 
