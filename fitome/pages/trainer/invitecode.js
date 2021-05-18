@@ -17,6 +17,8 @@ const Trainer = () => {
     dispatch(getUserById(currentUser.uid))
   }, [])
 
+  console.log(user);
+
   return (
     <div>
       <h1></h1>
