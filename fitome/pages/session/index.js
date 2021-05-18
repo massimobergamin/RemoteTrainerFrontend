@@ -58,18 +58,18 @@ function SessionList() {
 
     return (
         <div>
-        <div className="page_container">
-            {showButton()}
-            <div className="sessionList1"> 
-                Next Session:
-                {showFirst()}
+            <div className="page_container">
+                {showButton()}
+                <div className="sessionList1"> 
+                    Next Session:
+                    {showFirst()}
+                </div>
+                <div className="sessionList2">
+                    Upcoming Sessions:
+                    {showRest()}
+                </div>
             </div>
-            <div className="sessionList2">
-                Upcoming Sessions:
-                {showRest()}
-            </div>
-        </div>
-        <NavigationTrainer/>
+            <NavigationTrainer/>
         </div>
     )
 }

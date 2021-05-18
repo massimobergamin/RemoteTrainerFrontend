@@ -148,10 +148,10 @@ export const clientSlice = createSlice({
   // },
   extraReducers: {
     [postUser.fulfilled] : (state, action) => {
-      state.user = action.payload;
+       if (action.payload) state.user = action.payload;
     },
     [updateUser.fulfilled] : (state, action) => {
-      state.user = action.payload;
+      if (action.payload) state.user = action.payload;
     },
     [getUser.fulfilled] : (state, action) => {
       state.sessions = action.payload.sessions;

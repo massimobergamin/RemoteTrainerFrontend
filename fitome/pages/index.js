@@ -18,7 +18,7 @@ export default function Home() {
     email: '',
     password: '',
   };
-  
+
   const [formState, setFormState] = useState(initialState);
 
   const { user, trainerInfo } = useSelector(state => state.client);

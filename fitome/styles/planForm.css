@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: column;
   padding: 4vh 4vw 0px 4vw;
-  height: 94vh;
-  width: 100vh;
   overflow-y:scroll;
 }
 
@@ -33,4 +31,8 @@
 
 .labelPlanForm {
   font-size:medium;
+}
+
+.plan_card {
+  background-color: var(--primary);
 }

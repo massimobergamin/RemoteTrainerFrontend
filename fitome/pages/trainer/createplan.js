@@ -6,8 +6,10 @@ const CreatePlan = () => {
  
   return (
     <div>
-     <CreatePlanForm></CreatePlanForm>
-     
+      <div className="page_container">
+      <CreatePlanForm/>
+     </div>
+     <NavigationTrainer/>
     </div>
   )
 }
