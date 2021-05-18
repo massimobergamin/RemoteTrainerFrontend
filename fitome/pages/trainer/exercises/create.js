@@ -39,22 +39,25 @@ const CreateExercise = () => {
         <h1>Create New Exercise</h1>
         <form className="workoutsExercises_form">
           <label className="workoutsExercises_field" htmlFor="title">Title:
-            <input placeholder="Title" type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
+            <input type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
           </label>
-          <label className="workoutsExercises_field" htmlFor="sescription">Description:
-            <input placeholder="Description" type="text" onChange={(e) => setFormState({...formState, description: e.target.value})}/>
+          <label className="workoutsExercises_field" htmlFor="description">Description:
+            <textarea name="description" rows="4" cols="50" onChange={(e) => setFormState({...formState, description: e.target.value})}></textarea>
+          {console.log('formState', formState)}
           </label>
           <label className="workoutsExercises_field" htmlFor="muscleGroup">Muscle Group:
-            <input placeholder="Muscle Group" type="text" list="muscleGroups" onChange={(e) => setFormState({...formState, muscle_group: e.target.value.toLowerCase()})}/>
+            <input type="text" list="muscleGroups" onChange={(e) => setFormState({...formState, muscle_group: e.target.value.toLowerCase()})}/>
             <datalist id="muscleGroups">
               <option>Arms</option>
               <option>Legs</option>
               <option>Back</option>
               <option>Chest</option>
+              <option>Core</option>
+              <option>Shoulders</option>
             </datalist>
           </label>
           <label className="workoutsExercises_field" htmlFor="benefits">Benefits:
-            <input placeholder="Benefits" type="text" onChange={(e) => setFormState({...formState, benefits: e.target.value})}/>
+            <input type="text" onChange={(e) => setFormState({...formState, benefits: e.target.value})}/>
           </label>
           <label className="workoutsExercises_field" htmlFor="video">Video:
             <UploadVideoForm setMedia={setMedia}></UploadVideoForm>

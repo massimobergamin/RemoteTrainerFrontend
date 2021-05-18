@@ -32,6 +32,7 @@ const UpdateProfileForm = () => {
             type="number"
             name="weight"
             value={profileState.weight}
+            placeholder={user.weight}
             step="1"
             min="0"
             onChange={(e) => setProfileState({...profileState, weight: parseInt(e.target.value)})}/>
@@ -42,6 +43,7 @@ const UpdateProfileForm = () => {
             type="number"
             name="height"
             value={profileState.height}
+            placeholder={user.height}
             step="1"
             min="0"
             onChange={(e) => setProfileState({...profileState, height: parseInt(e.target.value)})}/>
@@ -52,6 +54,7 @@ const UpdateProfileForm = () => {
             type="date"
             name="birthday"
             value={profileState.birthday}
+            placeholder={user.birthday}
             max="2003-05-17"
             onChange={(e) => setProfileState({...profileState, birthday: e.target.value})}/>
           </label>
@@ -60,6 +63,7 @@ const UpdateProfileForm = () => {
             <input
             name="sex"
             value={profileState.sex}
+            placeholder={user.sex}
             list="sexes"
             onChange={(e) => setProfileState({...profileState, sex: e.target.value})}/>
             <datalist id="sexes">
