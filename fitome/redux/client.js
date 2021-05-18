@@ -18,9 +18,9 @@ export const postUser = createAsyncThunk(
 
 export const updateUser = createAsyncThunk(
   'client/updateUserStatus',
-  async (userData, thunkAPI) => {
+  async ({uid, userData}) => {
     try {
-      const response = await axios.put('https://remotetrainerserver.herokuapp.com/users', userData);
+      const response = await axios.put(`https://remotetrainerserver.herokuapp.com/users/${uid}`, userData);
       return response.data;
     } catch (err) {
       console.error(err)
