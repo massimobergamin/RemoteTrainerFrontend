@@ -9,7 +9,7 @@ const NavigationTrainer = () => {
                     <img className="navigationBar_image" src="/icons/fitness_center_white_24dp.svg"/>
                 </li>
             </Link>
-            <Link href="/trainer/sessionList">
+            <Link href="/trainer/session/create">
                 <li className="navigationBar_icon">
                     <img className="navigationBar_image" src="/icons/call_white_24dp.svg"/>
                 </li>

@@ -71,6 +71,7 @@ const CreatePlanForm = () => {
 
 //*********************** */
   const showSelectedWorkout = () => {
+    console.log("SELECTED", detailState.exercises)
     if (detailState.exercises.length) {
       return detailState.exercises.map((exercise, index) => {
         console.log("EXERCISE", exercise)
@@ -98,15 +99,13 @@ const CreatePlanForm = () => {
       return workouts.map((workout)=> {
         return <option key={workout.id} value={`${workout.title}`}></option>
       })
-    }
-    else {
-      alert('You have no clients. Please invite your clients using your invite code.')
-    } 
   }
+  return null
+}
 
-  //client list will be a drop down option
-  //trainer can click the client and it will register that client to the plan
-  
+//client list will be a drop down option
+//trainer can click the client and it will register that client to the plan
+
 
   const listClients = () => {
     if (clients) {
@@ -118,14 +117,6 @@ const CreatePlanForm = () => {
       alert('You have no clients. Please invite your clients using your invite code.')
     } 
   }
-
-  useEffect(() => {
-    showCards();
-  }, [planState])
-
-  useEffect(() => {
-    showSelectedWorkout()
-  }, [detailState])
   
   const findValue = (value) => {
     for (let i=0; i<clients.length; i++) {
@@ -137,16 +128,17 @@ const CreatePlanForm = () => {
       break;
     }
   }
-
+  
   const findWorkoutValue = (value) => {
-    console.log("VAL", value)
     for (let i=0; i<workouts.length; i++) {
       let name = workouts[i].title
+      
+      console.log("VAL", value, "NAME", name)
       if (name===value){
         console.log("WORKOUT VALUE", workouts[i])
         setDetailState({...detailState, workout:workouts[i], exercises:detailState.exercises.concat(workouts[i].exercises)});
+        break;
       }
-      break;
     }
   }
   
@@ -179,7 +171,7 @@ const CreatePlanForm = () => {
         onClick={e => handlePlanSubmit(e)}>Assign Schedule</button>
   }
 
-  function getDate (date) {
+  const getDate = (date) => {
     let dateVal = new Date(date);
     let day = dateVal.getDate().toString().padStart(2, "0");
     let month = (1 + dateVal.getMonth()).toString().padStart(2, "0");

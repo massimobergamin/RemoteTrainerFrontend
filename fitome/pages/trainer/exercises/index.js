@@ -9,7 +9,7 @@ import ShortExDetails from '../../../components/shortExDetails';
 
 function Exercises() {
   const router = useRouter();
-  const { user, exercises, armExs, legExs, backExs, chestExs, miscExs } = useSelector(state => state.trainer);
+  const { user, exercises, armExs, legExs, backExs, chestExs, coreExs, shoulderExs, miscExs } = useSelector(state => state.trainer);
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
 
@@ -44,6 +44,16 @@ function Exercises() {
             {chestExs && chestExs.map(exercise =>
               <ShortExDetails key={exercise.id} exercise={exercise}></ShortExDetails>)}
             </div>
+          {coreExs.length ? <h3>Core</h3> : null}
+          <div className="workoutsExercises_scroll">
+            {coreExs && coreExs.map(exercise =>
+              <ShortExDetails key={exercise.id} exercise={exercise}></ShortExDetails>)}
+            </div>
+          {shoulderExs.length ? <h3>Shoulders</h3> : null}
+          <div className="workoutsExercises_scroll">
+          {shoulderExs && shoulderExs.map(exercise =>
+            <ShortExDetails key={exercise.id} exercise={exercise}></ShortExDetails>)}
+          </div>
           {miscExs.length ? <h3>Miscellaneous</h3> : null}
           <div className="workoutsExercises_scroll">
             {miscExs && miscExs.map(exercise =>

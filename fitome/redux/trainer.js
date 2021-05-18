@@ -20,6 +20,7 @@ export const updateUser = createAsyncThunk(
     'trainer/updateUserStatus',
     async ({uid, userData}) => {
       try {
+        console.log('in thunk', uid, userData)
         const response = await axios.put(`https://remotetrainerserver.herokuapp.com/users/${uid}`, userData);
         return response.data;
       } catch (error) {
@@ -245,19 +246,21 @@ export const trainerSlice = createSlice({
   name: 'trainer',
   initialState: {
     user: {
-      user_uid: "",
-      username: "",
-      email: "",
-      last_login: 0,
-      first_name: "",
-      last_name: "",
-      profile_picture: "",
-      sex: "",
-      weight: 0,
-      height: 0,
-      birthday: 0,
+      // user_uid: "",
+      // username: "",
+      // email: "",
+      // last_login: 0,
+      // first_name: "",
+      // last_name: "",
+      // profile_picture: "",
+      // sex: "",
+      // weight: 0,
+      // height: 0,
+      // birthday: 0,
+      // type: '',
+      // sex: ''
     },
-    invite_code: "",
+    invite_code: {},
     exercises: [],
     workouts: [],
     clients: [],
@@ -270,7 +273,10 @@ export const trainerSlice = createSlice({
     legExs: [],
     backExs: [],
     chestExs: [],
-    miscExs: []
+    coreExs: [],
+    shoulderExs: [],
+    miscExs: [],
+    measurements: []
   },
   reducers: {
     setSelectedWorkout (state, action) {
@@ -289,17 +295,24 @@ export const trainerSlice = createSlice({
     },
     [getUserById.fulfilled] : (state, action) => {
       state.sessions = action.payload.sessions;
-      state.user.user_uid = action.payload.user_uid;
-      state.user.username  = action.payload.username;
-      state.user.email = action.payload.email;
-      state.user.last_login = action.payload.last_login;
-      state.user.first_name = action.payload.first_name;
-      state.user.last_name = action.payload.last_name;
-      state.user.profile_picture = action.payload.profile_picture;
-      state.user.sex = action.payload.sex;
-      state.user.weight = action.payload.weight;
-      state.user.height = action.payload.height;
-      state.user.birthday = action.payload.birthday;
+      delete action.payload.sessions;
+      console.log('action.payload', action.payload);
+
+      state.user = action.payload;
+      console.log('state.user', state.user);
+      // state.user.user_uid = action.payload.user_uid;
+      // state.user.username  = action.payload.username;
+      // state.user.email = action.payload.email;
+      // state.user.last_login = action.payload.last_login;
+      // state.user.first_name = action.payload.first_name;
+      // state.user.last_name = action.payload.last_name;
+      // state.user.profile_picture = action.payload.profile_picture;
+      // state.user.sex = action.payload.sex;
+      // state.user.weight = action.payload.weight;
+      // state.user.height = action.payload.height;
+      // state.user.birthday = action.payload.birthday;
+      // state.user.type = action.payload.type;
+      // state.user.sex = action.payload.sex;
     },
     [postClient.fulfilled] : (state, action) => {
       state.clients.push(action.payload);
@@ -350,8 +363,11 @@ export const trainerSlice = createSlice({
       state.legExs = state.exercises.filter(exercise => exercise.muscle_group === 'legs' && exercise.type === 'custom');
       state.backExs = state.exercises.filter(exercise => exercise.muscle_group === 'back' && exercise.type === 'custom');
       state.chestExs = state.exercises.filter(exercise => exercise.muscle_group === 'chest' && exercise.type === 'custom');
+      state.coreExs = state.exercises.filter(exercise => exercise.muscle_group === 'core' && exercise.type === 'custom');
+      state.shoulderExs = state.exercises.filter(exercise => exercise.muscle_group === 'shoulders' && exercise.type === 'custom');
       state.miscExs = state.exercises.filter(exercise => exercise.muscle_group !== 'arms' && exercise.muscle_group !== 'legs'
-        && exercise.muscle_group !== 'back' && exercise.muscle_group !== 'chest' && exercise.type === 'custom');
+        && exercise.muscle_group !== 'back' && exercise.muscle_group !== 'chest' && exercise.muscle_group !== 'core'
+        && exercise.muscle_group !== 'shoulders' && exercise.type === 'custom');
     },
     [postWorkout.fulfilled] : (state, action) => {
       state.workouts.push(action.payload);

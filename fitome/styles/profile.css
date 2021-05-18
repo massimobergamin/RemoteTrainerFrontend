@@ -1,44 +1,23 @@
-.profileContainer {
-  display: flex;
-
-  align-content: center;
-  padding: 4vh 4vw 0px 4vw;
-  height: 94vh;
-  width: 100vw;
-}
-
 .profileCreate_form {
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  
-  padding-top: 10px;
-  max-width: 300px;
-}
-
-.profileCreate_field {
+  max-height: 65vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around; 
-  margin-bottom: 3vh;
-  font-size: 1.2em;
-}
-
-.createProfileButton {
-  padding: 1em 1em;
-}
-
-.profileLabelInput {
-  font-size:medium;
+  padding-top: 10px;
 }
 
 .profilePic {
   border-radius: 50%;
+  height: 35vh;
+  width: auto;
+}
+
+.profileCreate_form .button {
+  width: 100px;
 }
 
 .photoPreview {
   border-radius: 50%;
-  height: 20vh;
-  width: 30vw;
+  height: 35vh;
+  width: auto;
 }

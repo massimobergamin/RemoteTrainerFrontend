@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import useStorage from '../firebase/useStorage';
 
-const UploadImageForm = ({setPhoto}) => {
+const UploadImageForm = ({ setPhoto }) => {
 
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
-    const [urlFile, setUrlFile] = useState(null);
     const { url, progress } = useStorage(file);
     const types = ['image/png', 'image/jpeg'];
 
@@ -28,9 +27,10 @@ const UploadImageForm = ({setPhoto}) => {
     return (
         <div>
             <form>
-                <input type="file" onChange={handleChange}/>
-                <div >
-                {url && <img className="photoPreview"src={url}/>}
+                <input type="file" accept="image/*" onChange={handleChange}/>
+                <div>
+                {(file && !url) && <h5>Uploading {file.name}...</h5>}
+                {url && <img src={url}/>}
                 {error && <div>{error}</div>}
                 </div>
             </form>

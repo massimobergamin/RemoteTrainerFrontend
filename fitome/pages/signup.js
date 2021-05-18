@@ -41,11 +41,11 @@ const SignUp = () => {
             let firstName = titleCase(formState.first_name);
             let lastName = titleCase(formState.last_name);
             const fireBaseData = await signUp(formState.email, formState.password, lowerType);
-            if (formState.type === 'trainer') {
+            if (formState.type === 'Trainer') {
                 await dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
                 await dispatch(postInviteCode({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5).toUpperCase()}));
                 router.push(`/trainer/invitecode`);
-            } else {
+            } else if (formState.type === 'Client') {
               await dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
               router.push(`/client/invitecode`);
             }
@@ -58,34 +58,34 @@ const SignUp = () => {
         <div>
             <form>
                 <label className="sessionCreate_field" htmlFor="firstName">First Name:</label>
-                <input type="text" 
+                <input type="text"
                     placeholder="First Name"
                     name="firstName"
-                    value={formState.firstName} 
+                    value={formState.firstName}
                     onChange={(e)=>setFormState({...formState, first_name:e.target.value})}/>
                 <label className="sessionCreate_field" htmlFor="lastName">Last Name:</label>
-                <input type="text" 
+                <input type="text"
                     name="lastName"
                     placeholder="Last Name"
-                    value={formState.lastName} 
+                    value={formState.lastName}
                     onChange={(e)=>setFormState({...formState, last_name:e.target.value})}/>
                 <label className="sessionCreate_field" htmlFor="username">Account Username:</label>
-                <input type="text" 
+                <input type="text"
                     name="username"
                     placeholder="Username"
-                    value={formState.username} 
+                    value={formState.username}
                     onChange={(e)=>setFormState({...formState, username:e.target.value})}/>
                 <label className="sessionCreate_field" htmlFor="email">Email:</label>
                 <input type="email"
                     name="email"
                     placeholder="Email"
-                    value={formState.email} 
+                    value={formState.email}
                     onChange={(e)=>setFormState({...formState, email:e.target.value})}/>
                 <label className="sessionCreate_field" htmlFor="password">Password:</label>
                 <input type="password"
                     name="password"
                     placeholder="Password"
-                    value={formState.password} 
+                    value={formState.password}
                     onChange={(e)=>setFormState({...formState, password:e.target.value})}/>
                 <label className="sessionCreate_field" htmlFor="type">Select an Account Type:</label>
                 <input list="accountType"
@@ -97,7 +97,7 @@ const SignUp = () => {
                     <option value="Client"></option>
                     <option value="Trainer"></option>
                 </datalist>
-                <button type="button" 
+                <button type="button"
                     disabled={formState.password===""||formState.email===""||formState.first_name===""||formState.last_name===""||formState.username===""||formState.type===""}
                     onClick={createHandler}>SIGN UP</button>
             </form>
