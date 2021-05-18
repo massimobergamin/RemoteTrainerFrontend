@@ -23,13 +23,14 @@ const Plan = () => {
     
     if (client.plans) {
       // console.log('client plans: ', client.plans);
-      return client.plans.map(plan => {
+      for (let i = 0; i < client.plans.length; i++) {
+        let plan = client.plans[i];
         const startDate = plan.start_date
         const endDate = plan.end_date
         const today = Date.now();
         if (moment(today).isBetween(startDate, endDate)) {
           let curPlan = plan;
-          console.log('curPlan: ', curPlan);
+          // console.log('curPlan: ', curPlan);
           return (
             <div>
               <div>Beginning: {moment(startDate).format("dddd, MMMM Do YYYY")}</div>
@@ -39,20 +40,20 @@ const Plan = () => {
                   <div>
                     <h2 key={day.id}>{moment(day.day).format("dddd, MMMM Do YYYY")}</h2>
                     <WorkoutDetails key={day.day} workout={day}></WorkoutDetails> 
-                  </div>        
+                  </div>
                 ))}
                 </div>
             </div>
           );
         };
-      });
+      };
     };
-    }
+    };
 
 
   return (
     <div>
-      <div className="pageContainer">
+      <div className="page_container">
       <h1>{client.user.username}'s Training Plan</h1>
       {renderPlan()}
       <NavigationClient />

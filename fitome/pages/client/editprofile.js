@@ -3,7 +3,7 @@ import { useAuth } from '../../firebase/contextAuth';
 import { useDispatch, useSelector } from 'react-redux';
 import NavigationClient from '../../components/navigationBar/navigationClient';
 import { getUser } from '../../redux/client';
-
+import UpdateClientProfileForm from '../../components/updateClientProfileForm'
 
 
 const Editprofile = () => {
@@ -16,7 +16,9 @@ const Editprofile = () => {
 
 
   return (
-    <div>
+    <div className="page_container">
+      <h2>Edit Profile</h2>
+      <UpdateClientProfileForm></UpdateClientProfileForm>
       <NavigationClient></NavigationClient>
     </div>
   )

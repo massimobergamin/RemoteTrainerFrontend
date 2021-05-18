@@ -8,7 +8,11 @@
 @import './sessions.css';
 @import './profile.css';
 @import './planForm.css';
+<<<<<<< HEAD
 @import './initialPages.css';
+=======
+@import './trainerClientPlanDetails.css';
+>>>>>>> 1fa2f012398d37a5d51b64de75832e9439b18210
 
 :root {
   /* Colors: */

@@ -1,0 +1,15 @@
+.setrepContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.planContainer {
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
+}
+
+.exerciseTitleContainer {
+  display: flex;
+  flex-direction: column;
+}
