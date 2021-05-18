@@ -17,33 +17,46 @@ const Plan = () => {
   }, []);
 
   const client = useSelector(state => state.client);
-  console.log(client.plans);
+  console.log('client: ', client);
 
-  let curPlan;
-  let sched;
-
-  if (client.plans) {
-    curPlan = client.plans[7];
-    sched = client.plans[7].details;
-  }
+  function renderPlan () {
+    
+    if (client.plans) {
+      // console.log('client plans: ', client.plans);
+      return client.plans.map(plan => {
+        const startDate = plan.start_date
+        const endDate = plan.end_date
+        const today = Date.now();
+        if (moment(today).isBetween(startDate, endDate)) {
+          let curPlan = plan;
+          console.log('curPlan: ', curPlan);
+          return (
+            <div>
+              <div>Beginning: {moment(startDate).format("dddd, MMMM Do YYYY")}</div>
+              <div>Ending: {moment(endDate).format("dddd, MMMM Do YYYY")}</div>
+              <div>
+                {curPlan.details.map(day => (
+                  <div>
+                    <h2 key={day.id}>{moment(day.day).format("dddd, MMMM Do YYYY")}</h2>
+                    <WorkoutDetails key={day.day} workout={day}></WorkoutDetails> 
+                  </div>        
+                ))}
+                </div>
+            </div>
+          );
+        };
+      });
+    };
+    }
 
 
   return (
     <div>
+      <div className="pageContainer">
       <h1>{client.user.username}'s Training Plan</h1>
-      <div>
-        <div>Beginning: {client.plans ? moment(curPlan.start_date).format('LL') : null}</div>
-        <div>Ending: {client.plans ? moment(curPlan.end_date).format('LL') : null}</div>
-        <div className={''/* TODO: plan_details_container css */}>
-          {client.plans ? sched.map((day) => (
-            <div>
-              <h2 key={day.id}>{day.day !== '' ? moment(day.day).format("dddd, MMMM Do YYYY") : null}</h2>
-              <WorkoutDetails key={day.day} workout={day}></WorkoutDetails>
-            </div>
-          )) : null}
-        </div>
-      </div>
+      {renderPlan()}
       <NavigationClient />
+      </div>
     </div>
   )
 }

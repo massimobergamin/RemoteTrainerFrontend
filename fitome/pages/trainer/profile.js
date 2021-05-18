@@ -29,18 +29,18 @@ const Profile = () => {
           <button className="button">Edit Profile</button>
         </a>
         <p>You currently have {clients.length} clients.</p>
-        <div>Invite a client: {invite_code?.invite_code}</div>
-        <div>Birthday: <br/> {user.birthday}</div>
-        <div>Height: <br/> {user.height}</div>
+        <div><b>Invite code:</b><br/>{invite_code?.invite_code}</div>
+        <div><b>Birthday:</b><br/>{user.birthday}</div>
+        <div><b>Height:</b><br/>{user.height}</div>
 
-        <div>Weight: <br/> {user.weight}</div>
-        <div>Sex: <br/> {user.sex}</div>
+        <div><b>Weight:</b><br/>{user.weight}</div>
+        <div><b>Sex:</b><br/>{user.sex}</div>
 
         <a href="" onClick={(e) => {
           e.preventDefault();
           logout();
           router.push('/');
-        }}>Sign Out</a>
+        }}><u>Sign Out</u></a>
       <NavigationTrainer></NavigationTrainer>
     </div>
   )

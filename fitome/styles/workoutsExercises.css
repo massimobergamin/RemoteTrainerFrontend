@@ -21,6 +21,55 @@
   max-width: 80vw;
 }
 
+.workoutsExercises_clientCard {
+  border: 1px solid darkgray;
+  border-radius: 4px;
+  margin: 2vh 2vh;
+  padding: 2vh 2vh;
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.workoutsExercises_expandedContainer {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.workoutsExercises_FadeIn {
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 10;
+    background-color: rgba(0,0,0,0.6);
+    color: seashell;
+}
+
+
+
+
+/* .workoutsExercises_focusedCard {
+  left: 50vw;
+  top: 50vh;
+} */
+
+/* .workoutsExercises_FadeOut {
+  opacity:0;
+  width:0;
+  height:0;
+  transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
+} */
+
+.workoutsExercises_clientCard:hover {
+  cursor: pointer;
+}
+
 .workoutsExercises_scroll {
   display: flex;
   flex-direction: row;

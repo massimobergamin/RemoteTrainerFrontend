@@ -18,7 +18,8 @@ const UpdateProfileForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: photo ? photo : user.profile_picture}}));
+    dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: photo ? photo : user.profile_picture}}))
+      .then(() => router.push('/trainer/profile'));
   };
 
   return (
@@ -57,7 +58,6 @@ const UpdateProfileForm = () => {
           <label htmlFor="sex">Sex:
           <br/>
             <input
-            placeholder="Sex"
             name="sex"
             value={profileState.sex}
             list="sexes"

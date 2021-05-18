@@ -8,6 +8,8 @@
 
 .profilePic {
   border-radius: 50%;
+  height: 35vh;
+  width: auto;
 }
 
 .profileCreate_form .button {
@@ -16,6 +18,6 @@
 
 .photoPreview {
   border-radius: 50%;
-  height: 20vh;
-  width: 30vw;
+  height: 35vh;
+  width: auto;
 }
