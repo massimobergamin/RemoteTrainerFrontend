@@ -24,6 +24,9 @@ const Trainer = () => {
     <div>
       <h3>Start inviting your clients with this code</h3>
         <p>{invite_code?.invite_code}</p>
+        <a href="./profile">
+          <button className="button">Continue to Profile</button>
+        </a>
       <NavigationTrainer></NavigationTrainer>
     </div>
   )
