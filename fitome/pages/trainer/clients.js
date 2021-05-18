@@ -52,8 +52,7 @@ const Clients = () => {
   return (
     <div>
       <h1>Client List</h1>
-      {clientList()}
-         
+      {clientList()}   
       <NavigationTrainer/>
     </div>
   )
