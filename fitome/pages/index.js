@@ -18,10 +18,10 @@ export default function Home() {
     email: '',
     password: '',
   };
+  
   const [formState, setFormState] = useState(initialState);
-  // const { user } = useSelector(state => state.trainer);
-  // const { client } = useSelector(state => state.client);
-  const { user, trainerInfo } = useSelector(state => state.trainer);
+
+  const { user, trainerInfo } = useSelector(state => state.client);
 
 
     const loginHandler = async () => {
@@ -31,15 +31,12 @@ export default function Home() {
         router.push('/session');
       } else if (userInfo.user.displayName === 'client') {
           console.log('loginHandler: ', userInfo.user.uid);
-          dispatch(getUser(userInfo.user.uid)).then(() => console.log(user, trainerInfo));
-          // console.log('user: ', client);
-          router.push('/client/plan');
-          // TODO: route to landing if data not present
-          // if (!user.trainerInfo.trainer_uid) {
-          //   router.push('/client/invitecode');
-          // } else {
-          //   router.push('/client/plan');
-          // }
+          await dispatch(getUser(userInfo.user.uid)).then(() => {
+          if (trainerInfo) {
+            router.push('/client/plan');
+          } else {
+            router.push('/client/invitecode');
+          }});
         };
       }
 
