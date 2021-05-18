@@ -54,7 +54,7 @@ io.on('connection', socket => {
     io.to(payload.callerID).emit('receiving returned signal', { signal: payload.signal, id: socket.id });
   });
 
-  socket.on('disconnect', () => {
+  socket.on('endCall', () => {
     console.log("DISCONNECTING")
     const roomID = socketToRoom[socket.id];
     let room = users[roomID];
