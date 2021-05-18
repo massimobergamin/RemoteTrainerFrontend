@@ -28,7 +28,7 @@ const Plan = () => {
         const startDate = plan.start_date
         const endDate = plan.end_date
         const today = Date.now();
-        if (moment(today).isBetween(startDate, endDate) && !gotPlan) {
+        if (moment(today).isBetween(startDate, endDate)) {
           let curPlan = plan;
           // console.log('curPlan: ', curPlan);
           return (
