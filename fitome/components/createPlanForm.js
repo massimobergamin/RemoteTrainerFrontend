@@ -65,36 +65,23 @@ const CreatePlanForm = () => {
   const { user, clients, workouts } = useSelector(state => state.trainer);
 
 //*********************** */
-  const showSeletedWorkout = () => {
-    if (detailState.exercises.length) {
-      return detailState.exercises.map((exercise, index) => (
-        <div>
-          <h1>{exercise.title}</h1>
-          <h6>Reps</h6>
-          <input onChange={(e) => setReps(e, index)}/>
-          <h6>Sets</h6>
-          <input onChange={(e) => setSets(e, index)}/>
-          </div>
-      ))
-    }
+
+const listWorkouts = () => {
+  if (workouts) {
+    return workouts.map((workout)=> {
+      return <option key={workout.id} value={`${workout.title}`}></option>
+    })
   }
+  else return null
+}
 
-  const listWorkouts = () => {
-    if (workouts) {
-      return workouts.map((workout)=> {
-        return <option key={workout.id} value={`${workout.title}`}></option>
-      })
-    }
-    else return null
-  }
+//client list will be a drop down option
+//trainer can click the client and it will register that client to the plan
 
-  //client list will be a drop down option
-  //trainer can click the client and it will register that client to the plan
-  
 
-  const listClients = () => {
-    // console.log("CLIENTS", clients)
-    // console.log("USER", user)'
+const listClients = () => {
+  // console.log("CLIENTS", clients)
+  // console.log("USER", user)'
     if (clients) {
       return clients.map((client)=> {
         return <option key={client.id} value={`${client.first_name} ${client.last_name}`}></option>
@@ -115,7 +102,7 @@ const CreatePlanForm = () => {
       break;
     }
   }
-
+  
   const findWorkoutValue = (value) => {
     console.log("VAL", value)
     for (let i=0; i<workouts.length; i++) {
@@ -123,8 +110,22 @@ const CreatePlanForm = () => {
       if (name===value){
         console.log(workouts[i])
         detailState.exercises.push(workouts[i])
+        {showSeletedWorkout()}
       }
       break;
+    }
+  }
+  const showSeletedWorkout = () => {
+    if (detailState.exercises.length) {
+      return detailState.exercises.map((exercise, index) => (
+        <div>
+          <h1>{exercise.title}</h1>
+          <h6>Reps</h6>
+          <input onChange={(e) => setReps(e, index)}/>
+          <h6>Sets</h6>
+          <input onChange={(e) => setSets(e, index)}/>
+          </div>
+      ))
     }
   }
   
@@ -208,7 +209,7 @@ const deleteDay = (index) => {
         </datalist>
         {showSeletedWorkout()}
         </div>
-              
+          
         <textarea placeholder="notes" value={detailState.trainer_notes} onChange={(e) => setDetailState({...detailState, trainer_notes:e.target.value})}/>
         
         {addDayButton()}
