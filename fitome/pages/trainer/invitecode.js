@@ -8,17 +8,15 @@ import { useDispatch, useSelector } from 'react-redux';
 const Trainer = () => {
   const dispatch = useDispatch();
 
-
-  //let inviteCode = '';
   const { currentUser } = useAuth();
-  const { user, invite_code } = useSelector(state => state.trainer);
+  const { user, invite_code, trainer } = useSelector(state => state.trainer);
   useEffect(() => {
     dispatch(getInviteCode(currentUser.uid))
     dispatch(getUserById(currentUser.uid))
   }, [])
 
   console.log(user);
-
+  
   return (
     <div>
       <h1></h1>
@@ -30,14 +28,3 @@ const Trainer = () => {
 }
 
 export default Trainer;
-
-// creating  plan
-// view his appointments
-// profile
-
-// client landing page
-// view appointment
-// view owkrout
-// view plan
-// view exercises
-// profile

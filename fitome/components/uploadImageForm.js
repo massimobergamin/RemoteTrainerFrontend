@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useStorage from '../firebase/useStorage';
 
-const UploadImageForm = () => {
+const UploadImageForm = ({setPhoto}) => {
 
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
@@ -12,7 +12,6 @@ const UploadImageForm = () => {
      const handleChange = (e) => {
         let selected = e.target.files[0];
         if (selected && types.includes(selected.type)) {
-            console.log(selected.type)
             setFile(selected);
             setError(null);
         } else {
@@ -21,12 +20,17 @@ const UploadImageForm = () => {
         }
     }
 
+    useEffect(() => {
+        file && setPhoto('uploading');
+        url && setPhoto(url);
+      }, [file, url])
+
     return (
         <div>
             <form>
                 <input type="file" onChange={handleChange}/>
                 <div >
-                {url && <img src={url}/>}
+                {url && <img className="photoPreview"src={url}/>}
                 {error && <div>{error}</div>}
                 </div>
             </form>

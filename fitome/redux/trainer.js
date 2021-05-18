@@ -59,7 +59,7 @@ export const getClients= createAsyncThunk(
   async (uid, thunkAPI) => {
     try {
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/clients/${uid}`);
-      return response.data;
+      return response.data.sort((a,b)=> (a.first_name+" "+a.last_name).localeCompare(b.first_name+" "+b.last_name));
     } catch (error) {
       console.log(error);
     }
@@ -70,6 +70,7 @@ export const postInviteCode = createAsyncThunk(
   'trainer/postInviteCodeStatus',
   async (inviteState) => {
     try {
+      console.log("in redux", inviteState)
       const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users/invite/${inviteState.user_uid}`, inviteState);
       return response.data;
     } catch (error) {

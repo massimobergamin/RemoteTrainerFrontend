@@ -30,7 +30,7 @@ const SignUp = () => {
     const [inviteState, setInviteState] = useState(inviteInitialState)
     const [formState, setFormState] = useState(initialState);
     const { user, invite_code } = useSelector(state => state.trainer);
-
+    console.log("INVITE", invite_code)
     function titleCase(name){
         return name[0].toUpperCase() + name.slice(1).toLowerCase();
     }
