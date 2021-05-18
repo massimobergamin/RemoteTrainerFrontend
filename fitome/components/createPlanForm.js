@@ -85,9 +85,7 @@ const CreatePlanForm = () => {
         return <option key={workout.id} value={`${workout.title}`}></option>
       })
     }
-    else {
-      alert('You have no clients. Please invite your clients using your invite code.')
-    } 
+    else return null
   }
 
   //client list will be a drop down option
@@ -157,12 +155,18 @@ const CreatePlanForm = () => {
     else  return <button className="button" type="button" disabled>Finalize Plan</button>
   }
 
-  function getDate (date) {
+  const getDate = (date) => {
     let dateVal = new Date(date);
     let day = dateVal.getDate().toString().padStart(2, "0");
     let month = (1 + dateVal.getMonth()).toString().padStart(2, "0");
     let inputDate = dateVal.getFullYear() + "-" + (month) + "-" + (day);
     return inputDate;
+}
+
+const deleteDay = (index) => {
+  console.log(index)
+  console.log(planState.details)
+  planState.details.splice(index, 1)
 }
   
   return (
@@ -196,15 +200,15 @@ const CreatePlanForm = () => {
             else alert("This day is not within the selected plan dates")
           }
             }/>
-            
+        <div>
               <label htmlFor="listOfWorkoutss">Select a Workout:</label>
-              
         <input list="workoutList" onChange={(e)=>findWorkoutValue(e.target.value)} id="listOfWorkouts" name="listOfWorkouts" />
         <datalist id="workoutList" >
         {listWorkouts()}
         </datalist>
         {showSeletedWorkout()}
-        
+        </div>
+              
         <textarea placeholder="notes" value={detailState.trainer_notes} onChange={(e) => setDetailState({...detailState, trainer_notes:e.target.value})}/>
         
         {addDayButton()}
@@ -214,9 +218,11 @@ const CreatePlanForm = () => {
       {planState.details ? planState.details.map(day => (
         <div>
           <p>{day.day}</p>
-          {day.exercises.map(exercise => (
+          {day.exercises.map((exercise, index) => (
             <div>
+              <button value={day.title} onClick={() => deleteDay(index)}>X
               <p>{exercise.title}</p>
+              </button>
             </div>
           ))}
         </div>
