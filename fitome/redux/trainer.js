@@ -246,21 +246,21 @@ export const trainerSlice = createSlice({
   name: 'trainer',
   initialState: {
     user: {
-      user_uid: "",
-      username: "",
-      email: "",
-      last_login: 0,
-      first_name: "",
-      last_name: "",
-      profile_picture: "",
-      sex: "",
-      weight: 0,
-      height: 0,
-      birthday: 0,
+      // user_uid: "",
+      // username: "",
+      // email: "",
+      // last_login: 0,
+      // first_name: "",
+      // last_name: "",
+      // profile_picture: "",
+      // sex: "",
+      // weight: 0,
+      // height: 0,
+      // birthday: 0,
       // type: '',
       // sex: ''
     },
-    invite_code: "",
+    invite_code: {},
     exercises: [],
     workouts: [],
     clients: [],
@@ -273,7 +273,8 @@ export const trainerSlice = createSlice({
     legExs: [],
     backExs: [],
     chestExs: [],
-    miscExs: []
+    miscExs: [],
+    measurements: []
   },
   reducers: {
     setSelectedWorkout (state, action) {
@@ -292,17 +293,22 @@ export const trainerSlice = createSlice({
     },
     [getUserById.fulfilled] : (state, action) => {
       state.sessions = action.payload.sessions;
-      state.user.user_uid = action.payload.user_uid;
-      state.user.username  = action.payload.username;
-      state.user.email = action.payload.email;
-      state.user.last_login = action.payload.last_login;
-      state.user.first_name = action.payload.first_name;
-      state.user.last_name = action.payload.last_name;
-      state.user.profile_picture = action.payload.profile_picture;
-      state.user.sex = action.payload.sex;
-      state.user.weight = action.payload.weight;
-      state.user.height = action.payload.height;
-      state.user.birthday = action.payload.birthday;
+      delete action.payload.sessions;
+      console.log('action.payload', action.payload);
+
+      state.user = action.payload;
+      console.log('state.user', state.user);
+      // state.user.user_uid = action.payload.user_uid;
+      // state.user.username  = action.payload.username;
+      // state.user.email = action.payload.email;
+      // state.user.last_login = action.payload.last_login;
+      // state.user.first_name = action.payload.first_name;
+      // state.user.last_name = action.payload.last_name;
+      // state.user.profile_picture = action.payload.profile_picture;
+      // state.user.sex = action.payload.sex;
+      // state.user.weight = action.payload.weight;
+      // state.user.height = action.payload.height;
+      // state.user.birthday = action.payload.birthday;
       // state.user.type = action.payload.type;
       // state.user.sex = action.payload.sex;
     },

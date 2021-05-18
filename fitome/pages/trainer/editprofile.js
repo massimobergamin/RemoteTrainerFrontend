@@ -11,8 +11,6 @@ const EditProfile = () => {
   const { currentUser } = useAuth();
   const { user } = useSelector(state => state.trainer);
 
-  console.log('user', user)
-
   useEffect(() => {
     dispatch(getUserById(currentUser.uid));
   }, [])

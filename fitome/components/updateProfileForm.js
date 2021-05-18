@@ -7,46 +7,27 @@ import { useRouter } from 'next/router';
 
 const UpdateProfileForm = () => {
   const dispatch = useDispatch();
-  const { currentUser, logout } = useAuth();
+  const { currentUser } = useAuth();
   const router = useRouter();
   const [photo, setPhoto] = useState('');
 
   const initialState = {
-<<<<<<< HEAD
-=======
-    profile_picture: "",
-    sex: "",
-    weight: 0,
-    height: 0,
-    birthday: 0,
-    trainer_uid: currentUser.uid
->>>>>>> main
   };
   const [profileState, setProfileState] = useState(initialState);
-  const { user, invite_code } = useSelector(state => state.trainer);
-
-  console.log('user in updateProfForm', currentUser)
+  const { user } = useSelector(state => state.trainer);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-    console.log('currentUser in updateProf', currentUser)
-    dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: photo}}))
-      // .then(() => router.push('/trainer/profile'));
-=======
-    console.log(profileState)
-    dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: photo}}));
->>>>>>> main
+    dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: photo ? photo : user.profile_picture}}));
   };
 
   return (
     <div>
       <div className="pageContainer">
         <form className="profileCreate_form">
-          <label className="profileCreate_field" htmlFor="weight">Weight (lb):
+          <label htmlFor="weight">Weight (lb):
           <br/>
             <input
-            className="profileCreate_field"
             type="number"
             name="weight"
             value={profileState.weight}
@@ -54,38 +35,31 @@ const UpdateProfileForm = () => {
             min="0"
             onChange={(e) => setProfileState({...profileState, weight: parseInt(e.target.value)})}/>
           </label>
-          <label className="profileCreate_field" htmlFor="height">Height (cm):
+          <label htmlFor="height">Height (cm):
           <br/>
             <input
-            className="profileCreate_field"
-            placeholder="Height"
             type="number"
             name="height"
-            placeholder="Height"
             value={profileState.height}
             step="1"
             min="0"
             onChange={(e) => setProfileState({...profileState, height: parseInt(e.target.value)})}/>
           </label>
-          <label className="profileCreate_field" htmlFor="Birthday">Birthday:
+          <label htmlFor="Birthday">Birthday:
           <br/>
             <input
-            className="profileCreate_field"
-            placeholder="Birthday"
             type="date"
             name="birthday"
             value={profileState.birthday}
             max="2003-05-17"
             onChange={(e) => setProfileState({...profileState, birthday: e.target.value})}/>
           </label>
-          {/*label className="profileCreate_field" htmlFor="sex">Sex:
+          <label htmlFor="sex">Sex:
           <br/>
             <input
-            className="profileCreate_field"
             placeholder="Sex"
             name="sex"
             value={profileState.sex}
-<<<<<<< HEAD
             list="sexes"
             onChange={(e) => setProfileState({...profileState, sex: e.target.value})}/>
             <datalist id="sexes">
@@ -94,8 +68,8 @@ const UpdateProfileForm = () => {
               <option>Other</option>
               <option>I prefer not to say</option>
             </datalist>
-          </label> */}
-          <label className="profileCreate_field" htmlFor="profilePicture">Profile Picture:
+          </label>
+          <label htmlFor="profilePicture">Profile Picture:
           <br/>
             <UploadImageForm setPhoto={setPhoto}></UploadImageForm>
           </label>
@@ -104,15 +78,10 @@ const UpdateProfileForm = () => {
               e.preventDefault();
               router.push('/trainer/profile');
               }}/>
-=======
-            onChange={(e) => setProfileState({...profileState, sex:e.target.value})}/>
-            <UploadImageForm setPhoto={setPhoto}></UploadImageForm>
-            <input className="button" type="submit" value="update" onClick={e => handleSubmit(e)}/>
->>>>>>> main
         </form>
       </div>
     </div>
   )
 }
 
-export default UpdateProfileForm
+export default UpdateProfileForm;
