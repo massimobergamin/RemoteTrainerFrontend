@@ -12,7 +12,7 @@ const UpdateProfileForm = () => {
   const [photo, setPhoto] = useState('');
 
   const initialState = {
-    profile_picture: photo,
+    profile_picture: "",
     sex: "",
     weight: 0,
     height: 0,
@@ -24,7 +24,8 @@ const UpdateProfileForm = () => {
   console.log(user)
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateUser(currentUser.uid, profileState));
+    console.log(profileState)
+    dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: photo}}));
   };
 
   return (
@@ -62,7 +63,7 @@ const UpdateProfileForm = () => {
             name="gender"
             value={profileState.sex}
             onChange={(e) => setProfileState({...profileState, sex:e.target.value})}/>
-            <UploadImageForm>setPhoto={setPhoto}</UploadImageForm>
+            <UploadImageForm setPhoto={setPhoto}></UploadImageForm>
             <input className="button" type="submit" value="update" onClick={e => handleSubmit(e)}/>
         </form>
       </div>
