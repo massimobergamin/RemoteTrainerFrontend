@@ -38,7 +38,7 @@ const TrainerCode = () => {
 
 
   return (
-    <div className="pageContainer">
+    <div className="page_container">
       <h2>Welcome to Fitome!</h2>
       <h4>Please enter your Trainer's invite code below:</h4>
       <input type="text" value={input} onChange={handleChange} placeholder="Trainer code..."></input>

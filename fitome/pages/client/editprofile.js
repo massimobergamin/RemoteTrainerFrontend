@@ -16,7 +16,7 @@ const Editprofile = () => {
 
 
   return (
-    <div>
+    <div className="page_container">
       <h2>Edit Profile</h2>
       <UpdateClientProfileForm></UpdateClientProfileForm>
       <NavigationClient></NavigationClient>

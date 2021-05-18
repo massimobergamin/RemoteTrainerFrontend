@@ -52,7 +52,7 @@ const Plan = () => {
 
   return (
     <div>
-      <div className="pageContainer">
+      <div className="page_container">
       <h1>{client.user.username}'s Training Plan</h1>
       {renderPlan()}
       <NavigationClient />

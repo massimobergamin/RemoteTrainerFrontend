@@ -24,7 +24,7 @@ const Profile = () => {
 
 
   return (
-    <div>
+    <div className="page_container">
       <div>
       <p>{user.first_name + " " + user.last_name}</p>
       {user.profile_picture ?
