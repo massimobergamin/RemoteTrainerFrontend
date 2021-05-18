@@ -10,12 +10,12 @@ import { useDispatch } from 'react-redux';
 import NavigationTrainer from '../components/navigationBar/navigationTrainer'
 import moment from 'moment';
 import PlansBar from '../components/plansBar';
-import { route } from 'next/dist/next-server/server/router';
+import { useRouter } from 'next/router';
 
 //get list of workouts
 
 const CreatePlanForm = () => {
-
+  const router = useRouter();
   const { currentUser } = useAuth();
                 
   const initialState = {
@@ -136,7 +136,8 @@ const CreatePlanForm = () => {
       console.log("VAL", value, "NAME", name)
       if (name===value){
         console.log("WORKOUT VALUE", workouts[i])
-        setDetailState({...detailState, workout:workouts[i], exercises:detailState.exercises.concat(workouts[i].exercises)});
+        setDetailState({...detailState, workout:workouts[i], exercises:workouts[i].exercises});
+        //setDetailState({...detailState, workout:workouts[i], exercises:detailState.exercises.concat(workouts[i].exercises)});
         break;
       }
     }
@@ -153,7 +154,7 @@ const CreatePlanForm = () => {
   const handlePlanSubmit = (e) => {
     e.preventDefault();
     dispatch(postPlan(planState));
-    route.push('./clients')
+    router.push('./clients')
   };
 
   const addDayButton = () => {
@@ -192,7 +193,7 @@ const showExercises = (exercises, reps, sets) => {
 
 function deleteHandler(index) {
   console.log("INDEX TO DELETE", index)
-  setPlanState({...planState, details: planState.details.splice(index, 1)})
+  setPlanState({...planState, details: planState.details.filter((_, i) => i !== index)})
   console.log(planState, "DELETING")
 }
   const showCards = () => {
@@ -203,7 +204,7 @@ function deleteHandler(index) {
           <div className="plan_card">
             <button type="button" onClick={()=>deleteHandler(index)}>X</button>
             <div>{workout.workout.title}</div>
-            <div>{moment(workout.day).format('dddd MMM  do')}</div>
+            <div>{moment(workout.day).format('MMMM Do')}</div>
             {showExercises(workout.exercises, workout.reps, workout.sets)}
           </div>
         )

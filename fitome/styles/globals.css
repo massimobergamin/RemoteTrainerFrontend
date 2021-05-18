@@ -8,6 +8,7 @@
 @import './sessions.css';
 @import './profile.css';
 @import './planForm.css';
+@import './trainerClientPlanDetails.css';
 
 :root {
   /* Colors: */
