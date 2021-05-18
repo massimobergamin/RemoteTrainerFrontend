@@ -22,14 +22,8 @@ const Trainer = () => {
   
   return (
     <div>
-      <h1></h1>
       <h3>Start inviting your clients with this code</h3>
-      <CopyToClipboard>
-        <div className="copy-area">
-        <button>{invite_code?.invite_code}</button>
-        </div>
-      </CopyToClipboard>
-     
+        <p>{invite_code?.invite_code}</p>
       <NavigationTrainer></NavigationTrainer>
     </div>
   )
