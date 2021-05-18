@@ -31,7 +31,7 @@ export default function Home() {
         router.push('/session');
       } else if (userInfo.user.displayName === 'client') {
           console.log('loginHandler: ', userInfo.user.uid);
-          await dispatch(getUser(userInfo.user.uid));
+          dispatch(getUser(userInfo.user.uid));
           // console.log('user: ', client);
           router.push('/client/plan');
           // TODO: route to landing if data not present

@@ -8,6 +8,7 @@
 @import './sessions.css';
 @import './profile.css';
 @import './planForm.css';
+@import './trainerClientPlanDetails.css';
 
 :root {
   /* Colors: */
@@ -29,7 +30,8 @@ body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   color: var(--fontColor);
-  overflow-x: none;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 a {
@@ -42,10 +44,11 @@ a {
   text-align: center; /*added this*/
 }
 
-.pageContainer {
+.page_container {
   padding: 4vh 4vw 0px 4vw;
   height: 94vh;
   width: 100vw;
+  max-height: 94vh;
   overflow-y:scroll;
 }
 
