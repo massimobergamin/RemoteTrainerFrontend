@@ -9,17 +9,19 @@ const Trainer = () => {
   const dispatch = useDispatch();
 
   const { currentUser } = useAuth();
-  const { user, invite_code, trainer } = useSelector(state => state.trainer);
+  
   useEffect(() => {
+    console.log(currentUser)
     dispatch(getInviteCode(currentUser.uid))
     dispatch(getUserById(currentUser.uid))
   }, [])
+  const { user, invite_code, trainer } = useSelector(state => state.trainer);
   
   return (
     <div>
       <h1></h1>
       <h3>Start inviting your clients with this code</h3>
-      <p>{invite_code.invite_code}</p>
+      <p>{invite_code?.invite_code}</p>
       <NavigationTrainer></NavigationTrainer>
     </div>
   )

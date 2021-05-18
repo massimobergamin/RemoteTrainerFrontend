@@ -9,12 +9,12 @@ import { useDispatch } from 'react-redux';
 const Profile = () => {
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
-  const { user, invite_code } = useSelector(state => state.trainer);
-
+  
   useEffect(() => {
     dispatch(getInviteCode(currentUser.uid))
     dispatch(getUserById(currentUser.uid))
   }, [])
+    const { user, invite_code } = useSelector(state => state.trainer);
 
   return (
     <div>
@@ -26,8 +26,8 @@ const Profile = () => {
       <p>{user.username}</p>
         <a href="./editprofile">
           <button className="button">Edit Profile</button>
-        </a>
-        <p>Invite a client: {invite_code.invite_code}</p>
+        </a>    
+        <p>Invite a client: {invite_code?.invite_code}</p>
       <NavigationTrainer></NavigationTrainer>
     </div>
   )
