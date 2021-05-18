@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import ExerciseDetails from './exerciseDetails';
+import { useAuth } from '../firebase/contextAuth'
+import ClientExerciseDetails from './clientExerciseDetails';
 
 function WorkoutDetails({ workout }) {
   const [index, setIndex] = useState(0);
@@ -7,8 +9,11 @@ function WorkoutDetails({ workout }) {
   const [prevDisabled, setPrevDisabled] = useState(true);
   const [nextDisabled, setNextDisabled] = useState(false);
 
+  const { currentUser } = useAuth();
+  
   useEffect(() => {
     setExercise(workout.exercises[0]);
+    console.log('workout exercise: ', exercise);
     if (workout.exercises.length === 1) {
       setPrevDisabled(true);
       setNextDisabled(true)
@@ -38,7 +43,9 @@ function WorkoutDetails({ workout }) {
       <h3>{workout.title}</h3>
       <div className="workoutsExercises_flex">
         <button className="button" onClick={handlePrevClick} disabled={prevDisabled}>◀</button>
+        {currentUser.displayName == 'trainer' ? 
         <ExerciseDetails key={exercise.id} exercise={exercise}></ExerciseDetails>
+        : <ClientExerciseDetails key={exercise?.id} exercise={exercise}></ClientExerciseDetails>}
         <button className="button" onClick={handleNextClick} disabled={nextDisabled}>▶</button>
       </div>
     </div>

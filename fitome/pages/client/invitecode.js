@@ -26,7 +26,7 @@ const TrainerCode = () => {
         const trainer = response.payload.data.user_uid;
         if (trainer && client) {
           dispatch(postClient({trainer_uid: trainer , client_uid: client}));
-          router.push('/client/plan');
+          router.push('/client/editprofile');
         } else { 
           alert('Trainer does not exist...');
         }
