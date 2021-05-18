@@ -34,6 +34,7 @@ function sessionCard({class_name, usertype, session}) {
 
     return (
         <div className={`${class_name} sessionCard_contrainer`}>
+            <button>Delete</button>
             <div className="sessionCard_left">
                 {showProfilePicture()}
             </div>

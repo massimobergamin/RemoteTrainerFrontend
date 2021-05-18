@@ -19,7 +19,7 @@ export default function Home() {
     password: '',
   };
   const [formState, setFormState] = useState(initialState);
-  const { user } = useSelector(state => state.trainer);
+  const { user, trainerInfo } = useSelector(state => state.trainer);
 
 
     const loginHandler = async () => {
@@ -30,8 +30,8 @@ export default function Home() {
         router.push('/session');
       } else if (userInfo.user.displayName === 'client') {
           console.log('loginHandler: ', userInfo.user.uid);
-          await dispatch(getUser(userInfo.user.uid));
-          router.push('/client/plan');
+          dispatch(getUser(userInfo.user.uid)).then(()=>console.log(user, trainerInfo))
+          //router.push('/client/plan');
           // TODO: route to landing if data not present
           // if (!user.trainerInfo.trainer_uid) {
           //   router.push('/client/invitecode');

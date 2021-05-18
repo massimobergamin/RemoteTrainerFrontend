@@ -12,7 +12,6 @@ import moment from 'moment';
 import PlansBar from '../components/plansBar';
 import { route } from 'next/dist/next-server/server/router';
 
-
 //get list of workouts
 
 const CreatePlanForm = () => {
@@ -29,6 +28,7 @@ const CreatePlanForm = () => {
   
   const detailInitialState = {
     day: "",
+    workout: {},
     exercises: [],
     reps: [],
     sets: [],
@@ -39,12 +39,19 @@ const CreatePlanForm = () => {
   const [detailState, setDetailState] = useState(detailInitialState)
   const [planState, setPlanState] = useState(initialState);
   const dispatch = useDispatch();
+  const { user, clients, workouts } = useSelector(state => state.trainer);
 
   //retrieves list of Trainer's clients
   useEffect(() => {
     dispatch(getClients(currentUser.uid))
     dispatch(getWorkout(currentUser.uid))
   }, [])
+
+///
+  // const workoutCard = () => {
+  //   return (<)
+  // }
+///
   
   const insertAt = (array, index, elem) => {
     const shallowArray = Object.assign(array);
@@ -53,33 +60,40 @@ const CreatePlanForm = () => {
 
   const setReps = (e, index) => {
     console.log(planState)
-    const updatedArrray = insertAt(detailState.reps, index, e.currentTarget.value);
+    const updatedArray = insertAt(detailState.reps, index, e.currentTarget.value);
     console.log(detailState.reps)
   }
 
   const setSets = (e, index) => {
-    const updatedArrray = insertAt(detailState.sets, index, e.currentTarget.value);
+    const updatedArray = insertAt(detailState.sets, index, e.currentTarget.value);
     console.log(detailState.sets)
   }
 
-  const { user, clients, workouts } = useSelector(state => state.trainer);
-
 //*********************** */
-  const showSeletedWorkout = () => {
+  const showSelectedWorkout = () => {
     if (detailState.exercises.length) {
-      return detailState.exercises.map((exercise, index) => (
-        <div>
-          <h1>{exercise.title}</h1>
-          <h6>Reps</h6>
-          <input onChange={(e) => setReps(e, index)}/>
-          <h6>Sets</h6>
-          <input onChange={(e) => setSets(e, index)}/>
+      return detailState.exercises.map((exercise, index) => {
+        console.log("EXERCISE", exercise)
+        return (
+          <div>
+            <h2>{exercise.title}</h2>
+            <p>{exercise.description}</p>
+            <div className="createPlan_reps">
+              <label>Sets:</label>
+              <input type="number" min="0" step="1" onChange={(e) => setSets(e, index)}/>
+            </div>
+            <div className="createPlan_reps">
+              <label>Reps:</label>
+              <input type="number" min="0" step="1" onChange={(e) => setReps(e, index)}/>
+            </div>
           </div>
-      ))
+        )
+      })
     }
   }
 
   const listWorkouts = () => {
+    console.log("WORKOUTS:" ,workouts)
     if (workouts) {
       return workouts.map((workout)=> {
         return <option key={workout.id} value={`${workout.title}`}></option>
@@ -95,8 +109,6 @@ const CreatePlanForm = () => {
   
 
   const listClients = () => {
-    // console.log("CLIENTS", clients)
-    // console.log("USER", user)'
     if (clients) {
       return clients.map((client)=> {
         return <option key={client.id} value={`${client.first_name} ${client.last_name}`}></option>
@@ -106,6 +118,14 @@ const CreatePlanForm = () => {
       alert('You have no clients. Please invite your clients using your invite code.')
     } 
   }
+
+  useEffect(() => {
+    showCards();
+  }, [planState])
+
+  useEffect(() => {
+    showSelectedWorkout()
+  }, [detailState])
   
   const findValue = (value) => {
     for (let i=0; i<clients.length; i++) {
@@ -123,16 +143,19 @@ const CreatePlanForm = () => {
     for (let i=0; i<workouts.length; i++) {
       let name = workouts[i].title
       if (name===value){
-        console.log(workouts[i])
-        detailState.exercises.push(workouts[i])
+        console.log("WORKOUT VALUE", workouts[i])
+        setDetailState({...detailState, workout:workouts[i], exercises:detailState.exercises.concat(workouts[i].exercises)});
       }
       break;
     }
   }
   
   const handleDetailSubmit = (e) => {
-    e.preventDefault();
-    planState.details.push(detailState);
+    setPlanState({...planState, details: planState.details.concat(detailState)});
+    let dropdown = document.getElementById("listOfClients");
+    dropdown.selectedIndex=0;
+    console.log("ELEMENT", document.getElementById("day_date"))
+    document.getElementById("day_date").value="";
     setDetailState(detailInitialState)
   }
   const handlePlanSubmit = (e) => {
@@ -142,19 +165,18 @@ const CreatePlanForm = () => {
   };
 
   const addDayButton = () => {
-    if (detailState.day && detailState.exercises.length && detailState.reps.length && detailState.sets.length) {
-      return <input className="button" type="submit" value="Add Day" onClick={e => handleDetailSubmit(e)}/>
-    }
-    else {
-      return <button className="button" type="button" disabled>Add Day</button>
-    }
+    return <button className="button" 
+      disabled ={detailState.day==="" || !detailState.workout || detailState.reps.length===0 || detailState.reps.length===0}
+      type="button" 
+      onClick={e => handleDetailSubmit(e)}>Add Workout Day</button>
   }
 
   const finalizeDayButton = () => {
-    if (planState.client_uid && planState.details.length && planState.start_date && planState.end_date) {
-      return <input className="button" type="submit" value="Finalize Plan" onClick={e => handlePlanSubmit(e)}/>
-    }
-    else  return <button className="button" type="button" disabled>Finalize Plan</button>
+      return <button className="button" 
+        type="button" 
+        disabled={planState.client_uid==="" || planState.details.length===0 || planState.start_date==="" || planState.end_date===""}
+        value="Finalize Plan" 
+        onClick={e => handlePlanSubmit(e)}>Assign Schedule</button>
   }
 
   function getDate (date) {
@@ -165,17 +187,49 @@ const CreatePlanForm = () => {
     return inputDate;
 }
   
+const showExercises = (exercises, reps, sets) => {
+  return exercises.map((exercise, index)=> {
+      return (
+        <div>
+          <div>Exercise #{index+1}: <span>{exercise.title}</span></div>
+          <div>Sets: {sets[index]}   Reps:{reps[index]}</div>
+        </div>
+      )
+  })
+}
+
+function deleteHandler(index) {
+  console.log("INDEX TO DELETE", index)
+  setPlanState({...planState, details: planState.details.splice(index, 1)})
+  console.log(planState, "DELETING")
+}
+  const showCards = () => {
+    if (planState.details.length) {
+      return planState.details.map((workout,index) =>{
+        console.log("MAPPING", workout)
+        return (
+          <div className="plan_card">
+            <button type="button" onClick={()=>deleteHandler(index)}>X</button>
+            <div>{workout.workout.title}</div>
+            <div>{moment(workout.day).format('dddd MMM  do')}</div>
+            {showExercises(workout.exercises, workout.reps, workout.sets)}
+          </div>
+        )
+      })
+    }
+    return null;
+  }
+
   return (
-    <div>
-      <PlansBar></PlansBar>
+    <div >
+      {console.log("DAY STATE", detailState)}
       <form className="fullFormContainer">
         <label htmlFor="listOfClients">Select a Client:</label>
         
-        <input list="clientList" onChange={(e)=>findValue(e.target.value)} id="listOfClients" name="listOfClients" />
+        <input list="clientList" autoComplete="off" onChange={(e)=>findValue(e.target.value)} id="listOfClients" name="listOfClients" />
         <datalist id="clientList" >
         {listClients()}
         </datalist>
-        {/* </div> */}
         <div>
         </div>
         <p className="profileLabelInput">Start Date</p>
@@ -190,39 +244,28 @@ const CreatePlanForm = () => {
           }}/>
         
         <p className="profileLabelInput">Day</p>
-          <input type="date" placeholder="Day" onChange={(e) => {
-            if(e.target.value >= planState.start_date && e.target.value <= planState.end_date)
-            setDetailState({...detailState, day:e.target.value})
-            else alert("This day is not within the selected plan dates")
-          }
-            }/>
+          <input type="date" 
+            disabled = {planState.start_date==="" || planState.end_date===""}
+            min={getDate(moment(planState.start_date))}
+            max= {getDate(moment(planState.end_date))}
+            id="day_date"
+            onChange={(e) => setDetailState({...detailState, day:e.target.value})}
+          />
             
-              <label htmlFor="listOfWorkoutss">Select a Workout:</label>
+              <label htmlFor="listOfWorkouts">Select a Workout:</label>
               
-        <input list="workoutList" onChange={(e)=>findWorkoutValue(e.target.value)} id="listOfWorkouts" name="listOfWorkouts" />
+        <input list="workoutList" autoComplete="off" onSelect={(e)=>findWorkoutValue(e.target.value)} id="listOfWorkouts" name="listOfWorkouts" />
         <datalist id="workoutList" >
         {listWorkouts()}
         </datalist>
-        {showSeletedWorkout()}
-        
+        {showSelectedWorkout()}
         <textarea placeholder="notes" value={detailState.trainer_notes} onChange={(e) => setDetailState({...detailState, trainer_notes:e.target.value})}/>
         
         {addDayButton()}
         
         {finalizeDayButton()}
       </form>
-      {planState.details ? planState.details.map(day => (
-        <div>
-          <p>{day.day}</p>
-          {day.exercises.map(exercise => (
-            <div>
-              <p>{exercise.title}</p>
-            </div>
-          ))}
-        </div>
-      )) : null
-      }
-      {/* <NavigationTrainer></NavigationTrainer> */}
+      {showCards()}
     </div>
   )
 }

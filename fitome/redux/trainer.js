@@ -282,10 +282,10 @@ export const trainerSlice = createSlice({
   },
   extraReducers: {
     [postUser.fulfilled] : (state, action) => {
-      state.user = action.payload;
+      if (action.payload) state.user = action.payload;
     },
     [updateUser.fulfilled] : (state, action) => {
-      state.user = action.payload;
+      if (action.payload) state.user = action.payload;
     },
     [getUserById.fulfilled] : (state, action) => {
       state.sessions = action.payload.sessions;
