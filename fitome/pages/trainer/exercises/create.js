@@ -65,7 +65,7 @@ const CreateExercise = () => {
         </form>
           <button className="button" onClick={handleSubmit} disabled={formState.title===""||formState.description===""||formState.muscle_group===""||media==='uploading'}>Create</button>
       </div>
-      <NavigationTrainer></NavigationTrainer>
+      {/* <NavigationTrainer></NavigationTrainer> */}
     </div>
   )
 }
