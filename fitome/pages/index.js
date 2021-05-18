@@ -21,12 +21,12 @@ export default function Home() {
   const [formState, setFormState] = useState(initialState);
   const { user } = useSelector(state => state.trainer);
 
-  const loginHandler = async () => {
+
+    const loginHandler = async () => {
       let userInfo = await login(formState.email, formState.password);
       console.log(userInfo)
       if (userInfo.user.displayName === 'trainer') {
         await dispatch(getUserById(userInfo.user.uid))
-        
         router.push('/session');
       } else if (userInfo.user.displayName === 'client') {
           console.log('loginHandler: ', userInfo.user.uid);
@@ -68,9 +68,7 @@ export default function Home() {
               onClick={loginHandler}>LOGIN</button>
             </form>
             <p>Don't have an account? <Link href="/signup"><a><span>Sign up.</span></a></Link></p>
-            
           </main>
         </div>
       )
-  };
-
+  }

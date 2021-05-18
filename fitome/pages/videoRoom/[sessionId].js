@@ -14,7 +14,7 @@ const Video = ({ peer }) => {
     })
   }, []);
 
-  return <video className="video_them" playsInline autoPlay ref={ref} />;
+  return <video id="video_them" className="video_them" playsInline autoPlay ref={ref} />;
 }
 
 const VideoRoom = () => {
@@ -63,6 +63,22 @@ const VideoRoom = () => {
         item.peer.signal(payload.signal);
       });
 
+      socketRef.current.on('callEnded', res => {
+        console.log(peersRef.current)
+        const themVideo = document.getElementById('video_them');
+        console.log(themVideo, "THEM");
+        peersRef.current.length >= 1 && peersRef.current.forEach(peer=>{
+          peer.peer.destroy();
+          console.log(peer.peer)
+        });
+         themVideo && themVideo.remove();
+        if (userVideo.current) {
+          userVideo.current.srcObject.getTracks()[0].stop()
+          userVideo.current.srcObject.getTracks()[1].stop()
+        }
+         router.push('/session')
+      });
+
     })
   }, []);
 
@@ -103,7 +119,11 @@ const VideoRoom = () => {
   }
 
   function hangUp () {
-    console.log("HANGING UP")
+    console.log("HANGING UP");
+    userVideo.current.srcObject.getTracks()[0].stop()
+    userVideo.current.srcObject.getTracks()[1].stop()
+    socketRef.current.emit('endCall')
+    router.push('/session')
   }
 
   return (
@@ -113,6 +133,9 @@ const VideoRoom = () => {
       <div className="timer_container">
         <TimerOverlay />
       </div>
+      <div className="endCall">
+        <button type="button" onClick={hangUp} className="button_circle"><img src="/icons/call_end_white_24dp.svg"/></button>
+    </div> 
     </div>
   );
 }

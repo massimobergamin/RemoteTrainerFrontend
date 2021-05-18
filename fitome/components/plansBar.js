@@ -9,9 +9,9 @@ const PlansBar = () => {
                   <p>Create Plan</p>
                 </li>
             </Link>
-            <Link href="./plans">
+            <Link href="./clients">
                 <li className="workoutsExercisesBar_icon">
-                    <p>View Plans</p>
+                    <p>Clients</p>
                 </li>
             </Link>
         </ul>

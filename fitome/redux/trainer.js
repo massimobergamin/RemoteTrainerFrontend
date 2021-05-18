@@ -71,6 +71,7 @@ export const postInviteCode = createAsyncThunk(
   'trainer/postInviteCodeStatus',
   async (inviteState) => {
     try {
+      console.log("in redux", inviteState)
       const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users/invite/${inviteState.user_uid}`, inviteState);
       return response.data;
     } catch (error) {

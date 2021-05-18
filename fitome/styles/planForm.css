@@ -1,6 +1,18 @@
+.fullFormContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 4vh 4vw 0px 4vw;
+  height: 94vh;
+  width: 100vh;
+  overflow-y:scroll;
+}
+
 .detailsContainer {
   display: flex;
   flex-direction: column;
+}
+.detailInput {
+  display: flex;
 }
 
 .planForm_label {
@@ -17,4 +29,8 @@
   display: flex;
   flex-direction: column;
   margin: 5px;
+}
+
+.labelPlanForm {
+  font-size:medium;
 }

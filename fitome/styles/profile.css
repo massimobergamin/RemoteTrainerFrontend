@@ -13,3 +13,9 @@
 .profileCreate_form .button {
   width: 100px;
 }
+
+.photoPreview {
+  border-radius: 50%;
+  height: 20vh;
+  width: 30vw;
+}

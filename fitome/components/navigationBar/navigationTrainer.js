@@ -14,7 +14,7 @@ const NavigationTrainer = () => {
                     <img className="navigationBar_image" src="/icons/call_white_24dp.svg"/>
                 </li>
             </Link>
-            <Link href="/trainer/clientAssignment">
+            <Link href="/trainer/clients">
                 <li className="navigationBar_icon">
                     <img className="navigationBar_image" src="/icons/inventory_white_24dp.svg"/>
                 </li>

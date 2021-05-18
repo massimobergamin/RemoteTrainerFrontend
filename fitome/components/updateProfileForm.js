@@ -12,6 +12,15 @@ const UpdateProfileForm = () => {
   const [photo, setPhoto] = useState('');
 
   const initialState = {
+<<<<<<< HEAD
+=======
+    profile_picture: "",
+    sex: "",
+    weight: 0,
+    height: 0,
+    birthday: 0,
+    trainer_uid: currentUser.uid
+>>>>>>> main
   };
   const [profileState, setProfileState] = useState(initialState);
   const { user, invite_code } = useSelector(state => state.trainer);
@@ -20,9 +29,14 @@ const UpdateProfileForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     console.log('currentUser in updateProf', currentUser)
     dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: photo}}))
       // .then(() => router.push('/trainer/profile'));
+=======
+    console.log(profileState)
+    dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: photo}}));
+>>>>>>> main
   };
 
   return (
@@ -71,6 +85,7 @@ const UpdateProfileForm = () => {
             placeholder="Sex"
             name="sex"
             value={profileState.sex}
+<<<<<<< HEAD
             list="sexes"
             onChange={(e) => setProfileState({...profileState, sex: e.target.value})}/>
             <datalist id="sexes">
@@ -89,6 +104,11 @@ const UpdateProfileForm = () => {
               e.preventDefault();
               router.push('/trainer/profile');
               }}/>
+=======
+            onChange={(e) => setProfileState({...profileState, sex:e.target.value})}/>
+            <UploadImageForm setPhoto={setPhoto}></UploadImageForm>
+            <input className="button" type="submit" value="update" onClick={e => handleSubmit(e)}/>
+>>>>>>> main
         </form>
       </div>
     </div>

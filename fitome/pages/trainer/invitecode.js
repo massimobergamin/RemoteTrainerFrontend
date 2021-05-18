@@ -8,34 +8,23 @@ import { useDispatch, useSelector } from 'react-redux';
 const Trainer = () => {
   const dispatch = useDispatch();
 
-
-  //let inviteCode = '';
   const { currentUser } = useAuth();
-  const { user, invite_code } = useSelector(state => state.trainer);
+  
   useEffect(() => {
+    console.log(currentUser)
     dispatch(getInviteCode(currentUser.uid))
     dispatch(getUserById(currentUser.uid))
   }, [])
-
+  const { user, invite_code, trainer } = useSelector(state => state.trainer);
+  
   return (
     <div>
       <h1></h1>
       <h3>Start inviting your clients with this code</h3>
-      <p>{invite_code.invite_code}</p>
+      <p>{invite_code?.invite_code}</p>
       <NavigationTrainer></NavigationTrainer>
     </div>
   )
 }
 
 export default Trainer;
-
-// creating  plan
-// view his appointments
-// profile
-
-// client landing page
-// view appointment
-// view owkrout
-// view plan
-// view exercises
-// profile
