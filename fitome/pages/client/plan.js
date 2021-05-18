@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { getUser } from '../../redux/client'
 import { useAuth } from '../../firebase/contextAuth';
@@ -9,7 +9,6 @@ import WorkoutDetails from '../../components/workoutDetails';
 
 // displays client's workout plan + exercises
 const Plan = () => {
-  const [gotPlan, setGotPlan] = useState(false);
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
 
@@ -31,7 +30,7 @@ const Plan = () => {
         const today = Date.now();
         if (moment(today).isBetween(startDate, endDate) && !gotPlan) {
           let curPlan = plan;
-          console.log('curPlan: ', curPlan);
+          // console.log('curPlan: ', curPlan);
           return (
             <div>
               <div>Beginning: {moment(startDate).format("dddd, MMMM Do YYYY")}</div>
