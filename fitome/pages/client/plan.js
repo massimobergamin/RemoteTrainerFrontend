@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { getUser } from '../../redux/client'
 import { useAuth } from '../../firebase/contextAuth';
@@ -9,6 +9,7 @@ import WorkoutDetails from '../../components/workoutDetails';
 
 // displays client's workout plan + exercises
 const Plan = () => {
+  const [gotPlan, setGotPlan] = useState(false);
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
 
@@ -23,11 +24,12 @@ const Plan = () => {
     
     if (client.plans) {
       // console.log('client plans: ', client.plans);
-      return client.plans.map(plan => {
+      for (let i = 0; i < client.plans.length; i++) {
+        let plan = client.plans[i];
         const startDate = plan.start_date
         const endDate = plan.end_date
         const today = Date.now();
-        if (moment(today).isBetween(startDate, endDate)) {
+        if (moment(today).isBetween(startDate, endDate) && !gotPlan) {
           let curPlan = plan;
           console.log('curPlan: ', curPlan);
           return (
@@ -39,15 +41,15 @@ const Plan = () => {
                   <div>
                     <h2 key={day.id}>{moment(day.day).format("dddd, MMMM Do YYYY")}</h2>
                     <WorkoutDetails key={day.day} workout={day}></WorkoutDetails> 
-                  </div>        
+                  </div>
                 ))}
                 </div>
             </div>
           );
         };
-      });
+      };
     };
-    }
+    };
 
 
   return (
