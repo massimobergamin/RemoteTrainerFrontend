@@ -273,6 +273,8 @@ export const trainerSlice = createSlice({
     legExs: [],
     backExs: [],
     chestExs: [],
+    coreExs: [],
+    shoulderExs: [],
     miscExs: [],
     measurements: []
   },
@@ -361,8 +363,11 @@ export const trainerSlice = createSlice({
       state.legExs = state.exercises.filter(exercise => exercise.muscle_group === 'legs' && exercise.type === 'custom');
       state.backExs = state.exercises.filter(exercise => exercise.muscle_group === 'back' && exercise.type === 'custom');
       state.chestExs = state.exercises.filter(exercise => exercise.muscle_group === 'chest' && exercise.type === 'custom');
+      state.coreExs = state.exercises.filter(exercise => exercise.muscle_group === 'core' && exercise.type === 'custom');
+      state.shoulderExs = state.exercises.filter(exercise => exercise.muscle_group === 'shoulders' && exercise.type === 'custom');
       state.miscExs = state.exercises.filter(exercise => exercise.muscle_group !== 'arms' && exercise.muscle_group !== 'legs'
-        && exercise.muscle_group !== 'back' && exercise.muscle_group !== 'chest' && exercise.type === 'custom');
+        && exercise.muscle_group !== 'back' && exercise.muscle_group !== 'chest' && exercise.muscle_group !== 'core'
+        && exercise.muscle_group !== 'shoulders' && exercise.type === 'custom');
     },
     [postWorkout.fulfilled] : (state, action) => {
       state.workouts.push(action.payload);
