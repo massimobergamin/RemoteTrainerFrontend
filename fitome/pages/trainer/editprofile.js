@@ -11,14 +11,15 @@ const EditProfile = () => {
   const { currentUser } = useAuth();
   const { user } = useSelector(state => state.trainer);
 
+  console.log('user', user)
+
   useEffect(() => {
-    console.log(currentUser)
-    dispatch(getUserById(currentUser.uid))
+    dispatch(getUserById(currentUser.uid));
   }, [])
 
   return (
     <div>
-      <ProfileBar></ProfileBar>
+      {/* <ProfileBar></ProfileBar> */}
       <UpdateProfileForm></UpdateProfileForm>
       <NavigationTrainer></NavigationTrainer>
     </div>

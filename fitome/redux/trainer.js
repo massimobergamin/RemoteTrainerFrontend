@@ -20,6 +20,7 @@ export const updateUser = createAsyncThunk(
     'trainer/updateUserStatus',
     async ({uid, userData}) => {
       try {
+        console.log('in thunk', uid, userData)
         const response = await axios.put(`https://remotetrainerserver.herokuapp.com/users/${uid}`, userData);
         return response.data;
       } catch (error) {
@@ -255,6 +256,8 @@ export const trainerSlice = createSlice({
       weight: 0,
       height: 0,
       birthday: 0,
+      // type: '',
+      // sex: ''
     },
     invite_code: "",
     exercises: [],
@@ -299,6 +302,8 @@ export const trainerSlice = createSlice({
       state.user.weight = action.payload.weight;
       state.user.height = action.payload.height;
       state.user.birthday = action.payload.birthday;
+      // state.user.type = action.payload.type;
+      // state.user.sex = action.payload.sex;
     },
     [postClient.fulfilled] : (state, action) => {
       state.clients.push(action.payload);

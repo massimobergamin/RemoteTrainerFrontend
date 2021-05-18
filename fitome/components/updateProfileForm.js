@@ -1,69 +1,94 @@
 import { useState } from 'react';
 import { useAuth } from '../firebase/contextAuth'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import UploadImageForm from './uploadImageForm';
 import { updateUser } from '../redux/trainer';
-import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 
 const UpdateProfileForm = () => {
   const dispatch = useDispatch();
-  const { currentUser } = useAuth();
-  
+  const { currentUser, logout } = useAuth();
+  const router = useRouter();
   const [photo, setPhoto] = useState('');
 
   const initialState = {
-    profile_picture: photo,
-    sex: "",
-    weight: 0,
-    height: 0,
-    birthday: 0,
-    trainer_uid: currentUser.uid
   };
   const [profileState, setProfileState] = useState(initialState);
-  const { user } = useSelector(state => state.trainer);
-  console.log(user)
+  const { user, invite_code } = useSelector(state => state.trainer);
+
+  console.log('user in updateProfForm', currentUser)
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateUser(currentUser.uid, profileState));
+    console.log('currentUser in updateProf', currentUser)
+    dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: photo}}))
+      // .then(() => router.push('/trainer/profile'));
   };
 
   return (
     <div>
-      <div className="profileContainer">
+      <div className="pageContainer">
         <form className="profileCreate_form">
-            <p className="profileLabelInput">weight</p>
+          <label className="profileCreate_field" htmlFor="weight">Weight (lb):
+          <br/>
             <input
             className="profileCreate_field"
-            type="text" 
+            type="number"
             name="weight"
             value={profileState.weight}
-            onChange={(e) => setProfileState({...profileState, weight:e.target.value})}/>
-            <p className="profileLabelInput">height</p>
-            <input 
+            step="1"
+            min="0"
+            onChange={(e) => setProfileState({...profileState, weight: parseInt(e.target.value)})}/>
+          </label>
+          <label className="profileCreate_field" htmlFor="height">Height (cm):
+          <br/>
+            <input
             className="profileCreate_field"
-            placeholder="Height" 
-            type="text" 
-            name="height" 
+            placeholder="Height"
+            type="number"
+            name="height"
             placeholder="Height"
             value={profileState.height}
-            onChange={(e) => setProfileState({...profileState, height:e.target.value})}/>
-            <p className="profileLabelInput">birthday</p>
-            <input 
+            step="1"
+            min="0"
+            onChange={(e) => setProfileState({...profileState, height: parseInt(e.target.value)})}/>
+          </label>
+          <label className="profileCreate_field" htmlFor="Birthday">Birthday:
+          <br/>
+            <input
             className="profileCreate_field"
-            placeholder="Birthday" 
-            type="date" 
-            name="birthday" 
+            placeholder="Birthday"
+            type="date"
+            name="birthday"
             value={profileState.birthday}
-            onChange={(e) => setProfileState({...profileState, birthday:e.target.value})}/>
-            <input 
+            max="2003-05-17"
+            onChange={(e) => setProfileState({...profileState, birthday: e.target.value})}/>
+          </label>
+          {/*label className="profileCreate_field" htmlFor="sex">Sex:
+          <br/>
+            <input
             className="profileCreate_field"
-            placeholder="Gender"
-            type="text" 
-            name="gender"
+            placeholder="Sex"
+            name="sex"
             value={profileState.sex}
-            onChange={(e) => setProfileState({...profileState, sex:e.target.value})}/>
-            <UploadImageForm>setPhoto={setPhoto}</UploadImageForm>
-            <input className="button" type="submit" value="update" onClick={e => handleSubmit(e)}/>
+            list="sexes"
+            onChange={(e) => setProfileState({...profileState, sex: e.target.value})}/>
+            <datalist id="sexes">
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+              <option>I prefer not to say</option>
+            </datalist>
+          </label> */}
+          <label className="profileCreate_field" htmlFor="profilePicture">Profile Picture:
+          <br/>
+            <UploadImageForm setPhoto={setPhoto}></UploadImageForm>
+          </label>
+            <input className="button" type="submit" value="Save" onClick={e => handleSubmit(e)} disabled={photo==='uploading'}/>
+            <input className="button" type="submit" value="Cancel" onClick={e => {
+              e.preventDefault();
+              router.push('/trainer/profile');
+              }}/>
         </form>
       </div>
     </div>
