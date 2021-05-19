@@ -66,7 +66,7 @@ const CreateExercise = () => {
           </form>
             <button className="button" onClick={handleSubmit} disabled={formState.title===""||formState.description===""||formState.muscle_group===""||media==='uploading'}>Create</button>
             <br/>
-            <button className="button" onClick={() => {
+            <button className="buttonCancel" onClick={() => {
               router.push('/trainer/exercises');
             }}>Cancel</button>
         </div>

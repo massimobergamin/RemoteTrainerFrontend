@@ -34,18 +34,17 @@ const Profile = () => {
             </img> :
           <img className="profilePic" src="/noVid.png"></img>}
         </div>
-        <span className="profile_addImage">{user.username}</span>
+        <span className="profile_addImage">@{user.username}</span>
+          <div>Your last log in was <b>{lastLogin}</b>.</div>
+          <div>Your current trainer is <b>{trainer.user.first_name} {trainer.user.last_name}</b>.</div>
           <a href="./editprofile">
-            <button className="button profile_marginBottom">Edit Profile</button>
+            <button className="buttonCancel profile_marginBottom">Edit Profile</button>
           </a>
-          <div>Your last log in was {lastLogin}.</div>
-          <div>Your current trainer is {trainer.user.first_name} {trainer.user.last_name}.</div>
-          <br></br>
           <div><b>Birthday:</b><br/>{userBirthday}</div>
           <div><b>Height:</b><br/>{user.height} cm</div>
           <div><b>Weight:</b><br/>{user.weight} lbs</div>
           <div><b>Sex:</b><br/>{user.sex}</div>
-          <a href="" onClick={(e) => {
+          <a style={{fontSize: "0.9rem", color: "#585858"}} href="" onClick={(e) => {
             e.preventDefault();
             logout();
             router.push('/');

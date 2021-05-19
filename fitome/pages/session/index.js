@@ -50,7 +50,7 @@ function SessionList() {
                     e.preventDefault();
                     router.push('/trainer/session/create')
                   }}><span className="workout_addworkout_span">+ </span>Session</div>
-    
+
             )
         }
         return null;
@@ -61,7 +61,7 @@ function SessionList() {
             <div className="page_container">
                 {showButton()}
                 <div className="sessionList1">
-                    <div className="session_list" >Next Session:</div>
+                    <div className="session_list">Next Session:</div>
                     {showFirst()}
                 </div>
                 <div className="sessionList2">

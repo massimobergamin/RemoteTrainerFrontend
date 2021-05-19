@@ -56,3 +56,15 @@
     color: white;
     box-shadow:0 0 5px 3px rgba(0, 0, 0, 0.11);
 }
+
+.buttonCancel {
+    background-color: var(--primary);
+    margin-top: 10px;
+    font-weight: 700;
+    padding: 11px 10px;
+    border: 0;
+    border-radius: 10px;
+    color: white;
+    font-size: .72rem;
+    box-shadow:0 0 5px 3px rgba(0, 0, 0, 0.11);
+  }
