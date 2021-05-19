@@ -50,8 +50,10 @@ const Clients = () => {
  
   return (
     <div>
+      <div className="page_container">
       <h1>Client List</h1>
       {clientList()}   
+      </div>
       <NavigationTrainer/>
     </div>
   )
