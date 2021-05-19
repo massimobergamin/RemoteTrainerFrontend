@@ -5,13 +5,15 @@ import NavigationClient from '../../components/navigationBar/navigationClient';
 import { getUser } from '../../redux/client';
 import { getUserById } from '../../redux/trainer';
 import moment from 'moment';
+import { useRouter } from 'next/router';
 
 
 const Profile = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
   const dispatch = useDispatch();
   const { user, trainerInfo } = useSelector(state => state.client);
   // console.log('user', user);
+  const router = useRouter();
 
   useEffect(() => {
     dispatch(getUser(currentUser.uid));
