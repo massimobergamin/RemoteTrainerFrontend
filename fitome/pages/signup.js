@@ -55,53 +55,58 @@ const SignUp = () => {
     }
 
     return (
-        <div>
-            <form>
-                <label className="sessionCreate_field" htmlFor="firstName">First Name:</label>
+        <div className="initial_background">
+            <img className="initial_decor" src="/decor_background.png"/>
+            <img className="initial_wave" src="/wave.png"/>
+            <div className="signup_wrapper">
+            <img className="initial_logo" src="/fitome_orange.png"/>
+            <form className="signup_form">
+                <label className="signup_input" htmlFor="firstName">First Name:</label>
                 <input type="text"
-                    placeholder="First Name"
+                    // placeholder="First Name"
                     name="firstName"
                     value={formState.firstName}
                     onChange={(e)=>setFormState({...formState, first_name:e.target.value})}/>
-                <label className="sessionCreate_field" htmlFor="lastName">Last Name:</label>
+                <label className="signup_input" htmlFor="lastName">Last Name:</label>
                 <input type="text"
                     name="lastName"
-                    placeholder="Last Name"
+                    // placeholder="Last Name"
                     value={formState.lastName}
                     onChange={(e)=>setFormState({...formState, last_name:e.target.value})}/>
-                <label className="sessionCreate_field" htmlFor="username">Account Username:</label>
+                <label className="signup_input" htmlFor="username">Account Username:</label>
                 <input type="text"
                     name="username"
-                    placeholder="Username"
+                    // placeholder="Username"
                     value={formState.username}
                     onChange={(e)=>setFormState({...formState, username:e.target.value})}/>
-                <label className="sessionCreate_field" htmlFor="email">Email:</label>
+                <label className="signup_input" htmlFor="email">Email:</label>
                 <input type="email"
                     name="email"
-                    placeholder="Email"
+                    // placeholder="Email"
                     value={formState.email}
                     onChange={(e)=>setFormState({...formState, email:e.target.value})}/>
-                <label className="sessionCreate_field" htmlFor="password">Password:</label>
+                <label className="signup_input" htmlFor="password">Password:</label>
                 <input type="password"
                     name="password"
-                    placeholder="Password"
+                    // placeholder="Password"
                     value={formState.password}
                     onChange={(e)=>setFormState({...formState, password:e.target.value})}/>
-                <label className="sessionCreate_field" htmlFor="type">Select an Account Type:</label>
+                <label className="signup_input" htmlFor="type">Select an Account Type:</label>
                 <input list="accountType"
                     id="listoftype"
                     name="listoftype"
-                    placeholder="Account Type"
+                    // placeholder="Account Type"
                     onChange={(e)=>setFormState({...formState, type:e.target.value})}/>
                 <datalist id="accountType">
                     <option value="Client"></option>
                     <option value="Trainer"></option>
                 </datalist>
-                <button type="button"
-                    disabled={formState.password===""||formState.email===""||formState.first_name===""||formState.last_name===""||formState.username===""||formState.type===""}
-                    onClick={createHandler}>SIGN UP</button>
             </form>
-            <p>Already have an account? <Link href="/"><a><span>Login.</span></a></Link></p>
+            <button type="button" className="signup_button"
+                disabled={formState.password===""||formState.email===""||formState.first_name===""||formState.last_name===""||formState.username===""||formState.type===""}
+                onClick={createHandler}>SIGN UP</button>
+            <p className="signup_account" >Already have an account? <Link href="/"><a><span className="signup_account_span">Login.</span></a></Link></p>
+            </div>
         </div>
     )
 }

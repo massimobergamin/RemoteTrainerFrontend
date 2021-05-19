@@ -8,6 +8,7 @@
 @import './sessions.css';
 @import './profile.css';
 @import './planForm.css';
+@import './initialPages.css';
 @import './trainerClientPlanDetails.css';
 
 :root {
@@ -29,9 +30,11 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Poppins', sans-serif;
+  font-size: 16px;
   color: var(--fontColor);
   overflow-x: hidden;
   overflow-y: hidden;
+  background-color: var(--primary-accent);
 }
 
 a {
@@ -62,12 +65,12 @@ p {
   margin-bottom: 15px;
 }
 
-form input { /*added*/
+/*form input { 
   margin: 1vh 0;
   border: 0;
   padding: 3px 5px 3px 5px;
   box-shadow:0 0 5px 3px rgba(0, 0, 0, 0.11);
-}
+}*/
 
 #Exercise_Video { /*added*/
   border-radius: 5px;
