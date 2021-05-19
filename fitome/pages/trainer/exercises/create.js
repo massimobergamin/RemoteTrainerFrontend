@@ -34,7 +34,6 @@ const CreateExercise = () => {
 
   return (
     <div>
-      <WorkoutsExercisesBar></WorkoutsExercisesBar>
       <div className="pageContainer">
         <div className="createprofile_wrapper">
           <div className="page_title">Create New Exercise</div>
@@ -71,7 +70,7 @@ const CreateExercise = () => {
             }}>Cancel</button>
         </div>
       </div>
-      {/* <NavigationTrainer></NavigationTrainer> */}
+      <NavigationTrainer></NavigationTrainer>
     </div>
   )
 }
