@@ -73,7 +73,7 @@
   font-weight: 300;
 }
 
-.createprofile_form input {
+.createprofile_form input, textarea {
     border-radius: 10px;
     color: var(--fontColor);
     font-weight: 700;
