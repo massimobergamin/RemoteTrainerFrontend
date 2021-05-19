@@ -198,7 +198,7 @@ const VideoRoom = () => {
     const minutes = Math.floor((remainingTime % 3600) / 60)
     const seconds = remainingTime % 60
   
-    return `${hours}:${minutes}:${seconds}`
+    return <div className="timer_time">{`${hours}:${minutes}:${seconds}`}</div>
   }
 
   const handleChange = async (e) => {
@@ -327,39 +327,39 @@ const VideoRoom = () => {
     <div>
       <video muted className="video_me" ref={userVideo} autoPlay playsInline />
       {peers.map((peer, index) => <Video key={index} peer={peer} />)}
+      <div>
       <div className="timer_container">
-      <div>
-      <div>
       <CountdownCircleTimer
-        size={120}
+        size={125}
         key={reset}
         isPlaying={isPlaying}
         duration={newTimer}
         colors={[
-          ['#ffffff', 0.33],
-          ['#fbe560', 0.33],
-          ['#A30000', 0.33],
+          ['#307b63', 0.33],
+          ['#e5c100', 0.33],
+          ['#9c0412', 0.33],
         ]}
       >
         { children }
       </CountdownCircleTimer>
-      <button onClick={handlePause} disabled={isEmpty()}>{isPlaying ? "Pause" : "Start"}</button>
-      <button onClick={handleReset}>{isEditing ? "Submit" : "Reset"}</button>
-      <button onClick={handleEdit}>Edit</button>
+      <div className="timer_button_container">
+        <button className="timer_button" onClick={handlePause} disabled={isEmpty()}>{isPlaying ? "Pause" : "Start"}</button>
+        <button className="timer_button" onClick={handleReset}>{isEditing ? "Submit" : "Reset"}</button>
+        <button className="timer_button" onClick={handleEdit}>Edit</button>
+      </div>
+      <div className="timer_input">
       <div style={{ display: isEditing ? "flex" : "none" }}>
-        <div className="timer_input">
           <input type="number" min="0" name="minutes" value={timerInput.minutes} onChange={handleChange}></input>
           <label className="timer_label">Minutes</label>
           <input type="number" min="0" name="seconds" value={timerInput.seconds} onChange={handleChange}></input>
           <label className="timer_label">Seconds</label>
       </div>
       </div>
-      </div>
     </div>
       </div>
       <div className="endCall">
         <button type="button" onClick={hangUp} className="button_circle"><img src="/icons/call_end_white_24dp.svg"/></button>
-    </div> 
+    </div>
     </div>
   );
 }
