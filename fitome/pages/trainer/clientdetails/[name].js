@@ -25,6 +25,7 @@ const ClientDetail = () => {
               {moment(detail.day).format('MMM DD')}
               <div className="planContainer">
                 <div className="exerciseTitleContainer">  
+              <p>Exercises</p>
                   {detail.exercises.map(exercise => (
                     <div>
                       <p>{exercise.title}</p>
