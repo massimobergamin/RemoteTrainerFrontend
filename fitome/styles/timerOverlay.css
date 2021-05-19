@@ -1,17 +1,41 @@
 .timer_input {
   display: flex;
   flex-flow: column;
-  width: 6vw;
+  width: 10vw;
   margin: 8px;
+  text-align: right;
 }
 
 .timer_container {
   display: flex;
-  position:fixed;
-  bottom: 30vh;
-  right: 4vh;
+  position: fixed;
+  flex-flow: column;
+  bottom: 25vh;
+  right: 1vh;
+  align-items: flex-end;
 }
 
 .timer_label {
-  color: white;
+  color: black;
+}
+
+.timer_button {
+  color: rgb(255, 255, 255);
+  background-color:rgba(75, 75, 75, 0.5);
+  border-radius: 10px;
+  border-color: rgb(97, 96, 96);
+  margin: 1px;
+  padding: 5px 8px;
+  font-weight: 750;
+  font-size: 11px;
+}
+
+.timer_button_container {
+  display: flex;
+}
+
+.timer_time {
+  font-weight: 700;
+  /* color:rgb(255, 137, 27); */
+  font-size: 28px;
 }
