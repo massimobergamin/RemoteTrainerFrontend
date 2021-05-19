@@ -99,7 +99,10 @@ const VideoRoom = () => {
         signal,
       })
     })
-    // peer.send('HI!!!');
+
+    peer.on('connect', () => {
+      peer.send('Hey there!');
+    });
     return peer;
   }
 
@@ -115,12 +118,15 @@ const VideoRoom = () => {
         signal,
         callerID,
       })
-      // peer.send('Hello!!!');
     })
 
+    peer.on('data', data => {
+      console.log('Got a message from Peer, it says: ' + data);
+    });
     peer.signal(incomingSignal);
     return peer;
   }
+
 
   function hangUp () {
     console.log("HANGING UP");
