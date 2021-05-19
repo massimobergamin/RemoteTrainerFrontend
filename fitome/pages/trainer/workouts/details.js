@@ -13,12 +13,13 @@ function Details() {
 
   return (
     <div>
-      <WorkoutsExercisesBar></WorkoutsExercisesBar>
-      <div className="pageContainer">
-        <button className="button" onClick={() => {
+      
+      <div className="page_container">
+      <div className="workout_addworkout" onClick={(e) => {
+          e.preventDefault();
           dispatch(setSelectedWorkout({}));
-          router.push('/trainer/workouts');
-          }}>Back</button>
+          router.push('/trainer/workouts')
+        }}><span className="workout_addworkout_span">{"< "}</span>Back</div>
         <WorkoutDetails workout={selectedWorkout}></WorkoutDetails>
       </div>
       <NavigationTrainer></NavigationTrainer>

@@ -39,8 +39,8 @@ function WorkoutDetails({ workout }) {
   }
 
   return (
-    <div>
-      <h3>{workout.title}</h3>
+    <div className="workoutdetail_wrapper">
+      <div className="page_title">{workout.title}</div>
       <div className="workoutsExercises_flex">
         <button className="button" onClick={handlePrevClick} disabled={prevDisabled}>◀</button>
         {currentUser.displayName == 'trainer' ? 
