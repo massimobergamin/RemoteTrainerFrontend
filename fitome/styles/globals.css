@@ -10,6 +10,7 @@
 @import './planForm.css';
 @import './initialPages.css';
 @import './trainerClientPlanDetails.css';
+@import './clientInfoTrainerView.css';
 
 :root {
   /* Colors: */

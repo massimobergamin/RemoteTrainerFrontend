@@ -9,22 +9,25 @@ const ClientDetail = () => {
 
   
   const displayDetails = recentPlans[0]?.details
-  console.log("RECENT", displayDetails)
+  
   return (
+    <div>
+
     <div className="page_container">
       <h1>{user.first_name + ' ' + user.last_name}</h1>
       {user.profile_picture ?
         <img src={user.profile_picture} className="profilePic"/>
-      : null }
+        : null }
       {recentPlans.length ? recentPlans.map(plan => (
-        <div className="planCard">
-          <p>plan ends</p>
-          <p>{moment(plan.end_date).format('MMM DD')}</p>
+        <div className="planCard trainer_clientview">
+          <p className="planHeader">Plan:</p>
+          <p className="planHeaderDate">{moment(plan.start_date).format('MMM DD') + "-" + moment(plan.end_date).format('MMM DD')}</p>
           {displayDetails ? displayDetails.map(detail => (
-            <div>
-              {moment(detail.day).format('MMM DD')}
+            <div className="single_card_container">
+              {"Day: " + moment(detail.day).format('MMM DD')}
               <div className="planContainer">
                 <div className="exerciseTitleContainer">  
+              <p className="trainerclientview_detaillabel">Exercises</p>
                   {detail.exercises.map(exercise => (
                     <div>
                       <p>{exercise.title}</p>
@@ -33,15 +36,15 @@ const ClientDetail = () => {
                 </div>
                 <div className="setrepContainer">
                   <div className="detailContainer">
-                    <p>sets</p>
+                    <p className="trainerclientview_detaillabel">sets</p>
                     {detail.sets.map(set => (
-                    <div>
+                      <div>
                       <p>{set}</p>
                     </div>
                     ))}
                   </div>
                   <div className="detailContainer">
-                  <p>reps</p>
+                  <p className="trainerclientview_detaillabel">reps</p>
                   {detail.sets.map(set => (
                     <div>
                       <p>{set}</p>
@@ -58,10 +61,11 @@ const ClientDetail = () => {
       )
       : 
       <p>Assign {user.first_name} a plan!</p>
-      }
+    }
       <a href="../createplan">
       <button className="button">Create Plan</button>
       </a>
+    </div>
       <NavigationTrainer></NavigationTrainer>
     </div>
   )
