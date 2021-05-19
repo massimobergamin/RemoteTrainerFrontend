@@ -10,6 +10,7 @@ const UpdateProfileForm = () => {
   const { currentUser } = useAuth();
   const router = useRouter();
   const [url, setURL] = useState('');
+  const [changePic, setChangePic] = useState(false)
 
   const initialState = {
   };
@@ -20,6 +21,7 @@ const UpdateProfileForm = () => {
   const types = ['image/png', 'image/jpeg'];
 
   const handleEditProfile = (e) => {
+    setChangePic(true)
       let selected = e.target.files[0];
       if (selected && types.includes(selected.type)) {
         setFile(selected);
@@ -99,7 +101,7 @@ const UpdateProfileForm = () => {
               <option>I prefer not to say</option>
             </datalist>
           </label>
-            <button className="button" type="submit"  onClick={e => handleSubmit(e)} disabled={url==='uploading'}>Save</button>
+            <button className="button" type="submit"  onClick={e => handleSubmit(e)} disabled={!url && changePic}>Save</button>
             <button className="buttonCancel" type="button"  onClick={e => {
               router.push('/trainer/profile');
               }}>Cancel</button>
