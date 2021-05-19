@@ -23,6 +23,9 @@ const VideoRoom = () => {
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
+  
+  // grab timer data from timer ref
+  const userData = useRef();
 
   const { sessionId } = router.query;
 
@@ -131,7 +134,7 @@ const VideoRoom = () => {
       <video muted className="video_me" ref={userVideo} autoPlay playsInline />
       {peers.map((peer, index) => <Video key={index} peer={peer} />)}
       <div className="timer_container">
-        <TimerOverlay />
+        <TimerOverlay ref={userData}/>
       </div>
       <div className="endCall">
         <button type="button" onClick={hangUp} className="button_circle"><img src="/icons/call_end_white_24dp.svg"/></button>

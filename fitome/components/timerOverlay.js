@@ -14,7 +14,7 @@ const TimerOverlay = () => {
   const [timerInput, setTimerInput] = useState(initState);
   const [newTimer, setNewTimer] = useState(0);
 
-
+  
   const children = ({ remainingTime }) => {
     const hours = Math.floor(remainingTime / 3600)
     const minutes = Math.floor((remainingTime % 3600) / 60)
