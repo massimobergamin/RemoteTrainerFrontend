@@ -38,12 +38,12 @@ function sessionCard({class_name, usertype, session}) {
                 {showProfilePicture()}
             </div>
             <div className="sessionCard_right">
-                <div>{session.title}</div>
-                <div>{`Session Time: ${Moment(session.startDate).format('LLL')}-${Moment(session.endDate).format('LT')}`}</div>
+                <div className="sessioncard_title">{session.title}</div>
+                <div>{`${Moment(session.startDate).format('LLL')}-${Moment(session.endDate).format('LT')}`}</div>
                 {usertype==="trainer" ?
-                <div>Client: <span>{`${session.users[1].first_name} ${session.users[1].last_name}`}</span></div>
+                <div><span className="exercise_subtitle">Client: </span>{`${session.users[1].first_name} ${session.users[1].last_name}`}</div>
                 :
-                <div>Trainer: <span>{`${session.users[0].first_name} ${session.users[0].last_name}`}</span></div>}
+                <div><span className="exercise_subtitle">Trainer: </span>{`${session.users[0].first_name} ${session.users[0].last_name}`}</div>}
                 <button className="button sessionCard_smallButton">Delete</button>
                 {showButton()}
             </div>
