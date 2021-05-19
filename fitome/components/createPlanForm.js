@@ -198,25 +198,27 @@ function deleteHandler(index) {
       <form className="fullFormContainer">
         <label htmlFor="listOfClients">Select a Client:</label>
         
-        <input list="clientList" autoComplete="off" onChange={(e)=>findValue(e.target.value)} id="listOfClients" name="listOfClients" />
+        <input className="createPlanInput" list="clientList" autoComplete="off" onChange={(e)=>findValue(e.target.value)} id="listOfClients" name="listOfClients" />
         <datalist id="clientList" >
         {listClients()}
         </datalist>
         <div>
         </div>
-        <p className="profileLabelInput">Start Date</p>
-           <input type="date" name="start date" min={getDate(Date.now())} value={planState.start_date} onChange={(e) => {
+        <p className="planFormlabels">Start Date</p>
+           <input className="createPlanInput" type="date" name="start date" min={getDate(Date.now())} value={planState.start_date} onChange={(e) => {
             setPlanState({...planState, start_date:e.target.value})
            
           }} required/>
-        <p className="profileLabelInput">End Date</p>
-           <input placeholder="End Date" type="date"  min={getDate(moment(planState.start_date).add(1, 'days'))} disabled={planState.start_date === ''} name="end date" value={planState.end_date} 
+        <p className="planFormlabels">End Date</p>
+           <input className="createPlanInput" type="date"  min={getDate(moment(planState.start_date).add(1, 'days'))} disabled={planState.start_date === ''} name="end date" value={planState.end_date} 
            onChange={(e) => { if(e.target.value > planState.start_date) setPlanState({...planState, end_date:e.target.value})
            else alert("End date must be at least 1 day after start date")
           }}/>
         
-        <p className="profileLabelInput">Day</p>
-          <input type="date" 
+        <p className="planFormlabels">Day</p>
+          <input 
+          className="createPlanInput"
+          type="date" 
             disabled = {planState.start_date==="" || planState.end_date===""}
             min={getDate(moment(planState.start_date))}
             max= {getDate(moment(planState.end_date))}
@@ -224,14 +226,15 @@ function deleteHandler(index) {
             onChange={(e) => setDetailState({...detailState, day:e.target.value})}
           />
             
-              <label htmlFor="listOfWorkouts">Select a Workout:</label>
+              <label className="planLabelCreate" htmlFor="listOfWorkouts">Select a Workout:</label>
               
-        <input list="workoutList" autoComplete="off" onSelect={(e)=>findWorkoutValue(e.target.value)} id="listOfWorkouts" name="listOfWorkouts" />
+        <input className="createPlanInput" list="workoutList" autoComplete="off" onSelect={(e)=>findWorkoutValue(e.target.value)} id="listOfWorkouts" name="listOfWorkouts" />
         <datalist id="workoutList" >
         {listWorkouts()}
         </datalist>
         {showSelectedWorkout()}
-        <textarea placeholder="notes" value={detailState.trainer_notes} onChange={(e) => setDetailState({...detailState, trainer_notes:e.target.value})}/>
+        <p className="planFormlabels">Notes</p>
+        <textarea className="noteInput" value={detailState.trainer_notes} onChange={(e) => setDetailState({...detailState, trainer_notes:e.target.value})}/>
         
         {addDayButton()}
         

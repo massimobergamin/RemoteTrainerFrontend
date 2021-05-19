@@ -36,3 +36,28 @@
 .plan_card {
   background-color: var(--primary);
 }
+
+.createPlanInput {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 1.1em;
+  border: 1px solid var(--primary);
+  border-color: #94d2c9;
+}
+
+.planFormlabels {
+  font-weight:300;
+  margin-top: 7px;
+  font-size: 1.2em;
+}
+
+.noteInput {
+  width: 100%;
+}
+
+.planLabelCreate {
+  margin-top: 8px;
+}
