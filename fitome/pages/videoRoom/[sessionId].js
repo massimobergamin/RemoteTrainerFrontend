@@ -103,6 +103,10 @@ const VideoRoom = () => {
     peer.on('connect', () => {
       peer.send('Hey there!');
     });
+
+    peer.on('data', data => {
+      console.log('Got a message from Peer, it says: ' + data);
+    });
     return peer;
   }
 
@@ -124,6 +128,10 @@ const VideoRoom = () => {
     // when peer receives data, log the message to the console
     peer.on('data', data => {
       console.log('Got a message from Peer, it says: ' + data);
+    });
+
+    peer.on('connect', () => {
+      peer.send('Hey there!');
     });
     return peer;
   }

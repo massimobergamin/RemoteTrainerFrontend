@@ -11,7 +11,7 @@ const Profile = () => {
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
   const { user, trainerInfo } = useSelector(state => state.client);
-  console.log('user', user);
+  // console.log('user', user);
 
   useEffect(() => {
     dispatch(getUser(currentUser.uid));
