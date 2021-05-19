@@ -304,8 +304,7 @@ const VideoRoom = () => {
         const timerDataJson = JSON.stringify(timerData);
         peer.peer.send(timerDataJson);
       })
-    });
-
+    }); 
     if (isPlaying && !isEditing) {
       await new Promise((resolve, reject) => resolve(setIsPlaying(prev => false))).then(() => {
         peersRef.current.map(peer => {
@@ -332,7 +331,7 @@ const VideoRoom = () => {
       <div>
       <div>
       <CountdownCircleTimer
-        size={125}
+        size={120}
         key={reset}
         isPlaying={isPlaying}
         duration={newTimer}
