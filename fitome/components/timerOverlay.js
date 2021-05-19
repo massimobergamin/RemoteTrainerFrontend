@@ -8,7 +8,9 @@ const TimerOverlay = ({ peersRef, socketRef }) => {
   // const peer = useRef(peer);
   // console.log('peersRef: ', peer.current.signal());
   // // const peerRef = peerTimer.current;
-  // console.log('socketRef: ', socketRef.current);
+  console.log('socketRef: ', socketRef.current);
+
+  socketRef.current.on('')
   const initState = {
     minutes: 0, 
     seconds: 0,
