@@ -9,28 +9,61 @@ const UpdateClientProfileForm = () => {
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
   const router = useRouter();
-  const [photo, setPhoto] = useState('');
 
   const initialState = {
   };
 
   const [profileState, setProfileState] = useState(initialState);
+  const[url, setURL] = useState("");
+  const [file, setFile] = useState("")
   const { user } = useSelector(state => state.client);
   console.log('user', user);
   console.log('currentUser.uid: ', currentUser.uid);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: photo ? photo : user.profile_picture}}))
+    dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: url ? url : user.profile_picture}}))
       .then(() => router.push('/client/profile'));
   };
 
+
+  // types allowed for upload;
+  const types = ['image/png', 'image/jpeg'];
+
+  const handleEditProfile = (e) => {
+      let selected = e.target.files[0];
+      if (selected && types.includes(selected.type)) {
+        setFile(selected);
+      } else {
+          setFile("");
+          alert('Please select an image file (png or jpg)');
+      }
+  }
+
   return (
-    <div>
-      <div className="pageContainer">
-        <form className="profileCreate_form">
-          <label htmlFor="weight">Weight (lb):
-          <br/>
+    <div className="createprofile_wrapper">
+      <div className="page_title">Edit Profile</div>
+           {/* <label htmlFor="profilePicture">Profile Picture: */}
+           {!url ? 
+                    <label className="profilewrapper">
+                        {user.profile_picture? 
+                        <img className="profilePic" src={user.profile_picture}/>
+                        :
+                        <img className="profilePic" src="/emptyprofile.png"/>
+                        }
+                        <input className="profilePic_input" type="file" onChange={handleEditProfile}/>             
+                        <span className="profile_addImage">Click Image to Edit Profile Image</span>
+                    </label>
+                    : 
+                    <div className="profilewrapper">
+                        {url && <img className="profilePic" src={url}></img>}
+                        <span className="profile_addImage">New Profile Image</span>
+                    </div>
+                }
+                {!url && file && <UploadImageForm file={file} setURL={setURL} />}
+          {/* </label> */}
+       <form className="createprofile_form">
+          <label htmlFor="weight">Weight (lb):</label>
             <input
             type="number"
             name="weight"
@@ -38,28 +71,26 @@ const UpdateClientProfileForm = () => {
             step="1"
             min="0"
             onChange={(e) => setProfileState({...profileState, weight: parseInt(e.target.value)})}/>
-          </label>
-          <label htmlFor="height">Height (cm):
-          <br/>
-            <input
+          <label  htmlFor="height">Height (cm): </label>
+          <input
             type="number"
             name="height"
             value={profileState.height}
             step="1"
             min="0"
             onChange={(e) => setProfileState({...profileState, height: parseInt(e.target.value)})}/>
-          </label>
-          <label htmlFor="Birthday">Birthday:
-          <br/>
+
+          <label  htmlFor="Birthday">Birthday:</label>
+
             <input
             type="date"
             name="birthday"
             value={profileState.birthday}
-            max="2003-05-17"
+            min="2003-05-17"
             onChange={(e) => setProfileState({...profileState, birthday: e.target.value})}/>
-          </label>
-          <label htmlFor="sex">Sex:
-          <br/>
+          
+          <label  htmlFor="sex">Sex:</label>
+
             <input
             name="sex"
             value={profileState.sex}
@@ -71,18 +102,11 @@ const UpdateClientProfileForm = () => {
               <option>Other</option>
               <option>I prefer not to say</option>
             </datalist>
-          </label>
-          <label htmlFor="profilePicture">Profile Picture:
-          <br/>
-            <UploadImageForm setPhoto={setPhoto}></UploadImageForm>
-          </label>
-            <input className="button" type="submit" value="Save" onClick={e => handleSubmit(e)} disabled={photo==='uploading'}/>
-            <input className="button" type="submit" value="Cancel" onClick={e => {
-              e.preventDefault();
+            <button className="button" type="submit"  onClick={e => handleSubmit(e)} disabled={url==='uploading'}>Save</button>
+            <button className="button" type="button"  onClick={e => {
               router.push('/client/profile');
-              }}/>
+              }}>Cancel</button>
         </form>
-      </div>
     </div>
   )
 }

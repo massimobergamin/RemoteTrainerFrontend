@@ -38,11 +38,17 @@ const TrainerCode = () => {
 
 
   return (
-    <div className="page_container">
-      <h2>Welcome to Fitome!</h2>
-      <h4>Please enter your Trainer's invite code below:</h4>
-      <input type="text" value={input} onChange={handleChange} placeholder="Trainer code..."></input>
-      <button type="button" onClick={handleSubmit}>Submit</button>
+    <div className="initial_background">
+      <img className="initial_decor" src="/decor_background.png"/>
+      <img className="initial_wave" src="/wave.png"/>
+      <div className="signup_wrapper">
+        <div className="signup_code_welcome">Welcome to</div>
+        <img className="initial_logo" src="/fitome_orange.png"/>
+        <div className="signup_code_title">Please enter your trainer's invite code below:</div>
+        <label className="signup_input" htmlFor="code">Trainer's Code:</label>
+        < input  className="trainercode_input" type="text" name="code" value={input} onChange={handleChange}></input>
+        <button className="signup_button" type="button" onClick={handleSubmit}>Connect</button>
+      </div>
     </div>
   )
 }

@@ -34,7 +34,6 @@ body {
   color: var(--fontColor);
   overflow-x: hidden;
   overflow-y: hidden;
-  background-color: var(--primary-accent);
 }
 
 a {
@@ -65,14 +64,29 @@ p {
   margin-bottom: 15px;
 }
 
-/*form input { 
-  margin: 1vh 0;
-  border: 0;
-  padding: 3px 5px 3px 5px;
-  box-shadow:0 0 5px 3px rgba(0, 0, 0, 0.11);
-}*/
+.page_title {
+  font-size:2em;
+  font-weight: 700;
+}
 
 #Exercise_Video { /*added*/
   border-radius: 5px;
   background-color: rgb(27, 27, 27);
+  object-fit: cover;
+}
+
+::-webkit-scrollbar {
+  scrollbar-width: 3px;
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(241, 240, 240);
+  border-radius: 5px;
+  width: 3px;
 }

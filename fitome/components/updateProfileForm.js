@@ -9,7 +9,7 @@ const UpdateProfileForm = () => {
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
   const router = useRouter();
-  const [photo, setPhoto] = useState('');
+  const [url, setURL] = useState('');
 
   const initialState = {
   };
@@ -18,13 +18,29 @@ const UpdateProfileForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: photo ? photo : user.profile_picture}}))
+    dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: url ? url : user.profile_picture}}))
       .then(() => router.push('/trainer/profile'));
   };
 
   return (
     <div>
-      <div className="pageContainer">
+      {!url ? 
+         <label className="profilewrapper">
+            {user.profile_picture? 
+                        <img className="profilePic" src={user.profile_picture}/>
+                        :
+                        <img className="profilePic" src="/emptyprofile.png"/>
+                        }
+                        <input className="profilePic_input" type="file" onChange={handleEditProfile}/>             
+                        <span className="profile_addImage">Click Image to Edit Profile Image</span>
+                    </label>
+                    : 
+                    <div className="profilewrapper">
+                        {url && <img className="profilePic" src={url}></img>}
+                        <span className="profile_addImage">New Profile Image</span>
+                    </div>
+                }
+                {!url && file && <UploadImageForm file={file} setURL={setURL} />}
         <form className="profileCreate_form">
           <label htmlFor="weight">Weight (lb):
           <br/>
@@ -73,17 +89,11 @@ const UpdateProfileForm = () => {
               <option>I prefer not to say</option>
             </datalist>
           </label>
-          <label htmlFor="profilePicture">Profile Picture:
-          <br/>
-            <UploadImageForm setPhoto={setPhoto}></UploadImageForm>
-          </label>
-            <input className="button" type="submit" value="Save" onClick={e => handleSubmit(e)} disabled={photo==='uploading'}/>
-            <input className="button" type="submit" value="Cancel" onClick={e => {
-              e.preventDefault();
+            <button className="button" type="submit"  onClick={e => handleSubmit(e)} disabled={url==='uploading'}>Save</button>
+            <button className="button" type="button"  onClick={e => {
               router.push('/trainer/profile');
-              }}/>
+              }}>Cancel</button>
         </form>
-      </div>
     </div>
   )
 }
