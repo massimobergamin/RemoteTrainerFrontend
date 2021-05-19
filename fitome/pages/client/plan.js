@@ -19,6 +19,10 @@ const Plan = () => {
   const client = useSelector(state => state.client);
   console.log('client: ', client);
 
+  const handleClick = () => {
+    // add client notes logic
+  }
+
   function renderPlan () {
     
     if (client.plans) {
@@ -39,6 +43,7 @@ const Plan = () => {
                 {curPlan.details.map(day => (
                   <div>
                     <h2 key={day.id}>{moment(day.day).format("dddd, MMMM Do YYYY")}</h2>
+                    <button>Add Notes</button>
                     <WorkoutDetails key={day.day} workout={day}></WorkoutDetails> 
                   </div>
                 ))}
