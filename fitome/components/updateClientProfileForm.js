@@ -44,17 +44,17 @@ const UpdateClientProfileForm = () => {
     <div className="createprofile_wrapper">
       <div className="page_title">Edit Profile</div>
            {/* <label htmlFor="profilePicture">Profile Picture: */}
-           {!url ? 
+           {!url ?
                     <label className="profilewrapper">
-                        {user.profile_picture? 
+                        {user.profile_picture?
                         <img className="profilePic" src={user.profile_picture}/>
                         :
                         <img className="profilePic" src="/emptyprofile.png"/>
                         }
-                        <input className="profilePic_input" type="file" onChange={handleEditProfile}/>             
+                        <input className="profilePic_input" type="file" onChange={handleEditProfile}/>
                         <span className="profile_addImage">Click Image to Edit Profile Image</span>
                     </label>
-                    : 
+                    :
                     <div className="profilewrapper">
                         {url && <img className="profilePic" src={url}></img>}
                         <span className="profile_addImage">New Profile Image</span>
@@ -88,7 +88,7 @@ const UpdateClientProfileForm = () => {
             value={profileState.birthday}
             min="2003-05-17"
             onChange={(e) => setProfileState({...profileState, birthday: e.target.value})}/>
-          
+
           <label  htmlFor="sex">Sex:</label>
 
             <input
@@ -103,7 +103,7 @@ const UpdateClientProfileForm = () => {
               <option>I prefer not to say</option>
             </datalist>
             <button className="button" type="submit"  onClick={e => handleSubmit(e)} disabled={url==='uploading'}>Save</button>
-            <button className="button" type="button"  onClick={e => {
+            <button className="buttonCancel" type="button"  onClick={e => {
               router.push('/client/profile');
               }}>Cancel</button>
         </form>

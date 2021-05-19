@@ -52,8 +52,7 @@ const CreateWorkout = () => {
 
   return (
     <div>
-      <WorkoutsExercisesBar></WorkoutsExercisesBar>
-      <div className="pageContainer">
+      <div className="page_container">
         <h1>Create New Workout</h1>
         <form className="workoutsExercises_form">
           <label className="workoutsExercises_field" htmlFor="title">Title:
