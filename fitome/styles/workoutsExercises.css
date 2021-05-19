@@ -72,14 +72,12 @@
 
 
 
-.workoutsExercises_card {
+.workoutsExercises_detailcard {
   border: 1px solid darkgray;
   border-radius: 10px;
-  margin: 2vh 2vh;
+  margin: 1vh 1vh;
   padding: 2vh 2vh;
-  min-width: 250px;
-  max-width: 250px;
-  min-height: 250px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -116,6 +114,9 @@
     color: seashell;
 }
 
+.exercise_subtitle {
+  font-weight: 700;
+}
 
 
 
@@ -141,6 +142,14 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  height: 75vh;
+}
+
+.workoutdetail_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .workoutsExercises_flexCol {
