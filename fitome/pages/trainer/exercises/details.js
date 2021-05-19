@@ -13,13 +13,15 @@ function Details() {
 
   return (
     <div>
-      <WorkoutsExercisesBar></WorkoutsExercisesBar>
-      <div className="pageContainer workoutsExercises_flexCol">
-        <button className="button" onClick={() => {
+      <div className="page_container">
+          <div className="workout_addworkout" onClick={(e) => {
+          e.preventDefault();
           dispatch(setSelectedExercise({}));
-          router.push('/trainer/exercises');
-          }}>Back</button>
+          router.push('/trainer/exercises')
+        }}><span className="workout_addworkout_span">{"< "}</span>Back</div>
+        <div classNAme="workoutsExercises_flexCol">
         <ExerciseDetails exercise={selectedExercise}></ExerciseDetails>
+        </div>
         </div>
       <NavigationTrainer></NavigationTrainer>
     </div>

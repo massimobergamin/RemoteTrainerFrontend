@@ -46,7 +46,7 @@
     height: 45vw;
     width: 45vw;
     overflow: hidden;
-    border: 15px solid var(--primary);
+    border: 10px solid var(--primary);
     object-fit: cover;
 }
 
@@ -60,15 +60,22 @@
     z-index: 1;
 }
 
+.sessioncard_title {
+    font-weight:700;
+}
+
+.session_list {
+    margin-bottom: 2vh;
+    font-weight: 700;
+}
 .sessionCard_right {
     border-radius: 5%;
-    border: 1px solid var(--primary);
+    border: 0.5px solid var(--secondary);
     padding: 2vw;
     height: 35vw;
     width: 60vw;
     border-width: 3px;
     overflow: hidden;
-    object-fit: cover;
     font-size: 0.75rem;
     z-index: 2;
 }
