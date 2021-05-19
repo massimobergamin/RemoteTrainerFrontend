@@ -25,7 +25,7 @@ const ClientDetail = () => {
   console.log("DEETS", displayDetails)
 
   return (
-    <div>
+    <div className="page_container">
       <h1>{user.first_name + ' ' + user.last_name}</h1>
       {user.profile_picture ?
         <img src={user.profile_picture} className="profilePic"/>

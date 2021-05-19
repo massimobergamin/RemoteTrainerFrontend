@@ -59,22 +59,17 @@ const CreatePlanForm = () => {
   }
 
   const setReps = (e, index) => {
-    console.log(planState)
     const updatedArray = insertAt(detailState.reps, index, e.currentTarget.value);
-    console.log(detailState.reps)
   }
 
   const setSets = (e, index) => {
     const updatedArray = insertAt(detailState.sets, index, e.currentTarget.value);
-    console.log(detailState.sets)
   }
 
 //*********************** */
   const showSelectedWorkout = () => {
-    console.log("SELECTED", detailState.exercises)
     if (detailState.exercises.length) {
       return detailState.exercises.map((exercise, index) => {
-        console.log("EXERCISE", exercise)
         return (
           <div>
             <h2>{exercise.title}</h2>
@@ -94,7 +89,6 @@ const CreatePlanForm = () => {
   }
 
   const listWorkouts = () => {
-    console.log("WORKOUTS:" ,workouts)
     if (workouts) {
       return workouts.map((workout)=> {
         return <option key={workout.id} value={`${workout.title}`}></option>
@@ -120,7 +114,6 @@ const CreatePlanForm = () => {
   
   const findValue = (value) => {
     for (let i=0; i<clients.length; i++) {
-      console.log("CHECK HERE", clients)
       let name = clients[i].first_name+' '+clients[i].last_name;
       if (name===value){
         setPlanState({...planState, client_uid:clients[i].user_uid})
@@ -132,10 +125,7 @@ const CreatePlanForm = () => {
   const findWorkoutValue = (value) => {
     for (let i=0; i<workouts.length; i++) {
       let name = workouts[i].title
-      
-      console.log("VAL", value, "NAME", name)
       if (name===value){
-        console.log("WORKOUT VALUE", workouts[i])
         setDetailState({...detailState, workout:workouts[i], exercises:workouts[i].exercises});
         //setDetailState({...detailState, workout:workouts[i], exercises:detailState.exercises.concat(workouts[i].exercises)});
         break;
@@ -147,7 +137,6 @@ const CreatePlanForm = () => {
     setPlanState({...planState, details: planState.details.concat(detailState)});
     let dropdown = document.getElementById("listOfClients");
     dropdown.selectedIndex=0;
-    console.log("ELEMENT", document.getElementById("day_date"))
     document.getElementById("day_date").value="";
     setDetailState(detailInitialState)
   }
@@ -192,14 +181,11 @@ const showExercises = (exercises, reps, sets) => {
 }
 
 function deleteHandler(index) {
-  console.log("INDEX TO DELETE", index)
   setPlanState({...planState, details: planState.details.filter((_, i) => i !== index)})
-  console.log(planState, "DELETING")
 }
   const showCards = () => {
     if (planState.details.length) {
       return planState.details.map((workout,index) =>{
-        console.log("MAPPING", workout)
         return (
           <div className="plan_card">
             <button type="button" onClick={()=>deleteHandler(index)}>X</button>
@@ -215,7 +201,6 @@ function deleteHandler(index) {
 
   return (
     <div >
-      {console.log("DAY STATE", detailState)}
       <form className="fullFormContainer">
         <label htmlFor="listOfClients">Select a Client:</label>
         
