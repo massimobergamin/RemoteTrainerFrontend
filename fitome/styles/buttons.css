@@ -32,6 +32,16 @@
     cursor: pointer;
 }
 
-.button:disabled {
-    background-color: var(--disabled);
+.carousel_button {
+    border: 0;
+    background-color:rgba(148, 210, 201, 0.718) ;
+    border-radius: 10px;
+    color: white;
+}
+
+.carousel_button:disabled {
+    border: 0;
+    background-color:rgba(88, 88, 88, 0.568) ;
+    border-radius: 10px;
+    color: grey
 }

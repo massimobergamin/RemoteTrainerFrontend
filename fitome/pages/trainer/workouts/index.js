@@ -32,10 +32,12 @@ function Workouts() {
               {workout.exercises && workout.exercises.map(exercise =>
                 <div key={exercise.id} className="workoutsExercises_cards">
                     {exercise.media ?
+                    <div className="workout_video">
                       <video id="Exercise_Video" width="176" height="176" controls muted loop={true}>
                           <source src={exercise.media} type="video/mp4"/>
                           Your browser does not support HTML5 video.
-                      </video> :
+                      </video>
+                      </div> :
                     <img src="/noVid.png" width="176" height="176"></img>}
                   <div>{exercise.title}</div>
                 </div>)}
