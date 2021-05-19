@@ -36,7 +36,7 @@ const UpdateProfileForm = () => {
   };
 
   return (
-    <div className="createprofile_wrapper">
+    <div >
       <div className="page_title">Edit Profile</div>
       {!url ? 
          <label className="profilewrapper">
