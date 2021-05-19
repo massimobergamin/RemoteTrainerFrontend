@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import {socket} from '../../lib/socket';
 import Peer from "simple-peer";
 import TimerOverlay from '../../components/timerOverlay';
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 
 const Video = ({ peer }) => {
@@ -17,6 +18,11 @@ const Video = ({ peer }) => {
   return <video id="video_them" className="video_them" playsInline autoPlay ref={ref} />;
 }
 
+const initState = {
+  minutes: 0, 
+  seconds: 0,
+};
+
 const VideoRoom = () => {
 	const router = useRouter();
   const [peers, setPeers] = useState([]);
@@ -24,8 +30,13 @@ const VideoRoom = () => {
   const userVideo = useRef();
   const peersRef = useRef([]);
 
-  // grab timer data from timer ref
-  // const userData = useRef();
+  // **** TIMER STATE ADDED FOR TESTING **** // 
+  const [reset, setReset] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [timerInput, setTimerInput] = useState(initState);
+  const [newTimer, setNewTimer] = useState(0);
+
 
   const { sessionId } = router.query;
 
@@ -101,7 +112,28 @@ const VideoRoom = () => {
     })
     // once connected, send data to other peer
     peer.on('connect', () => {
-      peer.send('Hey there!');
+      // const timerData = {
+      //   newTimer: newTimer,
+      //   isEditing: isEditing,
+      //   isPlaying: isPlaying,
+      //   reset: reset,
+      // }
+      // const timerDataJson = JSON.stringify(timerData);
+      // peer.send(timerDataJson);
+    });
+
+    peer.on('data', data => {
+      const parsedTimerData = JSON.parse(data);
+      const { peerNewTimer, peerIsEditing, peerIsPlaying, peerReset, peerTimerInputName, peerTimerInputValue } = parsedTimerData;
+      if (peerNewTimer !== undefined) setNewTimer(peerNewTimer);
+      if (peerIsEditing !== undefined) setIsEditing(peerIsEditing);
+      if (peerIsPlaying !== undefined) setIsPlaying(peerIsPlaying);
+      if (peerReset !== undefined) setReset(peerReset);
+      if (peerTimerInputName !== undefined && peerTimerInputValue !== undefined) setTimerInput((prev) => ({
+        ...prev,
+        [peerTimerInputName]: peerTimerInputValue,
+      }));
+      console.log('parsed data line 132: ', JSON.parse(data));
     });
     return peer;
   }
@@ -121,9 +153,30 @@ const VideoRoom = () => {
     })
 
     peer.signal(incomingSignal);
-    // when peer receives data, log the message to the console
+    // when peer receives data, log the data to the console
     peer.on('data', data => {
-      console.log('Got a message from Peer, it says: ' + data);
+      const parsedTimerData = JSON.parse(data);
+      const { peerNewTimer, peerIsEditing, peerIsPlaying, peerReset, peerTimerInputName, peerTimerInputValue } = parsedTimerData;
+      if (peerNewTimer !== undefined) setNewTimer(peerNewTimer);
+      if (peerIsEditing !== undefined) setIsEditing(peerIsEditing);
+      if (peerIsPlaying !== undefined) setIsPlaying(peerIsPlaying);
+      if (peerReset !== undefined) setReset(peerReset);
+      if (peerTimerInputName !== undefined && peerTimerInputValue !== undefined) setTimerInput((prev) => ({
+        ...prev,
+        [peerTimerInputName]: peerTimerInputValue,
+      }));
+      console.log('parsed data line 160: ', JSON.parse(data));
+    });
+
+    peer.on('connect', () => {
+      // const timerData = {
+      //   newTimer: newTimer,
+      //   isEditing: isEditing,
+      //   isPlaying: isPlaying,
+      //   reset: reset,
+      // }
+      // const timerDataJson = JSON.stringify(timerData);
+      // peer.send(timerDataJson);
     });
     return peer;
   }
@@ -137,12 +190,173 @@ const VideoRoom = () => {
     router.push('/session')
   }
 
+
+  // ****** TIMER LOGIC ADDED BELOW FOR TESTING ***** // 
+
+  const children = ({ remainingTime }) => {
+    const hours = Math.floor(remainingTime / 3600)
+    const minutes = Math.floor((remainingTime % 3600) / 60)
+    const seconds = remainingTime % 60
+  
+    return `${hours}:${minutes}:${seconds}`
+  }
+
+  const handleChange = async (e) => {
+    const { name, value } = e.target;
+
+    await new Promise((resolve, reject) => resolve(setTimerInput((prev) => ({
+      ...prev,
+      [name]: value,
+    })))).then(() => {
+      peersRef.current.map(peer => {
+        const timerData = {
+          peerTimerInputName: name,
+          peerTimerInputValue: value,
+        }
+        const timerDataJson = JSON.stringify(timerData);
+        peer.peer.send(timerDataJson);
+      })
+    });
+  };
+
+  const handlePause = async () => {
+    await new Promise((resolve, reject) => resolve(setIsPlaying(prev => !prev))).then(() => {
+      peersRef.current.map(peer => {
+        const timerData = {
+          peerIsPlaying: !isPlaying,
+        }
+        const timerDataJson = JSON.stringify(timerData);
+        peer.peer.send(timerDataJson);
+      })
+    }
+    );
+  };
+
+  // const wrapSetState = async () => {
+
+  // }
+  
+  const handleReset = async () => {
+    if (!isEditing) {
+      await new Promise((resolve, reject) => resolve(setReset(prevState => prevState + 1))).then(() => {
+        peersRef.current.map(peer => {
+          const timerData = {
+            peerReset: reset + 1,
+          }
+          const timerDataJson = JSON.stringify(timerData);
+          peer.peer.send(timerDataJson);
+        })
+      });
+      await new Promise((resolve, reject) => resolve(setIsPlaying(prev => false))).then(() => {
+        peersRef.current.map(peer => {
+          const timerData = {
+            peerIsPlaying: isPlaying,
+          }
+          const timerDataJson = JSON.stringify(timerData);
+          peer.peer.send(timerDataJson);
+        })
+      });
+    } else {
+      const { minutes, seconds } = timerInput;
+      const newMinutes = parseInt(minutes);
+      const newSeconds = parseInt(seconds);
+    
+      const newDuration = (newMinutes * 60) + newSeconds;
+      await new Promise((resolve, reject) => resolve(setNewTimer(newDuration))).then(() => {
+        peersRef.current.map(peer => {
+          const timerData = {
+            peerNewTimer: newDuration, // check if naming needs to be changed here, no negator used (like others)
+          }
+          const timerDataJson = JSON.stringify(timerData);
+          peer.peer.send(timerDataJson);
+        })
+      });
+      await new Promise((resolve, reject) => resolve(setReset(prevState => prevState + 1))).then(() => {
+        peersRef.current.map(peer => {
+          const timerData = {
+            peerReset: reset + 1,
+          }
+          const timerDataJson = JSON.stringify(timerData);
+          peer.peer.send(timerDataJson);
+        })
+      });
+      await new Promise((resolve, reject) => resolve(setIsEditing(prevState => !prevState))).then(() => {
+        peersRef.current.map(peer => {
+          const timerData = {
+            peerIsEditing: !isEditing,
+          }
+          const timerDataJson = JSON.stringify(timerData);
+          peer.peer.send(timerDataJson);
+        })
+      });
+      console.log('peer instance: ', peersRef.current[0]);
+    }
+  };
+
+  const handleEdit = async () => {
+    await new Promise((resolve, reject) => resolve(setIsEditing(prevState => !prevState))).then(() => {
+      console.log('line 274: ', isEditing)
+      peersRef.current.map(peer => {
+        const timerData = {
+          peerIsEditing: !isEditing,
+        }
+        console.log('line 279: ', timerData);
+        const timerDataJson = JSON.stringify(timerData);
+        peer.peer.send(timerDataJson);
+      })
+    });
+
+    if (isPlaying && !isEditing) {
+      await new Promise((resolve, reject) => resolve(setIsPlaying(prev => false))).then(() => {
+        peersRef.current.map(peer => {
+          const timerData = {
+            peerIsPlaying: isPlaying,
+          }
+          const timerDataJson = JSON.stringify(timerData);
+          peer.peer.send(timerDataJson);
+        })
+      });
+    };
+  };
+
+  const isEmpty = () => {
+    return !newTimer;
+  }
+
+
   return (
     <div>
       <video muted className="video_me" ref={userVideo} autoPlay playsInline />
       {peers.map((peer, index) => <Video key={index} peer={peer} />)}
       <div className="timer_container">
-        <TimerOverlay peersRef={peersRef} socketRef={socketRef}/>
+      <div>
+      <div>
+      <CountdownCircleTimer
+        size={125}
+        key={reset}
+        isPlaying={isPlaying}
+        duration={newTimer}
+        colors={[
+          ['#ffffff', 0.33],
+          ['#fbe560', 0.33],
+          ['#A30000', 0.33],
+        ]}
+      >
+        { children }
+      </CountdownCircleTimer>
+      <button onClick={handlePause} disabled={isEmpty()}>{isPlaying ? "Pause" : "Start"}</button>
+      <button onClick={handleReset}>{isEditing ? "Submit" : "Reset"}</button>
+      <button onClick={handleEdit}>Edit</button>
+      <div style={{ display: isEditing ? "flex" : "none" }}>
+        <div className="timer_input">
+          <input type="number" min="0" name="minutes" value={timerInput.minutes} onChange={handleChange}></input>
+          <label className="timer_label">Minutes</label>
+          <input type="number" min="0" name="seconds" value={timerInput.seconds} onChange={handleChange}></input>
+          <label className="timer_label">Seconds</label>
+      </div>
+      </div>
+      </div>
+    </div>
       </div>
       <div className="endCall">
         <button type="button" onClick={hangUp} className="button_circle"><img src="/icons/call_end_white_24dp.svg"/></button>
