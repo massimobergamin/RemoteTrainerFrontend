@@ -20,7 +20,7 @@ const Plan = () => {
   console.log('client: ', client);
 
   const handleClick = () => {
-    
+    // add client notes logic
   }
 
   function renderPlan () {

@@ -99,7 +99,7 @@ const VideoRoom = () => {
         signal,
       })
     })
-
+    // once connected, send data to other peer
     peer.on('connect', () => {
       peer.send('Hey there!');
     });
@@ -120,10 +120,11 @@ const VideoRoom = () => {
       })
     })
 
+    peer.signal(incomingSignal);
+    // when peer receives data, log the message to the console
     peer.on('data', data => {
       console.log('Got a message from Peer, it says: ' + data);
     });
-    peer.signal(incomingSignal);
     return peer;
   }
 
