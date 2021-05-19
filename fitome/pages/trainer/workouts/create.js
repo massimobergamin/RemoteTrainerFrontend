@@ -63,7 +63,7 @@ const CreateWorkout = () => {
             }}>Cancel</button>
           </label>
         </form>
-          <h3>Select Exercises</h3>
+          <h3 className="selectExTitle">Select Exercises</h3>
           <div className="workoutsExercises_scrollCreate">
             {exercises && exercises.map((exercise, i) =>
               <div key={exercise.id} className="workoutsExercises_cardCreate">
