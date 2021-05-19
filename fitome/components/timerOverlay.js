@@ -1,12 +1,22 @@
 import React, { useState, useRef } from 'react'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
+import Peer from "simple-peer";
 
 
-const TimerOverlay = () => {
+const TimerOverlay = ({ peersRef, socketRef }) => {
+  const peer = useRef(peersRef);
+  // const peer = useRef(peer);
+  // console.log('peersRef: ', peer.current.signal());
+  // // const peerRef = peerTimer.current;
+  // console.log('socketRef: ', socketRef.current);
   const initState = {
     minutes: 0, 
     seconds: 0,
   };
+
+  // peer.on('data', (timerData) => {
+  //   console.log('Received Timer Data: ', timerData);
+  // });
 
   const [reset, setReset] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -14,7 +24,7 @@ const TimerOverlay = () => {
   const [timerInput, setTimerInput] = useState(initState);
   const [newTimer, setNewTimer] = useState(0);
 
-  
+
   const children = ({ remainingTime }) => {
     const hours = Math.floor(remainingTime / 3600)
     const minutes = Math.floor((remainingTime % 3600) / 60)
