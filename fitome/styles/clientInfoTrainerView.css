@@ -11,10 +11,8 @@
   height: fit-content;
 }
 
-.setrepContainer {
-  align-content: space-around;
-  padding: 0px;
-  height: fit-content;
+.dayTitle {
+  font-size: 0.8em;
 }
 
 .detailContainer {
@@ -32,14 +30,14 @@
   font-weight:bold;
   margin: 5px 0;
   padding: 0px;
-  color: rgb(94, 94, 94);
+  color: #94d2c9;
 }
 .planHeaderDate {
-  font-size:medium;
+  font-size:0.8em;
   margin: 5px 0;
   padding: 0px;
-  margin-bottom: 30px;
-  color: rgb(94, 94, 94);
+  margin-bottom: 15px;
+  color: rgb(129, 129, 129);
 }
 
 .planContainer {
@@ -57,4 +55,31 @@
   padding: 0px;
   margin: 0px;
   
+}
+
+.setrepContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+  font-size: 0.8em;
+  align-content: space-around;
+  padding: 0px;
+  height: fit-content;
+}
+
+.planContainer {
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
+}
+
+.exerciseTitleContainer {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8em;
+}
+
+
+.planExerciseRows {
+  font-size: 0.6em;
 }
