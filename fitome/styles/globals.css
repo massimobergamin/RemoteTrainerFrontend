@@ -11,6 +11,7 @@
 @import './initialPages.css';
 @import './trainerClientPlanDetails.css';
 @import './clientInfoTrainerView.css';
+@import './createWorkout.css';
 
 :root {
   /* Colors: */
@@ -73,7 +74,8 @@ p {
 #Exercise_Video { /*added*/
   border-radius: 5px;
   background-color: rgb(27, 27, 27);
-  object-fit: cover;
+  object-fit:cover;
+  max-width: 100vw;
 }
 
 ::-webkit-scrollbar {

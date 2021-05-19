@@ -30,7 +30,7 @@ function create() {
             dispatch(getClients(currentUser.uid))
         }
     },[currentUser, router]);
-    
+
     const listClients = () => {
         // console.log("CLIENTS", clients)
         // console.log("USER", user)'
@@ -42,7 +42,7 @@ function create() {
         }
         else {
             alert('You have no clients. Please invite your clients using your invite code.')
-        } 
+        }
     }
 
     async function submitHandler (e) {
@@ -94,44 +94,46 @@ function create() {
         let inputDate = dateVal.getFullYear() + "-" + (month) + "-" + (day) + "T" + (hour) + ":" + (minute);
         return inputDate;
     }
-    
+
     return (
         <div>
-        <div className="pageContainer">
-            <h1>Create Training Session</h1>
+        <div className="page_container">
+            <div className="createprofile_wrapper">
+                <div className="page_title">Create Training Session</div>
 
-            <form className="sessionCreate_form" onSubmit={submitHandler}>
-            <label className="sessionCreate_field" htmlFor="sessionTitle">Session Purpose:
-                <input type="text" id="sessionTitle" name="sessionTitle" placeholder="Workout" onChange={(e)=>setFormState({...formState, title: e.target.value})}/>
-                <div className="sessionForm_announcement">* Defaults to "Workout" if session purpose is blank.</div>
-            </label>
-            <label className="sessionCreate_field" htmlFor="listOfClients">Select a Client:
-                <input list="clientList"
-                    type="text"
-                    autocomplete="off" 
-                    onChange={(e)=>findValue(e.target.value)} 
-                    id="listOfClients" 
-                    name="listOfClients" />
-                <datalist id="clientList" >
-                    {listClients()}
-                    
-                </datalist>
+                <form className="sessionCreate_form" onSubmit={submitHandler}>
+                <label htmlFor="sessionTitle">Session Purpose: <br/>
+                    <input className="sessionCreate_field" type="text" id="sessionTitle" name="sessionTitle" placeholder="Workout" onChange={(e)=>setFormState({...formState, title: e.target.value})}/>
+                    <div className="sessionForm_announcement">* Defaults to "Workout" if session purpose is blank.</div>
                 </label>
-            <label className="sessionCreate_field" htmlFor="startTime">Session Start Date:
-                <input type="datetime-local" id="startTime" min={getDate()} onChange={(e)=>setFormState({...formState, startDate:e.target.value})} name="startTime"/>
-            </label>
-            <label className="sessionCreate_field" htmlFor="endTime">Session End Time:
-                <input type="time" id="endTime" name="endTime"  disabled={formState.startDate===""} min={getTime()} max="23:59"
-                onChange={(e)=>{
-                    setFormState({...formState, endDate:e.target.value})
-                }
-                }/>
-            </label>
-            <div>
-                <button type="submit" className="button createSessionButton"
-                disabled={ Object.keys(formState.client).length===0 || formState.startDate==="" || formState.endDate===""}>Create Session</button>
+                <label htmlFor="listOfClients">Select a Client: <br/>
+                    <input className="sessionCreate_field" list="clientList"
+                        type="text"
+                        autoComplete="off"
+                        onChange={(e)=>findValue(e.target.value)}
+                        id="listOfClients"
+                        name="listOfClients" />
+                    <datalist id="clientList" >
+                        {listClients()}
+
+                    </datalist>
+                    </label>
+                <label htmlFor="startTime">Session Start Date: <br/>
+                    <input className="sessionCreate_dateTime" type="datetime-local" id="startTime" min={getDate()} onChange={(e)=>setFormState({...formState, startDate:e.target.value})} name="startTime"/>
+                </label>
+                <label htmlFor="endTime">Session End Time: <br/>
+                    <input className="sessionCreate_field" type="time" id="endTime" name="endTime"  disabled={formState.startDate===""} min={getTime()} max="23:59"
+                    onChange={(e)=>{
+                        setFormState({...formState, endDate:e.target.value})
+                    }
+                    }/>
+                </label>
+                <div>
+                    <button type="submit" className="button"
+                    disabled={ Object.keys(formState.client).length===0 || formState.startDate==="" || formState.endDate===""}>Create Session</button>
+                </div>
+                </form>
             </div>
-            </form>
         </div>
             <NavigationTrainer />
         </div>

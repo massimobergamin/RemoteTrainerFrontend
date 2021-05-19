@@ -46,7 +46,7 @@ function SessionList() {
     function showButton () {
         if (currentUser.displayName === "trainer") {
             return (
-                <button className="button" 
+                <button className="button"
                 type="button"
                 onClick={()=>router.push('/trainer/session/create')}
                 >New Session
@@ -60,12 +60,12 @@ function SessionList() {
         <div>
             <div className="page_container">
                 {showButton()}
-                <div className="sessionList1"> 
-                    Next Session:
+                <div className="sessionList1">
+                    <div style={{margin: "2vh"}}>Next Session:</div>
                     {showFirst()}
                 </div>
                 <div className="sessionList2">
-                    Upcoming Sessions:
+                    <div style={{margin: "2vh"}}>Upcoming Sessions:</div>
                     {showRest()}
                 </div>
             </div>
