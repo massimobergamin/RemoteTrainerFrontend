@@ -6,7 +6,7 @@ import {getSessionsFiltered} from '../../redux/client'
 import SessionCard from '../../components/sessionCard';
 import uuid from 'react-uuid'
 import NavigationTrainer from '../../components/navigationBar/navigationTrainer';
-
+import NavigationClient from '../../components/navigationBar/navigationClient';
 
 function SessionList() {
 
@@ -69,7 +69,12 @@ function SessionList() {
                     {showRest()}
                 </div>
             </div>
-            <NavigationTrainer/>
+            { currentUser.displayName==="trainer" ? (
+
+                <NavigationTrainer/>
+            ) :
+                <NavigationClient/>
+            }
         </div>
     )
 }
