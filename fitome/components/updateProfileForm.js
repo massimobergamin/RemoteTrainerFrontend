@@ -38,17 +38,17 @@ const UpdateProfileForm = () => {
   return (
     <div >
       <div className="page_title">Edit Profile</div>
-      {!url ? 
+      {!url ?
          <label className="profilewrapper">
-            {user.profile_picture? 
+            {user.profile_picture?
                         <img className="profilePic" src={user.profile_picture}/>
                         :
                         <img className="profilePic" src="/emptyprofile.png"/>
                         }
-                        <input className="profilePic_input" type="file" onChange={handleEditProfile}/>             
+                        <input className="profilePic_input" type="file" onChange={handleEditProfile}/>
                         <span className="profile_addImage">Click Image to Edit Profile Image</span>
                     </label>
-                    : 
+                    :
                     <div className="profilewrapper">
                         {url && <img className="profilePic" src={url}></img>}
                         <span className="profile_addImage">New Profile Image</span>
@@ -62,7 +62,6 @@ const UpdateProfileForm = () => {
             type="number"
             name="weight"
             value={profileState.weight}
-            placeholder={user.weight}
             step="1"
             min="0"
             onChange={(e) => setProfileState({...profileState, weight: parseInt(e.target.value)})}/>
@@ -73,7 +72,6 @@ const UpdateProfileForm = () => {
             type="number"
             name="height"
             value={profileState.height}
-            placeholder={user.height}
             step="1"
             min="0"
             onChange={(e) => setProfileState({...profileState, height: parseInt(e.target.value)})}/>
@@ -84,7 +82,6 @@ const UpdateProfileForm = () => {
             type="date"
             name="birthday"
             value={profileState.birthday}
-            placeholder={user.birthday}
             max="2003-05-17"
             onChange={(e) => setProfileState({...profileState, birthday: e.target.value})}/>
           </label>
@@ -93,7 +90,6 @@ const UpdateProfileForm = () => {
             <input
             name="sex"
             value={profileState.sex}
-            placeholder={user.sex}
             list="sexes"
             onChange={(e) => setProfileState({...profileState, sex: e.target.value})}/>
             <datalist id="sexes">
@@ -104,7 +100,7 @@ const UpdateProfileForm = () => {
             </datalist>
           </label>
             <button className="button" type="submit"  onClick={e => handleSubmit(e)} disabled={url==='uploading'}>Save</button>
-            <button className="button" type="button"  onClick={e => {
+            <button className="buttonCancel" type="button"  onClick={e => {
               router.push('/trainer/profile');
               }}>Cancel</button>
         </form>
