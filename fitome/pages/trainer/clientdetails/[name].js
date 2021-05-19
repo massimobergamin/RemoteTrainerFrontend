@@ -24,30 +24,30 @@ const ClientDetail = () => {
           <p className="planHeaderDate">{moment(plan.start_date).format('MMM DD') + "-" + moment(plan.end_date).format('MMM DD')}</p>
           {displayDetails ? displayDetails.map(detail => (
             <div className="single_card_container">
-              {"Day: " + moment(detail.day).format('MMM DD')}
+              <p className="dayTitle">{"Day: " + moment(detail.day).format('MMM DD')}</p>
               <div className="planContainer">
                 <div className="exerciseTitleContainer">  
               <p className="trainerclientview_detaillabel">Exercises</p>
                   {detail.exercises.map(exercise => (
                     <div>
-                      <p>{exercise.title}</p>
+                      <p className="planExerciseRows">{exercise.title}</p>
                     </div>
                   ))}
                 </div>
                 <div className="setrepContainer">
                   <div className="detailContainer">
-                    <p className="trainerclientview_detaillabel">sets</p>
+                    <p className="trainerclientview_detaillabel">Sets</p>
                     {detail.sets.map(set => (
                       <div>
-                      <p>{set}</p>
+                      <p className="planExerciseRows">{set}</p>
                     </div>
                     ))}
                   </div>
                   <div className="detailContainer">
-                  <p className="trainerclientview_detaillabel">reps</p>
+                  <p className="trainerclientview_detaillabel">Reps</p>
                   {detail.sets.map(set => (
                     <div>
-                      <p>{set}</p>
+                      <p className="planExerciseRows">{set}</p>
                     </div>
                   ))}
                   </div>
