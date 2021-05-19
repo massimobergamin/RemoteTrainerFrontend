@@ -53,12 +53,12 @@ const Plan = () => {
           // console.log('curPlan: ', curPlan);
           return (
             <div>
-              <div>Beginning: {moment(startDate).format("dddd, MMMM Do YYYY")}</div>
-              <div>Ending: {moment(endDate).format("dddd, MMMM Do YYYY")}</div>
+              <div className="clientplan_date">Beginning: {moment(startDate).format("dddd, MMMM Do YYYY")}</div>
+              <div className="clientplan_date">Ending: {moment(endDate).format("dddd, MMMM Do YYYY")}</div>
               <div>
                 {curPlan.details.map(day => (
                   <div>
-                    <h2 key={day.id}>{moment(day.day).format("dddd, MMMM Do YYYY")}</h2>
+                    <div className="clientplan_dates" key={day.id}>{moment(day.day).format("dddd, MMMM Do YYYY")}</div>
                     {/* <button className="button" onClick={() => addNotesHandler()}>Add Notes</button>
                     {inputBoxStatus ? (
                       <div>
@@ -83,8 +83,8 @@ const Plan = () => {
       <div className="page_container">
       <h1>{client.user.username}'s Training Plan</h1>
       {renderPlan()}
-      <NavigationClient />
       </div>
+      <NavigationClient />
     </div>
   )
 }

@@ -132,7 +132,7 @@ function create() {
                     <button type="submit" className="button"
                     disabled={ Object.keys(formState.client).length===0 || formState.startDate==="" || formState.endDate===""}>Create Session</button>
                     <br/>
-                    <button className="button" onClick={() => {
+                    <button className="buttonCancel" onClick={() => {
                         router.push('/session');
                         }}>Cancel</button>
                 </div>
