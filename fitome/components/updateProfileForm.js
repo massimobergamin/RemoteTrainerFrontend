@@ -14,7 +14,20 @@ const UpdateProfileForm = () => {
   const initialState = {
   };
   const [profileState, setProfileState] = useState(initialState);
+  const [file, setFile] = useState("")
   const { user } = useSelector(state => state.trainer);
+
+  const types = ['image/png', 'image/jpeg'];
+
+  const handleEditProfile = (e) => {
+      let selected = e.target.files[0];
+      if (selected && types.includes(selected.type)) {
+        setFile(selected);
+      } else {
+          setFile("");
+          alert('Please select an image file (png or jpg)');
+      }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +36,8 @@ const UpdateProfileForm = () => {
   };
 
   return (
-    <div>
+    <div className="createprofile_wrapper">
+      <div className="page_title">Edit Profile</div>
       {!url ? 
          <label className="profilewrapper">
             {user.profile_picture? 
@@ -41,7 +55,7 @@ const UpdateProfileForm = () => {
                     </div>
                 }
                 {!url && file && <UploadImageForm file={file} setURL={setURL} />}
-        <form className="profileCreate_form">
+        <form className="createprofile_form">
           <label htmlFor="weight">Weight (lb):
           <br/>
             <input

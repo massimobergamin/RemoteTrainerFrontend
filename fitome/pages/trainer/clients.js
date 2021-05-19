@@ -11,7 +11,6 @@ import NavigationTrainer from '../../components/navigationBar/navigationTrainer'
 import { useRouter } from 'next/router';
 
 
-// displays client's workout plan + exercises
 const Clients = () => {
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
