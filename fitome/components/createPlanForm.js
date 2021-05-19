@@ -47,11 +47,6 @@ const CreatePlanForm = () => {
     dispatch(getWorkout(currentUser.uid))
   }, [])
 
-///
-  // const workoutCard = () => {
-  //   return (<)
-  // }
-///
   
   const insertAt = (array, index, elem) => {
     const shallowArray = Object.assign(array);
@@ -73,7 +68,6 @@ const CreatePlanForm = () => {
         return (
           <div>
             <h2>{exercise.title}</h2>
-            <p>{exercise.description}</p>
             <div className="createPlan_reps">
               <label>Sets:</label>
               <input type="number" min="0" step="1" onChange={(e) => setSets(e, index)}/>
