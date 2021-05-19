@@ -40,7 +40,7 @@ export default function Home() {
       }
 
       return (
-        <div className={styles.container}>
+        <div>
           <Head>
             <title>Fitome</title>
             <link rel="icon" href="/favicon.ico" />
@@ -49,23 +49,33 @@ export default function Home() {
             <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
             <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"></link>
           </Head>
-          <main className={styles.main}>
-            <form>
+          <main className="initial_background">
+            <img className="initial_decor" src="/decor_background.png"/>
+            <img className="initial_wave" src="/wave.png"/>
+            <div className="signup_wrapper">
+            <img className="initial_logo" src="/fitome_orange.png"/>
+            <form className="signup_form login_form">
+              <label className="signup_input" htmlFor="email">Email:</label>
               <input type="email"
-                placeholder="Email"
+                name="email"
+                // placeholder="Email"
                 value={formState.email}
                 onChange={(e) => setFormState({...formState, email: e.target.value})}
               />
+              <label className="signup_input" htmlFor="password">Password:</label>
               <input type="password"
-              placeholder="Password"
+              name="password"
+              // placeholder="Password"
               value={formState.password}
               onChange={(e) => setFormState({...formState, password: e.target.value})}
               />
+            </form>
               <button type="button" 
+              className="signup_button"
               disabled={formState.password===""||formState.email===""}
               onClick={loginHandler}>LOGIN</button>
-            </form>
-            <p>Don't have an account? <Link href="/signup"><a><span>Sign up.</span></a></Link></p>
+            <p className="signup_account">Don't have an account? <Link href="/signup"><a><span className="signup_account_span">Sign up.</span></a></Link></p>
+          </div>
           </main>
         </div>
       )

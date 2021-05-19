@@ -4,15 +4,17 @@
     background-color: var(--primary);
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
+    overflow-y: scroll;
 }
 
 .initial_logo {
-    width: 70vw;
+    width: 75vw;
     z-index: 3;
+    margin-bottom: 5vh;
     max-width: 450px;
-    margin-top: 20vh;
+    max-height: 20vh;
 }
 
 .initial_decor {
@@ -21,14 +23,16 @@
     top: 0vh;
     position: fixed;
     z-index: 2;
+    transform: scale(1.2);
 }
 
 .initial_wave {
     position: fixed;
-    top: calc(100vh-30vh);
+    top: calc(100vh-60vh);
     left: -20vw;
     width: 150vw;
     z-index: 1;
+    transform: scale(1);
 }
 
 .signup_form {
@@ -39,6 +43,10 @@
     flex-direction: column;
     align-items: center;
     font-weight: 300;
+}
+
+.login_form {
+    margin: 20px 0;
 }
 
 .signup_form input {
@@ -67,7 +75,7 @@
 
 .signup_button:hover {
     cursor: pointer;
-    background-color: var(--primary-accent);
+    background-color: var(--secondary);
 }
 
 .sign_button:disabled {
@@ -77,10 +85,11 @@
 
 .signup_wrapper {
     z-index: 5;
-    height: 70vh;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .signup_account {

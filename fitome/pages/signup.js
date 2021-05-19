@@ -56,10 +56,10 @@ const SignUp = () => {
 
     return (
         <div className="initial_background">
-            <img className="initial_logo" src="/fitome_orange.png"/>
             <img className="initial_decor" src="/decor_background.png"/>
             <img className="initial_wave" src="/wave.png"/>
             <div className="signup_wrapper">
+            <img className="initial_logo" src="/fitome_orange.png"/>
             <form className="signup_form">
                 <label className="signup_input" htmlFor="firstName">First Name:</label>
                 <input type="text"
