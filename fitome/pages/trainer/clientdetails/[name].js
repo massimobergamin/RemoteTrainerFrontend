@@ -63,7 +63,7 @@ const ClientDetail = () => {
       <p>Assign {user.first_name} a plan!</p>
     }
       <a href="../createplan">
-      <button className="button">Create Plan</button>
+      <button className="button_workout">Create Plan</button>
       </a>
     </div>
       <NavigationTrainer></NavigationTrainer>
