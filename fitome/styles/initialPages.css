@@ -141,5 +141,8 @@
     .initial_wave {
         bottom: 0;
     }
+    .initial_background {
+        overflow-y: none;
+    }
 }
 

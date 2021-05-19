@@ -1,6 +1,80 @@
+.page_container_workout {
+  max-height: 88vh;
+  padding: 2vw 4vw 0px 4vw;
+  height: 88vh;
+  width: 100vw;
+  overflow-y:scroll;
+  display: flex;
+  flex-direction:column;
+  align-items:left;
+  border-top: solid 3px var(--secondary)
+}
+
+.workout_addworkout {
+  text-align: left;
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.workout_addworkout_span {
+  color: var(--primary);
+}
+
+.workoutsExercises_largeCard {
+  border: 1px solid darkgray;
+  border-radius: 5px;
+  padding: 0 2vw 0 2vw;
+  margin-bottom: 5px;
+  width: 100%;
+  min-height: 300px;
+  height: fit-content;
+}
+
+.workoutsExercises_scroll {
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  overflow-x: visible;
+  overflow-y: hidden;
+  margin: 0;
+  padding:0;
+}
+
+.workout_title {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin:5px 0;
+  padding:0;
+}
+
+.workoutsExercises_cards {
+  margin: 0 5px;
+  margin-bottom:5px;
+}
+
+.button_workout {
+  background-color: var(--primary);
+  font-weight: 700;
+  margin: 10px 0;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  box-shadow:0 0 5px 3px rgba(0, 0, 0, 0.11);
+}
+
+.button_workout:hover {
+  cursor: pointer;
+  background-color: var(--secondary);
+}
+
+
+
 .workoutsExercises_card {
   border: 1px solid darkgray;
-  border-radius: 4px;
+  border-radius: 10px;
   margin: 2vh 2vh;
   padding: 2vh 2vh;
   min-width: 250px;
@@ -11,15 +85,6 @@
   align-items: center;
 }
 
-.workoutsExercises_largeCard {
-  border: 1px solid darkgray;
-  border-radius: 4px;
-  margin: 2vh 2vh;
-  padding: 2vh 2vh;
-  min-width: 250px;
-  min-height: 300px;
-  max-width: 80vw;
-}
 
 .workoutsExercises_clientCard {
   border: 1px solid darkgray;
@@ -70,30 +135,7 @@
   cursor: pointer;
 }
 
-.workoutsExercises_scroll {
-  display: flex;
-  flex-direction: row;
-  align-items: top;
-  overflow-x: visible;
-  overflow-y: hidden;
-}
 
-.workoutsExercises_scrollItems {
-  margin: 0 2vh;
-  min-height: 220px;
-}
-
-.workoutsExercises_card div, button {
-  margin: 1vh;
-}
-
-.workoutsExercises_scroll div {
-  margin: 1vh;
-}
-
-.workoutsExercises_largeCard div {
-  margin: 1vh;
-}
 
 .workoutsExercises_flex {
   display: flex;
