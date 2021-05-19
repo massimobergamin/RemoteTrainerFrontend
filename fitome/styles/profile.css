@@ -15,7 +15,6 @@
   overflow: hidden;
   border-color: var(--primary);
   object-fit: cover;
-
 }
 
 .profileCreate_form .button {
