@@ -5,12 +5,14 @@ import NavigationTrainer from '../../components/navigationBar/navigationTrainer'
 import { getUserById, getInviteCode, getClients } from '../../redux/trainer';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import moment from 'moment';
 
 const Profile = () => {
   const dispatch = useDispatch();
   const { currentUser, logout } = useAuth();
   const { user, invite_code, clients } = useSelector(state => state.trainer);
   const router = useRouter();
+  const userBirthday = moment(user.birthday).format('LL');
 
   useEffect(() => {
     dispatch(getInviteCode(currentUser.uid));
@@ -20,31 +22,36 @@ const Profile = () => {
 
   return (
     <div>
-      {console.log(clients)}
-      <p>{user.first_name + " " + user.last_name}</p>
-      {user.profile_picture ?
-        <img src={user.profile_picture} className="profilePic"/>
-      :
-      <img className="profilePic" src="/noVid.png"></img>}
-      <p>{user.username}</p>
-        <a href="./editprofile">
-          <button className="button">Edit Profile</button>
-        </a>
-        {clients.length === 1 ? <p>You currently have 1 client.</p> : <p>You currently have {clients.length} clients.</p>}
-        <div><b>Invite code:</b><br/>{invite_code?.invite_code}</div>
-        <div><b>Birthday:</b><br/>{user.birthday}</div>
-        <div><b>Height:</b><br/>{user.height}</div>
+      <div className="page_container">
+        <div className="createprofile_wrapper">
+          <div className="page_title">{user.first_name + " " + user.last_name}</div>
+          <div className="profilewrapper">
+            {user.profile_picture ?
+              <img src={user.profile_picture} className="profilePic"/>
+              :
+              <img className="profilePic" src="/noVid.png"></img>}
+          </div>
+          <span className="profile_addImage">{user.username}</span>
+          {clients.length === 1 ? <div>You currently have 1 client.</div> : <div>You currently have {clients.length} clients.</div>}
+            <a href="./editprofile">
+              <button className="button profile_marginBottom">Edit Profile</button>
+            </a>
+            <div><b>Invite code:</b><br/>{invite_code?.invite_code}</div>
+            <div><b>Birthday:</b><br/>{userBirthday}</div>
+            <div><b>Height:</b><br/>{user.height} cm</div>
 
-        <div><b>Weight:</b><br/>{user.weight}</div>
-        <div><b>Sex:</b><br/>{user.sex}</div>
+            <div><b>Weight:</b><br/>{user.weight} lbs</div>
+            <div><b>Sex:</b><br/>{user.sex}</div>
 
-        <a href="" onClick={(e) => {
-          e.preventDefault();
-          logout();
-          router.push('/');
-        }}><u>Sign Out</u></a>
-      <NavigationTrainer></NavigationTrainer>
-    </div>
+            <a href="" onClick={(e) => {
+              e.preventDefault();
+              logout();
+              router.push('/');
+            }}><u>Sign Out</u></a>
+          </div>
+        </div>
+        <NavigationTrainer></NavigationTrainer>
+      </div>
   )
 }
 

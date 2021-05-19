@@ -11,7 +11,7 @@
   height: 35vw;
   width: 35vw;
   border-width: 3px;
-  overflow: hidden; 
+  overflow: hidden;
   border-color: var(--primary);
   object-fit: cover;
 
@@ -36,7 +36,7 @@
 }
 
 .profilewrapper{
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -45,12 +45,12 @@
 }
 
 .profilewrapper:hover {
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .profilePic_input {
-    height:0;
-    width:0;
+    height: 0;
+    width: 0;
     opacity: 0;
 }
 
@@ -83,4 +83,8 @@
     margin-bottom: 5px;
     width: 50vw;
     max-width: 400px;
+}
+
+.profile_marginBottom {
+  margin-bottom: 15px;
 }
