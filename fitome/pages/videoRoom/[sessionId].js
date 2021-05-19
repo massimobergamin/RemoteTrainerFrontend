@@ -24,6 +24,9 @@ const VideoRoom = () => {
   const userVideo = useRef();
   const peersRef = useRef([]);
 
+  // grab timer data from timer ref
+  // const userData = useRef();
+
   const { sessionId } = router.query;
 
   useEffect(() => {
@@ -96,7 +99,10 @@ const VideoRoom = () => {
         signal,
       })
     })
-
+    // once connected, send data to other peer
+    peer.on('connect', () => {
+      peer.send('Hey there!');
+    });
     return peer;
   }
 
@@ -115,8 +121,13 @@ const VideoRoom = () => {
     })
 
     peer.signal(incomingSignal);
+    // when peer receives data, log the message to the console
+    peer.on('data', data => {
+      console.log('Got a message from Peer, it says: ' + data);
+    });
     return peer;
   }
+
 
   function hangUp () {
     console.log("HANGING UP");
@@ -131,7 +142,7 @@ const VideoRoom = () => {
       <video muted className="video_me" ref={userVideo} autoPlay playsInline />
       {peers.map((peer, index) => <Video key={index} peer={peer} />)}
       <div className="timer_container">
-        <TimerOverlay />
+        <TimerOverlay peersRef={peersRef} socketRef={socketRef}/>
       </div>
       <div className="endCall">
         <button type="button" onClick={hangUp} className="button_circle"><img src="/icons/call_end_white_24dp.svg"/></button>

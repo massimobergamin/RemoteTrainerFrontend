@@ -1,11 +1,60 @@
-/* .exerciseTitleContainer {
-  margin-top: 43px;
-} */
+.trainer_clientview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.exerciseTitleContainer {
+  align-items:flex-start;
+  margin: 5px 0;
+  padding: 0px;
+  height: fit-content;
+}
 
 .setrepContainer {
   align-content: space-around;
+  padding: 0px;
+  height: fit-content;
 }
 
 .detailContainer {
   margin-left: 10px;
+  padding: 0px;
+}
+
+.trainerclientview_detaillabel {
+  font-weight:bold;
+  padding: 0px;
+  margin-top: 10px;
+}
+.planHeader {
+  font-size:medium;
+  font-weight:bold;
+  margin: 5px 0;
+  padding: 0px;
+  color: rgb(94, 94, 94);
+}
+.planHeaderDate {
+  font-size:medium;
+  margin: 5px 0;
+  padding: 0px;
+  margin-bottom: 30px;
+  color: rgb(94, 94, 94);
+}
+
+.planContainer {
+  height: fit-content;
+  border: 1px solid rgb(108, 175, 166);
+  border-radius: 5px;
+  padding: 0 2vw 0 2vw;
+  margin-bottom: 5px;
+  width: 100%;
+  font-size:x-small;
+}
+
+.single_card_container {
+  height: fit-content;
+  padding: 0px;
+  margin: 0px;
+  
 }
