@@ -40,13 +40,13 @@ function WorkoutDetails({ workout }) {
 
   return (
     <div>
-      <h3>{workout.title}</h3>
+      <div className="page_title">{workout.title}</div>
       <div className="workoutsExercises_flex">
-        <button className="button" onClick={handlePrevClick} disabled={prevDisabled}>◀</button>
+        <button className="carousel_button" onClick={handlePrevClick} disabled={prevDisabled}>◀</button>
         {currentUser.displayName == 'trainer' ? 
         <ExerciseDetails key={exercise.id} exercise={exercise}></ExerciseDetails>
         : <ClientExerciseDetails key={exercise?.id} exercise={exercise}></ClientExerciseDetails>}
-        <button className="button" onClick={handleNextClick} disabled={nextDisabled}>▶</button>
+        <button className="carousel_button" onClick={handleNextClick} disabled={nextDisabled}>▶</button>
       </div>
     </div>
   )

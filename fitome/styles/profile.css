@@ -1,5 +1,6 @@
 .profileCreate_form {
   max-height: 65vh;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,10 +12,9 @@
   height: 35vw;
   width: 35vw;
   border-width: 3px;
-  overflow: hidden; 
+  overflow: hidden;
   border-color: var(--primary);
   object-fit: cover;
-
 }
 
 .profileCreate_form .button {
@@ -36,7 +36,7 @@
 }
 
 .profilewrapper{
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -45,23 +45,23 @@
 }
 
 .profilewrapper:hover {
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .profilePic_input {
-    height:0;
-    width:0;
+    height: 0;
+    width: 0;
     opacity: 0;
 }
 
-.createprofile_wrapper {
+/* .createprofile_wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 80%;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .createprofile_form {
   z-index: 4;
@@ -73,7 +73,7 @@
   font-weight: 300;
 }
 
-.createprofile_form input {
+.createprofile_form input, textarea {
     border-radius: 10px;
     color: var(--fontColor);
     font-weight: 700;
@@ -83,4 +83,8 @@
     margin-bottom: 5px;
     width: 50vw;
     max-width: 400px;
+}
+
+.profile_marginBottom {
+  margin-bottom: 15px;
 }

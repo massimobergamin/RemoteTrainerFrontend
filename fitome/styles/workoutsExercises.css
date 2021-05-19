@@ -10,6 +10,7 @@
   border-top: solid 3px var(--secondary)
 }
 
+
 .workout_addworkout {
   text-align: left;
   font-size: 1.5em;
@@ -27,7 +28,6 @@
   padding: 0 2vw 0 2vw;
   margin-bottom: 5px;
   width: 100%;
-  min-height: 300px;
   height: fit-content;
 }
 
@@ -41,6 +41,20 @@
   padding:0;
 }
 
+.workoutsExercises_largeCard2 {
+  border: 1px solid darkgray;
+  border-radius: 5px;
+  padding: 2vw;
+  margin-bottom: 5px;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  overflow-x: visible;
+  overflow-y: hidden;
+}
+
 .workout_title {
   font-size: 1.5em;
   font-weight: 700;
@@ -51,6 +65,12 @@
 .workoutsExercises_cards {
   margin: 0 5px;
   margin-bottom:5px;
+  width: 180px;
+}
+
+.workout_video {
+  width: 176px;
+  height:176px;
 }
 
 .button_workout {
@@ -70,19 +90,29 @@
   background-color: var(--secondary);
 }
 
+.exercise_info {
+  margin-top: 5px;
+  font-size: 0.8rem;
+}
 
+.exercise_video {
+  width:100%;
+  height: auto;
+  border: 0;
+  border-radius: 5px;
+}
 
 .workoutsExercises_card {
   border: 1px solid darkgray;
   border-radius: 10px;
-  margin: 2vh 2vh;
+  margin: 1vh 1vh;
   padding: 2vh 2vh;
-  min-width: 250px;
-  max-width: 250px;
-  min-height: 250px;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  overflow-y: scroll;
 }
 
 
@@ -91,9 +121,6 @@
   border-radius: 4px;
   margin: 2vh 2vh;
   padding: 2vh 2vh;
-  min-width: 250px;
-  max-width: 250px;
-  min-height: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,16 +133,31 @@
 }
 
 .workoutsExercises_FadeIn {
-    display: block;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    padding: 10vh 5vh;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     z-index: 10;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0, 0, 0, 0.747);
     color: seashell;
+    z-index: 3
 }
 
+.exercise_subtitle {
+  font-weight: 700;
+}
+
+.exerciselist_title {
+  font-size: 1rem;
+  font-weight: 300;
+  text-overflow: wrap;
+  margin: 0;
+  padding:0;
+}
 
 
 
@@ -143,6 +185,13 @@
   justify-content: center;
 }
 
+.workoutdetail_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .workoutsExercises_flexCol {
   display: flex;
   flex-direction: column;
@@ -161,6 +210,5 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: 3vh;
   font-size: 1.2em;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+    import React, { useState, useEffect } from 'react';
 import useStorage from '../firebase/useStorage';
 
 const UploadImageForm = ({ file, setURL }) => {
@@ -23,7 +23,7 @@ const UploadImageForm = ({ file, setURL }) => {
         if (url){
             setURL(url)
         }
-        else setURL("uploading")
+    
       }, [url])
 
     return (

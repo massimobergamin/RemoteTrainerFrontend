@@ -1,0 +1,85 @@
+.trainer_clientview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.exerciseTitleContainer {
+  align-items:flex-start;
+  margin: 5px 0;
+  padding: 0px;
+  height: fit-content;
+}
+
+.dayTitle {
+  font-size: 0.8em;
+}
+
+.detailContainer {
+  margin-left: 10px;
+  padding: 0px;
+}
+
+.trainerclientview_detaillabel {
+  font-weight:bold;
+  padding: 0px;
+  margin-top: 10px;
+}
+.planHeader {
+  font-size:medium;
+  font-weight:bold;
+  margin: 5px 0;
+  padding: 0px;
+  color: #94d2c9;
+}
+.planHeaderDate {
+  font-size:0.8em;
+  margin: 5px 0;
+  padding: 0px;
+  margin-bottom: 15px;
+  color: rgb(129, 129, 129);
+}
+
+.planContainer {
+  height: fit-content;
+  border: 1px solid rgb(108, 175, 166);
+  border-radius: 5px;
+  padding: 0 2vw 0 2vw;
+  margin-bottom: 5px;
+  width: 100%;
+  font-size:x-small;
+}
+
+.single_card_container {
+  height: fit-content;
+  padding: 0px;
+  margin: 0px;
+  
+}
+
+.setrepContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+  font-size: 0.8em;
+  align-content: space-around;
+  padding: 0px;
+  height: fit-content;
+}
+
+.planContainer {
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
+}
+
+.exerciseTitleContainer {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8em;
+}
+
+
+.planExerciseRows {
+  font-size: 0.6em;
+}

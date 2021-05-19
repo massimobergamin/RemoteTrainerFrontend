@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { getUser } from '../../redux/client'
+import { getUser, addPlanNotes } from '../../redux/client'
 import { useAuth } from '../../firebase/contextAuth';
 import NavigationClient from '../../components/navigationBar/navigationClient';
 import moment from 'moment';
@@ -9,6 +9,10 @@ import WorkoutDetails from '../../components/workoutDetails';
 
 // displays client's workout plan + exercises
 const Plan = () => {
+
+  // const [inputBoxStatus, setInputBox] = useState(false)
+  // const [noteState, setNoteState] = useState('')
+
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
 
@@ -19,9 +23,21 @@ const Plan = () => {
   const client = useSelector(state => state.client);
   console.log('client: ', client);
 
-  const handleClick = () => {
-    // add client notes logic
-  }
+  // //set inputBox to true and shows the input box
+  // const addNotesHandler = () => {
+  //   setInputBox(true)
+  // }
+  //****note sure how to grab current ID */
+  // const UpdatedNote = {
+  //   notes: noteState,
+  //   planId: currentPlanState.id
+  // }
+
+  // //sends the input to the backend and sets inputbox to false - hiding the input
+  // const noteHandler = () => {
+  //   dispatch(addPlanNotes(noteState))
+  //   setInputBox(false)
+  // }
 
   function renderPlan () {
     
@@ -37,13 +53,19 @@ const Plan = () => {
           // console.log('curPlan: ', curPlan);
           return (
             <div>
-              <div>Beginning: {moment(startDate).format("dddd, MMMM Do YYYY")}</div>
-              <div>Ending: {moment(endDate).format("dddd, MMMM Do YYYY")}</div>
+              <div className="clientplan_date">Beginning: {moment(startDate).format("dddd, MMMM Do YYYY")}</div>
+              <div className="clientplan_date">Ending: {moment(endDate).format("dddd, MMMM Do YYYY")}</div>
               <div>
                 {curPlan.details.map(day => (
                   <div>
-                    <h2 key={day.id}>{moment(day.day).format("dddd, MMMM Do YYYY")}</h2>
-                    <button>Add Notes</button>
+                    <div className="clientplan_dates" key={day.id}>{moment(day.day).format("dddd, MMMM Do YYYY")}</div>
+                    {/* <button className="button" onClick={() => addNotesHandler()}>Add Notes</button>
+                    {inputBoxStatus ? (
+                      <div>
+                        <input onChange={(e) => setNoteState(e.currentTarget.value)}></input>
+                        <button onClick={noteHandler}>submit</button>
+                      </div>
+                    ) : null } */}
                     <WorkoutDetails key={day.day} workout={day}></WorkoutDetails> 
                   </div>
                 ))}
@@ -61,8 +83,8 @@ const Plan = () => {
       <div className="page_container">
       <h1>{client.user.username}'s Training Plan</h1>
       {renderPlan()}
-      <NavigationClient />
       </div>
+      <NavigationClient />
     </div>
   )
 }

@@ -36,34 +36,40 @@ const CreateExercise = () => {
     <div>
       <WorkoutsExercisesBar></WorkoutsExercisesBar>
       <div className="pageContainer">
-        <h1>Create New Exercise</h1>
-        <form className="workoutsExercises_form">
-          <label className="workoutsExercises_field" htmlFor="title">Title:
-            <input type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
-          </label>
-          <label className="workoutsExercises_field" htmlFor="description">Description:
-            <textarea name="description" rows="4" cols="50" onChange={(e) => setFormState({...formState, description: e.target.value})}></textarea>
-          {console.log('formState', formState)}
-          </label>
-          <label className="workoutsExercises_field" htmlFor="muscleGroup">Muscle Group:
-            <input type="text" list="muscleGroups" onChange={(e) => setFormState({...formState, muscle_group: e.target.value.toLowerCase()})}/>
-            <datalist id="muscleGroups">
-              <option>Arms</option>
-              <option>Legs</option>
-              <option>Back</option>
-              <option>Chest</option>
-              <option>Core</option>
-              <option>Shoulders</option>
-            </datalist>
-          </label>
-          <label className="workoutsExercises_field" htmlFor="benefits">Benefits:
-            <input type="text" onChange={(e) => setFormState({...formState, benefits: e.target.value})}/>
-          </label>
-          <label className="workoutsExercises_field" htmlFor="video">Video:
-            <UploadVideoForm setMedia={setMedia}></UploadVideoForm>
-          </label>
-        </form>
-          <button className="button" onClick={handleSubmit} disabled={formState.title===""||formState.description===""||formState.muscle_group===""||media==='uploading'}>Create</button>
+        <div className="createprofile_wrapper">
+          <div className="page_title">Create New Exercise</div>
+          <form className="createprofile_form">
+            <label htmlFor="title">Title: <br/>
+              <input type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
+            </label>
+            <label htmlFor="description">Description: <br/>
+              <textarea name="description" rows="4" cols="50" style={{width: "70vw", height: "15vh"}} onChange={(e) => setFormState({...formState, description: e.target.value})}></textarea>
+            {console.log('formState', formState)}
+            </label>
+            <label htmlFor="muscleGroup">Muscle Group: <br/>
+              <input type="text" list="muscleGroups" onChange={(e) => setFormState({...formState, muscle_group: e.target.value.toLowerCase()})}/>
+              <datalist id="muscleGroups">
+                <option>Arms</option>
+                <option>Legs</option>
+                <option>Back</option>
+                <option>Chest</option>
+                <option>Core</option>
+                <option>Shoulders</option>
+              </datalist>
+            </label>
+            <label htmlFor="benefits">Benefits: <br/>
+              <input type="text" onChange={(e) => setFormState({...formState, benefits: e.target.value})}/>
+            </label>
+            <label htmlFor="video">Video: <br/>
+              <UploadVideoForm setMedia={setMedia}></UploadVideoForm>
+            </label>
+          </form>
+            <button className="button" onClick={handleSubmit} disabled={formState.title===""||formState.description===""||formState.muscle_group===""||media==='uploading'}>Create</button>
+            <br/>
+            <button className="buttonCancel" onClick={() => {
+              router.push('/trainer/exercises');
+            }}>Cancel</button>
+        </div>
       </div>
       {/* <NavigationTrainer></NavigationTrainer> */}
     </div>

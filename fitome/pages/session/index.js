@@ -46,11 +46,11 @@ function SessionList() {
     function showButton () {
         if (currentUser.displayName === "trainer") {
             return (
-                <button className="button" 
-                type="button"
-                onClick={()=>router.push('/trainer/session/create')}
-                >New Session
-                </button>
+                <div className="workout_addworkout" onClick={(e) => {
+                    e.preventDefault();
+                    router.push('/trainer/session/create')
+                  }}><span className="workout_addworkout_span">+ </span>Session</div>
+
             )
         }
         return null;
@@ -60,12 +60,12 @@ function SessionList() {
         <div>
             <div className="page_container">
                 {showButton()}
-                <div className="sessionList1"> 
-                    Next Session:
+                <div className="sessionList1">
+                    <div className="session_list">Next Session:</div>
                     {showFirst()}
                 </div>
                 <div className="sessionList2">
-                    Upcoming Sessions:
+                    <div className="session_list">Upcoming Sessions:</div>
                     {showRest()}
                 </div>
             </div>

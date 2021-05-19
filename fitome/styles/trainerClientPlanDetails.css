@@ -13,3 +13,30 @@
   display: flex;
   flex-direction: column;
 }
+
+.clientplan_dates {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.clientplan_date {
+  font-size: 1rem;
+  font-weight: 300;
+  color:grey;
+}
+
+.setrepContainer {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  font-size: 0.8em;
+}
+
+.setrepContainer {
+  font-size: 0.8em;
+}
+
+.planExerciseRows {
+  font-size: 0.6em;
+}

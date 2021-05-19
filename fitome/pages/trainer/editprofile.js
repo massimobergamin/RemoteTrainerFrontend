@@ -18,7 +18,9 @@ const EditProfile = () => {
   return (
     <div>
       {/* <ProfileBar></ProfileBar> */}
+      <div className="page_container">
       <UpdateProfileForm></UpdateProfileForm>
+      </div>
       <NavigationTrainer></NavigationTrainer>
     </div>
   )

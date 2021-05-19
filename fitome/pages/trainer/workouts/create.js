@@ -52,20 +52,22 @@ const CreateWorkout = () => {
 
   return (
     <div>
-      <WorkoutsExercisesBar></WorkoutsExercisesBar>
-      <div className="pageContainer">
+      <div className="page_container">
         <h1>Create New Workout</h1>
         <form className="workoutsExercises_form">
           <label className="workoutsExercises_field" htmlFor="title">Title:
-            <input placeholder="Title" type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
+            <input className="workoutsExercises_textField" type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
             <button className="button" onClick={handleSubmit} disabled={formState.title===""||formState.exerciseIds.length===0}>Create</button>
+            <button className="buttonCancel" onClick={() => {
+              router.push('/trainer/workouts');
+            }}>Cancel</button>
           </label>
         </form>
           <h3>Select Exercises</h3>
-          <div className="workoutsExercises_scroll">
+          <div className="workoutsExercises_scrollCreate">
             {exercises && exercises.map((exercise, i) =>
-              <div key={exercise.id} className="workoutsExercises_card">
-                <button className="button" onClick={() => handleClick(exercise.id, i)}>{buttonTextArr[i] || 'Add'}</button>
+              <div key={exercise.id} className="workoutsExercises_cardCreate">
+                <button className="button_workout" onClick={() => handleClick(exercise.id, i)}>{buttonTextArr[i] || 'Add'}</button>
                 {exercise.media ?
                   <video id="Exercise_Video" width="176" height="176" controls muted loop={true}>
                       <source src={exercise.media} type="video/mp4"/>
