@@ -45,3 +45,14 @@
     border-radius: 10px;
     color: grey
 }
+
+::-webkit-file-upload-button {
+    background-color: var(--primary);
+    font-weight: 700;
+    padding: 5px 8px;
+    font-size: 0.75rem;
+    border: 0;
+    border-radius: 10px;
+    color: white;
+    box-shadow:0 0 5px 3px rgba(0, 0, 0, 0.11);
+}

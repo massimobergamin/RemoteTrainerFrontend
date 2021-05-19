@@ -29,7 +29,7 @@ function UploadVideoForm({ setMedia }) {
     return (
         <div>
             <form>
-                <input type="file" onChange={handleChange}/>
+                <input style={{height: "1.82rem", width: "220px", padding: "2px 2px"}} type="file" onChange={handleChange}/>
                 <div >
                 {(file && !url) && <h5>Uploading {file.name}...</h5>}
                 {url &&
