@@ -12,7 +12,6 @@
 .exerciseTitleContainer {
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
 }
 
 .clientplan_dates {
@@ -25,9 +24,6 @@
   font-size: 1rem;
   font-weight: 300;
   color:grey;
-}
-=======
-  font-size: 0.8em;
 }
 
 .setrepContainer {
@@ -44,4 +40,3 @@
 .planExerciseRows {
   font-size: 0.6em;
 }
->>>>>>> e0eec53f19a45bcd571c9c1a117cc56c7936355c
