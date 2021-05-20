@@ -24,7 +24,7 @@ const Clients = () => {
   const [selectedClient, setSelectedClient] = useState('')
 
   const { clients } = useSelector(state => state.trainer);
-  
+
   const clientDetails = (uid) => {
      dispatch(getUser(uid))
   }
@@ -44,16 +44,20 @@ const Clients = () => {
     }
     else {
       alert('You have no clients. Please invite your clients using your invite code.')
-    } 
+    }
   }
 
- 
+
   return (
     <div>
       <div className="page_container">
+      <div className="workout_addworkout" onClick={(e) => {
+          e.preventDefault();
+          router.push('/trainer/createplan')
+        }}><span className="workout_addworkout_span">+ </span>Plan</div>
         <div className="client_list">
       <h1>Client List</h1>
-      {clientList()}   
+      {clientList()}
         </div>
       </div>
       <NavigationTrainer/>
