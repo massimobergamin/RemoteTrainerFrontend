@@ -46,7 +46,7 @@ const CreatePlanForm = () => {
     dispatch(getClients(currentUser.uid))
     dispatch(getWorkout(currentUser.uid))
   }, [])
-
+  console.log("CCLIENTS", clients)
 
   const insertAt = (array, index, elem) => {
     const shallowArray = Object.assign(array);
@@ -111,12 +111,16 @@ const CreatePlanForm = () => {
   const findValue = (value) => {
     for (let i=0; i<clients.length; i++) {
       let name = clients[i].first_name+' '+clients[i].last_name;
+      console.log("NAEM", name)
       if (name===value){
+        console.log("hello")
         setPlanState({...planState, client_uid:clients[i].user_uid})
+        break;
       }
-      break;
     }
   }
+
+  console.log("PLANSTATE", planState)
 
   const findWorkoutValue = (value) => {
     for (let i=0; i<workouts.length; i++) {
