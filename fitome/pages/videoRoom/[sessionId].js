@@ -19,7 +19,7 @@ const Video = ({ peer }) => {
 }
 
 const initState = {
-  minutes: 0, 
+  minutes: 0,
   seconds: 0,
 };
 
@@ -30,7 +30,7 @@ const VideoRoom = () => {
   const userVideo = useRef();
   const peersRef = useRef([]);
 
-  // **** TIMER STATE ADDED FOR TESTING **** // 
+  // **** TIMER STATE ADDED FOR TESTING **** //
   const [reset, setReset] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -191,13 +191,13 @@ const VideoRoom = () => {
   }
 
 
-  // ****** TIMER LOGIC ADDED BELOW FOR TESTING ***** // 
+  // ****** TIMER LOGIC ADDED BELOW FOR TESTING ***** //
 
   const children = ({ remainingTime }) => {
     const hours = Math.floor(remainingTime / 3600)
     const minutes = Math.floor((remainingTime % 3600) / 60)
     const seconds = remainingTime % 60
-  
+
     return <div className="timer_time">{`${hours}:${minutes}:${seconds}`}</div>
   }
 
@@ -235,7 +235,7 @@ const VideoRoom = () => {
   // const wrapSetState = async () => {
 
   // }
-  
+
   const handleReset = async () => {
     if (!isEditing) {
       await new Promise((resolve, reject) => resolve(setReset(prevState => prevState + 1))).then(() => {
@@ -260,7 +260,7 @@ const VideoRoom = () => {
       const { minutes, seconds } = timerInput;
       const newMinutes = parseInt(minutes);
       const newSeconds = parseInt(seconds);
-    
+
       const newDuration = (newMinutes * 60) + newSeconds;
       await new Promise((resolve, reject) => resolve(setNewTimer(newDuration))).then(() => {
         peersRef.current.map(peer => {
@@ -304,7 +304,7 @@ const VideoRoom = () => {
         const timerDataJson = JSON.stringify(timerData);
         peer.peer.send(timerDataJson);
       })
-    }); 
+    });
     if (isPlaying && !isEditing) {
       await new Promise((resolve, reject) => resolve(setIsPlaying(prev => false))).then(() => {
         peersRef.current.map(peer => {
@@ -335,9 +335,9 @@ const VideoRoom = () => {
         isPlaying={isPlaying}
         duration={newTimer}
         colors={[
-          ['#307b63', 0.33],
-          ['#e5c100', 0.33],
-          ['#9c0412', 0.33],
+          ['#94d2c9', 0.33],
+          ['#ee9b00', 0.33],
+          ['#ca6702', 0.33],
         ]}
       >
         { children }
@@ -347,13 +347,15 @@ const VideoRoom = () => {
         <button className="timer_button" onClick={handleReset}>{isEditing ? "Submit" : "Reset"}</button>
         <button className="timer_button" onClick={handleEdit}>Edit</button>
       </div>
-      <div className="timer_input">
-      <div style={{ display: isEditing ? "flex" : "none" }}>
+      <div className="timer_input" style={{ display: isEditing ? "flex" : "none" }}>
+        <div className="firstInput">
           <input type="number" min="0" name="minutes" value={timerInput.minutes} onChange={handleChange}></input>
-          <label className="timer_label">Minutes</label>
+          <label className="timer_label">Min</label>
+        </div>
+        <div className="secondInput">
           <input type="number" min="0" name="seconds" value={timerInput.seconds} onChange={handleChange}></input>
-          <label className="timer_label">Seconds</label>
-      </div>
+          <label className="timer_label">Sec</label>
+        </div>
       </div>
     </div>
       </div>
@@ -380,7 +382,7 @@ export default VideoRoom
 //     const { sessionId } = router.query;
 //     const [them, setThem] = useState({})
 
-    
+
 //     useEffect(() => {
 //         if (currentUser) {
 //             import('peerjs').then(({ default: Peer }) => {
@@ -419,11 +421,11 @@ export default VideoRoom
 //                             addVideoStream(video, userVideoStream, themVideoScreen) // Display their video to ourselves
 //                         })
 //                     })
-                    
+
 
 //                     socket.on('user-connected', userId => { // If a new user connect, connect to them
 //                         console.log("Socket user connected", userId);
-//                         connectToNewUser(userId, stream) 
+//                         connectToNewUser(userId, stream)
 //                     })
 
 //                     socket.on('call-ended', res => {
@@ -437,9 +439,9 @@ export default VideoRoom
 //                         }
 //                         router.push('/')
 //                     })
-                    
+
 //                 })
-            
+
 //                 function connectToNewUser(userId, stream) { // This runs when someone joins our room
 //                     console.log("CONNECTING TO NEW USER", userId, " ", stream, myPeer)
 //                     const call = myPeer.call(userId, stream) // Call the user who just joined
@@ -464,11 +466,11 @@ export default VideoRoom
 //                     })
 //                     container.append(video);
 //                   }
-                
+
 //             });
 //         }
 //     },[currentUser])
-    
+
 //    function hangUp () {
 //        stream.getTracks()[0].stop()
 //        stream.getTracks()[1].stop()
@@ -488,7 +490,7 @@ export default VideoRoom
 //           </div>
 //           <div className="endCall">
 //           <button type="button" onClick={() => hangUp()} className="button_circle"><img src="/icons/call_end_white_24dp.svg"/></button>
-//           </div> 
+//           </div>
 //         </div>
 //     )
 // }

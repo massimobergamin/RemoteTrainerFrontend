@@ -12,7 +12,7 @@ const TimerOverlay = ({ peersRef, socketRef }) => {
 
   socketRef.current.on('')
   const initState = {
-    minutes: 0, 
+    minutes: 0,
     seconds: 0,
   };
 
@@ -31,7 +31,7 @@ const TimerOverlay = ({ peersRef, socketRef }) => {
     const hours = Math.floor(remainingTime / 3600)
     const minutes = Math.floor((remainingTime % 3600) / 60)
     const seconds = remainingTime % 60
-  
+
     return `${hours}:${minutes}:${seconds}`
   }
 
@@ -55,7 +55,7 @@ const TimerOverlay = ({ peersRef, socketRef }) => {
       const { minutes, seconds } = timerInput;
       const newMinutes = parseInt(minutes);
       const newSeconds = parseInt(seconds);
-    
+
       const newDuration = (newMinutes * 60) + newSeconds;
       setNewTimer(newDuration);
       setReset(prevState => prevState + 1);
@@ -65,7 +65,7 @@ const TimerOverlay = ({ peersRef, socketRef }) => {
 
   const handleEdit = () => {
     setIsEditing(prevState => !prevState)
-    
+
     if (isPlaying && !isEditing) {
       setIsPlaying(prev => false)
     }
@@ -91,7 +91,7 @@ const TimerOverlay = ({ peersRef, socketRef }) => {
       >
         { children }
       </CountdownCircleTimer>
-      <button  onClick={handlePause} disabled={isEmpty()}>{isPlaying ? "Pause" : "Start"}</button>
+      <button onClick={handlePause} disabled={isEmpty()}>{isPlaying ? "Pause" : "Start"}</button>
       <button onClick={handleReset}>{isEditing ? "Submit" : "Reset"}</button>
       <button onClick={handleEdit}>Edit</button>
       <div style={{ display: isEditing ? "flex" : "none" }}>
