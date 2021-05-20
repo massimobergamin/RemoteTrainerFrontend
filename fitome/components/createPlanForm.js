@@ -115,6 +115,7 @@ const CreatePlanForm = () => {
       if (name===value){
         console.log("hello")
         setPlanState({...planState, client_uid:clients[i].user_uid})
+        break;
       }
     }
   }
