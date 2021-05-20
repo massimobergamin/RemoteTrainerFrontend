@@ -12,14 +12,18 @@
 
 
 .workout_addworkout {
+  display: flex;
+  align-items: center;
   text-align: left;
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: 700;
   margin-bottom: 5px;
+  line-height: 1.2em;
 }
 
 .workout_addworkout_span {
   color: var(--primary);
+  font-size: 1.8em;
 }
 
 .workoutsExercises_largeCard {

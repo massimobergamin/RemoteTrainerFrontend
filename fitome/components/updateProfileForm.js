@@ -84,7 +84,7 @@ const UpdateProfileForm = () => {
             type="date"
             name="birthday"
             value={profileState.birthday}
-            max="2003-05-17"
+            // max="2003-05-17"
             onChange={(e) => setProfileState({...profileState, birthday: e.target.value})}/>
           </label>
           <label htmlFor="sex">Sex:
