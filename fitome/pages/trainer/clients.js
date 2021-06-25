@@ -65,8 +65,4 @@ const Clients = () => {
   )
 }
 
-      // <label htmlFor="listOfClients">Select a Client:</label>
-      //   <input list="clientList" onChange={(e)=>findValue(e.target.value)} id="listOfClients" name="listOfClients" />
-      //   <datalist id="clientList" >
-      //   </datalist>
 export default Clients
