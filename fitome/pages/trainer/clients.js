@@ -24,7 +24,7 @@ const Clients = () => {
   const [selectedClient, setSelectedClient] = useState('')
 
   const { clients } = useSelector(state => state.trainer);
-  
+
   const clientDetails = (uid) => {
      dispatch(getUser(uid))
   }
@@ -44,23 +44,26 @@ const Clients = () => {
     }
     else {
       alert('You have no clients. Please invite your clients using your invite code.')
-    } 
+    }
   }
 
- 
+
   return (
     <div>
       <div className="page_container">
-        <h1>Client List</h1>
-        <div className="clients_list">{clientList()}</div>
+
+      <div className="workout_addworkout" onClick={(e) => {
+          e.preventDefault();
+          router.push('/trainer/createplan')
+        }}><span className="workout_addworkout_span">+ </span>Plan</div>
+        <div className="clients_list">
+      <h1>Client List</h1>
+      {clientList()}
+        </div>
       </div>
       <NavigationTrainer/>
     </div>
   )
 }
 
-      // <label htmlFor="listOfClients">Select a Client:</label>
-      //   <input list="clientList" onChange={(e)=>findValue(e.target.value)} id="listOfClients" name="listOfClients" />
-      //   <datalist id="clientList" >
-      //   </datalist>
 export default Clients
