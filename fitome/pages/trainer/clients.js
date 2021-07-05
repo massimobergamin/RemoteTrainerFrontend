@@ -50,19 +50,19 @@ const Clients = () => {
 
   return (
     <div>
-      <div className="page_container">
+    <div className="page_container">
 
-      <div className="workout_addworkout" onClick={(e) => {
-          e.preventDefault();
-          router.push('/trainer/createplan')
-        }}><span className="workout_addworkout_span">+ </span>Plan</div>
-        <div className="clients_list">
-      <h1>Client List</h1>
-      {clientList()}
-        </div>
+    <div className="workout_addworkout" onClick={(e) => {
+        e.preventDefault();
+        router.push('/trainer/createplan')
+      }}><span className="workout_addworkout_span">+ </span>Plan</div>
+    <h1>Client List</h1>
+      <div className="clients_list">
+    {clientList()}
       </div>
-      <NavigationTrainer/>
     </div>
+    <NavigationTrainer/>
+  </div>
   )
 }
 
