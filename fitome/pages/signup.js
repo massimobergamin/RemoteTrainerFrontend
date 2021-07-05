@@ -29,6 +29,7 @@ const SignUp = () => {
 
     const [inviteState, setInviteState] = useState(inviteInitialState)
     const [formState, setFormState] = useState(initialState);
+    const [error,setError] = useState("");
     const { user, invite_code } = useSelector(state => state.trainer);
     console.log("INVITE", invite_code)
     function titleCase(name){
@@ -41,6 +42,7 @@ const SignUp = () => {
             let firstName = titleCase(formState.first_name);
             let lastName = titleCase(formState.last_name);
             const fireBaseData = await signUp(formState.email, formState.password, lowerType);
+            setError("");
             if (formState.type === 'Trainer') {
                 await dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
                 await dispatch(postInviteCode({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5).toUpperCase()}));
@@ -50,7 +52,12 @@ const SignUp = () => {
               router.push(`/client/invitecode`);
             }
         } catch (err) {
-            console.error(err)
+            const error = document.getElementById("error");
+            console.error(err);
+            setError(err.message);
+            error.style.display="block";
+            setFormState(initialState);
+
         }
     }
 
@@ -60,6 +67,7 @@ const SignUp = () => {
             <img className="initial_wave" src="/wave.png"/>
             <div className="signup_wrapper">
             <img className="initial_logo" src="/fitome_orange.png"/>
+            <div className="signup_error" id="error">{error}</div>
             <form className="signup_form">
                 <label className="signup_input" htmlFor="firstName">First Name:</label>
                 <input type="text"
