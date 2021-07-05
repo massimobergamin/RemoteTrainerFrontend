@@ -50,17 +50,20 @@ const Clients = () => {
  
   return (
     <div>
-      <div className="page_container">
-        <h1>Client List</h1>
-        <div className="clients_list">{clientList()}</div>
+    <div className="page_container">
+
+    <div className="workout_addworkout" onClick={(e) => {
+        e.preventDefault();
+        router.push('/trainer/createplan')
+      }}><span className="workout_addworkout_span">+ </span>Plan</div>
+    <h1>Client List</h1>
+      <div className="clients_list">
+    {clientList()}
       </div>
-      <NavigationTrainer/>
     </div>
+    <NavigationTrainer/>
+  </div>
   )
 }
 
-      // <label htmlFor="listOfClients">Select a Client:</label>
-      //   <input list="clientList" onChange={(e)=>findValue(e.target.value)} id="listOfClients" name="listOfClients" />
-      //   <datalist id="clientList" >
-      //   </datalist>
 export default Clients
