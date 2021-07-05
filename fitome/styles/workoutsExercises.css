@@ -159,30 +159,24 @@
   padding:0;
 }
 
-
-
-/* .workoutsExercises_focusedCard {
-  left: 50vw;
-  top: 50vh;
-} */
-
-/* .workoutsExercises_FadeOut {
-  opacity:0;
-  width:0;
-  height:0;
-  transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
-} */
-
 .workoutsExercises_clientCard:hover {
   cursor: pointer;
 }
 
-
+.workoutdetail_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .workoutsExercises_flex {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  width: 100%;
+  max-width: 500px;
 }
 
 .workoutdetail_wrapper {

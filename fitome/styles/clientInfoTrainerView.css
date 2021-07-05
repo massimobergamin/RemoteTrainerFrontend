@@ -83,3 +83,15 @@
 .planExerciseRows {
   font-size: 0.6em;
 }
+
+.clients_list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.clients_button {
+  width: fit-content;
+}

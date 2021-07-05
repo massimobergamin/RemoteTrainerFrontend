@@ -39,7 +39,7 @@ const Clients = () => {
   const clientList = () => {
     if (clients) {
       return clients.map((client)=> {
-        return <button className="button" onClick={() => onChangeClient({ target: {name: "client", value: client} })}>{client.first_name + ' ' + client.last_name}</button>
+        return <button className="button clients_button" onClick={() => onChangeClient({ target: {name: "client", value: client} })}>{client.first_name + ' ' + client.last_name}</button>
       })
     }
     else {
@@ -51,8 +51,8 @@ const Clients = () => {
   return (
     <div>
       <div className="page_container">
-      <h1>Client List</h1>
-      {clientList()}   
+        <h1>Client List</h1>
+        <div className="clients_list">{clientList()}</div>
       </div>
       <NavigationTrainer/>
     </div>
