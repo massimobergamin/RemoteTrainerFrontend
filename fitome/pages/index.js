@@ -26,9 +26,11 @@ export default function Home() {
 
 
     const loginHandler = async () => {
+      const error = document.getElementById("error");
       try {
       let userInfo = await login(formState.email, formState.password);
       setError("");
+      error.style.display="none";
       if (userInfo.user.displayName === 'trainer') {
         await dispatch(getUserById(userInfo.user.uid))
         router.push('/session');
@@ -43,8 +45,6 @@ export default function Home() {
         };
 
      } catch (err) {
-       const error = document.getElementById("error");
-       console.log(err);
        setError(err.message);
        setFormState(initialState);
        error.style.display="block";

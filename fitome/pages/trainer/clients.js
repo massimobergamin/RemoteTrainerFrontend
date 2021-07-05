@@ -39,7 +39,7 @@ const Clients = () => {
   const clientList = () => {
     if (clients) {
       return clients.map((client)=> {
-        return <button className="button" onClick={() => onChangeClient({ target: {name: "client", value: client} })}>{client.first_name + ' ' + client.last_name}</button>
+        return <button className="button clients_button" onClick={() => onChangeClient({ target: {name: "client", value: client} })}>{client.first_name + ' ' + client.last_name}</button>
       })
     }
     else {
@@ -51,11 +51,12 @@ const Clients = () => {
   return (
     <div>
       <div className="page_container">
+
       <div className="workout_addworkout" onClick={(e) => {
           e.preventDefault();
           router.push('/trainer/createplan')
         }}><span className="workout_addworkout_span">+ </span>Plan</div>
-        <div className="client_list">
+        <div className="clients_list">
       <h1>Client List</h1>
       {clientList()}
         </div>
