@@ -1,3 +1,8 @@
+.client_list {
+  display: flex;
+  flex-direction: column;
+}
+
 .trainer_clientview {
   display: flex;
   flex-direction: column;

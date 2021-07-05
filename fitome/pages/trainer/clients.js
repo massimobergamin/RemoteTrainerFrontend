@@ -24,7 +24,7 @@ const Clients = () => {
   const [selectedClient, setSelectedClient] = useState('')
 
   const { clients } = useSelector(state => state.trainer);
-  
+
   const clientDetails = (uid) => {
      dispatch(getUser(uid))
   }
@@ -44,10 +44,10 @@ const Clients = () => {
     }
     else {
       alert('You have no clients. Please invite your clients using your invite code.')
-    } 
+    }
   }
 
- 
+
   return (
     <div>
     <div className="page_container">

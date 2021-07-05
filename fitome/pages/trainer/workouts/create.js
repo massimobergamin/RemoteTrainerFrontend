@@ -54,7 +54,7 @@ const CreateWorkout = () => {
     <div>
       <div className="page_container">
         <h1>Create New Workout</h1>
-        <form className="workoutsExercises_form">
+        <form className="createprofile_form">
           <label className="workoutsExercises_field" htmlFor="title">Title:
             <input className="workoutsExercises_textField" type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
             <button className="button" onClick={handleSubmit} disabled={formState.title===""||formState.exerciseIds.length===0}>Create</button>

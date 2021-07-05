@@ -34,7 +34,7 @@ const CreateExercise = () => {
 
   return (
     <div>
-      <div className="pageContainer">
+      <div className="page_container">
         <div className="createprofile_wrapper">
           <div className="page_title">Create New Exercise</div>
           <form className="createprofile_form">
@@ -62,9 +62,8 @@ const CreateExercise = () => {
             <label htmlFor="video">Video: <br/>
               <UploadVideoForm setMedia={setMedia}></UploadVideoForm>
             </label>
-          </form>
             <button className="button" onClick={handleSubmit} disabled={formState.title===""||formState.description===""||formState.muscle_group===""||media==='uploading'}>Create</button>
-            <br/>
+            </form>
             <button className="buttonCancel" onClick={() => {
               router.push('/trainer/exercises');
             }}>Cancel</button>
