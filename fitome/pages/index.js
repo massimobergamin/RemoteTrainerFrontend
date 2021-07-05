@@ -10,7 +10,6 @@ import { getUser } from '../redux/client';
 import { useRouter } from 'next/router';
 import Loader from '../components/loader';
 
-
 export default function Home() {
   const { login } = useAuth();
   const router = useRouter();
@@ -26,10 +25,11 @@ export default function Home() {
 
   const { user, trainerInfo } = useSelector(state => state.client);
 
-    const loginHandler = async () => {
-      const error = document.getElementById("error");
-      try {
+  const loginHandler = async () => {
+    const error = document.getElementById("error");
+    try {
       setLoading(true);
+      console.log('loading: ', loading);
       let userInfo = await login(formState.email, formState.password);
       setError("");
       error.style.display="none";
@@ -56,7 +56,10 @@ export default function Home() {
      }
     }
 
-    if (loading) return <Loader/>;
+    if (loading) {
+      console.log('is loading')
+      return <Loader/>;
+    }
 
       return (
         <div>

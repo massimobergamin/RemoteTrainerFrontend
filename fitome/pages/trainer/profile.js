@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../firebase/contextAuth'
 import { useSelector } from 'react-redux';
 import NavigationTrainer from '../../components/navigationBar/navigationTrainer';
@@ -6,8 +6,10 @@ import { getUserById, getInviteCode, getClients } from '../../redux/trainer';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import moment from 'moment';
+import Loader from '../../components/loader';
 
 const Profile = () => {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { currentUser, logout } = useAuth();
   const { user, invite_code, clients } = useSelector(state => state.trainer);
@@ -15,10 +17,13 @@ const Profile = () => {
   const userBirthday = moment(user.birthday).format('LL');
 
   useEffect(() => {
+    setLoading(true);
     dispatch(getInviteCode(currentUser.uid));
     dispatch(getUserById(currentUser.uid));
-    dispatch(getClients(currentUser.uid));
+    dispatch(getClients(currentUser.uid)).then(setLoading(false));
   }, [])
+
+  if (loading) return <Loader/>;
 
   return (
     <div>

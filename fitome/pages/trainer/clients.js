@@ -9,16 +9,19 @@ import moment from 'moment';
 import WorkoutDetails from '../../components/workoutDetails';
 import NavigationTrainer from '../../components/navigationBar/navigationTrainer';
 import { useRouter } from 'next/router';
+import Loader from '../../components/loader';
 
 
 const Clients = () => {
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     dispatch(getUserById(currentUser.uid));
-    dispatch(getClients(currentUser.uid))
+    dispatch(getClients(currentUser.uid)).then(setLoading(false));
   }, []);
 
   const [selectedClient, setSelectedClient] = useState('')
@@ -26,8 +29,10 @@ const Clients = () => {
   const { clients } = useSelector(state => state.trainer);
 
   const clientDetails = (uid) => {
-     dispatch(getUser(uid))
+    setLoading(true);
+    dispatch(getUser(uid)).then(setLoading(false));
   }
+
   const { user } = useSelector(state => state.client);
 
   const onChangeClient = (e) => {
@@ -47,6 +52,7 @@ const Clients = () => {
     }
   }
 
+  if (loading) return <Loader/>;
 
   return (
     <div>

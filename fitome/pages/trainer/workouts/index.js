@@ -5,16 +5,21 @@ import { getWorkout, setSelectedWorkout } from '../../../redux/trainer';
 import { useAuth } from '../../../firebase/contextAuth';
 import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
 import WorkoutsExercisesBar from '../../../components/workoutsExercisesBar';
+import Loader from '../../../components/loader';
 
 function Workouts() {
   const router = useRouter();
   const { workouts } = useSelector(state => state.trainer);
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    dispatch(getWorkout(currentUser.uid));
+    setLoading(true);
+    dispatch(getWorkout(currentUser.uid)).then(setLoading(false));
   }, [])
+
+  if (loading) return <Loader/>;
 
   return (
     <>
@@ -43,7 +48,8 @@ function Workouts() {
                 </div>)}
               </div>
               <button className="button_workout" onClick={() => {
-              dispatch(setSelectedWorkout(workout));
+              setLoading(true);
+              dispatch(setSelectedWorkout(workout)).then(setLoading(false));
               router.push('/trainer/workouts/details');
             }}>View Details</button>
           </div>) : <h2>Looks like you don't have any workouts.</h2>}

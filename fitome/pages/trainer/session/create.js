@@ -6,6 +6,7 @@ import {useAuth} from '../../../firebase/contextAuth'
 import {useRouter} from 'next/router';
 import uuid from 'react-uuid';
 import { postSession } from '../../../redux/trainer'
+import Loader from '../../../components/loader';
 
 function create() {
     const { currentUser } = useAuth();
@@ -13,6 +14,7 @@ function create() {
     const trainer = useSelector(state => state.trainer);
     const dispatch = useDispatch();
     const [currentTime, setCurrentTime] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const initialState = {
         title: "Workout",
@@ -21,19 +23,19 @@ function create() {
         endDate: "",
         meeting_id: uuid(),
     }
+
     const[formState, setFormState] = useState(initialState)
 
     useEffect(()=> {
-        console.log(currentUser)
+        setLoading(true);
         if (currentUser) {
-            dispatch(getClients(currentUser.uid))
+            dispatch(getClients(currentUser.uid)).then(setLoading(false));
         }
-    },[currentUser, router]);
+    }, [currentUser, router]);
 
     const listClients = () => {
         if (trainer.clients) {
             return trainer.clients.map((client)=> {
-                console.log("CLIENT" , client)
                 return <option key={client.id} value={`${client.first_name} ${client.last_name}`}></option>
             })
         }
@@ -43,6 +45,7 @@ function create() {
     }
 
     async function submitHandler (e) {
+        setLoading(true);
         e.preventDefault();
         let endDate = new Date(formState.startDate);
         endDate.setHours(formState.endDate.split(":")[0])
@@ -57,7 +60,7 @@ function create() {
                 meeting_id: formState.meeting_id,
                 title: title,
             }
-        }));
+        })).then(setLoading(false));
         router.push("/session")
     }
 
@@ -91,6 +94,8 @@ function create() {
         return inputDate;
     }
 
+    if (loading) return <Loader/>;
+    
     return (
         <div>
         <div className="page_container">

@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
 import WorkoutsExercisesBar from '../../../components/workoutsExercisesBar';
+import Loader from '../../../components/loader';
 
 const CreateExercise = () => {
   const router = useRouter();
@@ -18,19 +19,27 @@ const CreateExercise = () => {
     media: ''
   };
   const [formState, setFormState] = useState(initialState);
+  const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
   const { exercises } = useSelector(state => state.trainer);
 
   const handleSubmit = (e) => {
     try {
+      setLoading(true);
       e.preventDefault();
       dispatch(postExercise({trainer_uid: currentUser.uid, exerciseData: {...formState, media: media, type: 'custom'}}))
-        .then(() => router.push('/trainer/exercises'));
+        .then(() => {
+          setLoading(false);
+          router.push('/trainer/exercises');
+        });
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   }
+
+  if (loading) return <Loader/>;
 
   return (
     <div>

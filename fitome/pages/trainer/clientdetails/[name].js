@@ -10,7 +10,6 @@ const ClientDetail = () => {
   const recentPlans = plans.filter(plan => Date.parse(plan.end_date) >= Date.now());
   const router = useRouter();
 
-
   const displayDetails = recentPlans[0]?.details
 
   return (

@@ -6,17 +6,22 @@ import { useAuth } from '../../../firebase/contextAuth';
 import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
 import WorkoutsExercisesBar from '../../../components/workoutsExercisesBar';
 import ShortExDetails from '../../../components/shortExDetails';
+import Loader from '../../../components/loader';
 
 function Exercises() {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { user, exercises, armExs, legExs, backExs, chestExs, coreExs, shoulderExs, miscExs } = useSelector(state => state.trainer);
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    dispatch(getExercise(currentUser.uid));
+    setLoading(true);
+    dispatch(getExercise(currentUser.uid)).then(setLoading(false));
   }, [])
 
+  if (loading) return <Loader/>;
+  
   return (
     <div>
       <WorkoutsExercisesBar landingpage1="workouts_off" landingpage2="workouts_on"/>

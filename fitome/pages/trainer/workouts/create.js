@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
 import WorkoutsExercisesBar from '../../../components/workoutsExercisesBar';
+import Loader from '../../../components/loader';
 
 const CreateWorkout = () => {
   const router = useRouter();
@@ -12,6 +13,7 @@ const CreateWorkout = () => {
     title: '',
     exerciseIds: []
   };
+  const [loading, setLoading] = useState(false);
   const [formState, setFormState] = useState(initialState);
   const [buttonTextArr, setButtonTextArr] = useState([]);
   const { currentUser } = useAuth();
@@ -19,7 +21,8 @@ const CreateWorkout = () => {
   const { exercises } = useSelector(state => state.trainer);
 
   useEffect(() => {
-    dispatch(getExercise(currentUser.uid));
+    setLoading(true);
+    dispatch(getExercise(currentUser.uid)).then(setLoading(false));
   }, [])
 
   const handleClick = (id, i) => {
@@ -41,14 +44,21 @@ const CreateWorkout = () => {
   }
 
   const handleSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       dispatch(postWorkout({trainer_uid: currentUser.uid, workoutData: formState}))
-        .then(() => router.push('/trainer/workouts'));
+        .then(() => {
+          setLoading(false);
+          router.push('/trainer/workouts');
+        });
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   }
+
+  if (loading) return <Loader/>;
 
   return (
     <div>
