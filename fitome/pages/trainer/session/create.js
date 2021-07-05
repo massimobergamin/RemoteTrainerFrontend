@@ -62,14 +62,13 @@ function create() {
     }
 
     const findValue = (value) => {
-        for (let i=0; i<trainer.clients.length; i++) {
-            let name = trainer.clients[i].first_name+' '+trainer.clients[i].last_name;
-            console.log("NAME", trainer.clients[i], name)
-            if (name===value){
-                setFormState({...formState, client:trainer.clients[i]})
-                break;
+            for (let i=0; i<trainer.clients.length; i++) {
+                let name = trainer.clients[i].first_name+' '+trainer.clients[i].last_name;
+                if (name===value){
+                    setFormState({...formState, client:trainer.clients[i]})
+                    break;
+                } else {setFormState({...formState,client:{}})}
             }
-        }
     }
 
 

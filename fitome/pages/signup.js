@@ -38,6 +38,7 @@ const SignUp = () => {
     }
 
     const createHandler = async () => {
+        const error = document.getElementById("error");
         try {
             setLoading(true);
             let lowerType = formState.type.toLowerCase();
@@ -45,6 +46,7 @@ const SignUp = () => {
             let lastName = titleCase(formState.last_name);
             const fireBaseData = await signUp(formState.email, formState.password, lowerType);
             setError("");
+            error.style.display="none";
             if (formState.type === 'Trainer') {
                 await dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
                 await dispatch(postInviteCode({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5).toUpperCase()}));

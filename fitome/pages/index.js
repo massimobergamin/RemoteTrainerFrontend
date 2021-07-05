@@ -27,10 +27,12 @@ export default function Home() {
   const { user, trainerInfo } = useSelector(state => state.client);
 
     const loginHandler = async () => {
+      const error = document.getElementById("error");
       try {
       setLoading(true);
       let userInfo = await login(formState.email, formState.password);
       setError("");
+      error.style.display="none";
       if (userInfo.user.displayName === 'trainer') {
         await dispatch(getUserById(userInfo.user.uid)).then(setLoading(false));
         router.push('/session');
