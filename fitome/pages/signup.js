@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import {useAuth} from '../firebase/contextAuth'
 import { useDispatch, useSelector } from 'react-redux';
 import { postUser, postInviteCode } from '../redux/trainer'
 import { useRouter } from 'next/router';
 import { nanoid } from '@reduxjs/toolkit';
+import Loader from '../components/loader';
 
 const SignUp = () => {
     const {signUp, currentUser} = useAuth();
@@ -30,6 +31,7 @@ const SignUp = () => {
     const [inviteState, setInviteState] = useState(inviteInitialState)
     const [formState, setFormState] = useState(initialState);
     const [error,setError] = useState("");
+    const [loading, setLoading] = useState(false);
     const { user, invite_code } = useSelector(state => state.trainer);
     function titleCase(name){
         return name[0].toUpperCase() + name.slice(1).toLowerCase();
@@ -37,6 +39,7 @@ const SignUp = () => {
 
     const createHandler = async () => {
         try {
+            setLoading(true);
             let lowerType = formState.type.toLowerCase();
             let firstName = titleCase(formState.first_name);
             let lastName = titleCase(formState.last_name);
@@ -45,12 +48,15 @@ const SignUp = () => {
             if (formState.type === 'Trainer') {
                 await dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
                 await dispatch(postInviteCode({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5).toUpperCase()}));
+                setLoading(false);
                 router.push(`/trainer/invitecode`);
             } else if (formState.type === 'Client') {
               await dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
+              setLoading(false);
               router.push(`/client/invitecode`);
             }
         } catch (err) {
+            setLoading(false);
             const error = document.getElementById("error");
             console.error(err);
             setError(err.message);
@@ -59,6 +65,8 @@ const SignUp = () => {
 
         }
     }
+
+    if (loading) return <Loader/>;
 
     return (
         <div className="initial_background">
