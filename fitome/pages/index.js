@@ -19,12 +19,16 @@ export default function Home() {
   };
 
   const [formState, setFormState] = useState(initialState);
+  const [error, setError] = useState("");
 
   const { user, trainerInfo } = useSelector(state => state.client);
 
 
+
     const loginHandler = async () => {
+      try {
       let userInfo = await login(formState.email, formState.password);
+      setError("");
       if (userInfo.user.displayName === 'trainer') {
         await dispatch(getUserById(userInfo.user.uid))
         router.push('/session');
@@ -37,7 +41,15 @@ export default function Home() {
             router.push('/client/invitecode');
           }});
         };
-      }
+
+     } catch (err) {
+       const error = document.getElementById("error");
+       console.log(err);
+       setError(err.message);
+       setFormState(initialState);
+       error.style.display="block";
+     }
+    }
 
       return (
         <div>
@@ -54,6 +66,7 @@ export default function Home() {
             <img className="initial_wave" src="/wave.png"/>
             <div className="signup_wrapper">
             <img className="initial_logo" src="/fitome_orange.png"/>
+            <div className="signup_error" id="error">{error}</div>
             <form className="signup_form login_form">
               <label className="signup_input" htmlFor="email">Email:</label>
               <input type="email"

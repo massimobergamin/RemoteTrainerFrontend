@@ -137,6 +137,17 @@
     z-index: 5;
 }
 
+.signup_error {
+    border-radius: 5px;
+    background-color: rgba(197, 197, 197, 0.638);
+    /* color: rgb(106, 18, 22); */
+    color: var(--accent);
+    width:70vw;
+    display: none;
+    padding: 5px;
+    font-weight: 300;
+}
+
 @media only screen and (max-width: 600px) {
     .initial_wave {
         bottom: 0;
