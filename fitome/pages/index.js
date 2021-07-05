@@ -10,6 +10,7 @@ import { getUser } from '../redux/client';
 import { useRouter } from 'next/router';
 import Loader from '../components/loader';
 
+
 export default function Home() {
   const { login } = useAuth();
   const router = useRouter();
@@ -54,7 +55,7 @@ export default function Home() {
     }
 
     if (loading) return <Loader/>;
-    
+
       return (
         <div>
           <Head>

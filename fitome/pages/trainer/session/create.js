@@ -26,14 +26,11 @@ function create() {
     useEffect(()=> {
         console.log(currentUser)
         if (currentUser) {
-            //dispatch(getSessions("trainer", currentUser.uid));
             dispatch(getClients(currentUser.uid))
         }
     },[currentUser, router]);
 
     const listClients = () => {
-        // console.log("CLIENTS", clients)
-        // console.log("USER", user)'
         if (trainer.clients) {
             return trainer.clients.map((client)=> {
                 console.log("CLIENT" , client)

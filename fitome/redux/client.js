@@ -56,7 +56,7 @@ export const getSessionsClient = createAsyncThunk(
 
 export const getSessionsFiltered = createAsyncThunk(
   'client/getSessionsFilteredStatus',
-  async ({type, uid}, thinkAPI) => {
+  async ({type, uid}) => {
     try {
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/sessions/filtered/${uid}/${type}`);
       return response.data;
@@ -185,7 +185,7 @@ export const clientSlice = createSlice({
     [getTrainerByCode.fulfilled] : (state, action) => {
       state.trainerInfo = action.payload.trainerInfo;
     },
-    [getSessionsFiltered.fulfilled] : (state,action) => {
+    [getSessionsFiltered.fulfilled] : (state, action) => {
       state.filteredSessions = action.payload;
     }
   }
