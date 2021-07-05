@@ -31,7 +31,6 @@ const SignUp = () => {
     const [formState, setFormState] = useState(initialState);
     const [error,setError] = useState("");
     const { user, invite_code } = useSelector(state => state.trainer);
-    console.log("INVITE", invite_code)
     function titleCase(name){
         return name[0].toUpperCase() + name.slice(1).toLowerCase();
     }
@@ -71,39 +70,33 @@ const SignUp = () => {
             <form className="signup_form">
                 <label className="signup_input" htmlFor="firstName">First Name:</label>
                 <input type="text"
-                    // placeholder="First Name"
                     name="firstName"
                     value={formState.firstName}
                     onChange={(e)=>setFormState({...formState, first_name:e.target.value})}/>
                 <label className="signup_input" htmlFor="lastName">Last Name:</label>
                 <input type="text"
                     name="lastName"
-                    // placeholder="Last Name"
                     value={formState.lastName}
                     onChange={(e)=>setFormState({...formState, last_name:e.target.value})}/>
                 <label className="signup_input" htmlFor="username">Account Username:</label>
                 <input type="text"
                     name="username"
-                    // placeholder="Username"
                     value={formState.username}
                     onChange={(e)=>setFormState({...formState, username:e.target.value})}/>
                 <label className="signup_input" htmlFor="email">Email:</label>
                 <input type="email"
                     name="email"
-                    // placeholder="Email"
                     value={formState.email}
                     onChange={(e)=>setFormState({...formState, email:e.target.value})}/>
                 <label className="signup_input" htmlFor="password">Password:</label>
                 <input type="password"
                     name="password"
-                    // placeholder="Password"
                     value={formState.password}
                     onChange={(e)=>setFormState({...formState, password:e.target.value})}/>
                 <label className="signup_input" htmlFor="type">Select an Account Type:</label>
                 <input list="accountType"
                     id="listoftype"
                     name="listoftype"
-                    // placeholder="Account Type"
                     onChange={(e)=>setFormState({...formState, type:e.target.value})}/>
                 <datalist id="accountType">
                     <option value="Client"></option>

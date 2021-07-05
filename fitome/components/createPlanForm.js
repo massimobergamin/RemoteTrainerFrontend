@@ -1,7 +1,3 @@
-//USE TRAINER UID: EkNvm81E59bSBxQXFdQKe4Bh9D82
-//matteo@hotmail.com password
-//CLIENT: ygh0DKzWGOdK42Ito4yR6B1DSUu2
-
 import { useState, useEffect } from 'react';
 import { useAuth } from '../firebase/contextAuth';
 import { useSelector } from 'react-redux';
@@ -11,6 +7,8 @@ import NavigationTrainer from '../components/navigationBar/navigationTrainer'
 import moment from 'moment';
 import PlansBar from '../components/plansBar';
 import { useRouter } from 'next/router';
+import Loader from '../components/loader';
+
 
 const CreatePlanForm = () => {
   const router = useRouter();
@@ -36,12 +34,15 @@ const CreatePlanForm = () => {
 
   const [detailState, setDetailState] = useState(detailInitialState)
   const [planState, setPlanState] = useState(initialState);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { user, clients, workouts } = useSelector(state => state.trainer);
 
+
   useEffect(() => {
-    dispatch(getClients(currentUser.uid))
-    dispatch(getWorkout(currentUser.uid))
+    setLoading(true);
+    dispatch(getClients(currentUser.uid)).then(setLoading(false));
+    dispatch(getWorkout(currentUser.uid)).then(setLoading(false));
   }, [])
 
   const insertAt = (array, index, elem) => {
@@ -124,12 +125,14 @@ const CreatePlanForm = () => {
     let dropdown = document.getElementById("listOfClients");
     dropdown.selectedIndex=0;
     document.getElementById("day_date").value="";
-    setDetailState(detailInitialState)
+    setDetailState(detailInitialState);
   }
+
   const handlePlanSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
-    dispatch(postPlan(planState));
-    router.push('./clients')
+    dispatch(postPlan(planState)).then(setLoading(false));
+    router.push('./clients');
   };
 
   const addDayButton = () => {
@@ -169,21 +172,24 @@ const showExercises = (exercises, reps, sets) => {
 function deleteHandler(index) {
   setPlanState({...planState, details: planState.details.filter((_, i) => i !== index)})
 }
-  const showCards = () => {
-    if (planState.details.length) {
-      return planState.details.map((workout,index) =>{
-        return (
-          <div className="plan_card">
-            <button type="button" onClick={()=>deleteHandler(index)}>X</button>
-            <div><b>{workout.workout.title}</b></div>
-            <div><b>{moment(workout.day).format('MMMM Do')}</b></div>
-            {showExercises(workout.exercises, workout.reps, workout.sets)}
-          </div>
-        )
-      })
-    }
+
+const showCards = () => {
+  if (planState.details.length) {
+    return planState.details.map((workout,index) =>{
+      return (
+        <div className="plan_card">
+          <button type="button" onClick={()=>deleteHandler(index)}>X</button>
+          <div><b>{workout.workout.title}</b></div>
+          <div><b>{moment(workout.day).format('MMMM Do')}</b></div>
+          {showExercises(workout.exercises, workout.reps, workout.sets)}
+        </div>
+      );
+    });
+  };
     return null;
-  }
+  };
+
+  if (loading) return <Loader/>;
 
   return (
     <div >

@@ -13,7 +13,6 @@ function WorkoutDetails({ workout }) {
   
   useEffect(() => {
     setExercise(workout.exercises[0]);
-    console.log('workout exercise: ', exercise);
     if (workout.exercises.length === 1) {
       setPrevDisabled(true);
       setNextDisabled(true)

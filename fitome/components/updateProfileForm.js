@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import UploadImageForm from './uploadImageForm';
 import { updateUser } from '../redux/trainer';
 import { useRouter } from 'next/router';
+import Loader from '../components/loader';
 
 const UpdateProfileForm = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const UpdateProfileForm = () => {
   };
   const [profileState, setProfileState] = useState(initialState);
   const [file, setFile] = useState("")
+  const [loading, setLoading] = useState(false);
   const { user } = useSelector(state => state.trainer);
 
   const types = ['image/png', 'image/jpeg'];
@@ -32,10 +34,16 @@ const UpdateProfileForm = () => {
   }
 
   const handleSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
     dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: url ? url : user.profile_picture}}))
-      .then(() => router.push('/trainer/profile'));
+      .then(() => {
+        setLoading(false);
+        router.push('/trainer/profile');
+      });
   };
+
+  if (loading) return <Loader/>;
 
   return (
     <div >

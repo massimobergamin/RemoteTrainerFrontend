@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../firebase/contextAuth';
 import { useDispatch, useSelector } from 'react-redux';
 import NavigationClient from '../../components/navigationBar/navigationClient';
@@ -6,24 +6,27 @@ import { getUser } from '../../redux/client';
 import { getUserById } from '../../redux/trainer';
 import moment from 'moment';
 import { useRouter } from 'next/router';
+import Loader from '../../components/loader';
 
 
 const Profile = () => {
+  const [loading, setLoading] = useState(false);
   const { currentUser, logout } = useAuth();
   const dispatch = useDispatch();
   const { user, trainerInfo } = useSelector(state => state.client);
-  // console.log('user', user);
   const router = useRouter();
 
   useEffect(() => {
+    setLoading(true);
     dispatch(getUser(currentUser.uid));
-    dispatch(getUserById(trainerInfo.trainer_uid))
+    dispatch(getUserById(trainerInfo.trainer_uid)).then(setLoading(false));
   }, []);
 
   const trainer = useSelector(state => state.trainer);
   const lastLogin = moment(user.last_login).fromNow();
   const userBirthday = moment(user.birthday).format('LL');
 
+  if (loading) return <Loader/>;
 
   return (
     <div>

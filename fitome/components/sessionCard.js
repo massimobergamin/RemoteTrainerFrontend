@@ -47,7 +47,6 @@ function sessionCard({class_name, usertype, session}) {
                 <button className="button sessionCard_smallButton">Delete</button>
                 {showButton()}
             </div>
-
         </div>
     )
 }
