@@ -105,6 +105,19 @@ export const postSession = createAsyncThunk(
   }
 );
 
+export const deleteSession = createAsyncThunk (
+  'trainer/deleteSessionStatus',
+  async (meeting_id) => {
+    try {
+      const response = await axios.delete(`https://remotetrainerserver.herokuapp.com/users/sessions/${meeting_id}`);
+      console.log(response);
+      return response.data
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const updateSession = createAsyncThunk(
   'trainer/updateSessionsStatus',
   async (meeting_id) => {
@@ -328,6 +341,9 @@ export const trainerSlice = createSlice({
     },
     [postSession.fulfilled] : (state, action) => {
       state.sessions.push(action.payload);
+    },
+    [deleteSession.fulfilled] : (state, action) => {
+      state.sessions = action.payload;
     },
     [updateSession.fulfilled] : (state, action) => {
       let sessionIndex = state.sessions.findIndex(session => session.id === action.payload.id);

@@ -46,7 +46,6 @@ function SessionList() {
                 return <SessionCard key={uuid()} class_name="rest" usertype={`${currentUser.displayName}`} session={session} />
             })
         }
-
     }
 
     function showButton () {
@@ -56,7 +55,6 @@ function SessionList() {
                     e.preventDefault();
                     router.push('/trainer/session/create')
                   }}><span className="workout_addworkout_span">+ </span>Session</div>
-
             )
         }
         return null;
