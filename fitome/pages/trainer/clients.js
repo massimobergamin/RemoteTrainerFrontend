@@ -3,32 +3,35 @@ import {useDispatch, useSelector} from 'react-redux'
 import { getUserById, getClients } from '../../redux/trainer'
 import { getUser } from '../../redux/client'
 import { useAuth } from '../../firebase/contextAuth';
-import NavigationClient from '../../components/navigationBar/navigationClient';
-import PlansBar from '../../components/plansBar';
-import moment from 'moment';
-import WorkoutDetails from '../../components/workoutDetails';
 import NavigationTrainer from '../../components/navigationBar/navigationTrainer';
 import { useRouter } from 'next/router';
+import Loader from '../../components/loader';
 
 
 const Clients = () => {
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    dispatch(getUserById(currentUser.uid));
+    setLoading(true);
+    dispatch(getUserById(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
     dispatch(getClients(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, []);
-
-  const [selectedClient, setSelectedClient] = useState('')
 
   const { clients } = useSelector(state => state.trainer);
 
   const clientDetails = (uid) => {
-     dispatch(getUser(uid))
+    setLoading(true);
+    dispatch(getUser(uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }
-  const { user } = useSelector(state => state.client);
 
   const onChangeClient = (e) => {
     const { name, value } = e.target;
@@ -47,11 +50,11 @@ const Clients = () => {
     }
   }
 
+  if (loading) return <Loader/>;
 
   return (
     <div>
     <div className="page_container">
-
     <div className="workout_addworkout" onClick={(e) => {
         e.preventDefault();
         router.push('/trainer/createplan')

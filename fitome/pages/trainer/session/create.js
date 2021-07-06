@@ -6,6 +6,8 @@ import {useAuth} from '../../../firebase/contextAuth'
 import {useRouter} from 'next/router';
 import uuid from 'react-uuid';
 import { postSession } from '../../../redux/trainer'
+import Loader from '../../../components/loader';
+
 
 function create() {
     const { currentUser } = useAuth();
@@ -13,6 +15,7 @@ function create() {
     const trainer = useSelector(state => state.trainer);
     const dispatch = useDispatch();
     const [currentTime, setCurrentTime] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const initialState = {
         title: "Workout",
@@ -21,22 +24,21 @@ function create() {
         endDate: "",
         meeting_id: uuid(),
     }
+
     const[formState, setFormState] = useState(initialState)
 
     useEffect(()=> {
-        console.log(currentUser)
+        setLoading(true);
         if (currentUser) {
-            //dispatch(getSessions("trainer", currentUser.uid));
             dispatch(getClients(currentUser.uid))
+              .then(() => setLoading(false))
+              .catch(() => setLoading(false));
         }
-    },[currentUser, router]);
+    }, [currentUser, router]);
 
     const listClients = () => {
-        // console.log("CLIENTS", clients)
-        // console.log("USER", user)'
         if (trainer.clients) {
             return trainer.clients.map((client)=> {
-                console.log("CLIENT" , client)
                 return <option key={client.id} value={`${client.first_name} ${client.last_name}`}></option>
             })
         }
@@ -45,13 +47,14 @@ function create() {
         }
     }
 
-    async function submitHandler (e) {
+    function submitHandler (e) {
+        setLoading(true);
         e.preventDefault();
         let endDate = new Date(formState.startDate);
         endDate.setHours(formState.endDate.split(":")[0])
         endDate.setMinutes(formState.endDate.split(":")[1])
         let title = formState.title==="" ? "Workout" : formState.title;
-        await dispatch(postSession({
+        dispatch(postSession({
             trainer_uid:currentUser.uid,
             client_uid:formState.client.user_uid,
             sessionData: {
@@ -60,7 +63,9 @@ function create() {
                 meeting_id: formState.meeting_id,
                 title: title,
             }
-        }));
+        }))
+          .then(() => setLoading(false))
+          .catch(() => setLoading(false));
         router.push("/session")
     }
 
@@ -73,7 +78,6 @@ function create() {
                 } else {setFormState({...formState,client:{}})}
             }
     }
-
 
     function getTime() {
         let sessionDate = new Date(formState.startDate);
@@ -93,6 +97,8 @@ function create() {
         let inputDate = dateVal.getFullYear() + "-" + (month) + "-" + (day) + "T" + (hour) + ":" + (minute);
         return inputDate;
     }
+
+    if (loading) return <Loader/>;
 
     return (
         <div>

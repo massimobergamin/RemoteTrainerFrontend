@@ -1,12 +1,16 @@
-import {  } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setSelectedExercise } from '../redux/trainer';
+import Loader from '../components/loader';
 
 function shortExDetails({ exercise }) {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
 
+  if (loading) return <Loader/>;
+  
   return (
     <div className="workoutsExercises_cards">
       
@@ -18,7 +22,9 @@ function shortExDetails({ exercise }) {
         <img src="/noVid.png" width="176" height="176"></img>}
         <p className="exerciselist_title">{exercise.title}</p>
         <button className="button_workout" onClick={() => {
-        dispatch(setSelectedExercise(exercise));
+        setLoading(true);
+        dispatch(setSelectedExercise(exercise))
+         setLoading(false);
         router.push('/trainer/exercises/details');
       }}>View Details</button>
     </div>

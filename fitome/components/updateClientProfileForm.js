@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import UploadImageForm from './uploadImageForm';
 import { updateUser } from '../redux/client';
 import { useRouter } from 'next/router';
+import Loader from '../components/loader';
 
 const UpdateClientProfileForm = () => {
   const dispatch = useDispatch();
@@ -16,14 +17,18 @@ const UpdateClientProfileForm = () => {
   const [profileState, setProfileState] = useState(initialState);
   const[url, setURL] = useState("");
   const [file, setFile] = useState("")
+  const [loading, setLoading] = useState(false);
   const { user } = useSelector(state => state.client);
-  console.log('user', user);
-  console.log('currentUser.uid: ', currentUser.uid);
 
   const handleSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
     dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: url ? url : user.profile_picture}}))
-      .then(() => router.push('/client/profile'));
+      .then(() => {
+        setLoading(false);
+        router.push('/client/profile');
+      })
+      .catch(() => setLoading(false));
   };
 
 
@@ -39,6 +44,8 @@ const UpdateClientProfileForm = () => {
           alert('Please select an image file (png or jpg)');
       }
   }
+
+  if (loading) return <Loader/>;
 
   return (
     <div className="createprofile_wrapper">
