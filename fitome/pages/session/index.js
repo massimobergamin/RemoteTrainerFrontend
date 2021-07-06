@@ -16,7 +16,7 @@ function SessionList() {
     const { currentUser } = useAuth();
     const sessions = useSelector(state => state.client.filteredSessions);
     const [loading, setLoading] = useState(false);
-    
+
     useEffect(()=> {
         setLoading(true);
         if (currentUser.displayName === "trainer") {
