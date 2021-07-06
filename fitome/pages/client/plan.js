@@ -5,44 +5,27 @@ import { useAuth } from '../../firebase/contextAuth';
 import NavigationClient from '../../components/navigationBar/navigationClient';
 import moment from 'moment';
 import WorkoutDetails from '../../components/workoutDetails';
+import Loader from '../../components/loader';
 
 
 // displays client's workout plan + exercises
 const Plan = () => {
 
-  // const [inputBoxStatus, setInputBox] = useState(false)
-  // const [noteState, setNoteState] = useState('')
-
+  const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUser(currentUser.uid));
+    setLoading(true);
+    dispatch(getUser(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, []);
 
   const client = useSelector(state => state.client);
-  console.log('client: ', client);
-
-  // //set inputBox to true and shows the input box
-  // const addNotesHandler = () => {
-  //   setInputBox(true)
-  // }
-  //****note sure how to grab current ID */
-  // const UpdatedNote = {
-  //   notes: noteState,
-  //   planId: currentPlanState.id
-  // }
-
-  // //sends the input to the backend and sets inputbox to false - hiding the input
-  // const noteHandler = () => {
-  //   dispatch(addPlanNotes(noteState))
-  //   setInputBox(false)
-  // }
 
   function renderPlan () {
-    
     if (client.plans) {
-      // console.log('client plans: ', client.plans);
       for (let i = 0; i < client.plans.length; i++) {
         let plan = client.plans[i];
         const startDate = plan.start_date
@@ -50,7 +33,7 @@ const Plan = () => {
         const today = Date.now();
         if (moment(today).isBetween(startDate, endDate)) {
           let curPlan = plan;
-          // console.log('curPlan: ', curPlan);
+          console.log('curPlan: ', curPlan);
           return (
             <div>
               <div className="clientplan_date">Beginning: {moment(startDate).format("dddd, MMMM Do YYYY")}</div>
@@ -59,13 +42,6 @@ const Plan = () => {
                 {curPlan.details.map(day => (
                   <div>
                     <div className="clientplan_dates" key={day.id}>{moment(day.day).format("dddd, MMMM Do YYYY")}</div>
-                    {/* <button className="button" onClick={() => addNotesHandler()}>Add Notes</button>
-                    {inputBoxStatus ? (
-                      <div>
-                        <input onChange={(e) => setNoteState(e.currentTarget.value)}></input>
-                        <button onClick={noteHandler}>submit</button>
-                      </div>
-                    ) : null } */}
                     <WorkoutDetails key={day.day} workout={day}></WorkoutDetails> 
                   </div>
                 ))}
@@ -77,6 +53,7 @@ const Plan = () => {
     };
     };
 
+  if (loading) return <Loader/>;
 
   return (
     <div>

@@ -12,6 +12,8 @@
 @import './trainerClientPlanDetails.css';
 @import './clientInfoTrainerView.css';
 @import './createWorkout.css';
+@import './loader.css';
+
 
 :root {
   /* Colors: */

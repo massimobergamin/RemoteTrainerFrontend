@@ -2,12 +2,11 @@ import Head from 'next/head';
 import React, { useState } from 'react';
 import { useAuth } from '../firebase/contextAuth';
 import Link from 'next/link';
-import UploadImageForm from '../components/uploadImageForm';
-import UploadVideoForm from '../components/uploadVideoForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserById } from '../redux/trainer';
 import { getUser } from '../redux/client';
 import { useRouter } from 'next/router';
+import Loader from '../components/loader';
 
 export default function Home() {
   const { login } = useAuth();
@@ -20,36 +19,43 @@ export default function Home() {
 
   const [formState, setFormState] = useState(initialState);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const { user, trainerInfo } = useSelector(state => state.client);
+  const { trainerInfo } = useSelector(state => state.client);
 
-
-
-    const loginHandler = async () => {
-      const error = document.getElementById("error");
-      try {
+  const loginHandler = async () => {
+    const error = document.getElementById("error");
+    setLoading(true);
+    try {
       let userInfo = await login(formState.email, formState.password);
       setError("");
       error.style.display="none";
       if (userInfo.user.displayName === 'trainer') {
-        await dispatch(getUserById(userInfo.user.uid))
-        router.push('/session');
+        dispatch(getUserById(userInfo.user.uid)).then(() => {
+          setLoading(false);
+          router.push('/session');
+        });
       } else if (userInfo.user.displayName === 'client') {
-          console.log('loginHandler: ', userInfo.user.uid);
-          await dispatch(getUser(userInfo.user.uid)).then(() => {
+          dispatch(getUser(userInfo.user.uid)).then(() => {
           if (trainerInfo) {
+            setLoading(false);
             router.push('/client/plan');
           } else {
+            setLoading(false);
             router.push('/client/invitecode');
           }});
         };
-
      } catch (err) {
+       setLoading(false);
+       const error = document.getElementById("error");
+       console.log(err);
        setError(err.message);
        setFormState(initialState);
        error.style.display="block";
      }
     }
+
+    if (loading) return <Loader/>;
 
       return (
         <div>
@@ -71,14 +77,12 @@ export default function Home() {
               <label className="signup_input" htmlFor="email">Email:</label>
               <input type="email"
                 name="email"
-                // placeholder="Email"
                 value={formState.email}
                 onChange={(e) => setFormState({...formState, email: e.target.value})}
               />
               <label className="signup_input" htmlFor="password">Password:</label>
               <input type="password"
               name="password"
-              // placeholder="Password"
               value={formState.password}
               onChange={(e) => setFormState({...formState, password: e.target.value})}
               />

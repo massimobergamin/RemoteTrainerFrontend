@@ -8,7 +8,6 @@ const useStorage = (file) => {
 
     useEffect(()=>{
         //references
-        
         if (file) {
             const storageRef = projectStorage.ref();
             const imageRef = storageRef.child(`${Date.now()}.${file.name}`);
@@ -22,7 +21,7 @@ const useStorage = (file) => {
             setUrl(url);
         })
     }
-    },[file]);
+    }, [file]);
 
     return {progress, url, error};
 
