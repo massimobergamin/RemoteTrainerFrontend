@@ -1,6 +1,6 @@
 import { getInviteCode, getUserById } from '../../redux/trainer';
 import { useAuth } from '../../firebase/contextAuth';
-import  { useEffect } from 'react';
+import  { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {useRouter} from 'next/router';
 import Loader from '../../components/loader';
@@ -11,7 +11,7 @@ const Trainer = () => {
   const router = useRouter();
 
   const { currentUser } = useAuth();
-  
+
   useEffect(() => {
     setLoading(true);
     dispatch(getInviteCode(currentUser.uid))

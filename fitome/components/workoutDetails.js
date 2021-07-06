@@ -10,9 +10,9 @@ function WorkoutDetails({ workout }) {
   const [nextDisabled, setNextDisabled] = useState(false);
 
   const { currentUser } = useAuth();
-  
+
   useEffect(() => {
-    addRepsAndSets(0);
+    if (workout.reps && workout.sets) addRepsAndSets(0);
     if (workout.exercises.length === 1) {
       setPrevDisabled(true);
       setNextDisabled(true)
@@ -30,7 +30,7 @@ function WorkoutDetails({ workout }) {
   function handlePrevClick (e) {
     if (workout.exercises[index-1] !== undefined) {
       if (workout.exercises[index-2] === undefined) setPrevDisabled(true);
-      addRepsAndSets(index - 1);
+      if (workout.reps && workout.sets) addRepsAndSets(index - 1);
       setIndex(index-1);
       setNextDisabled(false);
     }
@@ -39,7 +39,7 @@ function WorkoutDetails({ workout }) {
   function handleNextClick (e) {
     if (workout.exercises[index+1] !== undefined) {
       if (workout.exercises[index+2] === undefined) setNextDisabled(true);
-      addRepsAndSets(index+1);
+      if (workout.reps && workout.sets) addRepsAndSets(index+1);
       setIndex(index+1);
       setPrevDisabled(false);
     }
@@ -50,7 +50,7 @@ function WorkoutDetails({ workout }) {
       <div className="page_title">{workout.title}</div>
       <div className="workoutsExercises_flex">
         <button className="carousel_button" onClick={handlePrevClick} disabled={prevDisabled}>◀</button>
-        {currentUser.displayName == 'trainer' ? 
+        {currentUser.displayName == 'trainer' ?
         <ExerciseDetails key={exercise.id} exercise={exercise}></ExerciseDetails>
         : <ClientExerciseDetails key={exercise?.id} exercise={exercise}></ClientExerciseDetails>}
         <button className="carousel_button" onClick={handleNextClick} disabled={nextDisabled}>▶</button>
