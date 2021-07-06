@@ -20,15 +20,17 @@ const TrainerCode = () => {
     setInput(e.target.value);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     setLoading(true);
     const code = input.toUpperCase();
-    await dispatch(getTrainerByCode(code))
+    dispatch(getTrainerByCode(code))
       .then(response => {
         const client = currentUser.uid;
         const trainer = response.payload.data.user_uid;
         if (trainer && client) {
-          dispatch(postClient({trainer_uid: trainer , client_uid: client})).then(setLoading(false));
+          dispatch(postClient({trainer_uid: trainer , client_uid: client}))
+            .then(() => setLoading(false))
+            .catch(() => setLoading(false));
           router.push('/client/editprofile');
         } else {
           setLoading(false);

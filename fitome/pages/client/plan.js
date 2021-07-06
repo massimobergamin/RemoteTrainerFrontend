@@ -17,7 +17,9 @@ const Plan = () => {
 
   useEffect(() => {
     setLoading(true);
-    dispatch(getUser(currentUser.uid)).then(setLoading(false));
+    dispatch(getUser(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, []);
 
   const client = useSelector(state => state.client);
@@ -31,6 +33,7 @@ const Plan = () => {
         const today = Date.now();
         if (moment(today).isBetween(startDate, endDate)) {
           let curPlan = plan;
+          console.log('curPlan: ', curPlan);
           return (
             <div>
               <div className="clientplan_date">Beginning: {moment(startDate).format("dddd, MMMM Do YYYY")}</div>

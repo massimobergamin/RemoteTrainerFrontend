@@ -40,7 +40,8 @@ const UpdateProfileForm = () => {
       .then(() => {
         setLoading(false);
         router.push('/trainer/profile');
-      });
+      })
+      .catch(() => setLoading(false));
   };
 
   if (loading) return <Loader/>;

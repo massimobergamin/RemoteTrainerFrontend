@@ -22,7 +22,9 @@ const CreateWorkout = () => {
 
   useEffect(() => {
     setLoading(true);
-    dispatch(getExercise(currentUser.uid)).then(setLoading(false));
+    dispatch(getExercise(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, [])
 
   const handleClick = (id, i) => {
@@ -31,9 +33,7 @@ const CreateWorkout = () => {
       let tempArr = buttonTextArr;
       tempArr[i] = 'Remove';
       setButtonTextArr(tempArr);
-
-    }
-    else {
+    } else {
       let tempExerciseIds = formState.exerciseIds;
       tempExerciseIds = tempExerciseIds.filter(exerciseId => exerciseId !== id);
       setFormState({...formState, exerciseIds: [...tempExerciseIds]});

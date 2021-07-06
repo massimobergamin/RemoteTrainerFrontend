@@ -6,7 +6,6 @@ import { updateUser } from '../redux/client';
 import { useRouter } from 'next/router';
 import Loader from '../components/loader';
 
-
 const UpdateClientProfileForm = () => {
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
@@ -28,7 +27,8 @@ const UpdateClientProfileForm = () => {
       .then(() => {
         setLoading(false);
         router.push('/client/profile');
-      });
+      })
+      .catch(() => setLoading(false));
   };
 
 

@@ -41,8 +41,12 @@ const CreatePlanForm = () => {
 
   useEffect(() => {
     setLoading(true);
-    dispatch(getClients(currentUser.uid)).then(setLoading(false));
-    dispatch(getWorkout(currentUser.uid)).then(setLoading(false));
+    dispatch(getClients(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
+    dispatch(getWorkout(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, [])
 
   const insertAt = (array, index, elem) => {
@@ -131,7 +135,9 @@ const CreatePlanForm = () => {
   const handlePlanSubmit = (e) => {
     setLoading(true);
     e.preventDefault();
-    dispatch(postPlan(planState)).then(setLoading(false));
+    dispatch(postPlan(planState))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
     router.push('./clients');
   };
 

@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
-import WorkoutsExercisesBar from '../../../components/workoutsExercisesBar';
 import Loader from '../../../components/loader';
 
 const CreateExercise = () => {

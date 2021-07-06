@@ -1,5 +1,3 @@
-import Link from 'next/link'
-import NavigationTrainer from '../../components/navigationBar/navigationTrainer'
 import { getInviteCode, getUserById } from '../../redux/trainer';
 import { useAuth } from '../../firebase/contextAuth';
 import  { useEffect } from 'react';
@@ -17,10 +15,14 @@ const Trainer = () => {
   useEffect(() => {
     setLoading(true);
     dispatch(getInviteCode(currentUser.uid))
-    dispatch(getUserById(currentUser.uid)).then(setLoading(false));
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
+    dispatch(getUserById(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, [])
 
-  const { user, invite_code, trainer } = useSelector(state => state.trainer);
+  const { invite_code } = useSelector(state => state.trainer);
 
   if (loading) return <Loader/>;
 

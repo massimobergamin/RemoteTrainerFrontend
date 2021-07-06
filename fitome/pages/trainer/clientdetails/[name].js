@@ -1,5 +1,4 @@
-import  { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
 import { useRouter } from 'next/router';

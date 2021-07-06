@@ -18,9 +18,15 @@ const Profile = () => {
 
   useEffect(() => {
     setLoading(true);
-    dispatch(getInviteCode(currentUser.uid));
-    dispatch(getUserById(currentUser.uid));
-    dispatch(getClients(currentUser.uid)).then(setLoading(false));
+    dispatch(getInviteCode(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
+    dispatch(getUserById(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
+    dispatch(getClients(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, [])
 
   if (loading) return <Loader/>;

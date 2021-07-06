@@ -8,6 +8,7 @@ import uuid from 'react-uuid';
 import { postSession } from '../../../redux/trainer'
 import Loader from '../../../components/loader';
 
+
 function create() {
     const { currentUser } = useAuth();
     const router = useRouter();
@@ -29,7 +30,9 @@ function create() {
     useEffect(()=> {
         setLoading(true);
         if (currentUser) {
-            dispatch(getClients(currentUser.uid)).then(setLoading(false));
+            dispatch(getClients(currentUser.uid))
+              .then(() => setLoading(false))
+              .catch(() => setLoading(false));
         }
     }, [currentUser, router]);
 
@@ -44,14 +47,14 @@ function create() {
         }
     }
 
-    async function submitHandler (e) {
+    function submitHandler (e) {
         setLoading(true);
         e.preventDefault();
         let endDate = new Date(formState.startDate);
         endDate.setHours(formState.endDate.split(":")[0])
         endDate.setMinutes(formState.endDate.split(":")[1])
         let title = formState.title==="" ? "Workout" : formState.title;
-        await dispatch(postSession({
+        dispatch(postSession({
             trainer_uid:currentUser.uid,
             client_uid:formState.client.user_uid,
             sessionData: {
@@ -60,7 +63,9 @@ function create() {
                 meeting_id: formState.meeting_id,
                 title: title,
             }
-        })).then(setLoading(false));
+        }))
+          .then(() => setLoading(false))
+          .catch(() => setLoading(false));
         router.push("/session")
     }
 
@@ -73,7 +78,6 @@ function create() {
                 } else {setFormState({...formState,client:{}})}
             }
     }
-
 
     function getTime() {
         let sessionDate = new Date(formState.startDate);
@@ -95,7 +99,7 @@ function create() {
     }
 
     if (loading) return <Loader/>;
-    
+
     return (
         <div>
         <div className="page_container">

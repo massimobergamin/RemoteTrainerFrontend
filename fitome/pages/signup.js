@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import {useAuth} from '../firebase/contextAuth'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { postUser, postInviteCode } from '../redux/trainer'
 import { useRouter } from 'next/router';
 import { nanoid } from '@reduxjs/toolkit';
 import Loader from '../components/loader';
 
 const SignUp = () => {
-    const {signUp, currentUser} = useAuth();
+    const { signUp } = useAuth();
     const dispatch = useDispatch();
     const router = useRouter();
 
@@ -32,7 +32,7 @@ const SignUp = () => {
     const [formState, setFormState] = useState(initialState);
     const [error,setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const { user, invite_code } = useSelector(state => state.trainer);
+
     function titleCase(name){
         return name[0].toUpperCase() + name.slice(1).toLowerCase();
     }
@@ -48,13 +48,14 @@ const SignUp = () => {
             setError("");
             error.style.display="none";
             if (formState.type === 'Trainer') {
-                await dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
-                await dispatch(postInviteCode({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5).toUpperCase()}));
-                setLoading(false);
+                dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
+                    .then(() => setLoading(false))
+                dispatch(postInviteCode({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5).toUpperCase()}))
+                    .then(() => setLoading(false))
                 router.push(`/trainer/invitecode`);
             } else if (formState.type === 'Client') {
-              await dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
-              setLoading(false);
+              dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
+              .then(() => setLoading(false))
               router.push(`/client/invitecode`);
             }
         } catch (err) {
@@ -64,7 +65,6 @@ const SignUp = () => {
             setError(err.message);
             error.style.display="block";
             setFormState(initialState);
-
         }
     }
 

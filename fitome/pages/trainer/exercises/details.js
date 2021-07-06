@@ -1,10 +1,9 @@
-import {  } from 'react';
+import { useState } from 'react';
 import ExerciseDetails from '../../../components/exerciseDetails';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedExercise } from '../../../redux/trainer';
 import { useRouter } from 'next/router';
 import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
-import WorkoutsExercisesBar from '../../../components/workoutsExercisesBar';
 import Loader from '../../../components/loader';
 
 function Details() {
@@ -21,10 +20,11 @@ function Details() {
           <div className="workout_addworkout" onClick={(e) => {
             setLoading(true);
             e.preventDefault();
-            dispatch(setSelectedExercise({})).then(setLoading(false));
+            dispatch(setSelectedExercise({}))
+            setLoading(false);
             router.push('/trainer/exercises')
         }}><span className="workout_addworkout_span">{"< "}</span>Back</div>
-        <div classNAme="workoutsExercises_flexCol">
+        <div className="workoutsExercises_flexCol">
         <ExerciseDetails exercise={selectedExercise}></ExerciseDetails>
         </div>
         </div>

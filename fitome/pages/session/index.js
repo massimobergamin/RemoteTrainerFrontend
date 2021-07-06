@@ -7,7 +7,7 @@ import SessionCard from '../../components/sessionCard';
 import uuid from 'react-uuid';
 import NavigationTrainer from '../../components/navigationBar/navigationTrainer';
 import NavigationClient from '../../components/navigationBar/navigationClient';
-
+import Loader from '../../components/loader';
 
 function SessionList() {
 
@@ -15,12 +15,18 @@ function SessionList() {
     const dispatch = useDispatch();
     const { currentUser } = useAuth();
     const sessions = useSelector(state => state.client.filteredSessions);
+    const [loading, setLoading] = useState(false);
     
     useEffect(()=> {
+        setLoading(true);
         if (currentUser.displayName === "trainer") {
-            dispatch(getSessionsFiltered({uid:currentUser.uid, type:"trainer"}));
+            dispatch(getSessionsFiltered({uid:currentUser.uid, type:"trainer"}))
+                .then(() => setLoading(false))
+                .catch(() => setLoading(false));
         } else {
-            dispatch(getSessionsFiltered({uid:currentUser.uid, type:"client"}));
+            dispatch(getSessionsFiltered({uid:currentUser.uid, type:"client"}))
+              .then(() => setLoading(false))
+              .catch(() => setLoading(false));
         }
     }, [router]);
 
@@ -55,6 +61,8 @@ function SessionList() {
         }
         return null;
     }
+
+    if (loading) return <Loader/>;
 
     return (
         <div>

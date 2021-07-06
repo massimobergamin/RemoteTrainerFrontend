@@ -18,12 +18,15 @@ const Profile = () => {
 
   useEffect(() => {
     setLoading(true);
-    dispatch(getUser(currentUser.uid));
-    dispatch(getUserById(trainerInfo.trainer_uid)).then(setLoading(false));
+    dispatch(getUser(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
+    dispatch(getUserById(trainerInfo.trainer_uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, []);
 
   const trainer = useSelector(state => state.trainer);
-  const lastLogin = moment(user.last_login).fromNow();
   const userBirthday = moment(user.birthday).format('LL');
 
   if (loading) return <Loader/>;
@@ -40,7 +43,6 @@ const Profile = () => {
           <img className="profilePic" src="/noVid.png"></img>}
         </div>
         <span className="profile_addImage">@{user.username}</span>
-          <div>Your last log in was <b>{lastLogin}</b>.</div>
           <div>Your current trainer is <b>{trainer.user.first_name} {trainer.user.last_name}</b>.</div>
           <a href="./editprofile">
             <button className="buttonCancel profile_marginBottom">Edit Profile</button>

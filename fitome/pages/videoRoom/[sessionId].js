@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import {socket} from '../../lib/socket';
 import Peer from "simple-peer";
-import TimerOverlay from '../../components/timerOverlay';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 
@@ -30,13 +29,12 @@ const VideoRoom = () => {
   const userVideo = useRef();
   const peersRef = useRef([]);
 
-  // **** TIMER STATE ADDED FOR TESTING **** //
+  // **** TIMER STATE ADDED BELOW **** //
   const [reset, setReset] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [timerInput, setTimerInput] = useState(initState);
   const [newTimer, setNewTimer] = useState(0);
-
 
   const { sessionId } = router.query;
 
@@ -107,18 +105,8 @@ const VideoRoom = () => {
         signal,
       })
     })
-    // once connected, send data to other peer
-    peer.on('connect', () => {
-      // const timerData = {
-      //   newTimer: newTimer,
-      //   isEditing: isEditing,
-      //   isPlaying: isPlaying,
-      //   reset: reset,
-      // }
-      // const timerDataJson = JSON.stringify(timerData);
-      // peer.send(timerDataJson);
-    });
 
+    // once connected, send data to other peer
     peer.on('data', data => {
       const parsedTimerData = JSON.parse(data);
       const { peerNewTimer, peerIsEditing, peerIsPlaying, peerReset, peerTimerInputName, peerTimerInputValue } = parsedTimerData;
@@ -162,22 +150,9 @@ const VideoRoom = () => {
         ...prev,
         [peerTimerInputName]: peerTimerInputValue,
       }));
-      console.log('parsed data line 160: ', JSON.parse(data));
-    });
-
-    peer.on('connect', () => {
-      // const timerData = {
-      //   newTimer: newTimer,
-      //   isEditing: isEditing,
-      //   isPlaying: isPlaying,
-      //   reset: reset,
-      // }
-      // const timerDataJson = JSON.stringify(timerData);
-      // peer.send(timerDataJson);
     });
     return peer;
   }
-
 
   function hangUp () {
     console.log("HANGING UP");
@@ -188,7 +163,7 @@ const VideoRoom = () => {
   }
 
 
-  // ****** TIMER LOGIC ADDED BELOW FOR TESTING ***** //
+  // ****** TIMER LOGIC ADDED BELOW ****** //
 
   const children = ({ remainingTime }) => {
     const hours = Math.floor(remainingTime / 3600)
@@ -228,10 +203,6 @@ const VideoRoom = () => {
     }
     );
   };
-
-  // const wrapSetState = async () => {
-
-  // }
 
   const handleReset = async () => {
     if (!isEditing) {

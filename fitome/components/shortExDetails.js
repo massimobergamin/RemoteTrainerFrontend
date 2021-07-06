@@ -23,7 +23,8 @@ function shortExDetails({ exercise }) {
         <p className="exerciselist_title">{exercise.title}</p>
         <button className="button_workout" onClick={() => {
         setLoading(true);
-        dispatch(setSelectedExercise(exercise)).then(setLoading(false));
+        dispatch(setSelectedExercise(exercise))
+         setLoading(false);
         router.push('/trainer/exercises/details');
       }}>View Details</button>
     </div>

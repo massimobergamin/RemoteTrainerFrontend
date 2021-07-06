@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getExercise } from '../../../redux/trainer';
 import { useAuth } from '../../../firebase/contextAuth';
 import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
@@ -17,11 +17,13 @@ function Exercises() {
 
   useEffect(() => {
     setLoading(true);
-    dispatch(getExercise(currentUser.uid)).then(setLoading(false));
+    dispatch(getExercise(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, [])
 
   if (loading) return <Loader/>;
-  
+
   return (
     <div>
       <WorkoutsExercisesBar landingpage1="workouts_off" landingpage2="workouts_on"/>
@@ -52,12 +54,12 @@ function Exercises() {
             {chestExs && chestExs.map(exercise =>
               <ShortExDetails key={exercise.id} exercise={exercise}></ShortExDetails>)}
             </div></>: null}
-          {coreExs.length ? <><div className="workout_title">Core</div> 
+          {coreExs?.length ? <><div className="workout_title">Core</div> 
           <div className="workoutsExercises_largeCard2">
             {coreExs && coreExs.map(exercise =>
               <ShortExDetails key={exercise.id} exercise={exercise}></ShortExDetails>)}
-            </div></>: null}
-          {shoulderExs.length ? <><div className="workout_title">Shoulders</div> 
+            </div></> : null}
+          {shoulderExs?.length ? <><div className="workout_title">Shoulders</div> 
           <div className="workoutsExercises_largeCard2">
           {shoulderExs && shoulderExs.map(exercise =>
             <ShortExDetails key={exercise.id} exercise={exercise}></ShortExDetails>)}

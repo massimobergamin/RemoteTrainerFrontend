@@ -14,7 +14,9 @@ const Editprofile = () => {
 
   useEffect(() => {
     setLoading(true);
-    dispatch(getUser(currentUser.uid)).then(setLoading(false));
+    dispatch(getUser(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, []);
 
   if (loading) return <Loader/>;

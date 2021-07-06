@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getWorkout, setSelectedWorkout } from '../../../redux/trainer';
 import { useAuth } from '../../../firebase/contextAuth';
 import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
@@ -16,7 +16,9 @@ function Workouts() {
 
   useEffect(() => {
     setLoading(true);
-    dispatch(getWorkout(currentUser.uid)).then(setLoading(false));
+    dispatch(getWorkout(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, [])
 
   if (loading) return <Loader/>;
@@ -49,7 +51,8 @@ function Workouts() {
               </div>
               <button className="button_workout" onClick={() => {
               setLoading(true);
-              dispatch(setSelectedWorkout(workout)).then(setLoading(false));
+              dispatch(setSelectedWorkout(workout))
+              setLoading(false);
               router.push('/trainer/workouts/details');
             }}>View Details</button>
           </div>) : <h2>Looks like you don't have any workouts.</h2>}

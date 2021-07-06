@@ -2,8 +2,6 @@ import Head from 'next/head';
 import React, { useState } from 'react';
 import { useAuth } from '../firebase/contextAuth';
 import Link from 'next/link';
-import UploadImageForm from '../components/uploadImageForm';
-import UploadVideoForm from '../components/uploadVideoForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserById } from '../redux/trainer';
 import { getUser } from '../redux/client';
@@ -23,21 +21,22 @@ export default function Home() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { user, trainerInfo } = useSelector(state => state.client);
+  const { trainerInfo } = useSelector(state => state.client);
 
   const loginHandler = async () => {
     const error = document.getElementById("error");
+    setLoading(true);
     try {
-      setLoading(true);
-      console.log('loading: ', loading);
       let userInfo = await login(formState.email, formState.password);
       setError("");
       error.style.display="none";
       if (userInfo.user.displayName === 'trainer') {
-        await dispatch(getUserById(userInfo.user.uid)).then(setLoading(false));
-        router.push('/session');
+        dispatch(getUserById(userInfo.user.uid)).then(() => {
+          setLoading(false);
+          router.push('/session');
+        });
       } else if (userInfo.user.displayName === 'client') {
-          await dispatch(getUser(userInfo.user.uid)).then(() => {
+          dispatch(getUser(userInfo.user.uid)).then(() => {
           if (trainerInfo) {
             setLoading(false);
             router.push('/client/plan');
@@ -56,10 +55,7 @@ export default function Home() {
      }
     }
 
-    if (loading) {
-      console.log('is loading')
-      return <Loader/>;
-    }
+    if (loading) return <Loader/>;
 
       return (
         <div>
