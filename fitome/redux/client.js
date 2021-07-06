@@ -78,6 +78,18 @@ export const getSession = createAsyncThunk(
   }
 )
 
+export const deleteClientSession = createAsyncThunk(
+  'trainer/deleteClientSessionStatus',
+  async ({meeting_id, uid}) => {
+    try {
+      const response = await axios.delete(`https://remotetrainerserver.herokuapp.com/users/sessions/${meeting_id}/${uid}/client`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const getClientPlans = createAsyncThunk(
   'client/getClientPlansStatus',
   async ({ uid, startDate }, thunkAPI) => {
@@ -109,7 +121,7 @@ export const getTrainerByCode = createAsyncThunk(
       console.log('redux code: ', code);
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/client/invite/${code}`);
       console.log('Redux/getTrainerByCode: ', response.data);
-      
+
       if (response.data) {
         const trainer = await axios.get(`https://remotetrainerserver.herokuapp.com/users/${response.data.trainer_uid}-trainer`);
         console.log('Redux/getTrainerByCode trainer: ', trainer);
@@ -170,6 +182,9 @@ export const clientSlice = createSlice({
     },
     [getSession.fulfilled] : (state, action) => {
       state.singleSession = action.payload;
+    },
+    [deleteClientSession.fulfilled] : (state, action) => {
+      state.sessions = action.payload;
     },
     [getClientPlans.fulfilled] : (state, action) => {
       state.plans = action.payload;
