@@ -1,10 +1,13 @@
 import React from 'react';
 import {useRouter} from 'next/router';
 import Moment from 'moment';
+import { deleteSession } from '../redux/trainer';
+import { useDispatch } from 'react-redux';
 
 function sessionCard({class_name, usertype, session}) {
 
     const router = useRouter();
+    const dispatch = useDispatch();
 
     function joinCallHandler () {
         router.push(`/videoRoom/${session.meeting_id}`)
@@ -30,7 +33,11 @@ function sessionCard({class_name, usertype, session}) {
             return (<button type="button" className="button sessionCard_smallButton" style={{backgroundColor: "#ca6702"}} onClick={joinCallHandler}>Join</button>)
         }
         return null;
-    }
+    };
+
+    const deleteSessionButton = (e) => {
+        dispatch(deleteSession(e.target.attributes.value.value));
+    };
 
     return (
         <div className={`${class_name} sessionCard_container`}>
@@ -44,10 +51,9 @@ function sessionCard({class_name, usertype, session}) {
                 <div><span className="exercise_subtitle">Client: </span>{`${session.users[1].first_name} ${session.users[1].last_name}`}</div>
                 :
                 <div><span className="exercise_subtitle">Trainer: </span>{`${session.users[0].first_name} ${session.users[0].last_name}`}</div>}
-                <button className="button sessionCard_smallButton">Delete</button>
+                <button value={session.meeting_id} onClick={e => deleteSessionButton(e)} className="button sessionCard_smallButton">Delete</button>
                 {showButton()}
             </div>
-
         </div>
     )
 }
