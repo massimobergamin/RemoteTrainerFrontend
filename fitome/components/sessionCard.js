@@ -3,10 +3,10 @@ import {useRouter} from 'next/router';
 import Moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { deleteTrainerSession } from '../redux/trainer';
-import { deleteClientSession } from '../redux/client';
+import { deleteClientSession, getSessionsFiltered } from '../redux/client';
 import { useSelector } from 'react-redux';
 
-function sessionCard({class_name, usertype, session}) {
+function sessionCard({class_name, deleted, setDeleted, usertype, session}) {
     const router = useRouter();
     const dispatch = useDispatch();
     const trainerInfo = useSelector(state => state.trainer);
@@ -40,9 +40,13 @@ function sessionCard({class_name, usertype, session}) {
 
     function deleteHandler () {
         if (usertype === 'trainer')
-            dispatch(deleteTrainerSession({meeting_id: session.meeting_id, uid: trainerInfo.user.user_uid}));
+            dispatch(deleteTrainerSession({meeting_id: session.meeting_id, uid: trainerInfo.user.user_uid}))
+                .then(() => setDeleted(true))
+                .then(() => dispatch(getSessionsFiltered({uid: trainerInfo.user.user_uid, type:"trainer"})))
         else
             dispatch(deleteClientSession({meeting_id: session.meeting_id, uid: clientInfo.user.user_uid}))
+                .then(() => setDeleted(true))
+                .then(() => dispatch(getSessionsFiltered({uid: clientInfo.user.user_uid, type:"client"})));
     }
 
     return (

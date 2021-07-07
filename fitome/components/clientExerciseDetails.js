@@ -17,7 +17,7 @@ const ClientExerciseDetails = ({ exercise }) => {
           <ExerciseDetails key={exercise.id} exercise={exercise} className="workoutsExercises_focusedCard"></ExerciseDetails>
         </div>
       </div>
-      : 
+      :
       <div>
         <p>{exercise?.title}</p>
         <h5>Reps: {exercise.reps}</h5>
