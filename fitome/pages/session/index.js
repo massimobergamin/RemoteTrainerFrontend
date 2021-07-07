@@ -63,10 +63,25 @@ function SessionList() {
         return null;
     }
 
-    if (loading) return <Loader/>;
+    if (loading) {
+        return (
+          <div>
+            <div className="loader_wrapper">
+              <Loader/>
+            </div>
+            { currentUser.displayName==="trainer" ? (
+
+            <NavigationTrainer/>
+            ) :
+            <NavigationClient/>
+            }
+          </div>
+        )
+    }
 
     return (
         <div>
+            {sessions &&
             <div className="page_container">
                 {showButton()}
                 <div className="sessionList1">
@@ -78,7 +93,8 @@ function SessionList() {
                     {showRest()}
                 </div>
             </div>
-            { currentUser.displayName === "trainer" ? (
+            }
+            { currentUser.displayName==="trainer" ? (
 
                 <NavigationTrainer/>
             ) :

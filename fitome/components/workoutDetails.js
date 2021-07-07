@@ -48,7 +48,7 @@ function WorkoutDetails({ workout }) {
   }
 
   return (
-    <div>
+    <div className="plan_detail_breakdown">
       <div className="page_title">{workout.title}</div>
       <div className="workoutsExercises_flex">
         <button className="carousel_button" onClick={handlePrevClick} disabled={prevDisabled}>◀</button>

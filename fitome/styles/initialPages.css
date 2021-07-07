@@ -24,6 +24,7 @@
     position: fixed;
     z-index: 2;
     transform: scale(1.2);
+    display: none;
 }
 
 .initial_wave {
@@ -148,12 +149,15 @@
     font-weight: 300;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 550px) {
     .initial_wave {
         bottom: 0;
     }
     .initial_background {
         overflow-y: none;
+    }
+    .initial_decor {
+        display: block;
     }
 }
 

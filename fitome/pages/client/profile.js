@@ -29,36 +29,54 @@ const Profile = () => {
   const trainer = useSelector(state => state.trainer);
   const userBirthday = moment(user.birthday).format('LL');
 
-  if (loading) return <Loader/>;
+  if (loading) {
+    return (
+      <div>
+        <div className="loader_wrapper">
+          <Loader/>
+        </div>
+        <NavigationClient/>
+      </div>
+    )
+  }
 
   return (
     <div>
       <div className="page_container">
-        <div className="createprofile_wrapper">
         <div className="page_title">{user.first_name + " " + user.last_name}</div>
-        <div className="profilewrapper">
-          {user.profile_picture ?
-            <img className="profilePic" src={user.profile_picture}>
-            </img> :
-          <img className="profilePic" src="/noVid.png"></img>}
-        </div>
-        <span className="profile_addImage">@{user.username}</span>
-          <div>Your current trainer is <b>{trainer.user.first_name} {trainer.user.last_name}</b>.</div>
-          <a href="./editprofile">
-            <button className="buttonCancel profile_marginBottom">Edit Profile</button>
-          </a>
-          <div><b>Birthday:</b><br/>{userBirthday}</div>
-          <div><b>Height:</b><br/>{user.height} cm</div>
-          <div><b>Weight:</b><br/>{user.weight} lbs</div>
-          <div><b>Sex:</b><br/>{user.sex}</div>
-          <a style={{fontSize: "0.9rem", color: "#585858"}} href="" onClick={(e) => {
+        <div className="createprofile_wrapper">
+        <div className="profile_top">
+          <div className="profilewrapper">
+            {user.profile_picture ?
+              <img className="profilePic" src={user.profile_picture}>
+              </img> :
+            <img className="profilePic" src="/noVid.png"></img>}
+          </div>
+          <span className="profile_addImage">@{user.username}</span>
+            <div>Your current trainer is <b>{trainer.user.first_name} {trainer.user.last_name}</b>.</div>
+            <a href="./editprofile">
+              <button className="buttonCancel profile_marginBottom">Edit Profile</button>
+            </a>
+            <a className="profile_signout_large" style={{fontSize: "0.9rem", color: "#585858"}} href="" onClick={(e) => {
             e.preventDefault();
             logout();
             router.push('/');
           }}><u>Sign Out</u></a>
+        </div>
+        <div className="profile_bottom">
+          <div><b>Birthday:</b><br/>{userBirthday}</div>
+          <div><b>Height:</b><br/>{user.height} cm</div>
+          <div><b>Weight:</b><br/>{user.weight} lbs</div>
+          <div><b>Sex:</b><br/>{user.sex}</div>
+          <a className="profile_signout_small" style={{fontSize: "0.9rem", color: "#585858"}} href="" onClick={(e) => {
+            e.preventDefault();
+            logout();
+            router.push('/');
+          }}><u>Sign Out</u></a>
+        </div>
       </div>
     </div>
-    <NavigationClient></NavigationClient>
+    <NavigationClient/>
     </div>
   )
 }

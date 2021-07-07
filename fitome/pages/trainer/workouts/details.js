@@ -12,21 +12,28 @@ function Details() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  if (loading) return <Loader/>;
+  if (loading) {
+    return (
+      <div>
+        <div className="loader_wrapper">
+          <Loader/>
+        </div>
+        <NavigationTrainer/>
+      </div>
+    )
+  }
 
   return (
     <div>
       <div className="page_container">
       <div className="workout_addworkout" onClick={(e) => {
-          setLoading(true);
           e.preventDefault();
           dispatch(setSelectedWorkout({}))
-          setLoading(false);
           router.push('/trainer/workouts')
         }}><span className="workout_addworkout_span">{"< "}</span>Back</div>
         <WorkoutDetails workout={selectedWorkout}></WorkoutDetails>
       </div>
-      <NavigationTrainer></NavigationTrainer>
+      <NavigationTrainer/>
     </div>
   )
 }

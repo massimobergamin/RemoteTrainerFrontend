@@ -210,3 +210,10 @@
   justify-content: space-around;
   font-size: 1.2em;
 }
+
+.plan_detail_breakdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

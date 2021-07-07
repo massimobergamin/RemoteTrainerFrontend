@@ -61,7 +61,7 @@ function sessionCard({class_name, deleted, setDeleted, usertype, session}) {
                 <div><span className="exercise_subtitle">Client: </span>{`${session.users[1].first_name} ${session.users[1].last_name}`}</div>
                 :
                 <div><span className="exercise_subtitle">Trainer: </span>{`${session.users[0].first_name} ${session.users[0].last_name}`}</div>}
-                <button value={session.meeting_id} onClick={deleteHandler} className="button sessionCard_smallButton">Delete</button>
+                <button value={session.meeting_id} onClick={deleteHandler} className="sessionCard_delete">X</button>
                 {showButton()}
             </div>
         </div>

@@ -43,7 +43,13 @@ const TrainerCode = () => {
       });
   };
 
-  if (loading) return <Loader/>;
+  if (loading) {
+    return (
+      <div className="loader_wrapper_100">
+        <Loader/>
+      </div>
+    )
+  }
 
   return (
     <div className="initial_background">

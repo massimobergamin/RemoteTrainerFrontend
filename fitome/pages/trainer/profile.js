@@ -29,24 +29,41 @@ const Profile = () => {
       .catch(() => setLoading(false));
   }, [])
 
-  if (loading) return <Loader/>;
+  if (loading) {
+    return (
+      <div>
+        <div className="loader_wrapper">
+          <Loader/>
+        </div>
+        <NavigationTrainer/>
+      </div>
+    )
+}
 
   return (
     <div>
       <div className="page_container">
+            <div className="page_title">{user.first_name + " " + user.last_name}</div>
         <div className="createprofile_wrapper">
-          <div className="page_title">{user.first_name + " " + user.last_name}</div>
-          <div className="profilewrapper">
-            {user.profile_picture ?
-              <img src={user.profile_picture} className="profilePic"/>
-              :
-              <img className="profilePic" src="/noVid.png"></img>}
-          </div>
-          <span className="profile_addImage">@{user.username}</span>
-          {clients.length === 1 ? <div>You currently have <b>1</b> client.</div> : <div>You currently have <b>{clients.length}</b> clients.</div>}
-            <a href="./editprofile">
-              <button className="buttonCancel profile_marginBottom">Edit Profile</button>
+          <div className="profile_top">
+            <div className="profilewrapper">
+              {user.profile_picture ?
+                <img src={user.profile_picture} className="profilePic"/>
+                :
+                <img className="profilePic" src="/noVid.png"></img>}
+            </div>
+            <span className="profile_addImage">@{user.username}</span>
+            {clients.length === 1 ? <div>You currently have <b>1</b> client.</div> : <div>You currently have <b>{clients.length}</b> clients.</div>}
+            <a  href="./editprofile">
+              <button className="button">Edit Profile</button>
             </a>
+            <a className="profile_signout_large" style={{fontSize: "0.9rem", color: "#585858"}} href="" onClick={(e) => {
+              e.preventDefault();
+              logout();
+              router.push('/');
+            }}><u>Sign Out</u></a>
+          </div>
+          <div className="profile_bottom">
             <div><b>Invite code:</b><br/>{invite_code?.invite_code}</div>
             <div><b>Birthday:</b><br/>{userBirthday}</div>
             <div><b>Height:</b><br/>{user.height} cm</div>
@@ -54,14 +71,15 @@ const Profile = () => {
             <div><b>Weight:</b><br/>{user.weight} lbs</div>
             <div><b>Sex:</b><br/>{user.sex}</div>
 
-            <a style={{fontSize: "0.9rem", color: "#585858"}} href="" onClick={(e) => {
+            <a className="profile_signout_small" style={{fontSize: "0.9rem", color: "#585858"}} href="" onClick={(e) => {
               e.preventDefault();
               logout();
               router.push('/');
             }}><u>Sign Out</u></a>
           </div>
+          </div>
         </div>
-        <NavigationTrainer></NavigationTrainer>
+        <NavigationTrainer/>
       </div>
   )
 }

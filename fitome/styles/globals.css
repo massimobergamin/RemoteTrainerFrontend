@@ -73,6 +73,13 @@ p {
   font-weight: 700;
 }
 
+.page_subtitle {
+  font-size: 1em;
+  line-height: 1.5em;
+  margin:0;
+  font-weight: 300;
+}
+
 #Exercise_Video { /*added*/
   border-radius: 5px;
   background-color: rgb(27, 27, 27);

@@ -24,7 +24,15 @@ const Trainer = () => {
 
   const { invite_code } = useSelector(state => state.trainer);
 
-  if (loading) return <Loader/>;
+  if (loading) {
+    return (
+      <div>
+        <div className="loader_wrapper_100">
+          <Loader/>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="initial_background">
