@@ -30,7 +30,7 @@ export const updateUser = createAsyncThunk(
 
 export const getUser = createAsyncThunk(
   'client/getUserStatus',
-  async (uid, thunkAPI) => {
+  async (uid) => {
     try {
       console.log('getUser input: ', uid);
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/${uid}-client`);
@@ -56,9 +56,10 @@ export const getSessionsClient = createAsyncThunk(
 
 export const getSessionsFiltered = createAsyncThunk(
   'client/getSessionsFilteredStatus',
-  async ({type, uid}, thinkAPI) => {
+  async ({type, uid}) => {
     try {
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/sessions/filtered/${uid}/${type}`);
+      console.log('Get Sessions Filtered: ', response);
       return response.data;
     } catch (err) {
       console.error(err)
@@ -77,6 +78,18 @@ export const getSession = createAsyncThunk(
     }
   }
 )
+
+export const deleteClientSession = createAsyncThunk(
+  'trainer/deleteClientSessionStatus',
+  async ({meeting_id, uid}) => {
+    try {
+      const response = await axios.delete(`https://remotetrainerserver.herokuapp.com/users/sessions/${meeting_id}/${uid}/client`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 export const getClientPlans = createAsyncThunk(
   'client/getClientPlansStatus',
@@ -109,7 +122,7 @@ export const getTrainerByCode = createAsyncThunk(
       console.log('redux code: ', code);
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/client/invite/${code}`);
       console.log('Redux/getTrainerByCode: ', response.data);
-      
+
       if (response.data) {
         const trainer = await axios.get(`https://remotetrainerserver.herokuapp.com/users/${response.data.trainer_uid}-trainer`);
         console.log('Redux/getTrainerByCode trainer: ', trainer);
@@ -125,17 +138,17 @@ export const clientSlice = createSlice({
   name: 'client',
   initialState: {
     user: {
-      user_uid: '',
-      username: '',
-      email: '',
-      last_login: 0,
-      first_name: '',
-      last_name: '',
-      profile_picture: '',
-      sex: '',
-      weight: 0,
-      height: 0,
-      birthday: 0,
+      // user_uid: '',
+      // username: '',
+      // email: '',
+      // last_login: 0,
+      // first_name: '',
+      // last_name: '',
+      // profile_picture: '',
+      // sex: '',
+      // weight: 0,
+      // height: 0,
+      // birthday: 0,
     },
     trainerInfo: {},
     sessions: [],
@@ -155,25 +168,24 @@ export const clientSlice = createSlice({
     },
     [getUser.fulfilled] : (state, action) => {
       state.sessions = action.payload.sessions;
-      state.user.user_uid = action.payload.user_uid;
-      state.user.username  = action.payload.username;
-      state.user.email = action.payload.email;
-      state.user.last_login = action.payload.last_login;
-      state.user.first_name = action.payload.first_name;
-      state.user.last_name = action.payload.last_name;
-      state.user.profile_picture = action.payload.profile_picture;
-      state.user.sex = action.payload.sex;
-      state.user.weight = action.payload.weight;
-      state.user.height = action.payload.height;
-      state.user.birthday = action.payload.birthday;
+      delete action.payload.sessions;
+      console.log('action.payload', action.payload);
       state.plans = action.payload.plans;
+      delete action.payload.plans;
       state.trainerInfo = action.payload.trainerInfo;
+      delete action.payload.trainerInfo;
+
+      state.user = action.payload;
+      console.log('state.user', state.user);
     },
     [getSessionsClient.fulfilled] : (state, action) => {
       state.sessions = action.payload;
     },
     [getSession.fulfilled] : (state, action) => {
       state.singleSession = action.payload;
+    },
+    [deleteClientSession.fulfilled] : (state, action) => {
+      state.sessions = action.payload;
     },
     [getClientPlans.fulfilled] : (state, action) => {
       state.plans = action.payload;
@@ -185,7 +197,7 @@ export const clientSlice = createSlice({
     [getTrainerByCode.fulfilled] : (state, action) => {
       state.trainerInfo = action.payload.trainerInfo;
     },
-    [getSessionsFiltered.fulfilled] : (state,action) => {
+    [getSessionsFiltered.fulfilled] : (state, action) => {
       state.filteredSessions = action.payload;
     }
   }

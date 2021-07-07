@@ -1,25 +1,31 @@
-import Link from 'next/link'
-import NavigationTrainer from '../../components/navigationBar/navigationTrainer'
 import { getInviteCode, getUserById } from '../../redux/trainer';
 import { useAuth } from '../../firebase/contextAuth';
-import  { useEffect } from 'react';
+import  { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {useRouter} from 'next/router';
+import Loader from '../../components/loader';
 
 const Trainer = () => {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
 
   const { currentUser } = useAuth();
-  
-  useEffect(() => {
-    console.log(currentUser)
-    dispatch(getInviteCode(currentUser.uid))
-    dispatch(getUserById(currentUser.uid))
-  }, [])
-  const { user, invite_code, trainer } = useSelector(state => state.trainer);
 
-  
+  useEffect(() => {
+    setLoading(true);
+    dispatch(getInviteCode(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
+    dispatch(getUserById(currentUser.uid))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
+  }, [])
+
+  const { invite_code } = useSelector(state => state.trainer);
+
+  if (loading) return <Loader/>;
+
   return (
     <div className="initial_background">
       <img className="initial_decor" src="/decor_background.png"/>

@@ -18,7 +18,7 @@ const nextConfig = {
         urlPattern: /\.(json|js|css)$/,
         handler: 'StaleWhileRevalidate',
         options: {
-          cacheName: 'weather-cache',
+          cacheName: 'fitome-cache',
           expiration: {
             maxEntries: 50,
             maxAgeSeconds: 24 * 60 * 60, // 1 day

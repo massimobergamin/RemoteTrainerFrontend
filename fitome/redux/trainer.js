@@ -60,6 +60,7 @@ export const getClients= createAsyncThunk(
   async (uid, thunkAPI) => {
     try {
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/clients/${uid}`);
+      console.log('Redux Response: ', response);
       return response.data.sort((a,b)=> (a.first_name+" "+a.last_name).localeCompare(b.first_name+" "+b.last_name));
     } catch (error) {
       console.log(error);
@@ -105,6 +106,19 @@ export const postSession = createAsyncThunk(
   }
 );
 
+export const deleteSession = createAsyncThunk (
+  'trainer/deleteSessionStatus',
+  async (meeting_id) => {
+    try {
+      const response = await axios.delete(`https://remotetrainerserver.herokuapp.com/users/sessions/${meeting_id}`);
+      console.log(response);
+      return response.data
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const updateSession = createAsyncThunk(
   'trainer/updateSessionsStatus',
   async (meeting_id) => {
@@ -136,6 +150,18 @@ export const getSession = createAsyncThunk(
   async (meeting_id) => {
     try {
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/sessions/${meeting_id}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const deleteTrainerSession = createAsyncThunk(
+  'trainer/deleteTrainerSessionStatus',
+  async ({meeting_id, uid}) => {
+    try {
+      const response = await axios.delete(`http://remotetrainerserver.herokuapp.com/users/sessions/${meeting_id}/${uid}/trainer`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -328,6 +354,9 @@ export const trainerSlice = createSlice({
     },
     [postSession.fulfilled] : (state, action) => {
       state.sessions.push(action.payload);
+    },
+    [deleteTrainerSession.fulfilled] : (state, action) => {
+      state.sessions = action.payload;
     },
     [updateSession.fulfilled] : (state, action) => {
       let sessionIndex = state.sessions.findIndex(session => session.id === action.payload.id);

@@ -1,46 +1,54 @@
-import React, {useEffect, useState} from 'react'
-import {useRouter} from 'next/router';
-import {useDispatch, useSelector} from 'react-redux'
-import {useAuth} from '../../firebase/contextAuth'
-import {getSessionsFiltered} from '../../redux/client'
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { useAuth } from '../../firebase/contextAuth';
+import { getSessionsFiltered } from '../../redux/client';
 import SessionCard from '../../components/sessionCard';
-import uuid from 'react-uuid'
+import uuid from 'react-uuid';
 import NavigationTrainer from '../../components/navigationBar/navigationTrainer';
 import NavigationClient from '../../components/navigationBar/navigationClient';
+import Loader from '../../components/loader';
 
 function SessionList() {
 
     const router = useRouter();
     const dispatch = useDispatch();
-    const {currentUser} = useAuth();
-    const sessions = useSelector(state=> state.client.filteredSessions)
+    const { currentUser } = useAuth();
+    const sessions = useSelector(state => state.client.filteredSessions);
+    const [loading, setLoading] = useState(false);
+    const [deleted, setDeleted] = useState(false);
 
     useEffect(()=> {
-        if (currentUser.displayName==="trainer") {
+        setLoading(true);
+        if (currentUser.displayName === "trainer") {
             dispatch(getSessionsFiltered({uid:currentUser.uid, type:"trainer"}))
+                .then(() => {
+                    setLoading(false);
+                })
+                .catch(() => setLoading(false));
         } else {
             dispatch(getSessionsFiltered({uid:currentUser.uid, type:"client"}))
+              .then(() => setLoading(false))
+              .catch(() => setLoading(false));
         }
-    },[router]);
+    }, []);
 
     function showFirst () {
-        console.log(sessions);
-        if (sessions?.length===0) {
+        if (sessions?.length == 0 || sessions == undefined) {
             return <div><div>No session Available.</div><div>Please make a session with your trainer.</div></div>
         } else {
-            return <SessionCard class_name="first" usertype={`${currentUser.displayName}`} session={sessions[0]} />
+            return <SessionCard class_name="first" deleted={deleted} setDeleted={setDeleted} usertype={`${currentUser.displayName}`} session={sessions[0]} />
         }
     }
 
     function showRest () {
-        if (sessions.length <= 1) {
+        if (sessions?.length <= 1) {
             return <div>No Upcoming Sessions Available.</div>
         } else {
-            return sessions.slice(1).map((session) => {
-                return <SessionCard key={uuid()} class_name="rest" usertype={`${currentUser.displayName}`} session={session} />
+            return sessions?.slice(1).map((session) => {
+                return <SessionCard key={uuid()} class_name="rest" deleted={deleted} setDeleted={setDeleted} usertype={`${currentUser.displayName}`} session={session} />
             })
         }
-
     }
 
     function showButton () {
@@ -50,11 +58,12 @@ function SessionList() {
                     e.preventDefault();
                     router.push('/trainer/session/create')
                   }}><span className="workout_addworkout_span">+ </span>Session</div>
-
             )
         }
         return null;
     }
+
+    if (loading) return <Loader/>;
 
     return (
         <div>

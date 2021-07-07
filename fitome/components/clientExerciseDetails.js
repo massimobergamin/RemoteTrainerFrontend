@@ -5,7 +5,6 @@ const ClientExerciseDetails = ({ exercise }) => {
   const [selectedEx, setSelectedEx] = useState({});
   const [selected, setSelected] = useState(false);
 
-
   const handleClick = (e) => {
     setSelected(prev => !prev);
   };
@@ -18,9 +17,11 @@ const ClientExerciseDetails = ({ exercise }) => {
           <ExerciseDetails key={exercise.id} exercise={exercise} className="workoutsExercises_focusedCard"></ExerciseDetails>
         </div>
       </div>
-      : 
+      :
       <div>
         <p>{exercise?.title}</p>
+        <h5>Reps: {exercise.reps}</h5>
+        <h5>Sets: {exercise.sets}</h5>
         {exercise?.media ?
          <video id="Exercise_Video" width="176" height="176" controls muted>
              <source src={exercise.media} type="video/mp4"/>

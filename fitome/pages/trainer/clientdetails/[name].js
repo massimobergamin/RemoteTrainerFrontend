@@ -1,5 +1,4 @@
-import  { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
 import { useRouter } from 'next/router';
@@ -9,7 +8,6 @@ const ClientDetail = () => {
   const { user, plans } = useSelector(state => state.client);
   const recentPlans = plans.filter(plan => Date.parse(plan.end_date) >= Date.now());
   const router = useRouter();
-
 
   const displayDetails = recentPlans[0]?.details
 
