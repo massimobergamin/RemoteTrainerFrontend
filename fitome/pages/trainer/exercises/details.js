@@ -12,7 +12,16 @@ function Details() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  if (loading) return <Loader/>;
+  if (loading) {
+    return (
+      <div>
+        <div className="loader_wrapper">
+          <Loader/>
+        </div>
+        <NavigationTrainer/>
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -28,7 +37,7 @@ function Details() {
         <ExerciseDetails exercise={selectedExercise}></ExerciseDetails>
         </div>
         </div>
-      <NavigationTrainer></NavigationTrainer>
+        <NavigationTrainer/>
     </div>
   )
 }

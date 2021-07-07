@@ -63,7 +63,21 @@ function SessionList() {
         return null;
     }
 
-    if (loading) return <Loader/>;
+    if (loading) {
+        return (
+          <div>
+            <div className="loader_wrapper">
+              <Loader/>
+            </div>
+            { currentUser.displayName==="trainer" ? (
+
+            <NavigationTrainer/>
+            ) :
+            <NavigationClient/>
+            }
+          </div>
+        )
+    }
 
     return (
         <div>

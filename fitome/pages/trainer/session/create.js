@@ -102,7 +102,16 @@ function create() {
         return inputDate;
     }
 
-    if (loading) return <Loader/>;
+    if (loading) {
+        return (
+          <div>
+            <div className="loader_wrapper">
+              <Loader/>
+            </div>
+            <NavigationTrainer/>
+          </div>
+        )
+    }
 
     return (
         <div>

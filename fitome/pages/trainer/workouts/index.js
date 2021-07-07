@@ -21,7 +21,16 @@ function Workouts() {
       .catch(() => setLoading(false));
   }, [])
 
-  if (loading) return <Loader/>;
+  if (loading) {
+    return (
+      <div>
+        <div className="loader_wrapper">
+          <Loader/>
+        </div>
+        <NavigationTrainer/>
+      </div>
+    )
+}
 
   return (
     <>
@@ -57,7 +66,7 @@ function Workouts() {
             }}>View Details</button>
           </div>) : <h2>Looks like you don't have any workouts.</h2>}
         </div>
-        <NavigationTrainer></NavigationTrainer>
+        <NavigationTrainer/>
     </>
   )
 }

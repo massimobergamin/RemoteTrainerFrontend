@@ -163,7 +163,7 @@ const VideoRoom = () => {
   }
 
 
-  // ****** TIMER LOGIC ADDED BELOW ****** //
+  // ****** TIMER LOGIC ****** //
 
   const children = ({ remainingTime }) => {
     const hours = Math.floor(remainingTime / 3600)

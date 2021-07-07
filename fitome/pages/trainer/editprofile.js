@@ -20,7 +20,16 @@ const EditProfile = () => {
       .catch(() => setLoading(false));
   }, [])
 
-  if (loading) return <Loader/>;
+  if (loading) {
+    return (
+      <div>
+        <div className="loader_wrapper">
+          <Loader/>
+        </div>
+        <NavigationTrainer/>
+      </div>
+    )
+  }
 
   return (
     <div>

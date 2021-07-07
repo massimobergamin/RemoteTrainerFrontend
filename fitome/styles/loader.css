@@ -1,9 +1,25 @@
+.loader_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100%;
+}
+
+.loader_wrapper {
+  height: 94vh;
+}
+
+.loader_wrapper_100 {
+  height: 100vh;
+}
+
 .lds-heart {
   display: inline-block;
   position: relative;
   width: 80px;
   height: 80px;
-  margin: 50vh auto;
+  /* margin: 50vh auto; */
   transform: rotate(45deg);
   transform-origin: 40px 40px;
 }

@@ -58,7 +58,16 @@ const CreateWorkout = () => {
     }
   }
 
-  if (loading) return <Loader/>;
+  if (loading) {
+    return (
+      <div>
+        <div className="loader_wrapper">
+          <Loader/>
+        </div>
+        <NavigationTrainer/>
+      </div>
+    )
+}
 
   return (
     <div>
@@ -89,7 +98,7 @@ const CreateWorkout = () => {
               </div>)}
             </div>
           </div>
-      <NavigationTrainer></NavigationTrainer>
+      <NavigationTrainer/>
     </div>
   )
 }

@@ -40,7 +40,7 @@ const Plan = () => {
               <div className="clientplan_date">Ending: {moment(endDate).format("dddd, MMMM Do YYYY")}</div>
               <div>
                 {curPlan.details.map(day => (
-                  <div>
+                  <div className="plan_detail_breakdown">
                     <div className="clientplan_dates" key={day.id}>{moment(day.day).format("dddd, MMMM Do YYYY")}</div>
                     <WorkoutDetails key={day.day} workout={day}></WorkoutDetails> 
                   </div>
@@ -53,7 +53,16 @@ const Plan = () => {
     };
     };
 
-  if (loading) return <Loader/>;
+  if (loading) {
+    return (
+      <div>
+        <div className="loader_wrapper">
+          <Loader/>
+        </div>
+        <NavigationClient/>
+      </div>
+    )
+  }
 
   return (
     <div>
