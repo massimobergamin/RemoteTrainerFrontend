@@ -59,6 +59,7 @@ export const getSessionsFiltered = createAsyncThunk(
   async ({type, uid}) => {
     try {
       const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/sessions/filtered/${uid}/${type}`);
+      console.log('Get Sessions Filtered: ', response);
       return response.data;
     } catch (err) {
       console.error(err)
