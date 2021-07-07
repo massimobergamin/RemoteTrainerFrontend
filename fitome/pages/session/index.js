@@ -58,6 +58,7 @@ function SessionList() {
 
     return (
         <div>
+            {sessions &&
             <div className="page_container">
                 {showButton()}
                 <div className="sessionList1">
@@ -69,6 +70,7 @@ function SessionList() {
                     {showRest()}
                 </div>
             </div>
+            }
             { currentUser.displayName==="trainer" ? (
 
                 <NavigationTrainer/>
