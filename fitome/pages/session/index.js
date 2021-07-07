@@ -21,14 +21,16 @@ function SessionList() {
         setLoading(true);
         if (currentUser.displayName === "trainer") {
             dispatch(getSessionsFiltered({uid:currentUser.uid, type:"trainer"}))
-                .then(() => setLoading(false))
+                .then(() => {
+                    setLoading(false);
+                })
                 .catch(() => setLoading(false));
         } else {
             dispatch(getSessionsFiltered({uid:currentUser.uid, type:"client"}))
               .then(() => setLoading(false))
               .catch(() => setLoading(false));
         }
-    }, [router]);
+    }, []);
 
     function showFirst () {
         if (sessions?.length == 0 || sessions == undefined) {

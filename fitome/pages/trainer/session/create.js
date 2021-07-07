@@ -7,6 +7,7 @@ import {useRouter} from 'next/router';
 import uuid from 'react-uuid';
 import { postSession } from '../../../redux/trainer'
 import Loader from '../../../components/loader';
+import { getSessionsFiltered } from '../../../redux/client';
 
 
 function create() {
@@ -34,7 +35,7 @@ function create() {
               .then(() => setLoading(false))
               .catch(() => setLoading(false));
         }
-    }, [currentUser, router]);
+    }, []);
 
     const listClients = () => {
         if (trainer.clients) {
@@ -64,9 +65,12 @@ function create() {
                 title: title,
             }
         }))
-          .then(() => setLoading(false))
+          .then(() => dispatch(getSessionsFiltered({uid:currentUser.uid, type:"trainer"})))
+          .then(() => {
+            router.push("/session")
+            setLoading(false)
+          })
           .catch(() => setLoading(false));
-        router.push("/session")
     }
 
     const findValue = (value) => {
