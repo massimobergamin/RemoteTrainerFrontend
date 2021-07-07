@@ -16,6 +16,7 @@ function SessionList() {
     const { currentUser } = useAuth();
     const sessions = useSelector(state => state.client.filteredSessions);
     const [loading, setLoading] = useState(false);
+    const [deleted, setDeleted] = useState(false);
 
     useEffect(()=> {
         setLoading(true);
@@ -36,7 +37,7 @@ function SessionList() {
         if (sessions?.length == 0 || sessions == undefined) {
             return <div><div>No session Available.</div><div>Please make a session with your trainer.</div></div>
         } else {
-            return <SessionCard class_name="first" usertype={`${currentUser.displayName}`} session={sessions[0]} />
+            return <SessionCard class_name="first" deleted={deleted} setDeleted={setDeleted} usertype={`${currentUser.displayName}`} session={sessions[0]} />
         }
     }
 
@@ -45,7 +46,7 @@ function SessionList() {
             return <div>No Upcoming Sessions Available.</div>
         } else {
             return sessions?.slice(1).map((session) => {
-                return <SessionCard key={uuid()} class_name="rest" usertype={`${currentUser.displayName}`} session={session} />
+                return <SessionCard key={uuid()} class_name="rest" deleted={deleted} setDeleted={setDeleted} usertype={`${currentUser.displayName}`} session={session} />
             })
         }
     }

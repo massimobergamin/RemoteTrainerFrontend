@@ -12,7 +12,7 @@ function WorkoutDetails({ workout }) {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    if (workout.reps && workout.sets) addRepsAndSets(0);
+    addRepsAndSets(0);
     if (workout.exercises.length === 1) {
       setPrevDisabled(true);
       setNextDisabled(true)
@@ -20,17 +20,19 @@ function WorkoutDetails({ workout }) {
   }, [])
 
   function addRepsAndSets(index) {
-    setExercise({
-      ...workout.exercises[index],
-      reps: workout.reps[index],
-      sets: workout.sets[index]
-    })
+    if (workout.reps && workout.sets)
+      setExercise({
+        ...workout.exercises[index],
+        reps: workout.reps[index],
+        sets: workout.sets[index]
+      });
+    else setExercise(workout.exercises[index]);
   }
 
   function handlePrevClick (e) {
     if (workout.exercises[index-1] !== undefined) {
       if (workout.exercises[index-2] === undefined) setPrevDisabled(true);
-      if (workout.reps && workout.sets) addRepsAndSets(index - 1);
+      addRepsAndSets(index - 1);
       setIndex(index-1);
       setNextDisabled(false);
     }
@@ -39,7 +41,7 @@ function WorkoutDetails({ workout }) {
   function handleNextClick (e) {
     if (workout.exercises[index+1] !== undefined) {
       if (workout.exercises[index+2] === undefined) setNextDisabled(true);
-      if (workout.reps && workout.sets) addRepsAndSets(index+1);
+      addRepsAndSets(index+1);
       setIndex(index+1);
       setPrevDisabled(false);
     }
