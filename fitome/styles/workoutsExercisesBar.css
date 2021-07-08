@@ -46,3 +46,10 @@
 .workouts_off {
   background-color: var(--primary)
 }
+
+.exerciseFormAndButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

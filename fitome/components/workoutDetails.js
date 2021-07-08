@@ -24,7 +24,8 @@ function WorkoutDetails({ workout }) {
       setExercise({
         ...workout.exercises[index],
         reps: workout.reps[index],
-        sets: workout.sets[index]
+        sets: workout.sets[index],
+        notes: workout.trainer_notes
       });
     else setExercise(workout.exercises[index]);
   }

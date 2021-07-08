@@ -100,8 +100,8 @@
 }
 
 .exercise_video {
-  width:100%;
-  height: auto;
+  height: 40vh;
+  width: 40vh;
   border: 0;
   border-radius: 5px;
 }

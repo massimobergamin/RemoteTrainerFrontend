@@ -88,11 +88,11 @@ const CreateWorkout = () => {
               <div key={exercise.id} className="workoutsExercises_cardCreate">
                 <button className="button_workout" onClick={() => handleClick(exercise.id, i)}>{buttonTextArr[i] || 'Add'}</button>
                 {exercise.media ?
-                  <video id="Exercise_Video" width="176" height="176" controls muted loop={true}>
+                  <video id="Exercise_Video" controls muted loop={true}>
                       <source src={exercise.media} type="video/mp4"/>
                       Your browser does not support HTML5 video.
                   </video> :
-                  <img src="/noVid.png" width="176" height="176"></img>}
+                  <img id="Exercise_Video" src="/noVid.png"></img>}
                 <div>{exercise.title}</div>
                 <div>{exercise.muscle_group}</div>
               </div>)}

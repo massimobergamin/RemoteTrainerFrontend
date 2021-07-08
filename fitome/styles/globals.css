@@ -83,8 +83,9 @@ p {
 #Exercise_Video { /*added*/
   border-radius: 5px;
   background-color: rgb(27, 27, 27);
-  object-fit:cover;
-  max-width: 100vw;
+  object-fit: cover;
+  height: 25vh;
+  width: 25vh;
 }
 
 ::-webkit-scrollbar {
