@@ -79,7 +79,7 @@ function Exercises() {
           </div></>: null}
         </div> : <h3>Looks like you don't have any exercises.</h3>}
       </div>
-      <NavigationTrainer></NavigationTrainer>
+      <NavigationTrainer/>
     </div>
   )
 }
