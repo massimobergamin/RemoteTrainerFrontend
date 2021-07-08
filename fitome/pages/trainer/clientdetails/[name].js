@@ -9,8 +9,6 @@ const ClientDetail = () => {
   const recentPlans = plans.filter(plan => Date.parse(plan.end_date) >= Date.now());
   const router = useRouter();
 
-  const displayDetails = recentPlans[0]?.details
-
   return (
     <div>
 
@@ -23,11 +21,12 @@ const ClientDetail = () => {
       {user.profile_picture ?
         <img src={user.profile_picture} className="profilePic"/>
         : null }
+        {console.log("PLANS:", recentPlans)}
       {recentPlans.length ? recentPlans.map(plan => (
         <div className="planCard trainer_clientview" key={plan.id}>
           <p className="planHeader">Plan:</p>
           <p className="planHeaderDate">{moment(plan.start_date).format('MMM DD') + "-" + moment(plan.end_date).format('MMM DD')}</p>
-          {displayDetails ? displayDetails.map(detail => (
+          {plan.details ? plan.details.map(detail => (
             <div className="single_card_container">
               <p className="dayTitle">{"Day: " + moment(detail.day).format('MMM DD')}</p>
               <div className="planContainer">
@@ -50,9 +49,9 @@ const ClientDetail = () => {
                   </div>
                   <div className="detailContainer">
                   <p className="trainerclientview_detaillabel">Reps</p>
-                  {detail.sets.map(set => (
+                  {detail.reps.map(rep => (
                     <div>
-                      <p>{set}</p>
+                      <p>{rep}</p>
                     </div>
                   ))}
                   </div>
