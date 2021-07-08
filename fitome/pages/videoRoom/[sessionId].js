@@ -8,7 +8,6 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 const Video = ({ peer }) => {
   const ref = useRef();
-  const { currentUser } = useAuth();
 
   useEffect(() => {
     peer.on("stream", stream => {
@@ -64,6 +63,7 @@ const VideoRoom = () => {
       })
 
       socketRef.current.on("user joined", payload => {
+        console.log("USER JOINED")
         const peer = addPeer(payload.signal, payload.callerID, stream);
         peersRef.current.push({
           peerID: payload.callerID,
@@ -293,11 +293,12 @@ const VideoRoom = () => {
   }
 
 
+  const { currentUser } = useAuth();
+
   return (
     <div>
       <video muted className="video_me" ref={userVideo} autoPlay playsInline />
       {peers.map((peer, index) => <Video key={index} peer={peer} />)}
-      { currentUser.displayName==="trainer" ?
         <div>
           <div className="timer_container">
           <CountdownCircleTimer
@@ -310,9 +311,10 @@ const VideoRoom = () => {
               ['#ee9b00', 0.33],
               ['#ca6702', 0.33],
             ]}
-          >
+            >
             { children }
           </CountdownCircleTimer>
+          { currentUser && currentUser.displayName==="trainer" ? <>
           <div className="timer_button_container">
             <button className="timer_button" onClick={handlePause} disabled={isEmpty()}>{isPlaying ? "Pause" : "Start"}</button>
             <button className="timer_button" onClick={handleReset}>{isEditing ? "Submit" : "Reset"}</button>
@@ -328,8 +330,9 @@ const VideoRoom = () => {
               <label className="timer_label">Sec</label>
             </div>
           </div>
+          </> : null }
         </div>
-      </div> : null }
+      </div> 
       <div className="endCall">
         <button type="button" onClick={hangUp} className="button_circle"><img src="/icons/call_end_white_24dp.svg"/></button>
     </div>

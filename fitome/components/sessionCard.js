@@ -56,7 +56,7 @@ function sessionCard({class_name, deleted, setDeleted, usertype, session}) {
             </div>
             <div className="sessionCard_right">
                 <div className="sessioncard_title">{session.title}</div>
-                <div>{`${Moment(session.startDate).format('LLL')}-${Moment(session.endDate).format('LT')}`}</div>
+                <div>{`${Moment.utc(session.startDate).format("LLL")}-${Moment(session.endDate).format('LT')}`}</div>
                 {usertype==="trainer" ?
                 <div><span className="exercise_subtitle">Client: </span>{`${session.users[1].first_name} ${session.users[1].last_name}`}</div>
                 :
