@@ -22,7 +22,16 @@ function Exercises() {
       .catch(() => setLoading(false));
   }, [])
 
-  if (loading) return <Loader/>;
+  if (loading) {
+    return (
+      <div>
+        <div className="loader_wrapper">
+          <Loader/>
+        </div>
+        <NavigationTrainer/>
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -71,7 +80,7 @@ function Exercises() {
           </div></>: null}
         </div> : <h3>Looks like you don't have any exercises.</h3>}
       </div>
-      <NavigationTrainer></NavigationTrainer>
+      <NavigationTrainer/>
     </div>
   )
 }

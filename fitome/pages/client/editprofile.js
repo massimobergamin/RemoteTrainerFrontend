@@ -22,7 +22,7 @@ const Editprofile = () => {
   if (loading) {
     return (
       <div>
-        <div className="loader_wrapper_100">
+        <div className="loader_wrapper">
           <Loader/>
         </div>
         <NavigationClient></NavigationClient>
