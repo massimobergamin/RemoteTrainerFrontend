@@ -29,9 +29,9 @@ function Details() {
           <div className="workout_addworkout" onClick={(e) => {
             setLoading(true);
             e.preventDefault();
-            dispatch(setSelectedExercise({}))
+            dispatch(setSelectedExercise({}));
             setLoading(false);
-            router.push('/trainer/exercises')
+            router.push('/trainer/exercises');
         }}><span className="workout_addworkout_span">{"< "}</span>Back</div>
         <div className="workoutsExercises_flexCol">
         <ExerciseDetails exercise={selectedExercise}></ExerciseDetails>

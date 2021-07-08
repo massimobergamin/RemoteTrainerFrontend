@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../../firebase/contextAuth';
@@ -10,7 +10,6 @@ import NavigationClient from '../../components/navigationBar/navigationClient';
 import Loader from '../../components/loader';
 
 function SessionList() {
-
     const router = useRouter();
     const dispatch = useDispatch();
     const { currentUser } = useAuth();
@@ -41,7 +40,7 @@ function SessionList() {
                     <div>Please make a session with your trainer.</div>}
                 </div>
         } else {
-            return <SessionCard class_name="first" deleted={deleted} setDeleted={setDeleted} usertype={`${currentUser.displayName}`} session={sessions[0]} />
+            return <SessionCard class_name="first" deleted={deleted} setDeleted={setDeleted} usertype={`${currentUser.displayName}`} session={sessions[0]}/>
         }
     }
 
@@ -50,7 +49,7 @@ function SessionList() {
             return <div>No Upcoming Sessions Available.</div>
         } else {
             return sessions?.slice(1).map((session) => {
-                return <SessionCard key={uuid()} class_name="rest" deleted={deleted} setDeleted={setDeleted} usertype={`${currentUser.displayName}`} session={session} />
+                return <SessionCard key={uuid()} class_name="rest" deleted={deleted} setDeleted={setDeleted} usertype={`${currentUser.displayName}`} session={session}/>
             })
         }
     }
@@ -108,4 +107,4 @@ function SessionList() {
     )
 }
 
-export default SessionList
+export default SessionList;

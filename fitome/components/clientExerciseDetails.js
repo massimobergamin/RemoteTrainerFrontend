@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 import ExerciseDetails from './exerciseDetails';
 
 const ClientExerciseDetails = ({ exercise }) => {
-  const [selectedEx, setSelectedEx] = useState({});
   const [selected, setSelected] = useState(false);
 
   const handleClick = (e) => {
@@ -20,19 +19,19 @@ const ClientExerciseDetails = ({ exercise }) => {
       :
       <div>
         <p>{exercise?.title}</p>
-        <div><b>Reps:</b> {exercise.reps}</div>
-        <div><b>Sets:</b> {exercise.sets}</div>
-        <div><b>Notes:</b> {exercise.notes}</div>
         {exercise?.media ?
          <video className="exercise_video" controls muted>
              <source src={exercise.media} type="video/mp4"/>
              Your browser does not support HTML5 video.
          </video> :
        <img className="exercise_video" src="/noVid.png"></img>}
+       <div><b>Reps:</b> {exercise.reps}</div>
+       <div><b>Sets:</b> {exercise.sets}</div>
+       {exercise.notes && <div><b>Notes:</b> {exercise.notes}</div>}
       </div>
      }
     </div>
   )
 }
 
-export default ClientExerciseDetails
+export default ClientExerciseDetails;

@@ -1,23 +1,7 @@
-.timer_input {
-  /* display: flex; */
-  /* flex-flow: column; */
-  /*width: 10vw;
-  margin: 8px;*/
-  /* font-size: 12px;
-  margin-top: 5px; */
-  /*justify-content: flex-end;
-  width: fit-content; */
-}
-
 .timer_container {
-  /* display: flex; */
   position: fixed;
-  /* flex-flow: column; */
   bottom: 25vh;
   right: 1vh;
-  /* align-items: right;
-  justify-content: flex-end; */
-  /* align-items: flex-end; */
 }
 
 .timer_label {
@@ -26,7 +10,7 @@
 
 .timer_button {
   color: rgb(255, 255, 255);
-  background-color:#303030a9;
+  background-color: #303030a9;
   border-radius: 10px;
   border: 0;
   margin: 1px;
@@ -35,26 +19,21 @@
   font-size: 10px;
 }
 
-.timer_button_container {
-  /* display: flex; */
-}
-
 .timer_time {
   font-weight: 700;
-  /* color:rgb(255, 137, 27); */
   font-size: 28px;
 }
 
 .firstInput {
   margin-right: 5px;
- }
+}
 
 .firstInput input {
- width: 30px;
- margin-right: 3px;
- border-radius: 10px;
- color: var(--fontColor);
- border: 1px solid var(--primary);
+  width: 30px;
+  margin-right: 3px;
+  border-radius: 10px;
+  color: var(--fontColor);
+  border: 1px solid var(--primary);
 }
 
 .secondInput input {

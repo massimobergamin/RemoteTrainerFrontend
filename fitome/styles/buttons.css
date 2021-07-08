@@ -7,7 +7,7 @@
     border-radius: 10px;
     color: white;
     font-size: 1em;
-    box-shadow:0 0 5px 3px rgba(0, 0, 0, 0.11);
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.11);
 }
 
 .button:hover {
@@ -34,14 +34,14 @@
 
 .carousel_button {
     border: 0;
-    background-color:rgba(148, 210, 201, 0.718) ;
+    background-color: rgba(148, 210, 201, 0.718) ;
     border-radius: 10px;
     color: white;
 }
 
 .carousel_button:disabled {
     border: 0;
-    background-color:rgba(88, 88, 88, 0.568) ;
+    background-color: rgba(88, 88, 88, 0.568) ;
     border-radius: 10px;
     color: grey
 }
@@ -54,7 +54,7 @@
     border: 0;
     border-radius: 10px;
     color: white;
-    box-shadow:0 0 5px 3px rgba(0, 0, 0, 0.11);
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.11);
 }
 
 .buttonCancel {
@@ -66,5 +66,5 @@
     border-radius: 10px;
     color: white;
     font-size: .72rem;
-    box-shadow:0 0 5px 3px rgba(0, 0, 0, 0.11);
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.11);
   }

@@ -1,7 +1,6 @@
-import React from 'react';
 import Link from 'next/link';
 
-const WorkoutsExercisesBar = ({landingpage1, landingpage2}) => {
+const WorkoutsExercisesBar = ({ landingpage1, landingpage2 }) => {
     return (
         <ul className="workoutsExercisesBar_container">
             <Link href="/trainer/workouts">

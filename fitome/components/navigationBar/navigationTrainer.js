@@ -1,4 +1,3 @@
-import React from 'react'
 import Link from 'next/link';
 
 const NavigationTrainer = () => {
@@ -28,4 +27,4 @@ const NavigationTrainer = () => {
     )
 }
 
-export default NavigationTrainer
+export default NavigationTrainer;

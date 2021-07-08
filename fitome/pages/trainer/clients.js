@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import { getUserById, getClients } from '../../redux/trainer'
-import { getUser } from '../../redux/client'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserById, getClients } from '../../redux/trainer';
+import { getUser } from '../../redux/client';
 import { useAuth } from '../../firebase/contextAuth';
 import NavigationTrainer from '../../components/navigationBar/navigationTrainer';
 import { useRouter } from 'next/router';
@@ -31,7 +31,7 @@ const Clients = () => {
     dispatch(getUser(uid))
       .then(() => {
         setLoading(false);
-        router.push(`./clientdetails/${value.first_name + value.last_name}`)
+        router.push(`./clientdetails/${value.first_name + value.last_name}`);
       }
       )
       .catch(() => setLoading(false));
@@ -39,17 +39,17 @@ const Clients = () => {
 
   const onChangeClient = (e) => {
     const { name, value } = e.target;
-    clientDetails(value.user_uid, value)
+    clientDetails(value.user_uid, value);
   }
 
   const clientList = () => {
-    if (clients) {
+    if (clients.length) {
       return clients.map((client)=> {
-        return <button className="button clients_button" onClick={() => onChangeClient({ target: {name: "client", value: client} })}>{client.first_name + ' ' + client.last_name}</button>
+        return <button className="button clients_button" key={client.user_uid} onClick={() => onChangeClient({ target: { name: "client", value: client } })}>{client.first_name + ' ' + client.last_name}</button>
       })
     }
     else {
-      alert('You have no clients. Please invite your clients using your invite code.')
+      return <h2>You have no clients. Please invite your clients using your invite code.</h2>
     }
   }
 
@@ -66,19 +66,19 @@ const Clients = () => {
 
   return (
     <div>
-    <div className="page_container">
-    <div className="workout_addworkout" onClick={(e) => {
-        e.preventDefault();
-        router.push('/trainer/createplan')
-      }}><span className="workout_addworkout_span">+ </span>Plan</div>
-    <h1>Client List</h1>
-      <div className="clients_list">
-    {clientList()}
+      <div className="page_container">
+      <div className="workout_addworkout" onClick={(e) => {
+          e.preventDefault();
+          router.push('/trainer/createplan')
+        }}><span className="workout_addworkout_span">+ </span>Plan</div>
+      <h1>Client List</h1>
+        <div className="clients_list">
+      {clientList()}
+        </div>
       </div>
+      <NavigationTrainer/>
     </div>
-    <NavigationTrainer/>
-  </div>
   )
 }
 
-export default Clients
+export default Clients;

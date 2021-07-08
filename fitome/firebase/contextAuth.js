@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect, createContext } from 'react'
-import { auth } from './config'
+import React, { useContext, useState, useEffect, createContext } from 'react';
+import { auth } from './config';
 
 const AuthContext = createContext();
 
@@ -12,12 +12,12 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   async function signUp(email, password, type) {
-    let userInfo = await auth.createUserWithEmailAndPassword(email, password)
+    let userInfo = await auth.createUserWithEmailAndPassword(email, password);
     auth.currentUser.updateProfile({ displayName: type });
     return userInfo;
   }
 
-  function login(email, password) {
+  function login (email, password) {
     return auth.signInWithEmailAndPassword(email,password);
   }
 
@@ -25,15 +25,15 @@ export function AuthProvider({ children }) {
     return auth.signOut();
   }
 
-  function resetPassword(email) {
+  function resetPassword (email) {
     return auth.sendPasswordResetEmail(email);
   }
 
-  function updateEmail(email) {
+  function updateEmail (email) {
     return currentUser.updateEmail(email);
   }
 
-  function updatePassword(password) {
+  function updatePassword (password) {
     return currentUser.updatePassword(password);
   }
 

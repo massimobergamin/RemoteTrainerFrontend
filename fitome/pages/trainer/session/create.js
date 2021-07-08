@@ -1,21 +1,19 @@
-import React, {useState, useEffect} from 'react'
-import NavigationTrainer from '../../../components/navigationBar/navigationTrainer'
-import {useDispatch, useSelector} from 'react-redux'
+import { useState, useEffect } from 'react';
+import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
+import { useDispatch, useSelector } from 'react-redux';
 import { getClients } from '../../../redux/trainer';
-import {useAuth} from '../../../firebase/contextAuth'
-import {useRouter} from 'next/router';
+import { useAuth } from '../../../firebase/contextAuth';
+import { useRouter } from 'next/router';
 import uuid from 'react-uuid';
-import { postSession } from '../../../redux/trainer'
+import { postSession } from '../../../redux/trainer';
 import Loader from '../../../components/loader';
 import { getSessionsFiltered } from '../../../redux/client';
 
-
-function create() {
+function Create () {
     const { currentUser } = useAuth();
     const router = useRouter();
     const trainer = useSelector(state => state.trainer);
     const dispatch = useDispatch();
-    const [currentTime, setCurrentTime] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const initialState = {
@@ -26,7 +24,7 @@ function create() {
         meeting_id: uuid(),
     }
 
-    const[formState, setFormState] = useState(initialState)
+    const [formState, setFormState] = useState(initialState);
 
     useEffect(()=> {
         setLoading(true);
@@ -52,8 +50,8 @@ function create() {
         setLoading(true);
         e.preventDefault();
         let endDate = new Date(formState.startDate);
-        endDate.setHours(formState.endDate.split(":")[0])
-        endDate.setMinutes(formState.endDate.split(":")[1])
+        endDate.setHours(formState.endDate.split(":")[0]);
+        endDate.setMinutes(formState.endDate.split(":")[1]);
         let title = formState.title==="" ? "Workout" : formState.title;
         dispatch(postSession({
             trainer_uid:currentUser.uid,
@@ -65,7 +63,7 @@ function create() {
                 title: title,
             }
         }))
-          .then(() => dispatch(getSessionsFiltered({uid:currentUser.uid, type:"trainer"})))
+          .then(() => dispatch(getSessionsFiltered({ uid:currentUser.uid, type:"trainer" })))
           .then(() => {
             router.push("/session")
             setLoading(false)
@@ -74,20 +72,20 @@ function create() {
     }
 
     const findValue = (value) => {
-            for (let i=0; i<trainer.clients.length; i++) {
-                let name = trainer.clients[i].first_name+' '+trainer.clients[i].last_name;
-                if (name===value){
-                    setFormState({...formState, client:trainer.clients[i]})
-                    break;
-                } else {setFormState({...formState,client:{}})}
-            }
+        for (let i=0; i<trainer.clients.length; i++) {
+            let name = trainer.clients[i].first_name + ' ' + trainer.clients[i].last_name;
+            if (name === value){
+                setFormState({ ...formState, client:trainer.clients[i] });
+                break;
+            } else setFormState({ ...formState, client: {} });
+        }
     }
 
     function getTime() {
         let sessionDate = new Date(formState.startDate);
         let hour  = sessionDate.getHours();
         let mins = sessionDate.getMinutes();
-        return(hour+":"+mins)
+        return (hour + ":" + mins);
     }
 
     function getDate () {
@@ -118,10 +116,9 @@ function create() {
         <div className="page_container">
             <div className="createprofile_wrapper">
                 <div className="page_title">Create Training Session</div>
-
                 <form className="sessionCreate_form" onSubmit={submitHandler}>
                 <label htmlFor="sessionTitle">Session Purpose: <br/>
-                    <input className="sessionCreate_field" type="text" id="sessionTitle" name="sessionTitle" placeholder="Workout" onChange={(e)=>setFormState({...formState, title: e.target.value})}/>
+                    <input className="sessionCreate_field" type="text" id="sessionTitle" name="sessionTitle" placeholder="Workout" onChange={(e)=>setFormState({ ...formState, title: e.target.value })}/>
                     <div className="sessionForm_announcement">* Defaults to "Workout" if session purpose is blank.</div>
                 </label>
                 <label htmlFor="listOfClients">Select a Client: <br/>
@@ -133,14 +130,13 @@ function create() {
                         name="listOfClients" />
                     <datalist id="clientList" >
                         {listClients()}
-
                     </datalist>
                     </label>
                 <label htmlFor="startTime">Session Start Date: <br/>
-                    <input className="sessionCreate_dateTime" type="datetime-local" id="startTime" min={getDate()} onChange={(e)=>setFormState({...formState, startDate:e.target.value})} name="startTime"/>
+                    <input className="sessionCreate_dateTime" type="datetime-local" id="startTime" min={getDate()} onChange={(e)=>setFormState({ ...formState, startDate:e.target.value })} name="startTime"/>
                 </label>
                 <label htmlFor="endTime">Session End Time: <br/>
-                    <input className="sessionCreate_field" type="time" id="endTime" name="endTime"  disabled={formState.startDate===""} min={getTime()} max="23:59"
+                    <input className="sessionCreate_field" type="time" id="endTime" name="endTime"  disabled={formState.startDate === ""} min={getTime()} max="23:59"
                     onChange={(e)=>{
                         setFormState({...formState, endDate:e.target.value})
                     }
@@ -148,7 +144,7 @@ function create() {
                 </label>
                 <div>
                     <button type="submit" className="button"
-                    disabled={ Object.keys(formState.client).length===0 || formState.startDate==="" || formState.endDate===""}>Create Session</button>
+                    disabled={ Object.keys(formState.client).length === 0 || formState.startDate === "" || formState.endDate === ""}>Create Session</button>
                     <br/>
                     <button className="buttonCancel" onClick={() => {
                         router.push('/session');
@@ -157,9 +153,9 @@ function create() {
                 </form>
             </div>
         </div>
-            <NavigationTrainer />
+            <NavigationTrainer/>
         </div>
     )
 }
 
-export default create
+export default Create;

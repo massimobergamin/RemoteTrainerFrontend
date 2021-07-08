@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../firebase/contextAuth';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import NavigationClient from '../../components/navigationBar/navigationClient';
 import { getUser } from '../../redux/client';
 import UpdateClientProfileForm from '../../components/updateClientProfileForm';
 import Loader from '../../components/loader';
 
 
-const Editprofile = () => {
+const EditProfile = () => {
   const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
@@ -40,4 +40,4 @@ const Editprofile = () => {
   )
 }
 
-export default Editprofile
+export default EditProfile;

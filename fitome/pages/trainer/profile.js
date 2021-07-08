@@ -43,7 +43,7 @@ const Profile = () => {
   return (
     <div>
       <div className="page_container">
-            <div className="page_title">{user.first_name + " " + user.last_name}</div>
+        <div className="page_title">{user.first_name + " " + user.last_name}</div>
         <div className="createprofile_wrapper">
           <div className="profile_top">
             <div className="profilewrapper">
@@ -67,10 +67,8 @@ const Profile = () => {
             <div><b>Invite code:</b><br/>{invite_code?.invite_code}</div>
             <div><b>Birthday:</b><br/>{userBirthday}</div>
             <div><b>Height:</b><br/>{user.height} cm</div>
-
             <div><b>Weight:</b><br/>{user.weight} lbs</div>
             <div><b>Sex:</b><br/>{user.sex}</div>
-
             <a className="profile_signout_small" style={{fontSize: "0.9rem", color: "#585858"}} href="" onClick={(e) => {
               e.preventDefault();
               logout();

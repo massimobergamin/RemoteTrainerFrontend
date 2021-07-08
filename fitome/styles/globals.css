@@ -18,14 +18,14 @@
 :root {
   /* Colors: */
   --primary: #94d2c9;
-  --primary-accent: rgb(108, 175, 166); /*added this to use for workoutsExercisesBar, feel free to change*/
+  --primary-accent: rgb(108, 175, 166);
   --secondary: #ee9b00;
   --accent: #ca6702;
   --fontColor: #303030;
   /* Font Sizes: */
   --bold: 500;
   --regular: 300;
-  /*button: */
+  /* Button: */
   --disabled: #585858;
 }
 
@@ -47,7 +47,7 @@ a {
 
 * {
   box-sizing: border-box;
-  text-align: center; /*added this*/
+  text-align: center;
 }
 
 .page_container {
@@ -55,7 +55,7 @@ a {
   height: 94vh;
   width: 100vw;
   max-height: 94vh;
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
 
 h1,
@@ -69,18 +69,18 @@ p {
 }
 
 .page_title {
-  font-size:2em;
+  font-size: 2em;
   font-weight: 700;
 }
 
 .page_subtitle {
   font-size: 1em;
   line-height: 1.5em;
-  margin:0;
+  margin: 0;
   font-weight: 300;
 }
 
-#Exercise_Video { /*added*/
+#Exercise_Video {
   border-radius: 5px;
   background-color: rgb(27, 27, 27);
   object-fit: cover;

@@ -48,7 +48,7 @@ export default function Home() {
      } catch (err) {
        setLoading(false);
        const error = document.getElementById("error");
-       console.log(err);
+       console.log('An error has occurred.');
        setError(err.message);
        setFormState(initialState);
        error.style.display="block";
@@ -70,7 +70,7 @@ export default function Home() {
             <link rel="icon" href="/favicon.ico" />
             <link rel="manifest" href="/manifest.json" />
             <meta name="theme-color" content="#317EFB"/>
-            <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
+            <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'/>
             <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"></link>
           </Head>
           <main className="initial_background">
@@ -84,18 +84,18 @@ export default function Home() {
               <input type="email"
                 name="email"
                 value={formState.email}
-                onChange={(e) => setFormState({...formState, email: e.target.value})}
+                onChange={(e) => setFormState({ ...formState, email: e.target.value })}
               />
               <label className="signup_input" htmlFor="password">Password:</label>
               <input type="password"
               name="password"
               value={formState.password}
-              onChange={(e) => setFormState({...formState, password: e.target.value})}
+              onChange={(e) => setFormState({ ...formState, password: e.target.value })}
               />
             </form>
-              <button type="button" 
+              <button type="button"
               className="signup_button"
-              disabled={formState.password===""||formState.email===""}
+              disabled={formState.password === "" || formState.email === ""}
               onClick={loginHandler}>LOGIN</button>
             <p className="signup_account">Don't have an account? <Link href="/signup"><a><span className="signup_account_span">Sign up.</span></a></Link></p>
           </div>

@@ -3,55 +3,50 @@ import axios from 'axios';
 
 const URL = 'https://remotetrainerserver.herokuapp.com';
 
-//user routes
 export const postUser = createAsyncThunk(
   'trainer/postUserStatus',
   async (userData) => {
     try {
-      console.log("POSTING", userData)
       const response = await axios.post(`${URL}/users`, userData);
-      console.log("RESPONSE DATA:", response.data)
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
-  );
+);
 
 export const updateUser = createAsyncThunk(
-    'trainer/updateUserStatus',
-    async ({uid, userData}) => {
-      try {
-        console.log('in thunk', uid, userData)
-        const response = await axios.put(`${URL}/users/${uid}`, userData);
-        return response.data;
-      } catch (error) {
-        console.log(error);
-      }
+  'trainer/updateUserStatus',
+  async ({ uid, userData }) => {
+    try {
+      const response = await axios.put(`${URL}/users/${uid}`, userData);
+      return response.data;
+    } catch (error) {
+      console.log('An error has occurred.');
     }
-  );
+  }
+);
 
 export const getUserById = createAsyncThunk(
-    'trainer/getUserByIdStatus',
-    async (uid) => {
-      try {
-        const response = await axios.get(`${URL}/users/${uid}-trainer`);
-        console.log("REDUX, get user info:", response.data)
-        return response.data;
-      } catch (error) {
-        console.log(error);
-      }
+  'trainer/getUserByIdStatus',
+  async (uid) => {
+    try {
+      const response = await axios.get(`${URL}/users/${uid}-trainer`);
+      return response.data;
+    } catch (error) {
+      console.log('An error has occurred.');
     }
-  );
+  }
+);
 
 export const postClient = createAsyncThunk(
   'trainer/postClientStatus',
-  async ({trainer_uid, client_uid}) => {
+  async ({ trainer_uid, client_uid }) => {
     try {
       const response = await axios.post(`${URL}/clients/${trainer_uid}-${client_uid}`);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
@@ -61,10 +56,9 @@ export const getClients= createAsyncThunk(
   async (uid, thunkAPI) => {
     try {
       const response = await axios.get(`${URL}/clients/${uid}`);
-      console.log('Redux Response: ', response);
-      return response.data.sort((a,b)=> (a.first_name+" "+a.last_name).localeCompare(b.first_name+" "+b.last_name));
+      return response.data.sort((a,b) => (a.first_name + " " + a.last_name).localeCompare(b.first_name + " " + b.last_name));
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
@@ -73,11 +67,10 @@ export const postInviteCode = createAsyncThunk(
   'trainer/postInviteCodeStatus',
   async (inviteState) => {
     try {
-      console.log("in redux", inviteState)
       const response = await axios.post(`${URL}/users/invite/${inviteState.user_uid}`, inviteState);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
@@ -89,20 +82,19 @@ export const getInviteCode = createAsyncThunk(
       const response = await axios.get(`${URL}/users/invite/${inviteState}`);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
 
-//session routes
 export const postSession = createAsyncThunk(
   'trainer/postSessionStatus',
-  async ({trainer_uid, client_uid, sessionData}) => {
+  async ({ trainer_uid, client_uid, sessionData }) => {
     try {
       const response = await axios.post(`${URL}/users/sessions/${trainer_uid}-${client_uid}`, sessionData);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
@@ -112,10 +104,9 @@ export const deleteSession = createAsyncThunk (
   async (meeting_id) => {
     try {
       const response = await axios.delete(`${URL}/users/sessions/${meeting_id}`);
-      console.log(response);
-      return response.data
+      return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
@@ -127,7 +118,7 @@ export const updateSession = createAsyncThunk(
       const response = await axios.put(`${URL}/users/sessions/${meeting_id}`);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
@@ -136,12 +127,10 @@ export const getSessionsTrainer = createAsyncThunk(
   'trainer/getSessionsStatus',
   async (uid) => {
     try {
-      console.log("UID", uid)
       const response = await axios.get(`${URL}/users/sessions/trainer-${uid}`);
-      console.log(response.data)
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
@@ -153,24 +142,23 @@ export const getSession = createAsyncThunk(
       const response = await axios.get(`${URL}/users/sessions/${meeting_id}`);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
 
 export const deleteTrainerSession = createAsyncThunk(
   'trainer/deleteTrainerSessionStatus',
-  async ({meeting_id, uid}) => {
+  async ({ meeting_id, uid }) => {
     try {
       const response = await axios.delete(`${URL}/users/sessions/${meeting_id}/${uid}/trainer`);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
 
-//plans routes
 export const postPlan = createAsyncThunk(
   'trainer/postPlanStatus',
   async (planData) => {
@@ -178,49 +166,47 @@ export const postPlan = createAsyncThunk(
       const response = await axios.post(`${URL}/plans/${planData.trainer_uid}-${planData.client_uid}`, planData);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
 
 export const updatePlan = createAsyncThunk(
   'trainer/updatePlanStatus',
-  async ({plan_id, planData}) => {
+  async ({ plan_id, planData }) => {
     try {
       const response = await axios.put(`${URL}/plans/${plan_id}`, planData);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
 
 export const getPlan = createAsyncThunk(
   'trainer/getPlanStatus',
-  async ({client_uid, start_date}) => {
+  async ({ client_uid, start_date }) => {
     try {
       const response = await axios.get(`${URL}/plans/${client_uid}-${start_date}`);
-      console.log(response.data)
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
 
 export const updatePlanNotes = createAsyncThunk(
   'trainer/updatePlanNotesStatus',
-  async ({plan_id, planData}) => {
+  async ({ plan_id, planData }) => {
     try {
       const response = await axios.put(`${URL}/plans/notes/${plan_id}`, planData);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
 
-//Workouts & Exercises
 export const getWorkout = createAsyncThunk(
   'trainer/getWorkoutStatus',
   async (trainer_uid) => {
@@ -228,7 +214,7 @@ export const getWorkout = createAsyncThunk(
       const response = await axios.get(`${URL}/workouts/${trainer_uid}`);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
@@ -240,31 +226,31 @@ export const getExercise = createAsyncThunk(
       const response = await axios.get(`${URL}/exercises/${trainer_uid}`);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
 
 export const postWorkout = createAsyncThunk(
   'trainer/postWorkoutStatus',
-  async ({trainer_uid, workoutData}) => {
+  async ({ trainer_uid, workoutData }) => {
     try {
       const response = await axios.post(`${URL}/workouts/${trainer_uid}`, workoutData);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
 
 export const postExercise = createAsyncThunk(
   'trainer/postExerciseStatus',
-  async ({trainer_uid, exerciseData}) => {
+  async ({ trainer_uid, exerciseData }) => {
     try {
       const response = await axios.post(`${URL}/exercises/custom/${trainer_uid}`, exerciseData);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('An error has occurred.');
     }
   }
 );
@@ -272,21 +258,7 @@ export const postExercise = createAsyncThunk(
 export const trainerSlice = createSlice({
   name: 'trainer',
   initialState: {
-    user: {
-      // user_uid: "",
-      // username: "",
-      // email: "",
-      // last_login: 0,
-      // first_name: "",
-      // last_name: "",
-      // profile_picture: "",
-      // sex: "",
-      // weight: 0,
-      // height: 0,
-      // birthday: 0,
-      // type: '',
-      // sex: ''
-    },
+    user: {},
     invite_code: {},
     exercises: [],
     workouts: [],
@@ -323,23 +295,7 @@ export const trainerSlice = createSlice({
     [getUserById.fulfilled] : (state, action) => {
       state.sessions = action.payload.sessions;
       delete action.payload.sessions;
-      console.log('action.payload', action.payload);
-
       state.user = action.payload;
-      console.log('state.user', state.user);
-      // state.user.user_uid = action.payload.user_uid;
-      // state.user.username  = action.payload.username;
-      // state.user.email = action.payload.email;
-      // state.user.last_login = action.payload.last_login;
-      // state.user.first_name = action.payload.first_name;
-      // state.user.last_name = action.payload.last_name;
-      // state.user.profile_picture = action.payload.profile_picture;
-      // state.user.sex = action.payload.sex;
-      // state.user.weight = action.payload.weight;
-      // state.user.height = action.payload.height;
-      // state.user.birthday = action.payload.birthday;
-      // state.user.type = action.payload.type;
-      // state.user.sex = action.payload.sex;
     },
     [postClient.fulfilled] : (state, action) => {
       state.clients.push(action.payload);
@@ -370,7 +326,6 @@ export const trainerSlice = createSlice({
       state.singleSession = action.payload;
     },
     [postPlan.fulfilled] : (state, action) => {
-      console.log("PAYLOAD", action.payload)
       state.plans.push(action.payload);
     },
     [updatePlan.fulfilled] : (state, action) => {

@@ -1,30 +1,29 @@
-import React from 'react';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import Moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { deleteTrainerSession } from '../redux/trainer';
 import { deleteClientSession, getSessionsFiltered } from '../redux/client';
 import { useSelector } from 'react-redux';
 
-function sessionCard({class_name, deleted, setDeleted, usertype, session}) {
+function SessionCard({ class_name, deleted, setDeleted, usertype, session }) {
     const router = useRouter();
     const dispatch = useDispatch();
     const trainerInfo = useSelector(state => state.trainer);
     const clientInfo = useSelector(state => state.client);
 
     function joinCallHandler () {
-        router.push(`/videoRoom/${session.meeting_id}`)
+        router.push(`/videoRoom/${session.meeting_id}`);
     }
 
     function showProfilePicture () {
         if (usertype === "trainer") {
             if (session.users[0].profile_picture) {
-                return <img className="sessionCard_profilepicture" src={session.users[1].profile_picture} />
+                return <img className="sessionCard_profilepicture" src={session.users[1].profile_picture}/>
             }
             return <img className="sessionCard_profilepicture" src="/emptyprofile.png"/>
         } else {
             if (session.users[1].profile_picture) {
-                return <img className="sessionCard_profilepicture" src={session.users[0].profile_picture} />
+                return <img className="sessionCard_profilepicture" src={session.users[0].profile_picture}/>
             }
             return <img className="sessionCard_profilepicture" src="/emptyprofile.png"/>
         }
@@ -40,13 +39,13 @@ function sessionCard({class_name, deleted, setDeleted, usertype, session}) {
 
     function deleteHandler () {
         if (usertype === 'trainer')
-            dispatch(deleteTrainerSession({meeting_id: session.meeting_id, uid: trainerInfo.user.user_uid}))
+            dispatch(deleteTrainerSession({ meeting_id: session.meeting_id, uid: trainerInfo.user.user_uid }))
                 .then(() => setDeleted(true))
-                .then(() => dispatch(getSessionsFiltered({uid: trainerInfo.user.user_uid, type:"trainer"})))
+                .then(() => dispatch(getSessionsFiltered({ uid: trainerInfo.user.user_uid, type:"trainer" })));
         else
-            dispatch(deleteClientSession({meeting_id: session.meeting_id, uid: clientInfo.user.user_uid}))
+            dispatch(deleteClientSession({ meeting_id: session.meeting_id, uid: clientInfo.user.user_uid }))
                 .then(() => setDeleted(true))
-                .then(() => dispatch(getSessionsFiltered({uid: clientInfo.user.user_uid, type:"client"})));
+                .then(() => dispatch(getSessionsFiltered({ uid: clientInfo.user.user_uid, type:"client" })));
     }
 
     return (
@@ -68,4 +67,4 @@ function sessionCard({class_name, deleted, setDeleted, usertype, session}) {
     )
 }
 
-export default sessionCard
+export default SessionCard;

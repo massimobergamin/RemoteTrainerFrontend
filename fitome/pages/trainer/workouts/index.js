@@ -42,7 +42,6 @@ function Workouts() {
         }}><span className="workout_addworkout_span">+ </span>Workout</div>
         {workouts[0] ? workouts.map(workout =>
           <div key={workout.id} className="workoutsExercises_largeCard">
-
             <div className="workout_title">{workout.title}</div>
             <div className="workoutsExercises_scroll">
               {workout.exercises && workout.exercises.map(exercise =>

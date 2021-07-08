@@ -6,7 +6,7 @@
 .sessionCreate_form {
     z-index: 4;
     width: 100%;
-    margin-top:20px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -76,7 +76,6 @@
     border: 3px solid var(--secondary);
     padding: 2vw;
     height: fit-content;
-    /* height: 35vw; */
     max-height: 100px;
     width: 60vw;
     max-width: 500px;

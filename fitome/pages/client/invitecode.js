@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
-import {useAuth} from '../../firebase/contextAuth';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAuth } from '../../firebase/contextAuth';
+import { useDispatch } from 'react-redux';
 import { getTrainerByCode } from '../../redux/client';
 import { postClient } from '../../redux/trainer';
 import Loader from '../../components/loader';
-
 
 const TrainerCode = () => {
   const [input, setInput] = useState('');
@@ -14,7 +13,7 @@ const TrainerCode = () => {
   const router = useRouter();
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
-  
+
 
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -37,9 +36,9 @@ const TrainerCode = () => {
           alert('Trainer does not exist...');
         }
       }).catch(error => {
-        setLoading(false); 
+        setLoading(false);
         console.error(error);
-        alert('Trainer does not exist...'); 
+        alert('Trainer does not exist...');
       });
   };
 
@@ -60,11 +59,11 @@ const TrainerCode = () => {
         <img className="initial_logo" src="/fitome_orange.png"/>
         <div className="signup_code_title">Please enter your trainer's invite code below:</div>
         <label className="signup_input" htmlFor="code">Trainer's Code:</label>
-        < input  className="trainercode_input" type="text" name="code" value={input} onChange={handleChange}></input>
+        < input className="trainercode_input" type="text" name="code" value={input} onChange={handleChange}></input>
         <button className="signup_button" type="button" onClick={handleSubmit}>Connect</button>
       </div>
     </div>
   )
 }
 
-export default TrainerCode
+export default TrainerCode;

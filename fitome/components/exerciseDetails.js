@@ -1,9 +1,7 @@
-import {  } from 'react';
-
 function ExerciseDetails({ exercise }) {
   return (
     <div className="workoutsExercises_card">
-      <div  className="workout_title">{exercise.title}</div>
+      <div className="workout_title">{exercise.title}</div>
       {exercise.media ?
         <video className="exercise_video" controls muted loop={true}>
             <source src={exercise.media} type="video/mp4"/>
