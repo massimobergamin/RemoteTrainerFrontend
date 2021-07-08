@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import {socket} from '../../lib/socket';
 import Peer from "simple-peer";
+import { useAuth } from '../../firebase/contextAuth';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 
@@ -62,6 +63,7 @@ const VideoRoom = () => {
       })
 
       socketRef.current.on("user joined", payload => {
+        console.log("USER JOINED")
         const peer = addPeer(payload.signal, payload.callerID, stream);
         peersRef.current.push({
           peerID: payload.callerID,
@@ -118,7 +120,7 @@ const VideoRoom = () => {
         ...prev,
         [peerTimerInputName]: peerTimerInputValue,
       }));
-      console.log('parsed data line 132: ', JSON.parse(data));
+      //console.log('parsed data line 132: ', JSON.parse(data));
     });
     return peer;
   }
@@ -291,42 +293,46 @@ const VideoRoom = () => {
   }
 
 
+  const { currentUser } = useAuth();
+
   return (
     <div>
       <video muted className="video_me" ref={userVideo} autoPlay playsInline />
       {peers.map((peer, index) => <Video key={index} peer={peer} />)}
-      <div>
-      <div className="timer_container">
-      <CountdownCircleTimer
-        size={125}
-        key={reset}
-        isPlaying={isPlaying}
-        duration={newTimer}
-        colors={[
-          ['#94d2c9', 0.33],
-          ['#ee9b00', 0.33],
-          ['#ca6702', 0.33],
-        ]}
-      >
-        { children }
-      </CountdownCircleTimer>
-      <div className="timer_button_container">
-        <button className="timer_button" onClick={handlePause} disabled={isEmpty()}>{isPlaying ? "Pause" : "Start"}</button>
-        <button className="timer_button" onClick={handleReset}>{isEditing ? "Submit" : "Reset"}</button>
-        <button className="timer_button" onClick={handleEdit}>Edit</button>
-      </div>
-      <div className="timer_input" style={{ display: isEditing ? "flex" : "none" }}>
-        <div className="firstInput">
-          <input type="number" min="0" name="minutes" value={timerInput.minutes} onChange={handleChange}></input>
-          <label className="timer_label">Min</label>
+        <div>
+          <div className="timer_container">
+          <CountdownCircleTimer
+            size={125}
+            key={reset}
+            isPlaying={isPlaying}
+            duration={newTimer}
+            colors={[
+              ['#94d2c9', 0.33],
+              ['#ee9b00', 0.33],
+              ['#ca6702', 0.33],
+            ]}
+            >
+            { children }
+          </CountdownCircleTimer>
+          { currentUser && currentUser.displayName==="trainer" ? <>
+          <div className="timer_button_container">
+            <button className="timer_button" onClick={handlePause} disabled={isEmpty()}>{isPlaying ? "Pause" : "Start"}</button>
+            <button className="timer_button" onClick={handleReset}>{isEditing ? "Submit" : "Reset"}</button>
+            <button className="timer_button" onClick={handleEdit}>Edit</button>
+          </div>
+          <div className="timer_input" style={{ display: isEditing ? "flex" : "none" }}>
+            <div className="firstInput">
+              <input type="number" min="0" name="minutes" value={timerInput.minutes} onChange={handleChange}></input>
+              <label className="timer_label">Min</label>
+            </div>
+            <div className="secondInput">
+              <input type="number" min="0" name="seconds" value={timerInput.seconds} onChange={handleChange}></input>
+              <label className="timer_label">Sec</label>
+            </div>
+          </div>
+          </> : null }
         </div>
-        <div className="secondInput">
-          <input type="number" min="0" name="seconds" value={timerInput.seconds} onChange={handleChange}></input>
-          <label className="timer_label">Sec</label>
-        </div>
-      </div>
-    </div>
-      </div>
+      </div> 
       <div className="endCall">
         <button type="button" onClick={hangUp} className="button_circle"><img src="/icons/call_end_white_24dp.svg"/></button>
     </div>

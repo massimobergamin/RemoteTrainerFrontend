@@ -21,6 +21,7 @@ const ClientDetail = () => {
       {user.profile_picture ?
         <img src={user.profile_picture} className="profilePic"/>
         : null }
+        {console.log("PLANS:", recentPlans)}
       {recentPlans.length ? recentPlans.map(plan => (
         <div className="planCard trainer_clientview" key={plan.id}>
           <p className="planHeader">Plan:</p>
