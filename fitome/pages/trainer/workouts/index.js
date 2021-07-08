@@ -42,19 +42,19 @@ function Workouts() {
         }}><span className="workout_addworkout_span">+ </span>Workout</div>
         {workouts[0] ? workouts.map(workout =>
           <div key={workout.id} className="workoutsExercises_largeCard">
-            
+
             <div className="workout_title">{workout.title}</div>
             <div className="workoutsExercises_scroll">
               {workout.exercises && workout.exercises.map(exercise =>
                 <div key={exercise.id} className="workoutsExercises_cards">
                     {exercise.media ?
                     <div className="workout_video">
-                      <video id="Exercise_Video" width="176" height="176" controls muted loop={true}>
+                      <video id="Exercise_Video" controls muted loop={true}>
                           <source src={exercise.media} type="video/mp4"/>
                           Your browser does not support HTML5 video.
                       </video>
                       </div> :
-                    <img src="/noVid.png" width="176" height="176"></img>}
+                    <img id="Exercise_Video" src="/noVid.png"></img>}
                   <div>{exercise.title}</div>
                 </div>)}
               </div>

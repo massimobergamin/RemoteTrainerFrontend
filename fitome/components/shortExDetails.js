@@ -10,16 +10,16 @@ function shortExDetails({ exercise }) {
   const dispatch = useDispatch();
 
   if (loading) return <Loader/>;
-  
+
   return (
     <div className="workoutsExercises_cards">
-      
+
         {exercise.media ?
-          <video id="Exercise_Video" width="176" height="176" controls muted loop={true}>
+          <video id="Exercise_Video" controls muted loop={true}>
               <source src={exercise.media} type="video/mp4"/>
               Your browser does not support HTML5 video.
           </video> :
-        <img src="/noVid.png" width="176" height="176"></img>}
+        <img id="Exercise_Video" src="/noVid.png"></img>}
         <p className="exerciselist_title">{exercise.title}</p>
         <button className="button_workout" onClick={() => {
         setLoading(true);

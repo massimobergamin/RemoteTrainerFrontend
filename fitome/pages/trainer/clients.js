@@ -26,17 +26,20 @@ const Clients = () => {
 
   const { clients } = useSelector(state => state.trainer);
 
-  const clientDetails = (uid) => {
+  const clientDetails = (uid, value) => {
     setLoading(true);
     dispatch(getUser(uid))
-      .then(() => setLoading(false))
+      .then(() => {
+        setLoading(false);
+        router.push(`./clientdetails/${value.first_name + value.last_name}`)
+      }
+      )
       .catch(() => setLoading(false));
   }
 
   const onChangeClient = (e) => {
     const { name, value } = e.target;
-    clientDetails(value.user_uid)
-    router.push(`./clientdetails/${value.first_name + value.last_name}`)
+    clientDetails(value.user_uid, value)
   }
 
   const clientList = () => {

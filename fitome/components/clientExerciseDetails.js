@@ -20,14 +20,15 @@ const ClientExerciseDetails = ({ exercise }) => {
       :
       <div>
         <p>{exercise?.title}</p>
-        <h5>Reps: {exercise.reps}</h5>
-        <h5>Sets: {exercise.sets}</h5>
+        <div><b>Reps:</b> {exercise.reps}</div>
+        <div><b>Sets:</b> {exercise.sets}</div>
+        <div><b>Notes:</b> {exercise.notes}</div>
         {exercise?.media ?
-         <video id="Exercise_Video" width="176" height="176" controls muted>
+         <video className="exercise_video" controls muted>
              <source src={exercise.media} type="video/mp4"/>
              Your browser does not support HTML5 video.
          </video> :
-       <img src="/noVid.png" width="176" height="176"></img>}
+       <img className="exercise_video" src="/noVid.png"></img>}
       </div>
      }
     </div>
