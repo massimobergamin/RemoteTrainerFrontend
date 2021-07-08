@@ -11,7 +11,7 @@ import Loader from '../../../components/loader';
 function Exercises() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { user, exercises, armExs, legExs, backExs, chestExs, coreExs, shoulderExs, miscExs } = useSelector(state => state.trainer);
+  const { exercises, armExs, legExs, backExs, chestExs, coreExs, shoulderExs, miscExs } = useSelector(state => state.trainer);
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
 
@@ -22,7 +22,7 @@ function Exercises() {
       .catch(() => setLoading(false));
   }, [])
 
-  if (loading) {
+  if (loading)
     return (
       <div>
         <div className="loader_wrapper">
@@ -30,8 +30,7 @@ function Exercises() {
         </div>
         <NavigationTrainer/>
       </div>
-    )
-  }
+    );
 
   return (
     <div>
@@ -53,22 +52,22 @@ function Exercises() {
             {legExs && legExs.map(exercise =>
               <ShortExDetails key={exercise.id} exercise={exercise}></ShortExDetails>)}
           </div></>: null}
-          {backExs.length ? <><div className="workout_title">Back</div> 
+          {backExs.length ? <><div className="workout_title">Back</div>
           <div className="workoutsExercises_largeCard2">
             {backExs && backExs.map(exercise =>
               <ShortExDetails key={exercise.id} exercise={exercise}></ShortExDetails>)}
           </div></>: null}
-          {chestExs.length ? <><div className="workout_title">Chest</div> 
+          {chestExs.length ? <><div className="workout_title">Chest</div>
           <div className="workoutsExercises_largeCard2">
             {chestExs && chestExs.map(exercise =>
               <ShortExDetails key={exercise.id} exercise={exercise}></ShortExDetails>)}
             </div></>: null}
-          {coreExs?.length ? <><div className="workout_title">Core</div> 
+          {coreExs?.length ? <><div className="workout_title">Core</div>
           <div className="workoutsExercises_largeCard2">
             {coreExs && coreExs.map(exercise =>
               <ShortExDetails key={exercise.id} exercise={exercise}></ShortExDetails>)}
             </div></> : null}
-          {shoulderExs?.length ? <><div className="workout_title">Shoulders</div> 
+          {shoulderExs?.length ? <><div className="workout_title">Shoulders</div>
           <div className="workoutsExercises_largeCard2">
           {shoulderExs && shoulderExs.map(exercise =>
             <ShortExDetails key={exercise.id} exercise={exercise}></ShortExDetails>)}

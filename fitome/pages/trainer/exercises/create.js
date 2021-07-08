@@ -1,7 +1,7 @@
 import UploadVideoForm from '../../../components/uploadVideoForm';
 import { postExercise } from '../../../redux/trainer';
 import { useAuth } from '../../../firebase/contextAuth';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
@@ -21,20 +21,19 @@ const CreateExercise = () => {
   const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
-  const { exercises } = useSelector(state => state.trainer);
 
   const handleSubmit = (e) => {
     try {
       setLoading(true);
       e.preventDefault();
-      dispatch(postExercise({trainer_uid: currentUser.uid, exerciseData: {...formState, media: media, type: 'custom'}}))
+      dispatch(postExercise({ trainer_uid: currentUser.uid, exerciseData: { ...formState, media: media, type: 'custom' } }))
         .then(() => {
           setLoading(false);
           router.push('/trainer/exercises');
         });
     } catch (err) {
       setLoading(false);
-      console.log(err);
+      console.log('An error has occurred.');
     }
   }
 
@@ -57,14 +56,13 @@ const CreateExercise = () => {
           <div className="exerciseFormAndButton">
           <form className="createprofile_form">
             <label htmlFor="title">Title: <br/>
-              <input type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
+              <input type="text" onChange={(e) => setFormState({ ...formState, title: e.target.value })}/>
             </label>
             <label htmlFor="description">Description: <br/>
-              <textarea name="description" rows="4" cols="50" style={{width: "70vw", height: "15vh"}} onChange={(e) => setFormState({...formState, description: e.target.value})}></textarea>
-            {console.log('formState', formState)}
+              <textarea name="description" rows="4" cols="50" style={{width: "70vw", height: "15vh"}} onChange={(e) => setFormState({ ...formState, description: e.target.value })}></textarea>
             </label>
             <label htmlFor="muscleGroup">Muscle Group: <br/>
-              <input type="text" list="muscleGroups" onChange={(e) => setFormState({...formState, muscle_group: e.target.value.toLowerCase()})}/>
+              <input type="text" list="muscleGroups" onChange={(e) => setFormState({ ...formState, muscle_group: e.target.value.toLowerCase() })}/>
               <datalist id="muscleGroups">
                 <option>Arms</option>
                 <option>Legs</option>
@@ -75,12 +73,12 @@ const CreateExercise = () => {
               </datalist>
             </label>
             <label htmlFor="benefits">Benefits: <br/>
-              <input type="text" onChange={(e) => setFormState({...formState, benefits: e.target.value})}/>
+              <input type="text" onChange={(e) => setFormState({ ...formState, benefits: e.target.value })}/>
             </label>
             <label htmlFor="video">Video: <br/>
               <UploadVideoForm setMedia={setMedia}></UploadVideoForm>
             </label>
-            <button className="button" onClick={handleSubmit} disabled={formState.title===""||formState.description===""||formState.muscle_group===""||media==='uploading'}>Create</button>
+            <button className="button" onClick={handleSubmit} disabled={formState.title === "" || formState.description === "" || formState.muscle_group === "" || media === 'uploading'}>Create</button>
             </form>
             <button className="buttonCancel" onClick={() => {
               router.push('/trainer/exercises');

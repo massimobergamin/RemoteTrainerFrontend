@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import { getUser, addPlanNotes } from '../../redux/client'
+import { useEffect, useState } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import { getUser } from '../../redux/client';
 import { useAuth } from '../../firebase/contextAuth';
 import NavigationClient from '../../components/navigationBar/navigationClient';
 import moment from 'moment';
 import WorkoutDetails from '../../components/workoutDetails';
 import Loader from '../../components/loader';
 
-
-// displays client's workout plan + exercises
 const Plan = () => {
-
   const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
   const dispatch = useDispatch();
@@ -25,15 +22,14 @@ const Plan = () => {
   const client = useSelector(state => state.client);
 
   function renderPlan () {
-    if (client.plans) {
+    if (client.plans.length) {
       for (let i = 0; i < client.plans.length; i++) {
         let plan = client.plans[i];
-        const startDate = plan.start_date
-        const endDate = plan.end_date
+        const startDate = plan.start_date;
+        const endDate = plan.end_date;
         const today = Date.now();
         if (moment(today).isBetween(startDate, endDate)) {
           let curPlan = plan;
-          console.log('curPlan: ', curPlan);
           return (
             <div>
               <div className="clientplan_date">Beginning: {moment(startDate).format("dddd, MMMM Do YYYY")}</div>
@@ -50,7 +46,7 @@ const Plan = () => {
           );
         };
       };
-    };
+    } else return <h2>You don't have a plan assigned to you right now.</h2>
     };
 
   if (loading) {
@@ -75,4 +71,4 @@ const Plan = () => {
   )
 }
 
-export default Plan
+export default Plan;

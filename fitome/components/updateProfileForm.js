@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../firebase/contextAuth'
+import { useAuth } from '../firebase/contextAuth';
 import { useSelector, useDispatch } from 'react-redux';
 import UploadImageForm from './uploadImageForm';
 import { updateUser } from '../redux/trainer';
@@ -11,12 +11,9 @@ const UpdateProfileForm = () => {
   const { currentUser } = useAuth();
   const router = useRouter();
   const [url, setURL] = useState('');
-  const [changePic, setChangePic] = useState(false)
-
-  const initialState = {
-  };
-  const [profileState, setProfileState] = useState(initialState);
-  const [file, setFile] = useState("")
+  const [changePic, setChangePic] = useState(false);
+  const [profileState, setProfileState] = useState({});
+  const [file, setFile] = useState("");
   const [loading, setLoading] = useState(false);
   const { user } = useSelector(state => state.trainer);
 
@@ -36,7 +33,7 @@ const UpdateProfileForm = () => {
   const handleSubmit = (e) => {
     setLoading(true);
     e.preventDefault();
-    dispatch(updateUser({uid: currentUser.uid, userData: {...profileState, profile_picture: url ? url : user.profile_picture}}))
+    dispatch(updateUser({ uid: currentUser.uid, userData: { ...profileState, profile_picture: url ? url : user.profile_picture } }))
       .then(() => {
         setLoading(false);
         router.push('/trainer/profile');
@@ -50,22 +47,22 @@ const UpdateProfileForm = () => {
     <div >
       <div className="page_title">Edit Profile</div>
       {!url ?
-         <label className="profilewrapper">
-            {user.profile_picture?
-                        <img className="profilePic" src={user.profile_picture}/>
-                        :
-                        <img className="profilePic" src="/emptyprofile.png"/>
-                        }
-                        <input className="profilePic_input" type="file" onChange={handleEditProfile}/>
-                        <span className="profile_addImage">Click Image to Edit Profile Image</span>
-                    </label>
-                    :
-                    <div className="profilewrapper">
-                        {url && <img className="profilePic" src={url}></img>}
-                        <span className="profile_addImage">New Profile Image</span>
-                    </div>
-                }
-                {!url && file && <UploadImageForm file={file} setURL={setURL} />}
+        <label className="profilewrapper">
+        {user.profile_picture?
+          <img className="profilePic" src={user.profile_picture}/>
+          :
+          <img className="profilePic" src="/emptyprofile.png"/>
+          }
+        <input className="profilePic_input" type="file" onChange={handleEditProfile}/>
+        <span className="profile_addImage">Click Image to Edit Profile Image</span>
+        </label>
+        :
+        <div className="profilewrapper">
+          {url && <img className="profilePic" src={url}></img>}
+          <span className="profile_addImage">New Profile Image</span>
+        </div>
+      }
+        {!url && file && <UploadImageForm file={file} setURL={setURL}/>}
         <form className="createprofile_form">
           <label htmlFor="weight">Weight (lb):
           <br/>
@@ -75,7 +72,7 @@ const UpdateProfileForm = () => {
             value={profileState.weight}
             step="1"
             min="0"
-            onChange={(e) => setProfileState({...profileState, weight: parseInt(e.target.value)})}/>
+            onChange={(e) => setProfileState({ ...profileState, weight: parseInt(e.target.value) })}/>
           </label>
           <label htmlFor="height">Height (cm):
           <br/>
@@ -85,7 +82,7 @@ const UpdateProfileForm = () => {
             value={profileState.height}
             step="1"
             min="0"
-            onChange={(e) => setProfileState({...profileState, height: parseInt(e.target.value)})}/>
+            onChange={(e) => setProfileState({ ...profileState, height: parseInt(e.target.value) })}/>
           </label>
           <label htmlFor="Birthday">Birthday:
           <br/>
@@ -93,8 +90,7 @@ const UpdateProfileForm = () => {
             type="date"
             name="birthday"
             value={profileState.birthday}
-            // max="2003-05-17"
-            onChange={(e) => setProfileState({...profileState, birthday: e.target.value})}/>
+            onChange={(e) => setProfileState({ ...profileState, birthday: e.target.value })}/>
           </label>
           <label htmlFor="sex">Sex:
           <br/>
@@ -102,7 +98,7 @@ const UpdateProfileForm = () => {
             name="sex"
             value={profileState.sex}
             list="sexes"
-            onChange={(e) => setProfileState({...profileState, sex: e.target.value})}/>
+            onChange={(e) => setProfileState({ ...profileState, sex: e.target.value })}/>
             <datalist id="sexes">
               <option>Male</option>
               <option>Female</option>

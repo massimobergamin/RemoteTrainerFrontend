@@ -42,7 +42,6 @@ function Workouts() {
         }}><span className="workout_addworkout_span">+ </span>Workout</div>
         {workouts[0] ? workouts.map(workout =>
           <div key={workout.id} className="workoutsExercises_largeCard">
-
             <div className="workout_title">{workout.title}</div>
             <div className="workoutsExercises_scroll">
               {workout.exercises && workout.exercises.map(exercise =>
@@ -60,7 +59,7 @@ function Workouts() {
               </div>
               <button className="button_workout" onClick={() => {
               setLoading(true);
-              dispatch(setSelectedWorkout(workout))
+              dispatch(setSelectedWorkout(workout));
               setLoading(false);
               router.push('/trainer/workouts/details');
             }}>View Details</button>

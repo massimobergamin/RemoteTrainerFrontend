@@ -39,7 +39,7 @@
 .signup_form {
     z-index: 4;
     width: 100%;
-    margin-top:20px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,7 +83,7 @@
     border-radius: 10px;
     color: white;
     font-size: 1rem;
-    box-shadow:0 0 5px 3px rgba(0, 0, 0, 0.11);
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.11);
 }
 
 .signup_button:hover {
@@ -141,7 +141,6 @@
 .signup_error {
     border-radius: 5px;
     background-color: rgba(197, 197, 197, 0.638);
-    /* color: rgb(106, 18, 22); */
     color: var(--accent);
     width:70vw;
     display: none;
@@ -160,4 +159,3 @@
         display: block;
     }
 }
-

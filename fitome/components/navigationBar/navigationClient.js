@@ -1,16 +1,15 @@
-import React from 'react'
 import Link from 'next/link';
 
-const navigationClient = () => {
+const NavigationClient = () => {
     return (
         <ul className="navigationBar_container">
             <Link href="/client/plan">
-                <li className="navigationBar_icon"> 
+                <li className="navigationBar_icon">
                     <img className="navigationBar_image" src="/icons/fitness_center_white_24dp.svg"/>
                 </li>
             </Link>
             <Link href="/session">
-                <li className="navigationBar_icon"> 
+                <li className="navigationBar_icon">
                     <img className="navigationBar_image" src="/icons/call_white_24dp.svg"/>
                 </li>
             </Link>
@@ -23,4 +22,4 @@ const navigationClient = () => {
     )
 }
 
-export default navigationClient
+export default NavigationClient;

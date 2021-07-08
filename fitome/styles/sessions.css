@@ -6,7 +6,7 @@
 .sessionCreate_form {
     z-index: 4;
     width: 100%;
-    margin-top:20px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,7 +64,7 @@
 }
 
 .sessioncard_title {
-    font-weight:700;
+    font-weight: 700;
 }
 
 .session_list {

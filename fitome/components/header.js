@@ -1,10 +1,8 @@
-import React from 'react'
-
-export function Header({ children }) {
-return (
+export function Header ({ children }) {
+  return (
     <>
-        <title>Fitome</title>     
-        <main>{children }</main>
+    <head><title>Fitome</title></head>
+      {children}
     </>
   )
 }

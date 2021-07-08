@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import {useAuth} from '../firebase/contextAuth'
+import {useAuth} from '../firebase/contextAuth';
 import { useDispatch } from 'react-redux';
-import { postUser, postInviteCode } from '../redux/trainer'
+import { postUser, postInviteCode } from '../redux/trainer';
 import { useRouter } from 'next/router';
 import { nanoid } from '@reduxjs/toolkit';
 import Loader from '../components/loader';
@@ -28,12 +28,12 @@ const SignUp = () => {
         invite_code: ""
     }
 
-    const [inviteState, setInviteState] = useState(inviteInitialState)
+    const [inviteState, setInviteState] = useState(inviteInitialState);
     const [formState, setFormState] = useState(initialState);
     const [error,setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-    function titleCase(name){
+    function titleCase (name) {
         return name[0].toUpperCase() + name.slice(1).toLowerCase();
     }
 
@@ -48,14 +48,14 @@ const SignUp = () => {
             setError("");
             error.style.display="none";
             if (formState.type === 'Trainer') {
-                dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
-                    .then(() => setLoading(false))
-                dispatch(postInviteCode({...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5).toUpperCase()}))
-                    .then(() => setLoading(false))
+                dispatch(postUser({ ...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now() }))
+                    .then(() => setLoading(false));
+                dispatch(postInviteCode({ ...inviteState, user_uid:fireBaseData.user.uid, invite_code: nanoid(5).toUpperCase() }))
+                    .then(() => setLoading(false));
                 router.push(`/trainer/invitecode`);
             } else if (formState.type === 'Client') {
-              dispatch(postUser({...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now()}))
-              .then(() => setLoading(false))
+              dispatch(postUser({ ...formState, type: lowerType, first_name: firstName, last_name: lastName, user_uid:fireBaseData.user.uid, last_login: Date.now() }))
+                .then(() => setLoading(false));
               router.push(`/client/invitecode`);
             }
         } catch (err) {
@@ -88,39 +88,39 @@ const SignUp = () => {
                 <input type="text"
                     name="firstName"
                     value={formState.firstName}
-                    onChange={(e)=>setFormState({...formState, first_name:e.target.value})}/>
+                    onChange={(e) => setFormState({ ...formState, first_name: e.target.value })}/>
                 <label className="signup_input" htmlFor="lastName">Last Name:</label>
                 <input type="text"
                     name="lastName"
                     value={formState.lastName}
-                    onChange={(e)=>setFormState({...formState, last_name:e.target.value})}/>
+                    onChange={(e) => setFormState({ ...formState, last_name: e.target.value })}/>
                 <label className="signup_input" htmlFor="username">Account Username:</label>
                 <input type="text"
                     name="username"
                     value={formState.username}
-                    onChange={(e)=>setFormState({...formState, username:e.target.value})}/>
+                    onChange={(e) => setFormState({ ...formState, username: e.target.value })}/>
                 <label className="signup_input" htmlFor="email">Email:</label>
                 <input type="email"
                     name="email"
                     value={formState.email}
-                    onChange={(e)=>setFormState({...formState, email:e.target.value})}/>
+                    onChange={(e) => setFormState({ ...formState, email: e.target.value })}/>
                 <label className="signup_input" htmlFor="password">Password:</label>
                 <input type="password"
                     name="password"
                     value={formState.password}
-                    onChange={(e)=>setFormState({...formState, password:e.target.value})}/>
+                    onChange={(e) => setFormState({ ...formState, password: e.target.value })}/>
                 <label className="signup_input" htmlFor="type">Select an Account Type:</label>
                 <input list="accountType"
                     id="listoftype"
                     name="listoftype"
-                    onChange={(e)=>setFormState({...formState, type:e.target.value})}/>
+                    onChange={(e) => setFormState({ ...formState, type: e.target.value })}/>
                 <datalist id="accountType">
                     <option value="Client"></option>
                     <option value="Trainer"></option>
                 </datalist>
             </form>
             <button type="button" className="signup_button"
-                disabled={formState.password===""||formState.email===""||formState.first_name===""||formState.last_name===""||formState.username===""||formState.type===""}
+                disabled={formState.password === "" || formState.email === "" || formState.first_name === "" || formState.last_name === ""|| formState.username === "" || formState.type === ""}
                 onClick={createHandler}>SIGN UP</button>
             <p className="signup_account" >Already have an account? <Link href="/"><a><span className="signup_account_span">Login.</span></a></Link></p>
             </div>
@@ -128,4 +128,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+export default SignUp;

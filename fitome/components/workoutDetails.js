@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import ExerciseDetails from './exerciseDetails';
-import { useAuth } from '../firebase/contextAuth'
+import { useAuth } from '../firebase/contextAuth';
 import ClientExerciseDetails from './clientExerciseDetails';
 
 function WorkoutDetails({ workout }) {
@@ -15,7 +15,7 @@ function WorkoutDetails({ workout }) {
     addRepsAndSets(0);
     if (workout.exercises.length === 1) {
       setPrevDisabled(true);
-      setNextDisabled(true)
+      setNextDisabled(true);
     }
   }, [])
 
@@ -52,11 +52,11 @@ function WorkoutDetails({ workout }) {
     <div className="plan_detail_breakdown">
       <div className="page_title">{workout.title}</div>
       <div className="workoutsExercises_flex">
-        <button className="carousel_button" onClick={handlePrevClick} disabled={prevDisabled}>◀</button>
+        <button className="carousel_button" onClick={handlePrevClick} disabled={prevDisabled}><img src="/previous.png" width="20" height="20"></img></button>
         {currentUser.displayName == 'trainer' ?
         <ExerciseDetails key={exercise.id} exercise={exercise}></ExerciseDetails>
         : <ClientExerciseDetails key={exercise?.id} exercise={exercise}></ClientExerciseDetails>}
-        <button className="carousel_button" onClick={handleNextClick} disabled={nextDisabled}>▶</button>
+        <button className="carousel_button" onClick={handleNextClick} disabled={nextDisabled}><img src="/next.png" width="20" height="20"></img></button>
       </div>
     </div>
   )

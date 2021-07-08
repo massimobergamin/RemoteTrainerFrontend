@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import useStorage from '../firebase/useStorage';
 
 function UploadVideoForm({ setMedia }) {
-
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
-    const [urlFile, setUrlFile] = useState(null);
-    const {url, progress} = useStorage(file);
+    const { url } = useStorage(file);
     const types = ['video/mp4'];
 
      const handleChange = (e) => {

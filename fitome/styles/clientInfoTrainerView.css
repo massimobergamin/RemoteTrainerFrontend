@@ -10,7 +10,7 @@
 }
 
 .exerciseTitleContainer {
-  align-items:flex-start;
+  align-items: flex-start;
   margin: 5px 0;
   padding: 0px;
   height: fit-content;
@@ -30,6 +30,7 @@
   padding: 0px;
   margin-top: 10px;
 }
+
 .planHeader {
   font-size:medium;
   font-weight:bold;
@@ -37,8 +38,9 @@
   padding: 0px;
   color: #94d2c9;
 }
+
 .planHeaderDate {
-  font-size:0.8em;
+  font-size: 0.8em;
   margin: 5px 0;
   padding: 0px;
   margin-bottom: 15px;
@@ -52,14 +54,13 @@
   padding: 0 2vw 0 2vw;
   margin-bottom: 5px;
   width: 100%;
-  font-size:x-small;
+  font-size: x-small;
 }
 
 .single_card_container {
   height: fit-content;
   padding: 0px;
-  margin: 0px;
-  
+  margin: 10px 0px;
 }
 
 .setrepContainer {
@@ -83,7 +84,6 @@
   flex-direction: column;
   font-size: 0.8em;
 }
-
 
 .planExerciseRows {
   font-size: 0.6em;

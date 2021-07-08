@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding: 4vh 4vw 0px 4vw;
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
 
 .detailsContainer {
@@ -65,7 +65,6 @@
 .createPlanInput {
   border-radius: 10px;
   display: flex;
-  /* flex-direction: row; */
   align-items: center;
   justify-content: space-around;
   font-size: 1.1em;

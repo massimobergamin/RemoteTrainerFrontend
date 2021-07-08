@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../firebase/contextAuth';
 import { useDispatch, useSelector } from 'react-redux';
 import NavigationClient from '../../components/navigationBar/navigationClient';
@@ -81,4 +81,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default Profile;

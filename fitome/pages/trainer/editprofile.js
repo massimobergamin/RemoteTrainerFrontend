@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '../../firebase/contextAuth'
-import { useSelector } from 'react-redux';
+import { useAuth } from '../../firebase/contextAuth';
 import UpdateProfileForm from '../../components/updateProfileForm';
 import NavigationTrainer from '../../components/navigationBar/navigationTrainer';
 import { getUserById } from '../../redux/trainer';
@@ -10,7 +9,6 @@ import Loader from '../../components/loader';
 const EditProfile = () => {
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
-  const { user } = useSelector(state => state.trainer);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

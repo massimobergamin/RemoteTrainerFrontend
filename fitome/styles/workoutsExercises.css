@@ -3,10 +3,10 @@
   padding: 2vw 4vw 0px 4vw;
   height: 88vh;
   width: 100vw;
-  overflow-y:scroll;
+  overflow-y: scroll;
   display: flex;
-  flex-direction:column;
-  align-items:left;
+  flex-direction: column;
+  align-items: left;
   border-top: solid 3px var(--secondary)
 }
 
@@ -42,7 +42,7 @@
   overflow-x: visible;
   overflow-y: hidden;
   margin: 0;
-  padding:0;
+  padding: 0;
 }
 
 .workoutsExercises_largeCard2 {
@@ -62,8 +62,8 @@
 .workout_title {
   font-size: 1.5em;
   font-weight: 700;
-  margin:5px 0;
-  padding:0;
+  margin: 5px 0;
+  padding: 0;
 }
 
 .workoutsExercises_cards {
@@ -74,7 +74,7 @@
 
 .workout_video {
   width: 176px;
-  height:176px;
+  height: 176px;
 }
 
 .button_workout {
@@ -86,7 +86,7 @@
   border-radius: 10px;
   color: white;
   font-size: 1rem;
-  box-shadow:0 0 5px 3px rgba(0, 0, 0, 0.11);
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.11);
 }
 
 .button_workout:hover {
@@ -137,18 +137,18 @@
 }
 
 .workoutsExercises_FadeIn {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    padding: 10vh 5vh;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    z-index: 10;
-    background-color: rgba(0, 0, 0, 0.747);
-    color: seashell;
-    z-index: 3
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  padding: 10vh 5vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.747);
+  color: seashell;
+  z-index: 3
 }
 
 .exercise_subtitle {
@@ -160,7 +160,7 @@
   font-weight: 300;
   text-overflow: wrap;
   margin: 0;
-  padding:0;
+  padding: 0;
 }
 
 .workoutsExercises_clientCard:hover {

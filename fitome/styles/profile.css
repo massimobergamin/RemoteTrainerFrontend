@@ -38,12 +38,12 @@
 }
 
 .profilewrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    object-fit: cover;
-    margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  object-fit: cover;
+  margin: 10px 0;
 }
 
 .profilewrapper:hover {
@@ -59,7 +59,7 @@
 .createprofile_form {
   z-index: 4;
   width: 100%;
-  margin-top:20px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -97,7 +97,7 @@
     justify-content: space-around;
     align-items: center;
     max-width: 600px;
-    margin:auto;
+    margin: auto;
   }
   .profile_signout_large {
     display: block
