@@ -138,7 +138,7 @@ function Create () {
                 <label htmlFor="endTime">Session End Time: <br/>
                     <input className="sessionCreate_field" type="time" id="endTime" name="endTime"  disabled={formState.startDate === ""} min={getTime()} max="23:59"
                     onChange={(e)=>{
-                        setFormState({...formState, endDate:e.target.value})
+                        setFormState({ ...formState, endDate:e.target.value })
                     }
                     }/>
                 </label>

@@ -1,7 +1,7 @@
 import UploadVideoForm from '../../../components/uploadVideoForm';
 import { postExercise } from '../../../redux/trainer';
 import { useAuth } from '../../../firebase/contextAuth';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import NavigationTrainer from '../../../components/navigationBar/navigationTrainer';
@@ -26,7 +26,7 @@ const CreateExercise = () => {
     try {
       setLoading(true);
       e.preventDefault();
-      dispatch(postExercise({trainer_uid: currentUser.uid, exerciseData: {...formState, media: media, type: 'custom'}}))
+      dispatch(postExercise({ trainer_uid: currentUser.uid, exerciseData: { ...formState, media: media, type: 'custom' } }))
         .then(() => {
           setLoading(false);
           router.push('/trainer/exercises');

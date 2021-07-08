@@ -59,7 +59,7 @@ function Workouts() {
               </div>
               <button className="button_workout" onClick={() => {
               setLoading(true);
-              dispatch(setSelectedWorkout(workout))
+              dispatch(setSelectedWorkout(workout));
               setLoading(false);
               router.push('/trainer/workouts/details');
             }}>View Details</button>

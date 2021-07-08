@@ -69,7 +69,7 @@ const UpdateClientProfileForm = () => {
             value={profileState.weight}
             step="1"
             min="0"
-            onChange={(e) => setProfileState({...profileState, weight: parseInt(e.target.value)})}/>
+            onChange={(e) => setProfileState({ ...profileState, weight: parseInt(e.target.value) })}/>
           <label htmlFor="height">Height (cm): </label>
           <input
             type="number"
@@ -77,19 +77,19 @@ const UpdateClientProfileForm = () => {
             value={profileState.height}
             step="1"
             min="0"
-            onChange={(e) => setProfileState({...profileState, height: parseInt(e.target.value)})}/>
-          <label  htmlFor="Birthday">Birthday:</label>
+            onChange={(e) => setProfileState({ ...profileState, height: parseInt(e.target.value) })}/>
+          <label htmlFor="Birthday">Birthday:</label>
             <input
             type="date"
             name="birthday"
             value={profileState.birthday}
-            onChange={(e) => setProfileState({...profileState, birthday: e.target.value})}/>
-          <label  htmlFor="sex">Sex:</label>
+            onChange={(e) => setProfileState({ ...profileState, birthday: e.target.value })}/>
+          <label htmlFor="sex">Sex:</label>
             <input
             name="sex"
             value={profileState.sex}
             list="sexes"
-            onChange={(e) => setProfileState({...profileState, sex: e.target.value})}/>
+            onChange={(e) => setProfileState({ ...profileState, sex: e.target.value })}/>
             <datalist id="sexes">
               <option>Male</option>
               <option>Female</option>
