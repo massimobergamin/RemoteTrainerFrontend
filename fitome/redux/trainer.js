@@ -1,13 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+const URL = 'https://remotetrainerserver.herokuapp.com';
+
 //user routes
 export const postUser = createAsyncThunk(
   'trainer/postUserStatus',
   async (userData) => {
     try {
       console.log("POSTING", userData)
-      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users`, userData);
+      const response = await axios.post(`${URL}/users`, userData);
       console.log("RESPONSE DATA:", response.data)
       return response.data;
     } catch (error) {
@@ -21,7 +23,7 @@ export const updateUser = createAsyncThunk(
     async ({uid, userData}) => {
       try {
         console.log('in thunk', uid, userData)
-        const response = await axios.put(`https://remotetrainerserver.herokuapp.com/users/${uid}`, userData);
+        const response = await axios.put(`${URL}/users/${uid}`, userData);
         return response.data;
       } catch (error) {
         console.log(error);
@@ -33,8 +35,7 @@ export const getUserById = createAsyncThunk(
     'trainer/getUserByIdStatus',
     async (uid) => {
       try {
-        const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/${uid}-trainer`);
-        //const response = await axios.get(`http://localhost:3050/users/${uid}-trainer`);
+        const response = await axios.get(`${URL}/users/${uid}-trainer`);
         console.log("REDUX, get user info:", response.data)
         return response.data;
       } catch (error) {
@@ -47,7 +48,7 @@ export const postClient = createAsyncThunk(
   'trainer/postClientStatus',
   async ({trainer_uid, client_uid}) => {
     try {
-      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/clients/${trainer_uid}-${client_uid}`);
+      const response = await axios.post(`${URL}/clients/${trainer_uid}-${client_uid}`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -59,7 +60,7 @@ export const getClients= createAsyncThunk(
   'trainer/getClientsStatus',
   async (uid, thunkAPI) => {
     try {
-      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/clients/${uid}`);
+      const response = await axios.get(`${URL}/clients/${uid}`);
       console.log('Redux Response: ', response);
       return response.data.sort((a,b)=> (a.first_name+" "+a.last_name).localeCompare(b.first_name+" "+b.last_name));
     } catch (error) {
@@ -73,7 +74,7 @@ export const postInviteCode = createAsyncThunk(
   async (inviteState) => {
     try {
       console.log("in redux", inviteState)
-      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users/invite/${inviteState.user_uid}`, inviteState);
+      const response = await axios.post(`${URL}/users/invite/${inviteState.user_uid}`, inviteState);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -85,7 +86,7 @@ export const getInviteCode = createAsyncThunk(
   'trainer/getInviteCodeStatus',
   async (inviteState) => {
     try {
-      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/invite/${inviteState}`);
+      const response = await axios.get(`${URL}/users/invite/${inviteState}`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -98,7 +99,7 @@ export const postSession = createAsyncThunk(
   'trainer/postSessionStatus',
   async ({trainer_uid, client_uid, sessionData}) => {
     try {
-      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/users/sessions/${trainer_uid}-${client_uid}`, sessionData);
+      const response = await axios.post(`${URL}/users/sessions/${trainer_uid}-${client_uid}`, sessionData);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -110,7 +111,7 @@ export const deleteSession = createAsyncThunk (
   'trainer/deleteSessionStatus',
   async (meeting_id) => {
     try {
-      const response = await axios.delete(`https://remotetrainerserver.herokuapp.com/users/sessions/${meeting_id}`);
+      const response = await axios.delete(`${URL}/users/sessions/${meeting_id}`);
       console.log(response);
       return response.data
     } catch (error) {
@@ -123,7 +124,7 @@ export const updateSession = createAsyncThunk(
   'trainer/updateSessionsStatus',
   async (meeting_id) => {
     try {
-      const response = await axios.put(`https://remotetrainerserver.herokuapp.com/users/sessions/${meeting_id}`);
+      const response = await axios.put(`${URL}/users/sessions/${meeting_id}`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -136,7 +137,7 @@ export const getSessionsTrainer = createAsyncThunk(
   async (uid) => {
     try {
       console.log("UID", uid)
-      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/sessions/trainer-${uid}`);
+      const response = await axios.get(`${URL}/users/sessions/trainer-${uid}`);
       console.log(response.data)
       return response.data;
     } catch (error) {
@@ -149,7 +150,7 @@ export const getSession = createAsyncThunk(
   'trainer/getSessionStatus',
   async (meeting_id) => {
     try {
-      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/users/sessions/${meeting_id}`);
+      const response = await axios.get(`${URL}/users/sessions/${meeting_id}`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -161,7 +162,7 @@ export const deleteTrainerSession = createAsyncThunk(
   'trainer/deleteTrainerSessionStatus',
   async ({meeting_id, uid}) => {
     try {
-      const response = await axios.delete(`http://remotetrainerserver.herokuapp.com/users/sessions/${meeting_id}/${uid}/trainer`);
+      const response = await axios.delete(`${URL}/users/sessions/${meeting_id}/${uid}/trainer`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -174,7 +175,7 @@ export const postPlan = createAsyncThunk(
   'trainer/postPlanStatus',
   async (planData) => {
     try {
-      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/plans/${planData.trainer_uid}-${planData.client_uid}`, planData);
+      const response = await axios.post(`${URL}/plans/${planData.trainer_uid}-${planData.client_uid}`, planData);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -186,7 +187,7 @@ export const updatePlan = createAsyncThunk(
   'trainer/updatePlanStatus',
   async ({plan_id, planData}) => {
     try {
-      const response = await axios.put(`https://remotetrainerserver.herokuapp.com/plans/${plan_id}`, planData);
+      const response = await axios.put(`${URL}/plans/${plan_id}`, planData);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -198,7 +199,7 @@ export const getPlan = createAsyncThunk(
   'trainer/getPlanStatus',
   async ({client_uid, start_date}) => {
     try {
-      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/plans/${client_uid}-${start_date}`);
+      const response = await axios.get(`${URL}/plans/${client_uid}-${start_date}`);
       console.log(response.data)
       return response.data;
     } catch (error) {
@@ -211,7 +212,7 @@ export const updatePlanNotes = createAsyncThunk(
   'trainer/updatePlanNotesStatus',
   async ({plan_id, planData}) => {
     try {
-      const response = await axios.put(`https://remotetrainerserver.herokuapp.com/plans/notes/${plan_id}`, planData);
+      const response = await axios.put(`${URL}/plans/notes/${plan_id}`, planData);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -224,7 +225,7 @@ export const getWorkout = createAsyncThunk(
   'trainer/getWorkoutStatus',
   async (trainer_uid) => {
     try {
-      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/workouts/${trainer_uid}`);
+      const response = await axios.get(`${URL}/workouts/${trainer_uid}`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -236,7 +237,7 @@ export const getExercise = createAsyncThunk(
   'trainer/getExerciseStatus',
   async (trainer_uid) => {
     try {
-      const response = await axios.get(`https://remotetrainerserver.herokuapp.com/exercises/${trainer_uid}`);
+      const response = await axios.get(`${URL}/exercises/${trainer_uid}`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -248,7 +249,7 @@ export const postWorkout = createAsyncThunk(
   'trainer/postWorkoutStatus',
   async ({trainer_uid, workoutData}) => {
     try {
-      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/workouts/${trainer_uid}`, workoutData);
+      const response = await axios.post(`${URL}/workouts/${trainer_uid}`, workoutData);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -260,7 +261,7 @@ export const postExercise = createAsyncThunk(
   'trainer/postExerciseStatus',
   async ({trainer_uid, exerciseData}) => {
     try {
-      const response = await axios.post(`https://remotetrainerserver.herokuapp.com/exercises/custom/${trainer_uid}`, exerciseData);
+      const response = await axios.post(`${URL}/exercises/custom/${trainer_uid}`, exerciseData);
       return response.data;
     } catch (error) {
       console.log(error);

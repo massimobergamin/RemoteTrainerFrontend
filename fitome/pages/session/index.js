@@ -35,7 +35,11 @@ function SessionList() {
 
     function showFirst () {
         if (sessions?.length == 0 || sessions == undefined) {
-            return <div><div>No session Available.</div><div>Please make a session with your trainer.</div></div>
+            return <div>
+                    <div>No session available.</div>
+                    {currentUser.displayName === "client" &&
+                    <div>Please make a session with your trainer.</div>}
+                </div>
         } else {
             return <SessionCard class_name="first" deleted={deleted} setDeleted={setDeleted} usertype={`${currentUser.displayName}`} session={sessions[0]} />
         }

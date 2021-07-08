@@ -42,7 +42,7 @@ const Plan = () => {
                 {curPlan.details.map(day => (
                   <div className="plan_detail_breakdown">
                     <div className="clientplan_dates" key={day.id}>{moment(day.day).format("dddd, MMMM Do YYYY")}</div>
-                    <WorkoutDetails key={day.day} workout={day}></WorkoutDetails> 
+                    <WorkoutDetails key={day.day} workout={day}></WorkoutDetails>
                   </div>
                 ))}
                 </div>

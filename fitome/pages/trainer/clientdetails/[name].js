@@ -57,7 +57,7 @@ const ClientDetail = () => {
                   </div>
                 </div>
                 </div>
-             <p>{detail.client_notes}</p>
+             <div><b>Notes:</b> {detail.trainer_notes}</div>
             </div>
           )) : null }
         </div>

@@ -32,7 +32,7 @@ function UploadVideoForm({ setMedia }) {
                 <div >
                 {(file && !url) && <h5>Uploading {file.name}...</h5>}
                 {url &&
-                <video id="Exercise_Video" width="176" height="176" controls muted loop={true}>
+                <video id="Exercise_Video" controls muted loop={true}>
                     <source src={url} type="video/mp4"/>
                     Your browser does not support HTML5 video.
                 </video>}

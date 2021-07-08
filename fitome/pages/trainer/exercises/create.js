@@ -54,6 +54,7 @@ const CreateExercise = () => {
       <div className="page_container">
         <div className="createprofile_wrapper">
           <div className="page_title">Create New Exercise</div>
+          <div className="exerciseFormAndButton">
           <form className="createprofile_form">
             <label htmlFor="title">Title: <br/>
               <input type="text" onChange={(e) => setFormState({...formState, title: e.target.value})}/>
@@ -84,6 +85,7 @@ const CreateExercise = () => {
             <button className="buttonCancel" onClick={() => {
               router.push('/trainer/exercises');
             }}>Cancel</button>
+          </div>
         </div>
       </div>
       <NavigationTrainer/>
