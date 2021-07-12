@@ -63,7 +63,7 @@ const Plan = () => {
   return (
     <div>
       <div className="page_container">
-      <h1>Your Training Plan</h1>
+      <h1>My Training Plan</h1>
       {renderPlan()}
       </div>
       <NavigationClient />

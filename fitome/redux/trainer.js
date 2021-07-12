@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const URL = 'https://remotetrainerserver.herokuapp.com';
+const URL = 'https://fitome.herokuapp.com';
 
 export const postUser = createAsyncThunk(
   'trainer/postUserStatus',
