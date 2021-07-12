@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { useRouter } from 'next/router'
-import {socket} from '../../lib/socket';
+import React, { useEffect, useState, useRef } from 'react';
+import { useRouter } from 'next/router';
+import { socket } from '../../lib/socket';
 import Peer from "simple-peer";
 import { useAuth } from '../../firebase/contextAuth';
-import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-
+import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 
 const Video = ({ peer }) => {
   const ref = useRef();
@@ -15,7 +14,7 @@ const Video = ({ peer }) => {
     })
   }, []);
 
-  return <video id="video_them" className="video_them" playsInline autoPlay ref={ref} />;
+  return <video id="video_them" className="video_them" playsInline autoPlay ref={ref}/>;
 }
 
 const initState = {
@@ -56,19 +55,18 @@ const VideoRoom = () => {
           peersRef.current.push({
             peerID: userID,
             peer,
-          })
+          });
           peers.push(peer);
-        })
+        });
         setPeers(peers);
-      })
+      });
 
       socketRef.current.on("user joined", payload => {
-        console.log("USER JOINED")
         const peer = addPeer(payload.signal, payload.callerID, stream);
         peersRef.current.push({
           peerID: payload.callerID,
           peer,
-        })
+        });
         setPeers(users => [...users, peer]);
       });
 
@@ -84,13 +82,12 @@ const VideoRoom = () => {
         });
          themVideo && themVideo.remove();
         if (userVideo.current) {
-          userVideo.current.srcObject.getTracks()[0].stop()
-          userVideo.current.srcObject.getTracks()[1].stop()
+          userVideo.current.srcObject.getTracks()[0].stop();
+          userVideo.current.srcObject.getTracks()[1].stop();
         }
-         router.push('/session')
+         router.push('/session');
       });
-
-    })
+    });
   }, []);
 
   const createPeer = (userToSignal, callerID, stream) => {
@@ -106,7 +103,7 @@ const VideoRoom = () => {
         callerID,
         signal,
       })
-    })
+    });
 
     // once connected, send data to other peer
     peer.on('data', data => {
@@ -120,7 +117,6 @@ const VideoRoom = () => {
         ...prev,
         [peerTimerInputName]: peerTimerInputValue,
       }));
-      //console.log('parsed data line 132: ', JSON.parse(data));
     });
     return peer;
   }
@@ -130,14 +126,14 @@ const VideoRoom = () => {
       initiator: false,
       trickle: false,
       stream,
-    })
+    });
 
     peer.on("signal", signal => {
       socketRef.current.emit("returning signal", {
         signal,
         callerID,
       })
-    })
+    });
 
     peer.signal(incomingSignal);
     // when peer receives data, log the data to the console
@@ -157,20 +153,19 @@ const VideoRoom = () => {
   }
 
   function hangUp () {
-    console.log("HANGING UP");
-    userVideo.current.srcObject.getTracks()[0].stop()
-    userVideo.current.srcObject.getTracks()[1].stop()
-    socketRef.current.emit('endCall')
-    router.push('/session')
+    userVideo.current.srcObject.getTracks()[0].stop();
+    userVideo.current.srcObject.getTracks()[1].stop();
+    socketRef.current.emit('endCall');
+    router.push('/session');
   }
 
 
   // ****** TIMER LOGIC ****** //
 
   const children = ({ remainingTime }) => {
-    const hours = Math.floor(remainingTime / 3600)
-    const minutes = Math.floor((remainingTime % 3600) / 60)
-    const seconds = remainingTime % 60
+    const hours = Math.floor(remainingTime / 3600);
+    const minutes = Math.floor((remainingTime % 3600) / 60);
+    const seconds = remainingTime % 60;
 
     return <div className="timer_time">{`${hours}:${minutes}:${seconds}`}</div>
   }
@@ -186,10 +181,10 @@ const VideoRoom = () => {
         const timerData = {
           peerTimerInputName: name,
           peerTimerInputValue: value,
-        }
+        };
         const timerDataJson = JSON.stringify(timerData);
         peer.peer.send(timerDataJson);
-      })
+      });
     });
   };
 
@@ -201,9 +196,8 @@ const VideoRoom = () => {
         }
         const timerDataJson = JSON.stringify(timerData);
         peer.peer.send(timerDataJson);
-      })
-    }
-    );
+      });
+    });
   };
 
   const handleReset = async () => {
@@ -215,7 +209,7 @@ const VideoRoom = () => {
           }
           const timerDataJson = JSON.stringify(timerData);
           peer.peer.send(timerDataJson);
-        })
+        });
       });
       await new Promise((resolve, reject) => resolve(setIsPlaying(prev => false))).then(() => {
         peersRef.current.map(peer => {
@@ -224,7 +218,7 @@ const VideoRoom = () => {
           }
           const timerDataJson = JSON.stringify(timerData);
           peer.peer.send(timerDataJson);
-        })
+        });
       });
     } else {
       const { minutes, seconds } = timerInput;
@@ -235,11 +229,11 @@ const VideoRoom = () => {
       await new Promise((resolve, reject) => resolve(setNewTimer(newDuration))).then(() => {
         peersRef.current.map(peer => {
           const timerData = {
-            peerNewTimer: newDuration, // check if naming needs to be changed here, no negator used (like others)
+            peerNewTimer: newDuration,
           }
           const timerDataJson = JSON.stringify(timerData);
           peer.peer.send(timerDataJson);
-        })
+        });
       });
       await new Promise((resolve, reject) => resolve(setReset(prevState => prevState + 1))).then(() => {
         peersRef.current.map(peer => {
@@ -248,7 +242,7 @@ const VideoRoom = () => {
           }
           const timerDataJson = JSON.stringify(timerData);
           peer.peer.send(timerDataJson);
-        })
+        });
       });
       await new Promise((resolve, reject) => resolve(setIsEditing(prevState => !prevState))).then(() => {
         peersRef.current.map(peer => {
@@ -257,23 +251,20 @@ const VideoRoom = () => {
           }
           const timerDataJson = JSON.stringify(timerData);
           peer.peer.send(timerDataJson);
-        })
+        });
       });
-      console.log('peer instance: ', peersRef.current[0]);
     }
   };
 
   const handleEdit = async () => {
     await new Promise((resolve, reject) => resolve(setIsEditing(prevState => !prevState))).then(() => {
-      console.log('line 274: ', isEditing)
       peersRef.current.map(peer => {
         const timerData = {
           peerIsEditing: !isEditing,
-        }
-        console.log('line 279: ', timerData);
+        };
         const timerDataJson = JSON.stringify(timerData);
         peer.peer.send(timerDataJson);
-      })
+      });
     });
     if (isPlaying && !isEditing) {
       await new Promise((resolve, reject) => resolve(setIsPlaying(prev => false))).then(() => {
@@ -283,7 +274,7 @@ const VideoRoom = () => {
           }
           const timerDataJson = JSON.stringify(timerData);
           peer.peer.send(timerDataJson);
-        })
+        });
       });
     };
   };
@@ -297,8 +288,8 @@ const VideoRoom = () => {
 
   return (
     <div>
-      <video muted className="video_me" ref={userVideo} autoPlay playsInline />
-      {peers.map((peer, index) => <Video key={index} peer={peer} />)}
+      <video muted className="video_me" ref={userVideo} autoPlay playsInline/>
+      {peers.map((peer, index) => <Video key={index} peer={peer}/>)}
         <div>
           <div className="timer_container">
           <CountdownCircleTimer
@@ -314,7 +305,7 @@ const VideoRoom = () => {
             >
             { children }
           </CountdownCircleTimer>
-          { currentUser && currentUser.displayName==="trainer" ? <>
+          { currentUser && currentUser.displayName === "trainer" ? <>
           <div className="timer_button_container">
             <button className="timer_button" onClick={handlePause} disabled={isEmpty()}>{isPlaying ? "Pause" : "Start"}</button>
             <button className="timer_button" onClick={handleReset}>{isEditing ? "Submit" : "Reset"}</button>
@@ -332,7 +323,7 @@ const VideoRoom = () => {
           </div>
           </> : null }
         </div>
-      </div> 
+      </div>
       <div className="endCall">
         <button type="button" onClick={hangUp} className="button_circle"><img src="/icons/call_end_white_24dp.svg"/></button>
     </div>
@@ -340,4 +331,4 @@ const VideoRoom = () => {
   );
 }
 
-export default VideoRoom
+export default VideoRoom;
