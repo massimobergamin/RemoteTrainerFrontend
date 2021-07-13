@@ -1,6 +1,6 @@
 **Fitome is available at [fitome.vercel.app](https://fitome.vercel.app) 💪**
 
-![image](![image](https://user-images.githubusercontent.com/74379281/125373176-7b86b980-e339-11eb-92eb-8dbf40dcb650.png)
+![image](https://user-images.githubusercontent.com/74379281/125373176-7b86b980-e339-11eb-92eb-8dbf40dcb650.png)
 
 This is the client repo. Server repo is here: https://github.com/massimobergamin/remotetrainerserver
 
